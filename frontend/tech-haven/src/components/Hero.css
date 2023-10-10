@@ -1,3 +1,36 @@
 .hero {
-  height: 150vh;
+  height: 90vh;
+  background-image: url('../assets/6017768.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__left {
+  display: flex;
+  padding-top: 100px;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero__title {
+  text-transform: uppercase;
+  color: white;
+  font-size: 100px;
+  text-align: center;
+}
+
+.hero__cta {
+  color: #1b88b7;
+  background-color: white;
+  font-weight: bold;
+  font-size: 48px;
+  padding: 43px 63px;
+  border-radius: 80px;
+  margin-top: 80px;
 }

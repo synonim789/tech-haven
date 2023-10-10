@@ -5,6 +5,11 @@
   font-family: 'Josefin Sans', sans-serif;
 }
 
+body,
+html {
+  height: 100%;
+}
+
 .header,
 .navbar,
 .hero,
