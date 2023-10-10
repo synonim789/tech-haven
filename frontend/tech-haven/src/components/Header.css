@@ -1,0 +1,24 @@
+.header {
+  background-color: #1b88b7;
+  width: 100%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  position: relative;
+  text-align: right;
+}
+
+.header__link {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+  transition: 0.3s opacity ease-in-out;
+}
+
+.header__link:hover {
+  opacity: 0.6;
+}
+
+.header__link:nth-child(1) {
+  margin-right: 10px;
+}
