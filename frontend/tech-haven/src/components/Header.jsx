@@ -1,4 +1,15 @@
+import { Link, useLocation } from 'react-router-dom'
+
 const Header = () => {
-  return <header className="header">Header</header>
+  const location = useLocation()
+  if (location.pathname === '/login' || location.pathname === '/register') {
+    return null
+  }
+
+  return (
+    <header className="header">
+      <h1>header</h1>
+    </header>
+  )
 }
 export default Header
