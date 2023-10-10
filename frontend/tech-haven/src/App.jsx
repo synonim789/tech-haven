@@ -9,7 +9,6 @@ import ProductsPage from './pages/ProductsPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import CartPage from './pages/CartPage'
-
 function App() {
   return (
     <>
