@@ -23,6 +23,19 @@
   color: white;
   font-size: 100px;
   text-align: center;
+  position: relative;
+}
+
+.hero__title::after {
+  content: '';
+  width: 250px;
+  height: 10px;
+  background-color: #d85b00;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .hero__cta {
