@@ -6,19 +6,24 @@ import {
   FaYoutube,
   FaTwitter,
 } from 'react-icons/fa'
+
+import './Footer.css'
 const Footer = () => {
   const location = useLocation()
   if (location.pathname === '/login' || location.pathname === '/register') {
     return null
   }
+  let date = new Date()
+
   return (
     <footer className="footer">
       <div className="footer__links">
-        <p className="footer__title">TechHaven</p>
-
-        <Link to="/products">Products</Link>
-        <Link to="/about">About Us</Link>
-        <Link to="/contact">Contact</Link>
+        <p className="footer__links-title">TechHaven</p>
+        <div className="footer__links-links">
+          <Link to="/products">Products</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
       </div>
       <div className="footer__newsletter">
         <p className="footer__newsletter-title">Newsletter</p>
@@ -31,21 +36,26 @@ const Footer = () => {
       </div>
       <div className="footer__socials">
         <p className="footer__socials-title">Socials</p>
-        <a href="http://facebook.com" target="blank">
-          <FaFacebook />
-        </a>
-        <a href="http://instagram.com" target="blank">
-          <FaInstagram />
-        </a>
-        <a href="http://tiktok.com" target="blank">
-          <FaTiktok />
-        </a>
-        <a href="http://youtube.com" target="blank">
-          <FaYoutube />
-        </a>
-        <a href="http://twitter.com" target="blank">
-          <FaTwitter />
-        </a>
+        <div className="footer__socials-links">
+          <a href="http://facebook.com" target="blank">
+            <FaFacebook />
+          </a>
+          <a href="http://instagram.com" target="blank">
+            <FaInstagram />
+          </a>
+          <a href="http://tiktok.com" target="blank">
+            <FaTiktok />
+          </a>
+          <a href="http://youtube.com" target="blank">
+            <FaYoutube />
+          </a>
+          <a href="http://twitter.com" target="blank">
+            <FaTwitter />
+          </a>
+        </div>
+        <p className="footer__socials-copyright">
+          © {date.getFullYear()} <span>TechHaven</span> All Rights reserved
+        </p>
       </div>
     </footer>
   )
