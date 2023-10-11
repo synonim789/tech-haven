@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import './Navbar.css'
 import { GrCart } from 'react-icons/gr'
 
@@ -10,23 +10,56 @@ const Navbar = () => {
   return (
     <section className="navbar">
       <p className="navbar__title">
-        <Link to="/">TechHaven</Link>
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isPending ? 'pending' : isActive ? 'active' : ''
+          }
+        >
+          TechHaven
+        </NavLink>
       </p>
       <nav className="navbar__navigation">
         <ul className="navbar__link">
-          <Link to="/products">Products</Link>
+          <NavLink
+            to="/products"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'active' : ''
+            }
+          >
+            Products
+          </NavLink>
         </ul>
         <ul className="navbar__link">
-          <Link to="/about">About Us</Link>
+          <NavLink
+            to="/about"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'active' : ''
+            }
+          >
+            About Us
+          </NavLink>
         </ul>
         <ul className="navbar__link">
-          <Link to="/contact">Contact</Link>
+          <NavLink
+            to="/contact"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'active' : ''
+            }
+          >
+            Contact
+          </NavLink>
         </ul>
         <ul className="navbar__link">
-          <Link to="/cart">
+          <NavLink
+            to="/cart"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'active' : ''
+            }
+          >
             <GrCart />
             Cart
-          </Link>
+          </NavLink>
         </ul>
       </nav>
     </section>

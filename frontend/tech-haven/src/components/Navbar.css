@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #d9d9d9;
+  background-color: white;
   width: 100%;
   position: sticky;
   top: 0;
@@ -40,4 +40,34 @@
 }
 .navbar__link:last-child > a {
   color: #d85b00;
+}
+
+.navbar__link {
+  position: relative;
+  transition: 0.2s all ease-in;
+}
+
+.navbar__link:hover {
+  opacity: 0.5;
+}
+
+.navbar__title {
+  position: relative;
+  transition: 0.3s ease-in-out;
+}
+
+.navbar__title:hover {
+  opacity: 0.5;
+}
+
+.active::after {
+  content: '';
+  background-color: #d85b00;
+  height: 3px;
+  width: 100px;
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
