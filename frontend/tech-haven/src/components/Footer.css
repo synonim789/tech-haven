@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 30px;
+  margin-top: auto;
 }
 
 .footer__links-title {

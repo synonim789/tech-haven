@@ -7,14 +7,21 @@
 
 body,
 html {
-  height: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header,
 .navbar,
 .hero,
 .homepage-products,
-.footer {
+.footer,
+.about-us {
   padding-left: 200px;
   padding-right: 200px;
 }
