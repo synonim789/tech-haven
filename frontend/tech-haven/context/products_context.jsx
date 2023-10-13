@@ -8,6 +8,7 @@ export const ProductsProvider = ({ children }) => {
     isLoading: false,
     isError: null,
     products: [],
+    featuredProducts: [],
   })
 
   const getAllProducts = async () => {
@@ -15,7 +16,15 @@ export const ProductsProvider = ({ children }) => {
     try {
       const response = await axios.get('http://localhost:3000/api/v1/products')
       const products = response.data
-      console.log(products)
+      setProductsContextState({
+        ...productsContextState,
+        isLoading: false,
+        isError: false,
+        products: products,
+        featuredProducts: products.find(
+          (product) => product.isFeatured === true
+        ),
+      })
     } catch (error) {
       setProductsContextState({ ...productsContextState, isError: true })
     }
