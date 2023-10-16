@@ -1,7 +1,8 @@
 import SingleProduct from './SingleProduct'
 import './HomepageProducts.css'
 import { Link } from 'react-router-dom'
-import { useProductsContext } from '../../context/products_context'
+import { useProductsContext } from '../context/products_context'
+
 const HomepageProducts = () => {
   const data = useProductsContext()
   const {
@@ -13,9 +14,9 @@ const HomepageProducts = () => {
     <section className="homepage-products">
       <h2 className="homepage-products__title">Products</h2>
       <div className="homepage-products__products">
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
+        {featured.map((product) => {
+          return <SingleProduct key={product.id} {...product} />
+        })}
       </div>
       <Link to="/products" className="homepage-products__cta">
         All Products
