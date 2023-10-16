@@ -9,6 +9,9 @@ const initialState = {
   productsError: false,
   products: [],
   featuredProducts: [],
+  singleProduct: {},
+  singleProductLoading: false,
+  singleProductLoading: true,
 }
 
 export const ProductsProvider = ({ children }) => {
@@ -26,12 +29,23 @@ export const ProductsProvider = ({ children }) => {
     }
   }
 
+  const getSingleProduct = async (url) => {
+    dispatch({ type: 'GET_SINGLE_PRODUCT_BEGIN' })
+    try {
+      const response = await axios.get(url)
+      const singleProduct = response.data
+      dispatch({ type: 'GET_SINGLE_PRODUCT_SUCCESS', payload: singleProduct })
+    } catch (error) {
+      dispatch({ type: 'GET_SINGLE_PRODUCT_SUCCESS' })
+    }
+  }
+
   useEffect(() => {
     getAllProducts()
   }, [])
 
   return (
-    <ProductsContext.Provider value={{ ...state }}>
+    <ProductsContext.Provider value={{ ...state, getSingleProduct }}>
       {children}
     </ProductsContext.Provider>
   )
