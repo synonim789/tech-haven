@@ -14,8 +14,29 @@ const ProductPage = () => {
     getSingleProduct(`http://localhost:3000/api/v1/products/${id}`)
   }, [id])
 
-  console.log(product)
+  const {
+    name,
+    description,
+    image,
+    images,
+    brand,
+    price,
+    category,
+    countInStock,
+    rating,
+  } = product
 
-  return <div>ProductPage</div>
+  return (
+    <div>
+      <img src={image} alt={name} />
+      <h1>{name}</h1>
+      <p>{description}</p>
+      <p>{brand}</p>
+      <h3>${price}</h3>
+      <p>{rating}</p>
+      <button>Add To Cart</button>
+      <p> - Amount: 1 +</p>
+    </div>
+  )
 }
 export default ProductPage
