@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useProductsContext } from '../context/products_context'
+import { useProductsContext } from '../../context/products_context'
 
 const ProductPage = () => {
   const { id } = useParams()

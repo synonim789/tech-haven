@@ -1,7 +1,7 @@
-import SingleProduct from './SingleProduct'
+import SingleProduct from '../SingleProduct/SingleProduct'
 import './HomepageProducts.css'
 import { Link } from 'react-router-dom'
-import { useProductsContext } from '../context/products_context'
+import { useProductsContext } from '../../context/products_context'
 
 const HomepageProducts = () => {
   const data = useProductsContext()
