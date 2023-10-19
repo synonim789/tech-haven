@@ -1,0 +1,33 @@
+.addtocart-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.addtocart-container__amount {
+  display: flex;
+}
+
+.addtocart-decrease,
+.addtocart-increase {
+  background-color: #1b88b7;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.addtocart-number {
+  padding: 15px;
+  font-size: 20px;
+  background-color: white;
+}
+
+.addtocart-cta {
+  padding: 10px;
+  background: #1b88b7;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+}
