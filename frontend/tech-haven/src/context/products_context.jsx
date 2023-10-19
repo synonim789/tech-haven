@@ -10,7 +10,7 @@ const initialState = {
   products: [],
   featuredProducts: [],
   singleProduct: {},
-  singleProductLoading: false,
+  singleProductError: false,
   singleProductLoading: true,
 }
 
