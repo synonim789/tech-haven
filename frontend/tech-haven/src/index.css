@@ -22,7 +22,8 @@ html {
 .homepage-products,
 .footer,
 .about-us,
-.product-page {
+.product-page,
+.products-page {
   padding-left: 200px;
   padding-right: 200px;
 }
