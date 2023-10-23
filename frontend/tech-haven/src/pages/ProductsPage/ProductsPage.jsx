@@ -1,21 +1,26 @@
+import Filters from '../../components/Filters/Filters'
 import SingleProduct from '../../components/SingleProduct/SingleProduct'
 import { useProductsContext } from '../../context/products_context'
 import './ProductsPage.css'
+import { BiSearchAlt } from 'react-icons/bi'
 
 const ProductsPage = () => {
   const { products } = useProductsContext()
-  console.log(products)
   return (
     <section className="products-page">
-      <input
-        type="text"
-        placeholder="search"
-        className="products-page__search"
-      />
+      <div className="product-page__search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="products-page__search"
+        />
+        <button className="product-page__search-button">
+          <BiSearchAlt />
+        </button>
+      </div>
+
       <div className="products-page__content">
-        <div className="products-page__filters">
-          <p>trigo[earthbpuiaesrgtbpuewipubgtoihnsortino</p>
-        </div>
+        <Filters />
         <div className="products-page__products">
           {products.map((product) => {
             return <SingleProduct key={product.id} {...product} />

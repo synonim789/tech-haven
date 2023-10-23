@@ -1,0 +1,74 @@
+.filters {
+  background-color: white;
+  margin-right: 40px;
+  height: 100%;
+  padding: 30px;
+  width: 400px;
+  border-radius: 20px;
+}
+
+.filters__title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.filters__category {
+  font-size: 18px;
+  text-transform: capitalize;
+  margin-bottom: 7px;
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.filters__category:hover {
+  font-weight: bold;
+}
+
+.filters__brands,
+.filters__price,
+.filters__ratings {
+  margin-top: 20px;
+}
+
+.filters__brand {
+  width: 200px;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+.filters__price-input {
+  width: 200px;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.filters__price-input:last-child {
+  margin-bottom: 0;
+}
+
+.filters__rating {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.filters__rating label svg {
+  vertical-align: center;
+  color: #ffae42;
+}
+
+input[type='radio'] {
+  margin-right: 10px;
+  height: 20px;
+  width: 20px;
+  vertical-align: center;
+}

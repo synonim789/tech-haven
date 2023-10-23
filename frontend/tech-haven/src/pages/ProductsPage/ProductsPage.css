@@ -12,6 +12,7 @@
   margin-bottom: 40px;
   font-size: 20px;
   border-radius: 10px 0 0 10px;
+  border: 1px solid black;
 }
 
 .products-page__products {
@@ -32,8 +33,28 @@
   display: flex;
 }
 
-.products-page__filters {
-  background-color: white;
-  margin-right: 40px;
-  height: 100%;
+.product-page__search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-page__search-button {
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  background-color: #1b88b7;
+  color: white;
+  font-weight: bold;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-page__search-button svg {
+  margin: 0;
+  padding: 0;
 }
