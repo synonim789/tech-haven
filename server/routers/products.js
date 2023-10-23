@@ -44,7 +44,7 @@ router.get("/:id", async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).send("Invalid Product ID");
   }
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate("category");
   if (!product) {
     return res.status(500).json({ success: false });
   }
