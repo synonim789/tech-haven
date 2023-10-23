@@ -21,7 +21,7 @@
 }
 
 .image-gallery__gallery img {
-  width: 100%;
+  width: 150px;
   height: 100px;
   border-radius: 10px;
   padding: 5px;
@@ -35,4 +35,11 @@
 
 .image-gallery__gallery img:hover {
   transform: scale(110%);
+}
+
+.image-gallery {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
