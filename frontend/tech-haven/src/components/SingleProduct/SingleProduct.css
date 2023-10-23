@@ -1,12 +1,12 @@
 .single-product {
   background-color: white;
-  margin-right: 50px;
   border-radius: 30px;
   overflow: hidden;
   height: auto;
-  width: 500px;
   position: relative;
   transition: 0.2s all ease-in;
+  width: 100%;
+  margin-right: 50px;
 }
 
 .single-product:last-child {
