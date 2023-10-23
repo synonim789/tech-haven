@@ -6,13 +6,13 @@
 }
 
 .products-page__search {
-  padding: 10px;
+  padding: 15px;
   width: 800px;
   margin-top: 40px;
   margin-bottom: 40px;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 10px 0 0 10px;
-  border: 1px solid black;
+  border: none;
 }
 
 .products-page__products {
@@ -40,9 +40,9 @@
 }
 
 .product-page__search-button {
-  padding: 10px;
-  font-size: 20px;
-  border: 1px solid black;
+  padding: 15px;
+  font-size: 25px;
+  border: none;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
   background-color: #1b88b7;
