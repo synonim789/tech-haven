@@ -34,8 +34,12 @@ const Filters = () => {
       })}
       <p className="filters__title filters__brands">Brand:</p>
       <select name="" id="" className="filters__brand">
-        {brands.map((brand) => {
-          return <option value={brand}>{brand}</option>
+        {brands.map((brand, index) => {
+          return (
+            <option value={brand} key={index}>
+              {brand}
+            </option>
+          )
         })}
       </select>
       <p className="filters__title filters__price">Price:</p>
@@ -49,7 +53,7 @@ const Filters = () => {
       <div className="filters__stars">
         <div className="filters__rating">
           <input type="radio" name="rating" id="rating5" />
-          <label for="rating5">
+          <label htmlFor="rating5">
             5 <AiFillStar />
             <AiFillStar />
             <AiFillStar />
@@ -59,7 +63,7 @@ const Filters = () => {
         </div>
         <div className="filters__rating">
           <input type="radio" name="rating" id="rating4" />
-          <label for="rating4">
+          <label htmlFor="rating4">
             From 4 <AiFillStar />
             <AiFillStar />
             <AiFillStar />
@@ -69,7 +73,7 @@ const Filters = () => {
         </div>
         <div className="filters__rating">
           <input type="radio" name="rating" id="rating3" />
-          <label for="rating3">
+          <label htmlFor="rating3">
             From 3 <AiFillStar />
             <AiFillStar />
             <AiFillStar />
@@ -80,7 +84,7 @@ const Filters = () => {
 
         <div className="filters__rating">
           <input type="radio" name="rating" id="rating2" />
-          <label for="rating2">
+          <label htmlFor="rating2">
             From 2 <AiFillStar />
             <AiFillStar />
             <AiOutlineStar />
@@ -90,7 +94,7 @@ const Filters = () => {
         </div>
         <div className="filters__rating">
           <input type="radio" name="rating" id="rating1" />
-          <label for="rating1">
+          <label htmlFor="rating1">
             From 1 <AiFillStar />
             <AiOutlineStar />
             <AiOutlineStar />
@@ -98,6 +102,7 @@ const Filters = () => {
             <AiOutlineStar />
           </label>
         </div>
+        <button className="filters__clear">Clear Filters</button>
       </div>
     </div>
   )
