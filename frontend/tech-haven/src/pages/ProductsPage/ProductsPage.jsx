@@ -1,11 +1,11 @@
 import Filters from '../../components/Filters/Filters'
 import SingleProduct from '../../components/SingleProduct/SingleProduct'
-import { useProductsContext } from '../../context/products_context'
 import './ProductsPage.css'
 import { BiSearchAlt } from 'react-icons/bi'
+import { useFilterContext } from '../../context/filter_context'
 
 const ProductsPage = () => {
-  const { products } = useProductsContext()
+  const { filteredProducts: products } = useFilterContext()
   return (
     <section className="products-page">
       <div className="product-page__search-bar">

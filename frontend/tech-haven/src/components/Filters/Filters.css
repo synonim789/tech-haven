@@ -27,6 +27,11 @@
   font-weight: bold;
 }
 
+.active-category {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .filters__brands,
 .filters__price,
 .filters__ratings {

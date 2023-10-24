@@ -2,21 +2,29 @@ import { useEffect, useState } from 'react'
 import { useProductsContext } from '../../context/products_context'
 import './Filters.css'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import { useFilterContext } from '../../context/filter_context'
 
 const Filters = () => {
-  const [categories, setCategories] = useState(['all'])
-  const [brands, setBrands] = useState(['all'])
-  const { products } = useProductsContext()
+  const [categories, setCategories] = useState([])
+  const [brands, setBrands] = useState([])
+  const {
+    filteredProducts: products,
+    filters,
+    updateFilters,
+    allProducts,
+    clearFilters,
+  } = useFilterContext()
 
   const getCategories = () => {
-    let unique = products.map((product) => product['category'].name)
-    setCategories((oldCategories) => [...oldCategories, ...new Set(unique)])
+    let unique = allProducts.map((product) => product['category'].name)
+    setCategories(['all', ...new Set(unique)])
   }
 
   const getBrands = () => {
-    let unique = products.map((product) => product['brand'])
-    setBrands((oldBrands) => [...oldBrands, ...new Set(unique)])
+    let unique = allProducts.map((product) => product['brand'])
+    setBrands(['all', ...new Set(unique)])
   }
+
   useEffect(() => {
     getCategories()
     getBrands()
@@ -27,13 +35,22 @@ const Filters = () => {
       <p className="filters__title">Category:</p>
       {categories.map((category, index) => {
         return (
-          <button key={index} className="filters__category">
+          <button
+            key={index}
+            className={
+              category === filters.category
+                ? 'filters__category active-category'
+                : 'filters__category'
+            }
+            name="category"
+            onClick={updateFilters}
+          >
             {category}
           </button>
         )
       })}
       <p className="filters__title filters__brands">Brand:</p>
-      <select name="" id="" className="filters__brand">
+      <select name="brand" className="filters__brand" onChange={updateFilters}>
         {brands.map((brand, index) => {
           return (
             <option value={brand} key={index}>
@@ -43,16 +60,39 @@ const Filters = () => {
         })}
       </select>
       <p className="filters__title filters__price">Price:</p>
+      <label htmlFor="price1">From:</label>
       <input
         type="number"
         placeholder="From"
         className="filters__price-input"
+        min={filters.minPrice}
+        max={filters.maxPrice}
+        id="price1"
+        name="minPrice"
+        onChange={updateFilters}
       />
-      <input type="number" placeholder="To" className="filters__price-input" />
+      <label htmlFor="price2">To:</label>
+      <input
+        type="number"
+        placeholder="To"
+        className="filters__price-input"
+        min={filters.minPrice}
+        max={filters.maxPrice}
+        id="price2"
+        name="maxPrice"
+        onChange={updateFilters}
+      />
       <p className="filters__title filters__ratings">Rating:</p>
       <div className="filters__stars">
         <div className="filters__rating">
-          <input type="radio" name="rating" id="rating5" />
+          <input
+            type="radio"
+            name="rating"
+            id="rating5"
+            checked={filters.rating === 5}
+            value={5}
+            onChange={updateFilters}
+          />
           <label htmlFor="rating5">
             5 <AiFillStar />
             <AiFillStar />
@@ -62,7 +102,14 @@ const Filters = () => {
           </label>
         </div>
         <div className="filters__rating">
-          <input type="radio" name="rating" id="rating4" />
+          <input
+            type="radio"
+            name="rating"
+            id="rating4"
+            checked={filters.rating === 4}
+            value={4}
+            onChange={updateFilters}
+          />
           <label htmlFor="rating4">
             From 4 <AiFillStar />
             <AiFillStar />
@@ -72,7 +119,14 @@ const Filters = () => {
           </label>
         </div>
         <div className="filters__rating">
-          <input type="radio" name="rating" id="rating3" />
+          <input
+            type="radio"
+            name="rating"
+            id="rating3"
+            checked={filters.rating === 3}
+            value={3}
+            onChange={updateFilters}
+          />
           <label htmlFor="rating3">
             From 3 <AiFillStar />
             <AiFillStar />
@@ -83,7 +137,14 @@ const Filters = () => {
         </div>
 
         <div className="filters__rating">
-          <input type="radio" name="rating" id="rating2" />
+          <input
+            type="radio"
+            name="rating"
+            id="rating2"
+            checked={filters.rating === 2}
+            value={2}
+            onChange={updateFilters}
+          />
           <label htmlFor="rating2">
             From 2 <AiFillStar />
             <AiFillStar />
@@ -93,7 +154,14 @@ const Filters = () => {
           </label>
         </div>
         <div className="filters__rating">
-          <input type="radio" name="rating" id="rating1" />
+          <input
+            type="radio"
+            name="rating"
+            id="rating1"
+            checked={filters.rating === 1}
+            value={1}
+            onChange={updateFilters}
+          />
           <label htmlFor="rating1">
             From 1 <AiFillStar />
             <AiOutlineStar />
@@ -102,7 +170,9 @@ const Filters = () => {
             <AiOutlineStar />
           </label>
         </div>
-        <button className="filters__clear">Clear Filters</button>
+        <button className="filters__clear" onClick={clearFilters}>
+          Clear Filters
+        </button>
       </div>
     </div>
   )
