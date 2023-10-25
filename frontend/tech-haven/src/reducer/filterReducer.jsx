@@ -122,5 +122,27 @@ const filterReducer = (state, action) => {
   if (action.type === 'UPDATE_SORT') {
     return { ...state, sort: action.payload }
   }
+
+  if (action.type === 'GET_PAGINATION') {
+    const { currentPage, limit, filteredProducts, pagedProducts } = state
+    const indexOfLastProduct = currentPage * limit
+    const indexOfFirstProduct = indexOfLastProduct - limit
+    const currentProducts = filteredProducts.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    )
+    return { ...state, pagedProducts: currentProducts }
+  }
+
+  if (action.type === 'UPDATE_PAGINATION') {
+    return { ...state, currentPage: action.payload }
+  }
+
+  if (action.type === 'SET_GRID_VIEW') {
+    return { ...state, gridView: true, listView: false, limit: 9 }
+  }
+  if (action.type === 'SET_LIST_VIEW') {
+    return { ...state, gridView: false, listView: true, limit: 4 }
+  }
 }
 export default filterReducer

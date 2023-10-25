@@ -14,6 +14,11 @@ const initialState = {
     maxPrice: 0,
     rating: 1,
   },
+  limit: 9,
+  currentPage: 1,
+  pagedProducts: [],
+  gridView: true,
+  listView: false,
 }
 
 const FilterContext = createContext()
@@ -33,6 +38,10 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: 'SORT_PRODUCTS' })
   }
 
+  const getPagination = () => {
+    dispatch({ type: 'GET_PAGINATION' })
+  }
+
   useEffect(() => {
     getProducts()
   }, [products])
@@ -40,7 +49,8 @@ export const FilterProvider = ({ children }) => {
   useEffect(() => {
     filterProducts()
     sortProducts()
-  }, [state.filters, state.sort])
+    getPagination()
+  }, [state.filters, state.sort, state.currentPage])
 
   const updateFilters = (e) => {
     let name = e.target.name
@@ -71,9 +81,30 @@ export const FilterProvider = ({ children }) => {
     let value = e.target.value
     dispatch({ type: 'UPDATE_SORT', payload: value })
   }
+
+  const updatePagination = (e) => {
+    let value = e.target.textContent
+    dispatch({ type: 'UPDATE_PAGINATION', payload: value })
+  }
+
+  const setGridView = () => {
+    dispatch({ type: 'SET_GRID_VIEW' })
+  }
+
+  const setListView = () => {
+    dispatch({ type: 'SET_LIST_VIEW' })
+  }
   return (
     <FilterContext.Provider
-      value={{ ...state, updateFilters, clearFilters, updateSort }}
+      value={{
+        ...state,
+        updateFilters,
+        clearFilters,
+        updateSort,
+        updatePagination,
+        setGridView,
+        setListView,
+      }}
     >
       {children}
     </FilterContext.Provider>
