@@ -142,7 +142,20 @@ const filterReducer = (state, action) => {
     return { ...state, gridView: true, listView: false, limit: 9 }
   }
   if (action.type === 'SET_LIST_VIEW') {
-    return { ...state, gridView: false, listView: true, limit: 4 }
+    const { currentPage, limit, filteredProducts, pagedProducts } = state
+    const indexOfLastProduct = currentPage * 4
+    const indexOfFirstProduct = indexOfLastProduct - 4
+    const currentProducts = filteredProducts.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    )
+    return {
+      ...state,
+      pagedProducts: currentProducts,
+      gridView: false,
+      listView: true,
+      limit: 4,
+    }
   }
 }
 export default filterReducer

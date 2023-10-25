@@ -1,7 +1,6 @@
 import { useFilterContext } from '../../context/filter_context'
 import GridView from '../GridView/GridView'
 import ListView from '../ListView/ListView'
-import SingleProduct from '../SingleProduct/SingleProduct'
 import './ProductsList.css'
 
 const ProductsList = () => {
