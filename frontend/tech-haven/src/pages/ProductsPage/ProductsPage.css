@@ -4,20 +4,6 @@
   justify-content: center;
 }
 
-.products-page__products {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 40px;
-  gap: 50px;
-}
-
-.products-page__products > * {
-  margin-bottom: 40px;
-  text-align: center;
-  width: 100%;
-  margin-right: 30px;
-}
-
 .products-page__content {
   display: flex;
 }

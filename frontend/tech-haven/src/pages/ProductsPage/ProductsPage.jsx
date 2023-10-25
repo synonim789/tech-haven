@@ -5,21 +5,19 @@ import './ProductsPage.css'
 import { useFilterContext } from '../../context/filter_context'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import Sort from '../../components/Sort/Sort'
+import { Pagination } from '../../components/Pagination/Pagination'
+import ProductsList from '../../components/ProductsList/ProductsList'
 
 const ProductsPage = () => {
-  const { filteredProducts: products } = useFilterContext()
   return (
     <section className="products-page">
       <SearchBar />
       <Sort />
       <div className="products-page__content">
         <Filters />
-        <div className="products-page__products">
-          {products.map((product) => {
-            return <SingleProduct key={product.id} {...product} />
-          })}
-        </div>
+        <ProductsList />
       </div>
+      <Pagination />
     </section>
   )
 }
