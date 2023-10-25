@@ -62,7 +62,7 @@ const ProductPage = () => {
         </p>
         <h3 className="product-page__price">${price}</h3>
 
-        <AddToCart />
+        <AddToCart product={product} />
       </div>
     </div>
   )

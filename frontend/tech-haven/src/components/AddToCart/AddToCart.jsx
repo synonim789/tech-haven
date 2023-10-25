@@ -2,7 +2,8 @@ import './AddToCart.css'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-const AddToCart = () => {
+const AddToCart = ({ product }) => {
+  const { countInStock: count } = product
   const [amount, setAmount] = useState(1)
   const decrease = () => {
     setAmount((oldAmount) => {
@@ -16,7 +17,11 @@ const AddToCart = () => {
 
   const increase = () => {
     setAmount((oldAmount) => {
-      return oldAmount + 1
+      let newAmount = oldAmount + 1
+      if (newAmount > count) {
+        newAmount = count
+      }
+      return newAmount
     })
   }
   return (
