@@ -6,6 +6,7 @@ const initialState = {
   allProducts: [],
   filteredProducts: [],
   filters: {
+    search: '',
     category: 'all',
     brand: 'all',
     minPrice: 0,
@@ -38,6 +39,7 @@ export const FilterProvider = ({ children }) => {
   const updateFilters = (e) => {
     let name = e.target.name
     let value = e.target.value
+
     if (name === 'category') {
       value = e.target.textContent
     }
@@ -51,6 +53,7 @@ export const FilterProvider = ({ children }) => {
     if (name === 'rating') {
       value = Number(value)
     }
+
     dispatch({ type: 'UPDATE_FILTERS', payload: { name, value } })
   }
 

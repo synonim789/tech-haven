@@ -1,0 +1,25 @@
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar__button {
+  padding: 15px;
+  font-size: 25px;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  background-color: #1b88b7;
+  color: white;
+  font-weight: bold;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar__button svg {
+  margin: 0;
+  padding: 0;
+}

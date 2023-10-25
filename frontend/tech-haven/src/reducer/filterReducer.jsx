@@ -22,8 +22,16 @@ const filterReducer = (state, action) => {
 
   if (action.type === 'FILTER_PRODUCTS') {
     const { allProducts } = state
-    const { category, brand, minPrice, maxPrice, rating } = state.filters
+    const { search, category, brand, minPrice, maxPrice, rating } =
+      state.filters
     let filteredProducts = [...allProducts]
+
+    if (search) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().startsWith(search)
+      )
+    }
+
     if (category !== 'all') {
       filteredProducts = filteredProducts.filter(
         (product) => product.category.name === category
@@ -65,7 +73,6 @@ const filterReducer = (state, action) => {
     filteredProducts = filteredProducts.filter(
       (product) => product.price > minPrice && product.price <= maxPrice
     )
-    console.log(state.filters)
     return { ...state, filteredProducts: filteredProducts }
   }
 
