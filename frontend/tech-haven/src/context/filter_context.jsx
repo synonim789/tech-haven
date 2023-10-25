@@ -5,6 +5,7 @@ import filterReducer from '../reducer/filterReducer'
 const initialState = {
   allProducts: [],
   filteredProducts: [],
+  sort: 'name-asc',
   filters: {
     search: '',
     category: 'all',
@@ -28,13 +29,18 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: 'FILTER_PRODUCTS' })
   }
 
+  const sortProducts = () => {
+    dispatch({ type: 'SORT_PRODUCTS' })
+  }
+
   useEffect(() => {
     getProducts()
   }, [products])
 
   useEffect(() => {
     filterProducts()
-  }, [state.filters])
+    sortProducts()
+  }, [state.filters, state.sort])
 
   const updateFilters = (e) => {
     let name = e.target.name
@@ -60,8 +66,15 @@ export const FilterProvider = ({ children }) => {
   const clearFilters = () => {
     dispatch({ type: 'CLEAR_FILTERS' })
   }
+
+  const updateSort = (e) => {
+    let value = e.target.value
+    dispatch({ type: 'UPDATE_SORT', payload: value })
+  }
   return (
-    <FilterContext.Provider value={{ ...state, updateFilters, clearFilters }}>
+    <FilterContext.Provider
+      value={{ ...state, updateFilters, clearFilters, updateSort }}
+    >
       {children}
     </FilterContext.Provider>
   )

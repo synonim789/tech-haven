@@ -89,5 +89,38 @@ const filterReducer = (state, action) => {
       },
     }
   }
+
+  if (action.type === 'SORT_PRODUCTS') {
+    const { sort, filteredProducts } = state
+    let sortedProducts = []
+    if (sort === 'name-asc') {
+      sortedProducts = filteredProducts.sort((a, b) => {
+        return a.name.localeCompare(b.name)
+      })
+    }
+
+    if (sort === 'name-desc') {
+      sortedProducts = filteredProducts.sort((a, b) => {
+        return b.name.localeCompare(a.name)
+      })
+    }
+
+    if (sort === 'price-asc') {
+      sortedProducts = filteredProducts.sort((a, b) => {
+        return a.price - b.price
+      })
+    }
+
+    if (sort === 'price-desc') {
+      sortedProducts = filteredProducts.sort((a, b) => {
+        return b.price - a.price
+      })
+    }
+    return { ...state, filteredProducts: sortedProducts }
+  }
+
+  if (action.type === 'UPDATE_SORT') {
+    return { ...state, sort: action.payload }
+  }
 }
 export default filterReducer

@@ -1,0 +1,18 @@
+.sort {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 300px;
+}
+
+.sort-input {
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.sort__products-found {
+  font-size: 20px;
+  font-weight: bold;
+}
