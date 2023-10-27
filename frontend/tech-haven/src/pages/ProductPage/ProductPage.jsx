@@ -1,19 +1,23 @@
 import { useEffect } from 'react'
+import { AiFillStar } from 'react-icons/ai'
 import { useNavigate, useParams } from 'react-router-dom'
+import AddToCart from '../../components/AddToCart/AddToCart'
 import ImageGallery from '../../components/ImageGallery/ImageGallery'
 import { useProductsContext } from '../../context/products_context'
 import './ProductPage.css'
-import { AiFillStar } from 'react-icons/ai'
-import AddToCart from '../../components/AddToCart/AddToCart'
+
 const ProductPage = () => {
   const navigate = useNavigate()
+
   const { id } = useParams()
+
   const {
     singleProduct: product,
     singleProductLoading: loading,
     singleProductError: error,
     getSingleProduct,
   } = useProductsContext()
+
   useEffect(() => {
     getSingleProduct(`http://localhost:3000/api/v1/products/${id}`)
   }, [id])
@@ -25,17 +29,8 @@ const ProductPage = () => {
   if (error) {
     console.log('Error')
   }
-  const {
-    name,
-    description,
-    image,
-    images,
-    brand,
-    price,
-    category,
-    countInStock,
-    rating,
-  } = product
+  const { name, description, images, brand, price, countInStock, rating } =
+    product
 
   return (
     <div className="product-page">

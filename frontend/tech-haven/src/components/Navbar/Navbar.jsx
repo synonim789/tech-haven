@@ -1,12 +1,14 @@
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import './Navbar.css'
 import { GrCart } from 'react-icons/gr'
 
 const Navbar = () => {
   const location = useLocation()
+
   if (location.pathname === '/login' || location.pathname === '/register') {
     return null
   }
+
   return (
     <section className="navbar">
       <p className="navbar__title">

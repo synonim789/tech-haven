@@ -10,9 +10,11 @@ import {
 import './Footer.css'
 const Footer = () => {
   const location = useLocation()
+
   if (location.pathname === '/login' || location.pathname === '/register') {
     return null
   }
+
   let date = new Date()
 
   return (

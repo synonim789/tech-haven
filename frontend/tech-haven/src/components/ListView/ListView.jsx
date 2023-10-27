@@ -4,6 +4,7 @@ import './ListView.css'
 
 const ListView = () => {
   const { pagedProducts: products } = useFilterContext()
+
   return (
     <div className="list-view">
       {products.map((product, index) => {

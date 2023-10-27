@@ -1,5 +1,6 @@
 import './AboutPage.css'
 import image from '../../assets/gadgets.jpg'
+
 const AboutPage = () => {
   return (
     <main className="about-us">

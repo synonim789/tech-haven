@@ -5,11 +5,13 @@ import { useProductsContext } from '../../context/products_context'
 
 const HomepageProducts = () => {
   const data = useProductsContext()
+
   const {
     isLoading: loading,
     isError: error,
     featuredProducts: featured,
   } = data
+
   return (
     <section className="homepage-products">
       <h2 className="homepage-products__title">Products</h2>

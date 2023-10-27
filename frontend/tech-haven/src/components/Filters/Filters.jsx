@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useProductsContext } from '../../context/products_context'
 import './Filters.css'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useFilterContext } from '../../context/filter_context'
 
 const Filters = () => {
   const [categories, setCategories] = useState([])
+
   const [brands, setBrands] = useState([])
+
   const {
     filteredProducts: products,
     filters,
@@ -28,7 +29,7 @@ const Filters = () => {
   useEffect(() => {
     getCategories()
     getBrands()
-  }, [products])
+  }, [allProducts])
 
   return (
     <div className="filters">

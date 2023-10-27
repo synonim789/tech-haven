@@ -4,6 +4,7 @@ import { BiSearchAlt } from 'react-icons/bi'
 
 const SingleProduct = (props) => {
   const { image, name, price, id } = props
+
   return (
     <div className="single-product">
       <div className="single-product__image-container">

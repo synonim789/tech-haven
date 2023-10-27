@@ -124,7 +124,7 @@ const filterReducer = (state, action) => {
   }
 
   if (action.type === 'GET_PAGINATION') {
-    const { currentPage, limit, filteredProducts, pagedProducts } = state
+    const { currentPage, limit, filteredProducts } = state
     const indexOfLastProduct = currentPage * limit
     const indexOfFirstProduct = indexOfLastProduct - limit
     const currentProducts = filteredProducts.slice(
@@ -142,9 +142,9 @@ const filterReducer = (state, action) => {
     return { ...state, gridView: true, listView: false, limit: 9 }
   }
   if (action.type === 'SET_LIST_VIEW') {
-    const { currentPage, limit, filteredProducts, pagedProducts } = state
-    const indexOfLastProduct = currentPage * 4
-    const indexOfFirstProduct = indexOfLastProduct - 4
+    const { currentPage, limit, filteredProducts } = state
+    const indexOfLastProduct = currentPage * limit
+    const indexOfFirstProduct = indexOfLastProduct - limit
     const currentProducts = filteredProducts.slice(
       indexOfFirstProduct,
       indexOfLastProduct

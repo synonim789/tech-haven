@@ -12,6 +12,7 @@ const Sort = () => {
     gridView,
     listView,
   } = useFilterContext()
+
   return (
     <div className="sort">
       <div className="sort__left">

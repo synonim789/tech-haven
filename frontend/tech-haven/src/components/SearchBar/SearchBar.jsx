@@ -4,6 +4,7 @@ import './SearchBar.css'
 
 const SearchBar = () => {
   const { filters, updateFilters } = useFilterContext()
+
   return (
     <div className="search-bar">
       <input

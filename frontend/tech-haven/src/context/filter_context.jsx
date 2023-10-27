@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
-import { useProductsContext } from './products_context'
 import filterReducer from '../reducer/filterReducer'
+import { useProductsContext } from './products_context'
 
 const initialState = {
   allProducts: [],
