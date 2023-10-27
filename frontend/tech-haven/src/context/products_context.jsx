@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { createContext, useEffect, useContext, useReducer } from 'react'
+import { createContext, useContext, useEffect, useReducer } from 'react'
 import productsReducer from '../reducer/productsReducer'
 
 const ProductsContext = createContext()
@@ -14,7 +14,7 @@ const initialState = {
   singleProductLoading: true,
 }
 
-export const ProductsProvider = ({ children }) => {
+export const ProductsProvider = (children) => {
   const [state, dispatch] = useReducer(productsReducer, initialState)
 
   const getAllProducts = async () => {
@@ -51,6 +51,7 @@ export const ProductsProvider = ({ children }) => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useProductsContext = () => {
   return useContext(ProductsContext)
 }

@@ -1,9 +1,9 @@
+import { BiSearchAlt } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import './SingleProduct.css'
-import { BiSearchAlt } from 'react-icons/bi'
 
-const SingleProduct = (props) => {
-  const { image, name, price, id } = props
+const SingleProduct = (product) => {
+  const { image, name, price, id } = product
 
   return (
     <div className="single-product">

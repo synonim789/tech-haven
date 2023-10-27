@@ -3,7 +3,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import './AddToCart.css'
 
-const AddToCart = ({ product }) => {
+const AddToCart = (product) => {
   const { countInStock: count } = product
 
   const [amount, setAmount] = useState(1)

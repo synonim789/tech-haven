@@ -4,7 +4,7 @@ import ListView from '../ListView/ListView'
 import './ProductsList.css'
 
 const ProductsList = () => {
-  const { pagedProducts: products, gridView, listView } = useFilterContext()
+  const { pagedProducts: products, listView } = useFilterContext()
 
   if (products.length < 1) {
     return <h1>No Products Found</h1>

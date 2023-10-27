@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react'
-import './Filters.css'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useFilterContext } from '../../context/filter_context'
+import './Filters.css'
 
 const Filters = () => {
   const [categories, setCategories] = useState([])
 
   const [brands, setBrands] = useState([])
 
-  const {
-    filteredProducts: products,
-    filters,
-    updateFilters,
-    allProducts,
-    clearFilters,
-  } = useFilterContext()
+  const { filters, updateFilters, allProducts, clearFilters } =
+    useFilterContext()
 
   const getCategories = () => {
     let unique = allProducts.map((product) => product['category'].name)
@@ -29,6 +24,7 @@ const Filters = () => {
   useEffect(() => {
     getCategories()
     getBrands()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allProducts])
 
   return (
