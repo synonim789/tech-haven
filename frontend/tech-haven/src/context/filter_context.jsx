@@ -88,10 +88,12 @@ export const FilterProvider = ({ children }) => {
   }
 
   const setGridView = () => {
+    dispatch({ type: 'UPDATE_LIMIT', payload: 9 })
     dispatch({ type: 'SET_GRID_VIEW' })
   }
 
   const setListView = () => {
+    dispatch({ type: 'UPDATE_LIMIT', payload: 4 })
     dispatch({ type: 'SET_LIST_VIEW' })
   }
   return (

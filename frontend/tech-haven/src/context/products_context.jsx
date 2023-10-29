@@ -14,7 +14,7 @@ const initialState = {
   singleProductLoading: true,
 }
 
-export const ProductsProvider = (children) => {
+export const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(productsReducer, initialState)
 
   const getAllProducts = async () => {

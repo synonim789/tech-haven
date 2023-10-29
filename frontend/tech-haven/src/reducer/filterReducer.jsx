@@ -139,8 +139,25 @@ const filterReducer = (state, action) => {
   }
 
   if (action.type === 'SET_GRID_VIEW') {
-    return { ...state, gridView: true, listView: false, limit: 9 }
+    const { currentPage, limit, filteredProducts } = state
+    const indexOfLastProduct = currentPage * limit
+    const indexOfFirstProduct = indexOfLastProduct - limit
+    const currentProducts = filteredProducts.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    )
+    return {
+      ...state,
+      gridView: true,
+      listView: false,
+      pagedProducts: currentProducts,
+    }
   }
+
+  if (action.type === 'UPDATE_LIMIT') {
+    return { ...state, limit: action.payload }
+  }
+
   if (action.type === 'SET_LIST_VIEW') {
     const { currentPage, limit, filteredProducts } = state
     const indexOfLastProduct = currentPage * limit
@@ -151,10 +168,9 @@ const filterReducer = (state, action) => {
     )
     return {
       ...state,
-      pagedProducts: currentProducts,
       gridView: false,
       listView: true,
-      limit: 4,
+      pagedProducts: currentProducts,
     }
   }
 }
