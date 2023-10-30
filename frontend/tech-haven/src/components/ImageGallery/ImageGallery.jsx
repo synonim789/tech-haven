@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import './ImageGallery.css'
 
-const ImageGallery = (images = ['']) => {
+const ImageGallery = ({ images = [''] }) => {
   const [main, setMain] = useState(images[0])
-
   useEffect(() => {
     setMain(images[0])
   }, [images])

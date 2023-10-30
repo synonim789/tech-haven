@@ -1,6 +1,6 @@
+import { GrCart } from 'react-icons/gr'
 import { NavLink, useLocation } from 'react-router-dom'
 import './Navbar.css'
-import { GrCart } from 'react-icons/gr'
 
 const Navbar = () => {
   const location = useLocation()
@@ -60,7 +60,6 @@ const Navbar = () => {
             }
           >
             <GrCart />
-            Cart
           </NavLink>
         </ul>
       </nav>
