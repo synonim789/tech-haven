@@ -38,9 +38,9 @@
 .navbar__link:last-child {
   margin-right: 0;
 }
-.navbar__link:last-child > a {
+/* .navbar__link:last-child > a {
   color: #d85b00;
-}
+} */
 
 .navbar__link {
   position: relative;

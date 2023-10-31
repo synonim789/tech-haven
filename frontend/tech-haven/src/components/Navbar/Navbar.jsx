@@ -56,7 +56,7 @@ const Navbar = () => {
           <NavLink
             to="/cart"
             className={({ isActive, isPending }) =>
-              isPending ? 'pending' : isActive ? 'active' : ''
+              isPending ? 'pending' : isActive ? 'none' : ''
             }
           >
             <GrCart />

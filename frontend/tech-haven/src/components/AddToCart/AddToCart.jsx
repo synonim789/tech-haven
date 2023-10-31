@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { useCartContext } from '../../context/cart_context'
+import AmountButtons from '../AmountButtons/AmountButtons'
 import './AddToCart.css'
 
-const AddToCart = (product) => {
-  const { countInStock: count } = product
+const AddToCart = ({ product }) => {
+  const { addToCart } = useCartContext()
+  const { countInStock: count, id: id } = product
 
   const [amount, setAmount] = useState(1)
-
   const decrease = () => {
     setAmount((oldAmount) => {
       let newAmount = oldAmount - 1
@@ -27,20 +27,18 @@ const AddToCart = (product) => {
       return newAmount
     })
   }
+
   return (
     <div className="addtocart-container">
-      <div className="addtocart-container__amount">
-        <button className="addtocart-decrease" onClick={() => decrease()}>
-          <MdKeyboardArrowDown />
-        </button>
-        <p className="addtocart-number">{amount}</p>
-        <button className="addtocart-increase" onClick={() => increase()}>
-          <MdKeyboardArrowUp />
-        </button>
-      </div>
-      <Link to="/cart" className="addtocart-cta">
+      <AmountButtons increase={increase} decrease={decrease} amount={amount} />
+      <button
+        className="addtocart-cta"
+        onClick={() => {
+          addToCart(id, amount, product)
+        }}
+      >
         Add To Cart
-      </Link>
+      </button>
     </div>
   )
 }
