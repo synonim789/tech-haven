@@ -1,5 +1,5 @@
-.addtocart-decrease,
-.addtocart-increase {
+.amount-decrease,
+.amount-increase {
   background-color: #1b88b7;
   color: white;
   border: none;
@@ -8,11 +8,11 @@
   font-size: 20px;
 }
 
-.addtocart-container__amount {
+.amount-container__amount {
   display: flex;
 }
 
-.addtocart-number {
+.amount-number {
   padding: 15px;
   font-size: 20px;
   background-color: white;

@@ -3,12 +3,12 @@ import './AmountButtons.css'
 
 const AmountButtons = ({ amount, increase, decrease }) => {
   return (
-    <div className="addtocart-container__amount">
-      <button className="addtocart-decrease" onClick={decrease}>
+    <div className="amount-container__amount">
+      <button className="amount-decrease" onClick={decrease}>
         <MdKeyboardArrowDown />
       </button>
-      <p className="addtocart-number">{amount}</p>
-      <button className="addtocart-increase" onClick={increase}>
+      <p className="amount-number">{amount}</p>
+      <button className="amount-increase" onClick={increase}>
         <MdKeyboardArrowUp />
       </button>
     </div>
