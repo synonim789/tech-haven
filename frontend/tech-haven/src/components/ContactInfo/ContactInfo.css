@@ -5,6 +5,7 @@
   align-items: center;
   width: 70%;
   gap: 30px;
+  flex-wrap: wrap;
 }
 
 .contact-info__phone,

@@ -9,3 +9,16 @@
   margin-bottom: 50px;
   display: flex;
 }
+
+.contact-page__map {
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 50px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.contact-page__map iframe {
+  display: block;
+}
