@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <CartProvider>
         <ToastContainer
           position="top-center"
-          autoClose={5000}
+          autoClose={1000}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick
