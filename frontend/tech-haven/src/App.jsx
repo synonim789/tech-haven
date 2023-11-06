@@ -1,15 +1,15 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
-import Footer from './components/Footer/Footer'
-import Homepage from './pages/Homepage/HomePage'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import LoginPage from './pages/LoginPage/LoginPage'
-import RegisterPage from './pages/RegisterPage/RegisterPage'
-import ProductsPage from './pages/ProductsPage/ProductsPage'
 import AboutPage from './pages/AboutPage/AboutPage'
-import ContactPage from './pages/ContactPage/ContactPage'
 import CartPage from './pages/CartPage/CartPage'
+import ContactPage from './pages/ContactPage/ContactPage'
+import Homepage from './pages/Homepage/HomePage'
+import LoginPage from './pages/LoginPage/LoginPage'
 import ProductPage from './pages/ProductPage/ProductPage'
+import ProductsPage from './pages/ProductsPage/ProductsPage'
+import RegisterPage from './pages/RegisterPage/RegisterPage'
 
 function App() {
   return (

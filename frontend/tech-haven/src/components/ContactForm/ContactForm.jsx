@@ -1,14 +1,28 @@
-import { DevTool } from '@hookform/devtools'
+import emailjs from '@emailjs/browser'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import './ContactForm.css'
 
 const ContactForm = () => {
   const form = useForm()
-  const { register, control, handleSubmit, formState } = form
+  const { register, control, handleSubmit, formState, reset } = form
   const { errors } = formState
-
+  const [loading, setLoading] = useState(false)
   const onSubmit = (data) => {
-    console.log('Form submitted', data)
+    setLoading(true)
+    emailjs
+      .send('service_7bby6nl', 'template_bf3x50i', data, 'O1sfst0O8Xe5oLKVS')
+      .then(
+        () => {
+          toast.success('Message send successfully')
+          setLoading(false)
+        },
+        () => {
+          toast.error('Something went wrong')
+        }
+      )
+    reset()
   }
 
   return (
@@ -68,10 +82,9 @@ const ContactForm = () => {
           <p className="contact-form__error">{errors.message?.message}</p>
         </label>
         <button type="submit" className="contact-form__cta">
-          Send Message
+          {loading ? 'Sending...' : 'Send Message'}
         </button>
       </form>
-      <DevTool control={control} />
     </div>
   )
 }
