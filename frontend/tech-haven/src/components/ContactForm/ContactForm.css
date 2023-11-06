@@ -22,14 +22,15 @@
 }
 
 .contact-form__label span {
-  margin-bottom: 10px;
+  margin-bottom: 7px;
+  cursor: pointer;
 }
 
 .contact-form__input {
   padding-left: 16px;
   padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-size: 16px;
   border-radius: 10px;
   border: none;
@@ -52,8 +53,8 @@
 
 .contact-form__error {
   color: red;
-  font-weight: normal;
-  font-size: 14px;
+  font-weight: bold;
+  font-size: 16px;
   text-align: left;
   margin-top: 10px;
 }

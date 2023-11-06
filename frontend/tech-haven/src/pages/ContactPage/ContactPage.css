@@ -1,9 +1,11 @@
-.contact-title {
+.contact-page__title {
   text-align: center;
   font-size: 50px;
   margin-top: 50px;
+  color: #1b88b7;
 }
 
-.contact-info {
+.contact-page__info {
   margin-bottom: 50px;
+  display: flex;
 }

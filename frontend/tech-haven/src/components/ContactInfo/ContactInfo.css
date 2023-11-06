@@ -1,0 +1,25 @@
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  gap: 30px;
+}
+
+.contact-info__phone,
+.contact-info__email,
+.contact-info__address {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.contact-info__phone span,
+.contact-info__email span,
+.contact-info__address span {
+  color: #1b88b7;
+}
