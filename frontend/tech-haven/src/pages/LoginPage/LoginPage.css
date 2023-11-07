@@ -1,0 +1,100 @@
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page__title {
+  text-align: center;
+}
+
+.login-page__title span {
+  color: #1b88b7;
+}
+
+.login-page__title a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.login-page__container {
+  background-color: white;
+  padding: 50px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
+  gap: 40px;
+}
+
+.login-page__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.login-page__form label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-page__form label span {
+  margin-bottom: 7px;
+}
+
+.login-page__input {
+  padding: 12px 10px 7.5px;
+  border: none;
+  outline: none;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.login-page__cta {
+  background: #1b88b7;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 23px;
+  color: white;
+  margin-top: 10px;
+}
+
+.login-page__password-container {
+  position: relative;
+  padding: 12px 10px 7.5px;
+  border: none;
+  outline: none;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.login-page__password-container svg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.login-page__password-input {
+  border: none;
+  height: 100%;
+  outline: none;
+  font-size: 20px;
+  width: 100%;
+}
