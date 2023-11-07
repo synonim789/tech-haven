@@ -23,7 +23,7 @@ const LoginPage = () => {
             <span>Email</span>
             <input
               type="email"
-              name=""
+              name="email"
               id="email"
               className="login-page__input"
               placeholder="Enter Email"
@@ -42,11 +42,13 @@ const LoginPage = () => {
             <div className="login-page__password-container">
               <input
                 type={visiblePassword ? 'text' : 'password'}
-                name=""
+                name="password"
                 id="password"
                 placeholder="Enter Password"
                 className="login-page__password-input"
-                {...register('password', { required: 'Password is required' })}
+                {...register('password', {
+                  required: 'Password is required',
+                })}
               ></input>
               <div
                 onClick={() => {
@@ -56,12 +58,16 @@ const LoginPage = () => {
                 {visiblePassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </div>
             </div>
+            <p className="login-page__input__error">
+              {errors.password?.message}
+            </p>
           </label>
           {error ? <p className="login-page__error">{error}</p> : null}
           <button type="submit" className="login-page__cta">
             {loading ? 'Logging in' : 'Log in'}
           </button>
         </form>
+        <Link to="/forgot-password" className='login-page__forgot-pass'>Forgot Password?</Link>
       </div>
     </div>
   )

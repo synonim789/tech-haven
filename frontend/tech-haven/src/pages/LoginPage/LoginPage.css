@@ -27,7 +27,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
+  box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
   gap: 40px;
 }
 
@@ -103,4 +103,17 @@
   font-weight: bold;
   color: red;
   font-size: 20px;
+}
+
+.login-page__input__error {
+  font-weight: bold;
+  color: red;
+  margin-top: 7px;
+  font-size: 18px;
+}
+
+.login-page__forgot-pass {
+  font-size: 20px;
+  color: #1b88b7;
+  font-weight: bold;
 }
