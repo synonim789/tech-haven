@@ -31,19 +31,27 @@
 
 .header__logout {
   background-color: transparent;
-  border: 1px solid white;
+  border: 2px solid white;
   color: white;
   font-size: 20px;
   font-weight: bold;
   padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: 7px;
   cursor: pointer;
 }
 
 .header__username {
-  font-size: 20px;
   color: white;
   font-weight: bold;
   text-decoration: underline;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 20px;
+}
+
+.header__username svg {
+  height: 30px;
+  width: 30px;
 }
