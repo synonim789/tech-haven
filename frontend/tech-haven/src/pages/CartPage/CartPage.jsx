@@ -4,7 +4,6 @@ import './CartPage.css'
 
 const CartPage = () => {
   const { cart, removeAllItemsFromCart, total_amount } = useCartContext()
-  console.log(cart)
 
   if (cart.length < 1) {
     return (
