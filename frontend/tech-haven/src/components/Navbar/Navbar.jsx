@@ -5,7 +5,11 @@ import './Navbar.css'
 const Navbar = () => {
   const location = useLocation()
 
-  if (location.pathname === '/login' || location.pathname === '/register') {
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/register' ||
+    location.pathname === '/forgot-password'
+  ) {
     return null
   }
 

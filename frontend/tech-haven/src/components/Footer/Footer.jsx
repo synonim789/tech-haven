@@ -1,17 +1,21 @@
-import { Link, useLocation } from 'react-router-dom'
 import {
   FaFacebook,
   FaInstagram,
   FaTiktok,
-  FaYoutube,
   FaTwitter,
+  FaYoutube,
 } from 'react-icons/fa'
+import { Link, useLocation } from 'react-router-dom'
 
 import './Footer.css'
 const Footer = () => {
   const location = useLocation()
 
-  if (location.pathname === '/login' || location.pathname === '/register') {
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/register' ||
+    location.pathname === '/forgot-password'
+  ) {
     return null
   }
 

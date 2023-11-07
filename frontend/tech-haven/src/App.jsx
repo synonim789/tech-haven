@@ -11,6 +11,7 @@ import { useUserContext } from './context/UserContext'
 import AboutPage from './pages/AboutPage/AboutPage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
+import ForgotPassword from './pages/ForgotPasswordPage/ForgotPassword'
 import Homepage from './pages/Homepage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import ProductPage from './pages/ProductPage/ProductPage'
@@ -31,7 +32,16 @@ function App() {
             path="/login"
             element={!user ? <LoginPage /> : <Navigate to="/" />}
           ></Route>
-          <Route exact path="/register" element={<RegisterPage />}></Route>
+          <Route
+            exact
+            path="/register"
+            element={!user ? <RegisterPage /> : <Navigate to="/" />}
+          ></Route>
+          <Route
+            exact
+            path="/forgot-password"
+            element={!user ? <ForgotPassword /> : <Navigate to="/" />}
+          ></Route>
           <Route exact path="/products" element={<ProductsPage />}></Route>
           <Route exact path="/about" element={<AboutPage />}></Route>
           <Route exact path="/contact" element={<ContactPage />}></Route>
