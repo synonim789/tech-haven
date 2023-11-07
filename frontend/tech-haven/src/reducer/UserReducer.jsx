@@ -8,9 +8,12 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === 'LOGIN') {
-    return { ...state, loading: false, user: action.payload }
+    return { ...state, loading: false, user: action.payload, error: false }
   }
 
+  if (action.type === 'LOGOUT_USER') {
+    return { ...state, user: null }
+  }
   throw new Error(`Cannot find ${action.type} action type`)
 }
 

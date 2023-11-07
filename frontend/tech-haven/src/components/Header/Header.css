@@ -21,3 +21,29 @@
 .header__link:nth-child(1) {
   margin-right: 10px;
 }
+
+.header__logged {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__logout {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.header__username {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
