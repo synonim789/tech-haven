@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
   user = await user.save();
   if (!user) {
-    return res.status(404).send("the user cannot be created!");
+    return res.status(404).send("the user cannot be created");
   }
   res.send(user);
 });
@@ -48,10 +48,15 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send("All fields must be filled");
+  }
+
   const user = await User.findOne({ email: req.body.email });
   const secret = process.env.secret;
+
   if (!user) {
-    return res.status(400).send("The user not found");
+    return res.status(400).send("Incorrect email");
   }
 
   if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
@@ -59,20 +64,25 @@ router.post("/login", async (req, res) => {
       {
         userId: user.id,
         isAdmin: user.isAdmin,
+        name: user.name,
       },
       secret,
       { expiresIn: "1d" },
     );
     res.status(200).send({ user: user.email, token: token });
   } else {
-    res.status(400).send("password is wrong!");
+    res.status(400).send("Incorrect password");
   }
 });
 
 router.post("/sign-up", async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send("All fields must be filled");
+  }
+
   const exist = User.findOne({ email: req.body.email });
   if (exist) {
-    res.status(400).send("User Already Exist");
+    return res.status(400).send("Email already in use");
   }
 
   let user = new User({
