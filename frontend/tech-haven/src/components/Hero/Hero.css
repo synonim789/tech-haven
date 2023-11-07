@@ -1,5 +1,5 @@
 .hero {
-  height: 90vh;
+  height: 100vh;
   background-image: url('../../assets/6017768.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@
 .hero__left {
   display: flex;
   padding-top: 100px;
-  width: 50%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
