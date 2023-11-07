@@ -98,3 +98,9 @@
   font-size: 20px;
   width: 100%;
 }
+
+.login-page__error {
+  font-weight: bold;
+  color: red;
+  font-size: 20px;
+}

@@ -1,7 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
+import { useUserContext } from './context/UserContext'
 import AboutPage from './pages/AboutPage/AboutPage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
@@ -12,6 +18,7 @@ import ProductsPage from './pages/ProductsPage/ProductsPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 
 function App() {
+  const { user } = useUserContext()
   return (
     <>
       <Router>
@@ -19,7 +26,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Homepage />}></Route>
-          <Route exact path="/login" element={<LoginPage />}></Route>
+          <Route
+            exact
+            path="/login"
+            element={!user ? <LoginPage /> : <Navigate to="/" />}
+          ></Route>
           <Route exact path="/register" element={<RegisterPage />}></Route>
           <Route exact path="/products" element={<ProductsPage />}></Route>
           <Route exact path="/about" element={<AboutPage />}></Route>
