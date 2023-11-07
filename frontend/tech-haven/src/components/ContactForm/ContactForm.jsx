@@ -6,9 +6,10 @@ import './ContactForm.css'
 
 const ContactForm = () => {
   const form = useForm()
-  const { register, control, handleSubmit, formState, reset } = form
+  const { register, handleSubmit, formState, reset } = form
   const { errors } = formState
   const [loading, setLoading] = useState(false)
+
   const onSubmit = (data) => {
     setLoading(true)
     emailjs
