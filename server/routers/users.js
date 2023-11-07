@@ -69,7 +69,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/sign-up", async (req, res) => {
+  const exist = User.findOne({ email: req.body.email });
+  if (exist) {
+    res.status(400).send("User Already Exist");
+  }
+
   let user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -84,10 +89,14 @@ router.post("/register", async (req, res) => {
   });
 
   user = await user.save();
+  const secret = process.env.secret;
+  const token = jwt.sign({ user: user.id, isAdmin: user.isAdmin }, secret, {
+    expiresIn: "1d",
+  });
   if (!user) {
     return res.status(404).send("the user cannot be created!");
   }
-  res.send(user);
+  res.status(200).send({ user: user.email, token: token });
 });
 
 router.get("/get/count", async (req, res) => {
