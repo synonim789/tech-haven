@@ -3,9 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { useUserContext } from '../../context/UserContext'
 import './Header.css'
 const Header = () => {
-  const { user, logoutUser } = useUserContext()
+  const { user = '', logoutUser } = useUserContext()
   const location = useLocation()
-  console.log()
 
   if (
     location.pathname === '/login' ||
@@ -23,10 +22,10 @@ const Header = () => {
             <button onClick={logoutUser} className="header__logout">
               Log out
             </button>
-            <p className="header__username">
+            <Link className="header__username" to={`/profile/`}>
               {user.name.split(' ')[0]}
               <CgProfile />
-            </p>
+            </Link>
           </div>
         )}
         {!user && (

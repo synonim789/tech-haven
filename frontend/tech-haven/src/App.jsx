@@ -16,6 +16,7 @@ import Homepage from './pages/Homepage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import ProductPage from './pages/ProductPage/ProductPage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
           <Route exact path="/contact" element={<ContactPage />}></Route>
           <Route exact path="/cart" element={<CartPage />}></Route>
           <Route exact path="/products/:id" element={<ProductPage />}></Route>
+          <Route
+            exact
+            path="/profile"
+            element={user ? <ProfilePage /> : <Navigate to="/login" />}
+          ></Route>
         </Routes>
         <Footer />
       </Router>
