@@ -64,19 +64,20 @@ router.post("/login", async (req, res) => {
       {
         userId: user.id,
         isAdmin: user.isAdmin,
-        name: user.name,
       },
       secret,
       { expiresIn: "1d" },
     );
-    res.status(200).send({ user: user.email, token: token });
+    res
+      .status(200)
+      .send({ user: user.email, token: token, name: user.name, id: user._id });
   } else {
     res.status(400).send("Incorrect password");
   }
 });
 
 router.post("/sign-up", async (req, res) => {
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.email || !req.body.password || !req.body.name) {
     return res.status(400).send("All fields must be filled");
   }
 
@@ -89,13 +90,6 @@ router.post("/sign-up", async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     passwordHash: bcrypt.hashSync(req.body.password, 10),
-    phone: req.body.phone,
-    isAdmin: req.body.isAdmin,
-    street: req.body.street,
-    apartment: req.body.apartment,
-    city: req.body.city,
-    zip: req.body.zip,
-    country: req.body.country,
   });
 
   user = await user.save();
@@ -106,7 +100,9 @@ router.post("/sign-up", async (req, res) => {
   if (!user) {
     return res.status(404).send("the user cannot be created!");
   }
-  res.status(200).send({ user: user.email, token: token });
+  res
+    .status(200)
+    .send({ user: user.email, token: token, name: user.name, id: user._id });
 });
 
 router.get("/get/count", async (req, res) => {
