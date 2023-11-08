@@ -11,7 +11,7 @@ import './LoginPage.css'
 
 const LoginPage = () => {
   const [visiblePassword, setVisiblePassword] = useState(false)
-  const { error, loading, loginUser, user } = useUserContext()
+  const { error, loading, loginUser } = useUserContext()
 
   const form = useForm()
   const { register, handleSubmit, formState } = form
@@ -47,6 +47,7 @@ const LoginPage = () => {
                 },
               })}
             />
+            <p className="login-page__input__error">{errors.email?.message}</p>
           </label>
           <label>
             <span>Password</span>
@@ -75,7 +76,7 @@ const LoginPage = () => {
           </label>
           {error ? <p className="login-page__error">{error}</p> : null}
           <button type="submit" className="login-page__cta">
-            {loading ? 'Logging in' : 'Log in'}
+            {loading ? 'Logging In...' : 'Log In'}
           </button>
         </form>
         <Link to="/forgot-password" className="login-page__forgot-pass">

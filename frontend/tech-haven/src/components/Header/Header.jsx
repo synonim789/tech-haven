@@ -5,6 +5,7 @@ import './Header.css'
 const Header = () => {
   const { user, logoutUser } = useUserContext()
   const location = useLocation()
+  console.log()
 
   if (
     location.pathname === '/login' ||
@@ -23,7 +24,7 @@ const Header = () => {
               Log out
             </button>
             <p className="header__username">
-              {user.user}
+              {user.name.split(' ')[0]}
               <CgProfile />
             </p>
           </div>

@@ -81,7 +81,7 @@ router.post("/sign-up", async (req, res) => {
     return res.status(400).send("All fields must be filled");
   }
 
-  const exist = User.findOne({ email: req.body.email });
+  const exist = await User.findOne({ email: req.body.email });
   if (exist) {
     return res.status(400).send("Email already in use");
   }

@@ -111,3 +111,18 @@
   color: white;
   margin-top: 10px;
 }
+
+.sign-up__input-error {
+  font-weight: bold;
+  color: red;
+  margin-top: 7px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-up__error {
+  font-weight: bold;
+  color: red;
+  font-size: 20px;
+}

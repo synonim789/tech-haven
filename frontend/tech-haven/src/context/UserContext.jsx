@@ -42,8 +42,27 @@ export const UserProvider = ({ children }) => {
     dispatch({ type: 'LOGOUT_USER' })
   }
 
+  const registerUser = async (user) => {
+    const { email, name, password } = user
+    dispatch({ type: 'REGISTER_START' })
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/v1/users/sign-up',
+        { email, name, password },
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      const registeredUser = await response.data
+      localStorage.setItem('user', JSON.stringify(registeredUser))
+      dispatch({ type: 'REGISTER', payload: registeredUser })
+    } catch (error) {
+      dispatch({ type: 'REGISTER_ERROR', payload: error.response.data })
+    }
+  }
+
   return (
-    <UserContext.Provider value={{ ...state, loginUser, logoutUser }}>
+    <UserContext.Provider
+      value={{ ...state, loginUser, logoutUser, registerUser }}
+    >
       {children}
     </UserContext.Provider>
   )
