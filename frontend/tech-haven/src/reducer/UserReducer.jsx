@@ -1,14 +1,19 @@
 const UserReducer = (state, action) => {
   if (action.type === 'LOGIN_START') {
-    return { ...state, loading: true, error: false }
+    return { ...state, loggingLoading: true, loggingError: false }
   }
 
   if (action.type === 'LOGIN_ERROR') {
-    return { ...state, loading: false, error: action.payload }
+    return { ...state, loggingLoading: false, loggingError: action.payload }
   }
 
   if (action.type === 'LOGIN') {
-    return { ...state, loading: false, user: action.payload, error: false }
+    return {
+      ...state,
+      loggingLoading: false,
+      user: action.payload,
+      loggingError: false,
+    }
   }
 
   if (action.type === 'LOGOUT_USER') {
@@ -16,15 +21,20 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === 'REGISTER_START') {
-    return { ...state, loading: true }
+    return { ...state, signingLoading: true, signingError: false }
   }
 
   if (action.type === 'REGISTER') {
-    return { ...state, loading: false, error: false, user: action.payload }
+    return {
+      ...state,
+      signingLoading: false,
+      signingError: false,
+      user: action.payload,
+    }
   }
 
   if (action.type === 'REGISTER_ERROR') {
-    return { ...state, loading: false, error: action.payload }
+    return { ...state, signingLoading: false, signingError: action.payload }
   }
   throw new Error(`Cannot find ${action.type} action type`)
 }

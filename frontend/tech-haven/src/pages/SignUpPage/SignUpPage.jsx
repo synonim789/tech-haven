@@ -14,7 +14,11 @@ const SignUpPage = () => {
   const { register, handleSubmit, formState } = form
   const { errors } = formState
 
-  const { error, loading, registerUser } = useUserContext()
+  const {
+    signingError: error,
+    signingLoading: loading,
+    registerUser,
+  } = useUserContext()
 
   return (
     <div className="sign-up-page">

@@ -6,8 +6,10 @@ const UserContext = createContext()
 
 const initialState = {
   user: null,
-  error: null,
-  loading: null,
+  loggingError: null,
+  loggingLoading: null,
+  signingError: null,
+  signingLoading: null,
 }
 
 export const UserProvider = ({ children }) => {

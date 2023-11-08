@@ -11,7 +11,11 @@ import './LoginPage.css'
 
 const LoginPage = () => {
   const [visiblePassword, setVisiblePassword] = useState(false)
-  const { error, loading, loginUser } = useUserContext()
+  const {
+    loggingError: error,
+    loggingLoading: loading,
+    loginUser,
+  } = useUserContext()
 
   const form = useForm()
   const { register, handleSubmit, formState } = form
