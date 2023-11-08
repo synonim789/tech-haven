@@ -140,4 +140,19 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+router.post("/forget-password", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(404).send("No User with that email find");
+  }
+
+  const secret = process.env.secret;
+  const token = jwt.sign({ email: user.email, id: user.id }, secret, {
+    expiresIn: "1d",
+  });
+  const link = `http://localhost:3000/reset-password/${user.id}/${token}`;
+  console.log(link);
+  return res.status(200).send({ success: true });
+});
+
 module.exports = router;

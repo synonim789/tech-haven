@@ -1,6 +1,56 @@
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { useUserContext } from '../../context/UserContext'
 import './ForgotPassword.css'
 
 const ForgotPassword = () => {
-  return <div>ForgotPassword</div>
+  const form = useForm()
+  const { register, handleSubmit, formState } = form
+  const { errors } = formState
+  const {
+    forgotLoading: loading,
+    forgotError: error,
+    forgetPassword,
+  } = useUserContext()
+  return (
+    <div className="forgot-password">
+      <div className="forgot-password__container">
+        <h1 className="forgot-password__title">Forgot Password</h1>
+        <form
+          className="forgot-password__form"
+          onSubmit={handleSubmit(forgetPassword)}
+        >
+          <label>
+            <span>Email</span>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="forgot-password__input"
+              placeholder="Enter Email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value:
+                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
+                  message: 'Invalid email',
+                },
+              })}
+            />
+            <p className="forgot-password__input-error">
+              {errors.email?.message}
+            </p>
+          </label>
+          {error ? <p className="forgot-password__error">{error}</p> : null}
+          <button type="submit" className="forgot-password__cta">
+            {loading ? 'Submitting...' : 'Submit'}
+          </button>
+        </form>
+        <Link to="/login" className="forgot-password__link">
+          Login
+        </Link>
+      </div>
+    </div>
+  )
 }
 export default ForgotPassword

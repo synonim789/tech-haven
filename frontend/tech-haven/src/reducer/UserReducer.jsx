@@ -36,6 +36,18 @@ const UserReducer = (state, action) => {
   if (action.type === 'REGISTER_ERROR') {
     return { ...state, signingLoading: false, signingError: action.payload }
   }
+
+  if (action.type === 'FORGOT_PASSWORD_START') {
+    return { ...state, forgotLoading: true, forgotError: false }
+  }
+
+  if (action.type === 'FORGOT_PASSWORD_ERROR') {
+    return { ...state, forgotError: true, forgotLoading: false }
+  }
+
+  if (action.type === 'FORGOT_PASSWORD_SUCCESS') {
+    return { ...state, forgotError: false, forgotLoading: false }
+  }
   throw new Error(`Cannot find ${action.type} action type`)
 }
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createContext, useContext, useEffect, useReducer } from 'react'
+import { toast } from 'react-toastify'
 import UserReducer from '../reducer/UserReducer'
 
 const UserContext = createContext()
@@ -10,6 +11,8 @@ const initialState = {
   loggingLoading: null,
   signingError: null,
   signingLoading: null,
+  forgotError: null,
+  forgotLoading: null,
 }
 
 export const UserProvider = ({ children }) => {
@@ -61,9 +64,27 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const forgetPassword = async (user) => {
+    const { email } = user
+    dispatch({ type: 'FORGOT_PASSWORD_START' })
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/v1/users/forget-password',
+        { email },
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      dispatch({ type: 'FORGOT_PASSWORD_SUCCESS' })
+      if (response.data.success) {
+        toast.success('Link to reset password was sent to your email')
+      }
+    } catch (error) {
+      dispatch({ type: 'FORGOT_PASSWORD_ERROR', payload: error.response.data })
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ ...state, loginUser, logoutUser, registerUser }}
+      value={{ ...state, loginUser, logoutUser, registerUser, forgetPassword }}
     >
       {children}
     </UserContext.Provider>
