@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import {
+  AiOutlineArrowLeft,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { useUserContext } from '../../context/UserContext'
 import './LoginPage.css'
@@ -15,6 +19,13 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-page__container">
+        <div className="login-page__back">
+          <Link to="/">
+            <AiOutlineArrowLeft />
+            Back Home
+          </Link>
+        </div>
+
         <h1 className="login-page__title">
           <span>Log In</span> | <Link to="/register">Sign Up</Link>
         </h1>
@@ -67,7 +78,9 @@ const LoginPage = () => {
             {loading ? 'Logging in' : 'Log in'}
           </button>
         </form>
-        <Link to="/forgot-password" className='login-page__forgot-pass'>Forgot Password?</Link>
+        <Link to="/forgot-password" className="login-page__forgot-pass">
+          Forgot Password?
+        </Link>
       </div>
     </div>
   )

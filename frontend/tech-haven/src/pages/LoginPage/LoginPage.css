@@ -116,3 +116,22 @@
   color: #120b90;
   font-weight: bold;
 }
+
+.login-page__back {
+  width: 100%;
+}
+
+.login-page__back a {
+  color: #120b90;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.login-page__back svg {
+  position: absolute;
+  left: -18px;
+  top: -2px;
+}
