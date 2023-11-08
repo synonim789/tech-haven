@@ -1,6 +1,7 @@
 .addtocart-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: right;
+  gap: 70px;
   align-items: center;
 }
 

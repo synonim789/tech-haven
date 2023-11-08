@@ -11,6 +11,7 @@
 .image-gallery__main {
   object-fit: contain;
   border-radius: 50px;
+  box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
 }
 
 .image-gallery__gallery {
@@ -27,6 +28,7 @@
   padding: 5px;
   cursor: pointer;
   transition: 0.2s all ease-in-out;
+  box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
 }
 
 .image-gallery__active {
