@@ -7,7 +7,7 @@ const Navbar = () => {
 
   if (
     location.pathname === '/login' ||
-    location.pathname === '/register' ||
+    location.pathname === '/sign-up' ||
     location.pathname === '/forgot-password'
   ) {
     return null

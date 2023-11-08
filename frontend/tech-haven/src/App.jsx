@@ -16,7 +16,7 @@ import Homepage from './pages/Homepage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import ProductPage from './pages/ProductPage/ProductPage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
-import RegisterPage from './pages/RegisterPage/RegisterPage'
+import SignUpPage from './pages/SignUpPage/SignUpPage'
 
 function App() {
   const { user } = useUserContext()
@@ -34,8 +34,8 @@ function App() {
           ></Route>
           <Route
             exact
-            path="/register"
-            element={!user ? <RegisterPage /> : <Navigate to="/" />}
+            path="/sign-up"
+            element={!user ? <SignUpPage /> : <Navigate to="/" />}
           ></Route>
           <Route
             exact

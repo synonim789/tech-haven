@@ -8,7 +8,7 @@ const Header = () => {
 
   if (
     location.pathname === '/login' ||
-    location.pathname === '/register' ||
+    location.pathname === '/sign-up' ||
     location.pathname === '/forgot-password'
   ) {
     return null
@@ -33,8 +33,8 @@ const Header = () => {
             <Link to="/login" className="header__link">
               Login
             </Link>
-            <Link to="/register" className="header__link">
-              Register
+            <Link to="/sign-up" className="header__link">
+              Sign Up
             </Link>
           </>
         )}
