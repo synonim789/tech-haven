@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { useUserContext } from '../../context/UserContext'
 import './ForgotPassword.css'
-
 const ForgotPassword = () => {
   const form = useForm()
   const { register, handleSubmit, formState } = form
@@ -15,6 +15,12 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password">
       <div className="forgot-password__container">
+        <div className="login-page__back">
+          <Link to="/">
+            <AiOutlineArrowLeft />
+            Back Home
+          </Link>
+        </div>
         <h1 className="forgot-password__title">Forgot Password</h1>
         <form
           className="forgot-password__form"
