@@ -7,7 +7,7 @@
 }
 
 .footer__links-title {
-  color: #1b88b7;
+  color: #120b90;
   font-size: 30px;
   font-weight: bold;
   margin-top: 20px;
@@ -39,7 +39,7 @@
 }
 
 .footer__links-links a:hover {
-  color: #1b88b7;
+  color: #120b90;
 }
 
 .footer__links-links:last-child {
@@ -54,7 +54,7 @@
 
 .footer__newsletter-title {
   font-size: 50px;
-  color: #1b88b7;
+  color: #120b90;
   font-weight: bold;
   text-transform: uppercase;
   margin-top: 10px;
@@ -89,7 +89,7 @@
   opacity: 0.66;
 }
 .footer__newsletter-cta {
-  background-color: #1b88b7;
+  background-color: #120b90;
   color: white;
   border: none;
   font-size: 25px;
@@ -101,7 +101,7 @@
 }
 
 .footer__socials-title {
-  color: #1b88b7;
+  color: #120b90;
   font-size: 30px;
   font-weight: bold;
   margin-top: 20px;
@@ -134,7 +134,7 @@
 }
 
 .footer__socials-links a:hover {
-  color: #1b88b7;
+  color: #120b90;
 }
 .footer__socials-links {
   margin-bottom: 30px;
@@ -146,5 +146,5 @@
 }
 
 .footer__socials-copyright span {
-  color: #1b88b7;
+  color: #120b90;
 }

@@ -10,7 +10,7 @@
 }
 
 .login-page__title span {
-  color: #1b88b7;
+  color: #120b90;
 }
 
 .login-page__title a {
@@ -63,7 +63,7 @@
 }
 
 .login-page__cta {
-  background: #1b88b7;
+  background: #120b90;
   font-weight: bold;
   padding: 10px 20px;
   border: none;
@@ -96,7 +96,6 @@
   height: 100%;
   outline: none;
   font-size: 20px;
-  width: 100%;
 }
 
 .login-page__error {
@@ -114,6 +113,6 @@
 
 .login-page__forgot-pass {
   font-size: 20px;
-  color: #1b88b7;
+  color: #120b90;
   font-weight: bold;
 }
