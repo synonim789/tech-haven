@@ -27,7 +27,7 @@ const LoginPage = () => {
         </div>
 
         <h1 className="login-page__title">
-          <span>Log In</span> | <Link to="/register">Sign Up</Link>
+          <span>Log In</span> | <Link to="/sign-up">Sign Up</Link>
         </h1>
         <form className="login-page__form" onSubmit={handleSubmit(loginUser)}>
           <label>
