@@ -1,10 +1,11 @@
 import { GrCart } from 'react-icons/gr'
 import { NavLink, useLocation } from 'react-router-dom'
+import { useCartContext } from '../../context/cart_context'
 import './Navbar.css'
 
 const Navbar = () => {
   const location = useLocation()
-
+  const { total_items } = useCartContext()
   if (
     location.pathname === '/login' ||
     location.pathname === '/sign-up' ||
@@ -60,10 +61,17 @@ const Navbar = () => {
           <NavLink
             to="/cart"
             className={({ isActive, isPending }) =>
-              isPending ? 'pending' : isActive ? 'none' : ''
+              isPending
+                ? 'pending navbar__cart-items'
+                : isActive
+                ? 'none navbar__cart-items'
+                : 'navbar__cart-items'
             }
           >
             <GrCart />
+            {total_items > 0 ? (
+              <p className="navbar__cart-amount">{total_items}</p>
+            ) : null}
           </NavLink>
         </ul>
       </nav>

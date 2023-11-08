@@ -71,3 +71,23 @@
   right: 0;
   margin: 0 auto;
 }
+
+.navbar__cart-amount {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #d85b00;
+  color: white;
+  margin: 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -18px;
+  right: -18px;
+}
+
+.navbar__cart-items {
+  position: relative;
+}
