@@ -18,6 +18,7 @@ import ProductPage from './pages/ProductPage/ProductPage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
+import UserOrderPage from './pages/UserOrderPage/UserOrderPage'
 
 function App() {
   const { token } = useAuthContext()
@@ -49,10 +50,13 @@ function App() {
           <Route exact path="/cart" element={<CartPage />}></Route>
           <Route exact path="/products/:id" element={<ProductPage />}></Route>
           <Route
-            exact
             path="/profile"
             element={token ? <ProfilePage /> : <Navigate to="/login" />}
           ></Route>
+          <Route
+            path="/profile/orders"
+            element={token ? <UserOrderPage /> : <Navigate to="/login" />}
+          />
         </Routes>
         <Footer />
       </Router>
