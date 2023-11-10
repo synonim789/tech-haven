@@ -27,7 +27,8 @@ html {
 .product-page,
 .products-page,
 .cart-page,
-.contact-page {
+.contact-page,
+.profile-page {
   padding-left: 200px;
   padding-right: 200px;
 }

@@ -17,7 +17,7 @@ const AuthReducer = (state, action) => {
   }
 
   if (action.type === 'LOGOUT_USER') {
-    return { ...state, token: null }
+    return { ...state, token: undefined }
   }
 
   if (action.type === 'REGISTER_START') {
