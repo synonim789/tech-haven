@@ -1,14 +1,8 @@
 .profile-page {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 50px;
-}
-
-.profile-info__description {
-  font-size: 20px;
-}
-
-.profile-info__title {
-  font-size: 25px;
+  text-align: center;
+  margin-bottom: 50px;
 }

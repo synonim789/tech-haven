@@ -19,7 +19,9 @@ import ProductsPage from './pages/ProductsPage/ProductsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
 import UserOrderPage from './pages/UserOrderPage/UserOrderPage'
+import UserProfileInfo from './pages/UserProfileInfo/UserProfileInfo'
 import UserSettingsPage from './pages/UserSettingsPage/UserSettingsPage'
+import UserWelcomePage from './pages/UserWelcomePage/UserWelcomePage'
 
 function App() {
   const { token } = useAuthContext()
@@ -53,15 +55,12 @@ function App() {
           <Route
             path="/profile"
             element={token ? <ProfilePage /> : <Navigate to="/login" />}
-          ></Route>
-          <Route
-            path="/profile/orders"
-            element={token ? <UserOrderPage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/profile/settings"
-            element={token ? <UserSettingsPage /> : <Navigate to="/login" />}
-          />
+          >
+            <Route index element={<UserWelcomePage />} />
+            <Route exact path="info" element={<UserProfileInfo />} />
+            <Route exact path="orders" element={<UserOrderPage />} />
+            <Route exact path="settings" element={<UserSettingsPage />} />
+          </Route>
         </Routes>
         <Footer />
       </Router>
