@@ -5,10 +5,10 @@
   margin-top: 50px;
 }
 
-.profile-page p {
+.profile-info__description {
   font-size: 20px;
 }
 
-.profile-page h3 {
+.profile-info__title {
   font-size: 25px;
 }
