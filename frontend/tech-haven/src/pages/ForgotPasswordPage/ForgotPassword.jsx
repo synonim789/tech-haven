@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useUserContext } from '../../context/UserContext'
+import { useAuthContext } from '../../context/AuthContext'
 import './ForgotPassword.css'
 const ForgotPassword = () => {
   const form = useForm()
@@ -11,7 +11,7 @@ const ForgotPassword = () => {
     forgotLoading: loading,
     forgotError: error,
     forgetPassword,
-  } = useUserContext()
+  } = useAuthContext()
   return (
     <div className="forgot-password">
       <div className="forgot-password__container">

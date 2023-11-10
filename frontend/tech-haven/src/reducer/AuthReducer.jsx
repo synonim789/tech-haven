@@ -1,4 +1,4 @@
-const UserReducer = (state, action) => {
+const AuthReducer = (state, action) => {
   if (action.type === 'LOGIN_START') {
     return { ...state, loggingLoading: true, loggingError: false }
   }
@@ -11,13 +11,13 @@ const UserReducer = (state, action) => {
     return {
       ...state,
       loggingLoading: false,
-      user: action.payload,
+      token: action.payload,
       loggingError: false,
     }
   }
 
   if (action.type === 'LOGOUT_USER') {
-    return { ...state, user: null }
+    return { ...state, token: null }
   }
 
   if (action.type === 'REGISTER_START') {
@@ -29,7 +29,7 @@ const UserReducer = (state, action) => {
       ...state,
       signingLoading: false,
       signingError: false,
-      user: action.payload,
+      token: action.payload,
     }
   }
 
@@ -51,4 +51,4 @@ const UserReducer = (state, action) => {
   throw new Error(`Cannot find ${action.type} action type`)
 }
 
-export default UserReducer
+export default AuthReducer

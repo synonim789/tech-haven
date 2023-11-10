@@ -68,9 +68,7 @@ router.post("/login", async (req, res) => {
       secret,
       { expiresIn: "1d" },
     );
-    res
-      .status(200)
-      .send({ user: user.email, token: token, name: user.name, id: user._id });
+    res.status(200).send({ token: token });
   } else {
     res.status(400).send("Incorrect password");
   }
@@ -100,9 +98,7 @@ router.post("/sign-up", async (req, res) => {
   if (!user) {
     return res.status(404).send("the user cannot be created!");
   }
-  res
-    .status(200)
-    .send({ user: user.email, token: token, name: user.name, id: user._id });
+  res.status(200).send({ token: token });
 });
 
 router.get("/get/count", async (req, res) => {

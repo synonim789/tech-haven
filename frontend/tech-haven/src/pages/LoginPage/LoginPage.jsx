@@ -6,7 +6,7 @@ import {
   AiOutlineEyeInvisible,
 } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useUserContext } from '../../context/UserContext'
+import { useAuthContext } from '../../context/AuthContext'
 import './LoginPage.css'
 
 const LoginPage = () => {
@@ -15,7 +15,7 @@ const LoginPage = () => {
     loggingError: error,
     loggingLoading: loading,
     loginUser,
-  } = useUserContext()
+  } = useAuthContext()
 
   const form = useForm()
   const { register, handleSubmit, formState } = form

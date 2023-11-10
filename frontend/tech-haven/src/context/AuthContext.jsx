@@ -1,12 +1,12 @@
 import axios from 'axios'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
-import UserReducer from '../reducer/UserReducer'
+import AuthReducer from '../reducer/AuthReducer'
 
-const UserContext = createContext()
+const AuthContext = createContext()
 
 const initialState = {
-  user: undefined,
+  token: undefined,
   loggingError: null,
   loggingLoading: null,
   signingError: null,
@@ -15,8 +15,8 @@ const initialState = {
   forgotLoading: null,
 }
 
-export const UserProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(UserReducer, initialState)
+export const AuthProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(AuthReducer, initialState)
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -83,14 +83,14 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider
+    <AuthContext.Provider
       value={{ ...state, loginUser, logoutUser, registerUser, forgetPassword }}
     >
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   )
 }
 
-export const useUserContext = () => {
-  return useContext(UserContext)
+export const useAuthContext = () => {
+  return useContext(AuthContext)
 }

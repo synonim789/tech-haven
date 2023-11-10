@@ -7,7 +7,7 @@ import {
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
-import { useUserContext } from './context/UserContext'
+import { useAuthContext } from './context/AuthContext'
 import AboutPage from './pages/AboutPage/AboutPage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
@@ -20,7 +20,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
 
 function App() {
-  const { user } = useUserContext()
+  const { token } = useAuthContext()
   return (
     <>
       <Router>
@@ -31,17 +31,17 @@ function App() {
           <Route
             exact
             path="/login"
-            element={!user ? <LoginPage /> : <Navigate to="/" />}
+            element={!token ? <LoginPage /> : <Navigate to="/" />}
           ></Route>
           <Route
             exact
             path="/sign-up"
-            element={!user ? <SignUpPage /> : <Navigate to="/" />}
+            element={!token ? <SignUpPage /> : <Navigate to="/" />}
           ></Route>
           <Route
             exact
             path="/forgot-password"
-            element={!user ? <ForgotPassword /> : <Navigate to="/" />}
+            element={!token ? <ForgotPassword /> : <Navigate to="/" />}
           ></Route>
           <Route exact path="/products" element={<ProductsPage />}></Route>
           <Route exact path="/about" element={<AboutPage />}></Route>
@@ -51,7 +51,7 @@ function App() {
           <Route
             exact
             path="/profile"
-            element={user ? <ProfilePage /> : <Navigate to="/login" />}
+            element={token ? <ProfilePage /> : <Navigate to="/login" />}
           ></Route>
         </Routes>
         <Footer />

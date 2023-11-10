@@ -6,7 +6,7 @@ import {
   AiOutlineEyeInvisible,
 } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useUserContext } from '../../context/UserContext'
+import { useAuthContext } from '../../context/AuthContext'
 import './SignUpPage.css'
 const SignUpPage = () => {
   const [visiblePassword, setVisiblePassword] = useState(false)
@@ -18,7 +18,7 @@ const SignUpPage = () => {
     signingError: error,
     signingLoading: loading,
     registerUser,
-  } = useUserContext()
+  } = useAuthContext()
 
   return (
     <div className="sign-up-page">
