@@ -16,10 +16,14 @@ const ProductPage = () => {
     singleProductLoading: loading,
     singleProductError: error,
     getSingleProduct,
+    clearSingleProduct,
   } = useProductsContext()
 
   useEffect(() => {
     getSingleProduct(`http://localhost:3000/api/v1/products/${id}`)
+    return function cleanup() {
+      clearSingleProduct()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 

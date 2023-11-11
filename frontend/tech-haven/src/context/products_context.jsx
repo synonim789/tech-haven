@@ -40,12 +40,18 @@ export const ProductsProvider = ({ children }) => {
     }
   }
 
+  const clearSingleProduct = () => {
+    dispatch({ type: 'CLEAR_SINGLE_PRODUCT' })
+  }
+
   useEffect(() => {
     getAllProducts()
   }, [])
 
   return (
-    <ProductsContext.Provider value={{ ...state, getSingleProduct }}>
+    <ProductsContext.Provider
+      value={{ ...state, getSingleProduct, clearSingleProduct }}
+    >
       {children}
     </ProductsContext.Provider>
   )
