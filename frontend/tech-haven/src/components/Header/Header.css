@@ -5,6 +5,9 @@
   padding-top: 10px;
   position: relative;
   text-align: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__link {

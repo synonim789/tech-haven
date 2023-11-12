@@ -18,7 +18,6 @@ html {
   flex-direction: column;
 }
 
-.header,
 .navbar,
 .hero,
 .homepage-products,
@@ -43,4 +42,8 @@ body {
 
 .toast-fontSize {
   font-size: 25px;
+}
+
+.container {
+  width: 80%;
 }

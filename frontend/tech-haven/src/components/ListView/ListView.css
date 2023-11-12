@@ -11,12 +11,13 @@
   flex-direction: column;
   width: 100%;
   border-radius: 10px;
+  box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
 }
 
 .list-view__image {
-  width: 300px;
+  width: 250px;
   height: 250px;
-  object-fit: cover;
+  object-fit: contain;
   overflow: hidden;
 }
 
