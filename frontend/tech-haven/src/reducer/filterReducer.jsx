@@ -17,6 +17,7 @@ const filterReducer = (state, action) => {
         ...state.filters,
         [action.payload.name]: action.payload.value,
       },
+      currentPage: 1,
     }
   }
 
@@ -151,6 +152,7 @@ const filterReducer = (state, action) => {
       gridView: true,
       listView: false,
       pagedProducts: currentProducts,
+      currentPage: 1,
     }
   }
 
@@ -171,6 +173,7 @@ const filterReducer = (state, action) => {
       gridView: false,
       listView: true,
       pagedProducts: currentProducts,
+      currentPage: 1,
     }
   }
 }

@@ -19,29 +19,31 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="header__links">
-        {user && (
-          <div className="header__logged">
-            <button className="header__logout" onClick={logoutUser}>
-              Log out
-            </button>
-            <Link className="header__username" to={`/profile/`}>
-              {user && user.name.split(' ')[0]}
-              <CgProfile />
-            </Link>
-          </div>
-        )}
+      <div className="container">
+        <div className="header__links">
+          {user && (
+            <div className="header__logged">
+              <button className="header__logout" onClick={logoutUser}>
+                Log out
+              </button>
+              <Link className="header__username" to={`/profile/`}>
+                {user && user.name.split(' ')[0]}
+                <CgProfile />
+              </Link>
+            </div>
+          )}
 
-        {!user && (
-          <>
-            <Link to="/login" className="header__link">
-              Login
-            </Link>
-            <Link to="/sign-up" className="header__link">
-              Sign Up
-            </Link>
-          </>
-        )}
+          {!user && (
+            <>
+              <Link to="/login" className="header__link">
+                Login
+              </Link>
+              <Link to="/sign-up" className="header__link">
+                Sign Up
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </header>
   )
