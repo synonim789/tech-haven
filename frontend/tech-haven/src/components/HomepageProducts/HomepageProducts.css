@@ -32,9 +32,9 @@
 .homepage-products__cta {
   color: #120b90;
   background-color: white;
-  font-size: 50px;
+  font-size: 48px;
   font-weight: bold;
-  padding: 20px 40px;
-  border-radius: 40px;
+  padding: 43px 63px;
+  border-radius: 80px;
   box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
 }
