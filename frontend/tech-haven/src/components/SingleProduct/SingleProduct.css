@@ -1,11 +1,11 @@
 .single-product {
   background-color: white;
-  border-radius: 30px;
+  border-radius: 50px;
   overflow: hidden;
   height: auto;
   position: relative;
   transition: 0.2s all ease-in;
-  width: 100%;
+  flex-basis: 32%;
   margin-right: 50px;
   box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
 }
