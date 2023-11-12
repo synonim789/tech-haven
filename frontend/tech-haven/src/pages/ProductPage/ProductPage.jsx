@@ -28,7 +28,7 @@ const ProductPage = () => {
   }, [id])
 
   if (loading) {
-    console.log('Loading')
+    return <h1>Loading...</h1>
   }
 
   if (error) {
