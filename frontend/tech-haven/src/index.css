@@ -24,7 +24,6 @@ html {
 .footer,
 .about-us,
 .product-page,
-.products-page,
 .cart-page,
 .contact-page,
 .profile-page {
@@ -46,4 +45,6 @@ body {
 
 .container {
   width: 80%;
+  margin: 0 auto;
+  max-width: 1400px ;
 }

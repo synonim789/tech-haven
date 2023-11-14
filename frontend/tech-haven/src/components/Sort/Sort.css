@@ -1,9 +1,10 @@
 .sort {
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   padding-left: 300px;
+  column-gap: 20px;
 }
 
 .sort-input {

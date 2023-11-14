@@ -6,6 +6,7 @@
 
 .products-page__content {
   display: flex;
+  justify-content: space-between;
 }
 
 .search-bar__search {

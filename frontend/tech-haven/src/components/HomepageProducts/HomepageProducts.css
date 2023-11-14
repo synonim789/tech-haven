@@ -27,6 +27,7 @@
   padding-top: 50px;
   display: flex;
   margin-bottom: 150px;
+  column-gap: 50px;
 }
 
 .homepage-products__cta {

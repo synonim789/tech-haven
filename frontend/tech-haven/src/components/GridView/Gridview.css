@@ -2,7 +2,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 40px;
-  gap: 50px;
+  column-gap: 50px;
+  row-gap: 25px;
+  height: 100%;
+  flex-basis: 80%;
 }
 
 .grid-view__products > * {

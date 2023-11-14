@@ -1,11 +1,12 @@
 .filters {
   background-color: white;
-  margin-right: 40px;
   height: 100%;
   padding: 30px;
-  width: 400px;
   border-radius: 20px;
   box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
+  position: sticky;
+  top: 100px;
+  flex-basis: 18%;
 }
 
 .filters__title {
@@ -40,7 +41,7 @@
 }
 
 .filters__brand {
-  width: 200px;
+  width: 100%;
   font-size: 15px;
   padding: 10px;
   border-radius: 10px;
@@ -52,7 +53,7 @@
 }
 
 .filters__price-input {
-  width: 200px;
+  width: 100%;
   font-size: 15px;
   padding: 10px;
   border-radius: 10px;
