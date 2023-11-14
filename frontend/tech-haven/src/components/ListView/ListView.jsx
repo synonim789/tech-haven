@@ -12,7 +12,10 @@ const ListView = () => {
           <div className="list-view__product" key={index}>
             <h2 className="list-view__title">{product.name}</h2>
             <div className="list-view__all">
-              <img src={product.image} alt="" className="list-view__image" />
+              <div className="list-view__image-container">
+                <img src={product.image} alt="" className="list-view__image" />
+              </div>
+
               <div className="list-view__product-content">
                 <h5 className="list-view__price">${product.price}</h5>
                 <p className="list-view__description">

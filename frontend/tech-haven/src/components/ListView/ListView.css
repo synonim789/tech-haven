@@ -16,10 +16,13 @@
 }
 
 .list-view__image {
-  width: 250px;
-  height: 250px;
-  object-fit: contain;
+  width: 100%;
   overflow: hidden;
+  border-radius: 5px;
+}
+
+.list-view__image-container {
+  flex-basis: 20%;
 }
 
 .list-view__title {
@@ -34,6 +37,8 @@
   align-items: center;
   justify-content: space-between;
   text-align: right;
+  padding-bottom: 20px;
+  padding-left: 10px;
 }
 
 .list-view__description {
@@ -59,4 +64,8 @@
   margin-right: 25px;
   margin-top: 25px;
   border-radius: 10px;
+}
+
+.list-view__product-content {
+  flex-basis: 70%;
 }
