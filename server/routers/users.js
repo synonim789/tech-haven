@@ -42,11 +42,11 @@ router.get("/:id", async (req, res) => {
     "-passwordHash -isAdmin",
   );
   if (!user) {
-    res
+    return res
       .status(500)
       .json({ message: "The user with the given ID was not found" });
   }
-  res.status(200).send(user);
+  return res.status(200).send(user);
 });
 
 router.post("/login", async (req, res) => {
@@ -94,7 +94,7 @@ router.post("/sign-up", async (req, res) => {
 
   user = await user.save();
   const secret = process.env.secret;
-  const token = jwt.sign({ user: user.id, isAdmin: user.isAdmin }, secret, {
+  const token = jwt.sign({ userId: user.id, isAdmin: user.isAdmin }, secret, {
     expiresIn: "1d",
   });
   if (!user) {
@@ -123,7 +123,7 @@ router.delete("/:id", (req, res) => {
   }
   User.findByIdAndRemove(req.params.id)
     .then((user) => {
-      if (userCount) {
+      if (user) {
         return res
           .status(200)
           .json({ success: true, message: "the user is deleted" });
