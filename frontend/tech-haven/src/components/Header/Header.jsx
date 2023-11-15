@@ -7,7 +7,7 @@ import './Header.css'
 const Header = () => {
   const location = useLocation()
   const { logoutUser } = useAuthContext()
-  const { user } = useUserContext()
+  const { user, userError } = useUserContext()
 
   if (
     location.pathname === '/login' ||
