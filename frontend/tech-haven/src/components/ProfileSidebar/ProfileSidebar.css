@@ -6,11 +6,33 @@
   border-radius: 50px;
   box-shadow: 4px 16px 26px -12px rgba(169, 169, 179, 1);
   margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.profile-sidebar a {
-  padding: 20px;
+.profile__link {
+  padding: 20px 50px;
   font-size: 30px;
   font-weight: bold;
   color: black;
+  display: inline-flex;
+  gap: 12px;
+}
+
+.profile__link svg {
+  font-size: 25px;
+  vertical-align: middle;
+}
+.profile__link--active {
+  background-color: #120b90;
+  border-radius: 100px;
+  color: #fff;
+}
+
+@media screen and (max-width: 1120px) {
+  .profile__link span,
+  .profile__link--active span {
+    display: none;
+    padding: 10px 30px;
+  }
 }
