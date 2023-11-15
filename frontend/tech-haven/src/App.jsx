@@ -54,7 +54,7 @@ function App() {
           <Route exact path="/products/:id" element={<ProductPage />}></Route>
           <Route
             path="/profile"
-            element={token ? <ProfilePage /> : <Navigate to="/login" />}
+            element={token ? <ProfilePage /> : <Navigate to="/" />}
           >
             <Route index element={<UserWelcomePage />} />
             <Route exact path="info" element={<UserProfileInfo />} />
