@@ -10,8 +10,8 @@ const AuthReducer = (state, action) => {
   if (action.type === 'LOGIN') {
     return {
       ...state,
-      loggingLoading: false,
       token: action.payload,
+      loggingLoading: false,
       loggingError: false,
     }
   }
@@ -27,9 +27,9 @@ const AuthReducer = (state, action) => {
   if (action.type === 'REGISTER') {
     return {
       ...state,
+      token: action.payload,
       signingLoading: false,
       signingError: false,
-      token: action.payload,
     }
   }
 
