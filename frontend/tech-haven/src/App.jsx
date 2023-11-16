@@ -1,13 +1,10 @@
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 import { useAuthContext } from './context/AuthContext'
+import { useUserContext } from './context/UserContext'
 import AboutPage from './pages/AboutPage/AboutPage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
@@ -22,9 +19,22 @@ import UserOrderPage from './pages/UserOrderPage/UserOrderPage'
 import UserProfileInfo from './pages/UserProfileInfo/UserProfileInfo'
 import UserSettingsPage from './pages/UserSettingsPage/UserSettingsPage'
 import UserWelcomePage from './pages/UserWelcomePage/UserWelcomePage'
+import AuthRoute from './routes/AuthRoute'
+import GuestRoute from './routes/GuestRoute'
 
 function App() {
   const { token } = useAuthContext()
+  const { getUser, clearUser } = useUserContext()
+  const { userLoading, user } = useUserContext()
+  console.log(userLoading, user)
+  useEffect(() => {
+    if (token) {
+      getUser(token)
+    } else {
+      clearUser()
+    }
+  }, [token])
+
   return (
     <>
       <Router>
@@ -35,17 +45,29 @@ function App() {
           <Route
             exact
             path="/login"
-            element={!token ? <LoginPage /> : <Navigate to="/" />}
+            element={
+              <GuestRoute>
+                <LoginPage />
+              </GuestRoute>
+            }
           ></Route>
           <Route
             exact
             path="/sign-up"
-            element={!token ? <SignUpPage /> : <Navigate to="/" />}
+            element={
+              <GuestRoute>
+                <SignUpPage />
+              </GuestRoute>
+            }
           ></Route>
           <Route
             exact
             path="/forgot-password"
-            element={!token ? <ForgotPassword /> : <Navigate to="/" />}
+            element={
+              <GuestRoute>
+                <ForgotPassword />
+              </GuestRoute>
+            }
           ></Route>
           <Route exact path="/products" element={<ProductsPage />}></Route>
           <Route exact path="/about" element={<AboutPage />}></Route>
@@ -54,7 +76,11 @@ function App() {
           <Route exact path="/products/:id" element={<ProductPage />}></Route>
           <Route
             path="/profile"
-            element={token ? <ProfilePage /> : <Navigate to="/" />}
+            element={
+              <AuthRoute>
+                <ProfilePage />
+              </AuthRoute>
+            }
           >
             <Route index element={<UserWelcomePage />} />
             <Route exact path="info" element={<UserProfileInfo />} />

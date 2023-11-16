@@ -1,12 +1,13 @@
 import axios from 'axios'
-import { createContext, useContext, useEffect, useReducer } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import AuthReducer from '../reducer/AuthReducer'
 
 const AuthContext = createContext()
 
 const initialState = {
-  token: undefined,
+  token: JSON.parse(localStorage.getItem('user')),
+  isAuthenticated: !!JSON.parse(localStorage.getItem('user')),
   loggingError: null,
   loggingLoading: null,
   signingError: null,
@@ -18,12 +19,12 @@ const initialState = {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState)
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (user) {
-      dispatch({ type: 'LOGIN', payload: user })
-    }
-  }, [])
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('user'))
+  //   if (user) {
+  //     dispatch({ type: 'LOGIN', payload: user })
+  //   }
+  // }, [])
 
   const loginUser = async (user) => {
     const { email, password } = user
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
         { email, password },
         { headers: { 'Content-Type': 'application/json' } }
       )
-      const loggedUser = await response.data
+      const loggedUser = response.data
       localStorage.setItem('user', JSON.stringify(loggedUser))
       dispatch({ type: 'LOGIN', payload: loggedUser })
     } catch (error) {
@@ -56,7 +57,7 @@ export const AuthProvider = ({ children }) => {
         { email, name, password },
         { headers: { 'Content-Type': 'application/json' } }
       )
-      const registeredUser = await response.data
+      const registeredUser = response.data
       localStorage.setItem('user', JSON.stringify(registeredUser))
       dispatch({ type: 'REGISTER', payload: registeredUser })
     } catch (error) {

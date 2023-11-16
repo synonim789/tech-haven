@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
-import { createContext, useContext, useEffect, useReducer } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import UserReducer from '../reducer/UserReducer'
 import { useAuthContext } from './AuthContext'
@@ -8,8 +8,8 @@ import { useAuthContext } from './AuthContext'
 const UserContext = createContext()
 
 const initialState = {
-  user: null,
-  userLoading: false,
+  userLoading: true,
+  user: undefined,
   userError: false,
   deleteUserError: false,
   deleteUserLoading: false,
@@ -18,39 +18,37 @@ const initialState = {
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState)
-  const { token, logoutUser } = useAuthContext()
+  const { logoutUser } = useAuthContext()
 
-  let decodedToken = ''
-  if (token) {
-    decodedToken = jwtDecode(token.token)
+  const decodeToken = (token) => {
+    const decodedToken = jwtDecode(token.token)
+    const { userId, isAdmin, exp } = decodedToken
+    return { userId, isAdmin, exp }
   }
-  const { exp, isAdmin, userId } = decodedToken
-  useEffect(() => {
-    if (token) {
-      getUser()
-    }
-    dispatch({ type: 'CLEAR_USER' })
-  }, [token])
 
-  const getUser = async () => {
+  const getUser = async (token) => {
+    const decodedToken = decodeToken(token)
+    const { userId } = decodedToken
     dispatch({ type: 'GET_USER_START' })
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/users/${userId}`,
-        {
+      await axios
+        .get(`http://localhost:3000/api/v1/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      )
-      const user = response.data
-      dispatch({ type: 'GET_USER_SUCCESS', payload: user })
+        })
+        .then((response) => {
+          dispatch({ type: 'GET_USER_SUCCESS', payload: response.data })
+        })
+      await new Promise((resolve) => setTimeout(resolve, 1000))
     } catch (error) {
       dispatch({ type: 'GET_USER_ERROR', payload: error.response })
+    } finally {
+      dispatch({ type: 'UPDATE_USER_LOADING' })
     }
   }
 
-  const deleteUser = async () => {
+  const deleteUser = async (token) => {
     dispatch({ type: 'DELETE_USER_START' })
     try {
       await axios.delete(`http://localhost:3000/api/v1/users/${userId}`, {
@@ -67,8 +65,12 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const clearUser = () => {
+    dispatch({ type: 'CLEAR_USER' })
+  }
+
   return (
-    <UserContext.Provider value={{ ...state, getUser, deleteUser }}>
+    <UserContext.Provider value={{ ...state, getUser, deleteUser, clearUser }}>
       {children}
     </UserContext.Provider>
   )

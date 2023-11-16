@@ -4,18 +4,23 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === 'GET_USER_SUCCESS') {
+    console.log('GET_USER_SUCCESS')
     return {
       ...state,
+      userError: true,
       user: action.payload,
-      userError: false,
-      userLoading: false,
     }
   }
   if (action.type === 'GET_USER_ERROR') {
     return { ...state, userError: action.payload }
   }
   if (action.type === 'CLEAR_USER') {
-    return { ...state, user: null }
+    return { ...state, user: undefined, userLoading: false, userError: false }
+  }
+
+  if (action.type === 'UPDATE_USER_LOADING') {
+    console.log('UPDATE_USER_LOADING')
+    return { ...state, userLoading: false, userError: false }
   }
 
   if (action.type === 'DELETE_USER_START') {
