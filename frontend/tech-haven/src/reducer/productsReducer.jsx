@@ -26,7 +26,7 @@ const productsReducer = (state, action) => {
   if (action.type === 'GET_SINGLE_PRODUCT_SUCCESS') {
     return {
       ...state,
-      singleProductLoading: false,
+      singleProductError: false,
       singleProduct: action.payload,
     }
   }
@@ -37,6 +37,10 @@ const productsReducer = (state, action) => {
 
   if (action.type === 'CLEAR_SINGLE_PRODUCT') {
     return { ...state, singleProduct: {} }
+  }
+
+  if (action.type === 'GET_SINGLE_PRODUCT_END') {
+    return { ...state, singleProductLoading: false }
   }
   throw new Error(`No Matching "${action.type}" - action type`)
 }

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { useNavigate, useParams } from 'react-router-dom'
 import AddToCart from '../../components/AddToCart/AddToCart'
+import FullscreenLoading from '../../components/FullscreenLoading/FullscreenLoading'
 import ImageGallery from '../../components/ImageGallery/ImageGallery'
 import { useProductsContext } from '../../context/products_context'
 import './ProductPage.css'
@@ -28,7 +29,7 @@ const ProductPage = () => {
   }, [id])
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return <FullscreenLoading />
   }
 
   if (error) {

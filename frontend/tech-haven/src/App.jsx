@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer/Footer'
+import FullscreenLoading from './components/FullscreenLoading/FullscreenLoading'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
+import ScrollToTop from './helpers/ScrollToTop'
 import AboutPage from './pages/AboutPage/AboutPage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
@@ -21,12 +23,10 @@ import UserSettingsPage from './pages/UserSettingsPage/UserSettingsPage'
 import UserWelcomePage from './pages/UserWelcomePage/UserWelcomePage'
 import AuthRoute from './routes/AuthRoute'
 import GuestRoute from './routes/GuestRoute'
-
 function App() {
   const { token } = useAuthContext()
   const { getUser, clearUser } = useUserContext()
   const { userLoading, user } = useUserContext()
-  console.log(userLoading, user)
   useEffect(() => {
     if (token) {
       getUser(token)
@@ -35,9 +35,13 @@ function App() {
     }
   }, [token])
 
+  if (userLoading) {
+    return <FullscreenLoading />
+  }
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Header />
         <Navbar />
         <Routes>

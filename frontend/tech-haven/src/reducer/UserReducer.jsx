@@ -4,7 +4,6 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === 'GET_USER_SUCCESS') {
-    console.log('GET_USER_SUCCESS')
     return {
       ...state,
       userError: true,
@@ -19,7 +18,6 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === 'UPDATE_USER_LOADING') {
-    console.log('UPDATE_USER_LOADING')
     return { ...state, userLoading: false, userError: false }
   }
 

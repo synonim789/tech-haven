@@ -35,8 +35,11 @@ export const ProductsProvider = ({ children }) => {
       const response = await axios.get(url)
       const singleProduct = response.data
       dispatch({ type: 'GET_SINGLE_PRODUCT_SUCCESS', payload: singleProduct })
+      await new Promise((resolve) => setTimeout(resolve, 250))
     } catch (error) {
       dispatch({ type: 'GET_SINGLE_PRODUCT_ERROR' })
+    } finally {
+      dispatch({ type: 'GET_SINGLE_PRODUCT_END' })
     }
   }
 
