@@ -12,10 +12,12 @@
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "axios": "^1.5.1",
+    "blurhash": "^2.0.5",
     "emailjs": "^4.0.3",
     "jwt-decode": "^4.0.0",
     "nanoid": "^5.0.2",
     "react": "^18.2.0",
+    "react-blurhash": "^0.3.0",
     "react-dom": "^18.2.0",
     "react-form-hook": "^0.0.1",
     "react-hook-form": "^7.48.2",

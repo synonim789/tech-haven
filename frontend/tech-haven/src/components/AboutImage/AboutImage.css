@@ -1,0 +1,10 @@
+.about-image {
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.about__blurred--image {
+  border-radius: 10px;
+  overflow: hidden;
+}

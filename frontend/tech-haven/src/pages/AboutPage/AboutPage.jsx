@@ -1,6 +1,6 @@
-import './AboutPage.css'
 import image from '../../assets/gadgets.jpg'
-
+import AboutImage from '../../components/AboutImage/AboutImage'
+import './AboutPage.css'
 const AboutPage = () => {
   return (
     <main className="about-us">
@@ -22,7 +22,7 @@ const AboutPage = () => {
         </p>
       </div>
       <div className="about-us__right">
-        <img src={image} alt="" className="about-us__image" />
+        <AboutImage src={image} />
       </div>
     </main>
   )
