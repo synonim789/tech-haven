@@ -16,65 +16,67 @@ const Navbar = () => {
 
   return (
     <section className="navbar">
-      <p className="navbar__title">
-        <NavLink
-          to="/"
-          className={({ isActive, isPending }) =>
-            isPending ? 'pending' : isActive ? 'active' : ''
-          }
-        >
-          TechHaven
-        </NavLink>
-      </p>
-      <nav className="navbar__navigation">
-        <ul className="navbar__link">
+      <div className="container">
+        <p className="navbar__title">
           <NavLink
-            to="/products"
+            to="/"
             className={({ isActive, isPending }) =>
               isPending ? 'pending' : isActive ? 'active' : ''
             }
           >
-            Products
+            TechHaven
           </NavLink>
-        </ul>
-        <ul className="navbar__link">
-          <NavLink
-            to="/about"
-            className={({ isActive, isPending }) =>
-              isPending ? 'pending' : isActive ? 'active' : ''
-            }
-          >
-            About Us
-          </NavLink>
-        </ul>
-        <ul className="navbar__link">
-          <NavLink
-            to="/contact"
-            className={({ isActive, isPending }) =>
-              isPending ? 'pending' : isActive ? 'active' : ''
-            }
-          >
-            Contact
-          </NavLink>
-        </ul>
-        <ul className="navbar__link">
-          <NavLink
-            to="/cart"
-            className={({ isActive, isPending }) =>
-              isPending
-                ? 'pending navbar__cart-items'
-                : isActive
-                ? 'none navbar__cart-items'
-                : 'navbar__cart-items'
-            }
-          >
-            <GrCart />
-            {total_items > 0 ? (
-              <p className="navbar__cart-amount">{total_items}</p>
-            ) : null}
-          </NavLink>
-        </ul>
-      </nav>
+        </p>
+        <nav className="navbar__navigation">
+          <ul className="navbar__link">
+            <NavLink
+              to="/products"
+              className={({ isActive, isPending }) =>
+                isPending ? 'pending' : isActive ? 'active' : ''
+              }
+            >
+              Products
+            </NavLink>
+          </ul>
+          <ul className="navbar__link">
+            <NavLink
+              to="/about"
+              className={({ isActive, isPending }) =>
+                isPending ? 'pending' : isActive ? 'active' : ''
+              }
+            >
+              About Us
+            </NavLink>
+          </ul>
+          <ul className="navbar__link">
+            <NavLink
+              to="/contact"
+              className={({ isActive, isPending }) =>
+                isPending ? 'pending' : isActive ? 'active' : ''
+              }
+            >
+              Contact
+            </NavLink>
+          </ul>
+          <ul className="navbar__link">
+            <NavLink
+              to="/cart"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? 'pending navbar__cart-items'
+                  : isActive
+                  ? 'none navbar__cart-items'
+                  : 'navbar__cart-items'
+              }
+            >
+              <GrCart />
+              {total_items > 0 ? (
+                <p className="navbar__cart-amount">{total_items}</p>
+              ) : null}
+            </NavLink>
+          </ul>
+        </nav>
+      </div>
     </section>
   )
 }
