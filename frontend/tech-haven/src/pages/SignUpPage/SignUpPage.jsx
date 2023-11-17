@@ -73,6 +73,7 @@ const SignUpPage = () => {
                 type={visiblePassword ? 'text' : 'password'}
                 name="password"
                 id="password"
+                autoComplete="on"
                 placeholder="Enter Password"
                 className="sign-up__password-input"
                 {...register('password', {
