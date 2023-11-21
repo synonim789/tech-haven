@@ -153,4 +153,37 @@ router.post("/forget-password", async (req, res) => {
   return res.status(200).send({ success: true });
 });
 
+router.put("/:id", async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return res.status(400).send("Invalid User ID");
+  }
+
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.phone = req.body.phone || user.phone;
+    user.street = req.body.street || user.street;
+    user.apartment = req.body.apartment || user.apartment;
+    user.city = req.body.city || user.city;
+    user.zip = req.body.zip || user.zip;
+    user.country = req.body.country || user.country;
+
+    const updatedUser = await user.save();
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      street: updatedUser.street,
+      apartment: updatedUser.apartment,
+      city: updatedUser.city,
+      zip: updatedUser.zip,
+      country: updatedUser.country,
+    });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
 module.exports = router;
