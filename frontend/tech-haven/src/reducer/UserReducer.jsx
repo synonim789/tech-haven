@@ -17,7 +17,7 @@ const UserReducer = (state, action) => {
     return { ...state, user: undefined, userLoading: false, userError: false }
   }
 
-  if (action.type === 'UPDATE_USER_LOADING') {
+  if (action.type === 'GET_USER_LOADING_SUCCESS') {
     return { ...state, userLoading: false, userError: false }
   }
 
@@ -40,6 +40,21 @@ const UserReducer = (state, action) => {
       deleteUserLoading: false,
       deleteUserError: action.payload,
     }
+  }
+
+  if (action.type === 'UPDATE_USER_START') {
+    return { ...state, userUpdateLoading: true, userUpdateError: false }
+  }
+  if (action.type === 'UPDATE_USER_SUCCESS') {
+    return {
+      ...state,
+      userUpdateLoading: false,
+      userUpdateError: false,
+      user: action.payload,
+    }
+  }
+  if (action.type === 'UPDATE_USER_ERROR') {
+    return { ...state, userUpdateLoading: false, userUpdateError: true }
   }
   throw new Error(`Cannot find ${action.type} action type`)
 }

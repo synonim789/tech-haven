@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
   const { logoutUser } = useAuthContext()
 
   const decodeToken = (token) => {
-    const decodedToken = jwtDecode(token.token)
+    const decodedToken = jwtDecode(token.token || token)
     const { userId, isAdmin, exp } = decodedToken
     return { userId, isAdmin, exp }
   }
@@ -44,11 +44,13 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       dispatch({ type: 'GET_USER_ERROR', payload: error.response })
     } finally {
-      dispatch({ type: 'UPDATE_USER_LOADING' })
+      dispatch({ type: 'GET_USER_LOADING_SUCCESS' })
     }
   }
 
   const deleteUser = async (token) => {
+    const decodedToken = decodeToken(token)
+    const { userId } = decodedToken
     dispatch({ type: 'DELETE_USER_START' })
     try {
       await axios.delete(`http://localhost:3000/api/v1/users/${userId}`, {
@@ -65,12 +67,40 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const updateUser = async (user) => {
+    const { token, name, email, phone, street, apartment, city, country, zip } =
+      user
+    const decodedToken = decodeToken(token)
+    const { userId } = decodedToken
+    dispatch({ type: 'UPDATE_USER_START' })
+    try {
+      await axios
+        .put(
+          `http://localhost:3000/api/v1/users/${userId}`,
+          { name, email, phone, street, apartment, city, country, zip },
+          {
+            headers: {
+              Authorization: `Bearer: ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          toast.success('User Info Successfully Updated')
+          dispatch({ type: 'UPDATE_USER_SUCCESS', payload: response.data })
+        })
+    } catch (error) {
+      dispatch({ type: 'UPDATE_USER_ERROR' })
+    }
+  }
+
   const clearUser = () => {
     dispatch({ type: 'CLEAR_USER' })
   }
 
   return (
-    <UserContext.Provider value={{ ...state, getUser, deleteUser, clearUser }}>
+    <UserContext.Provider
+      value={{ ...state, getUser, deleteUser, clearUser, updateUser }}
+    >
       {children}
     </UserContext.Provider>
   )
