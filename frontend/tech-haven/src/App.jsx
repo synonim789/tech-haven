@@ -17,6 +17,7 @@ import ProductPage from './pages/ProductPage/ProductPage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
+import UserChangeInfo from './pages/UserChangeInfo/UserChangeInfo'
 import UserOrderPage from './pages/UserOrderPage/UserOrderPage'
 import UserProfileInfo from './pages/UserProfileInfo/UserProfileInfo'
 import UserSettingsPage from './pages/UserSettingsPage/UserSettingsPage'
@@ -90,6 +91,7 @@ function App() {
             <Route exact path="info" element={<UserProfileInfo />} />
             <Route exact path="orders" element={<UserOrderPage />} />
             <Route exact path="settings" element={<UserSettingsPage />} />
+            <Route exact path="settings/update" element={<UserChangeInfo />} />
           </Route>
         </Routes>
         <Footer />
