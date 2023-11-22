@@ -1,8 +1,6 @@
-const Category = require("../models/category");
 const express = require("express");
-const { route } = require("./products");
-const Product = require("../models/product");
 const router = express.Router();
+
 const {
   getAllCategories,
   getSingleCategory,
