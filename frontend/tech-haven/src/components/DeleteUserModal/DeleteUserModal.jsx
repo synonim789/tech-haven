@@ -2,9 +2,7 @@ import { createPortal } from 'react-dom'
 import { useUserContext } from '../../context/UserContext'
 import './DeleteUserModal.css'
 const DeleteUserModal = ({ open, onClose }) => {
-  const { deleteUser, deleteUserError, deleteUserLoading } = useUserContext()
-
-  console.log(deleteUserError)
+  const { deleteUser, deleteUserLoading } = useUserContext()
 
   if (deleteUserLoading) {
     return <div className="modal">Loading...</div>
