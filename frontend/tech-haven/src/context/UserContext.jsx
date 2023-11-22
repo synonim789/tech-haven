@@ -14,6 +14,8 @@ const initialState = {
   deleteUserError: false,
   deleteUserLoading: false,
   isAdmin: false,
+  updateUserError: false,
+  updateUserLoading: false,
 }
 
 export const UserProvider = ({ children }) => {
@@ -40,7 +42,6 @@ export const UserProvider = ({ children }) => {
         .then((response) => {
           dispatch({ type: 'GET_USER_SUCCESS', payload: response.data })
         })
-      await new Promise((resolve) => setTimeout(resolve, 500))
     } catch (error) {
       dispatch({ type: 'GET_USER_ERROR', payload: error.response })
     } finally {

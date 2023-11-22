@@ -43,18 +43,18 @@ const UserReducer = (state, action) => {
   }
 
   if (action.type === 'UPDATE_USER_START') {
-    return { ...state, userUpdateLoading: true, userUpdateError: false }
+    return { ...state, updateUserLoading: true, updateUserError: false }
   }
   if (action.type === 'UPDATE_USER_SUCCESS') {
     return {
       ...state,
-      userUpdateLoading: false,
-      userUpdateError: false,
+      updateUserLoading: false,
+      updateUserError: false,
       user: action.payload,
     }
   }
   if (action.type === 'UPDATE_USER_ERROR') {
-    return { ...state, userUpdateLoading: false, userUpdateError: true }
+    return { ...state, updateUserLoading: false, updateUserError: true }
   }
   throw new Error(`Cannot find ${action.type} action type`)
 }

@@ -35,7 +35,7 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === 'REMOVE_ALL_ITEMS_FROM_CART') {
-    return { ...state, cart: null }
+    return { ...state, cart: [] }
   }
 
   if (action.type === 'COUNT_CART_TOTAL') {

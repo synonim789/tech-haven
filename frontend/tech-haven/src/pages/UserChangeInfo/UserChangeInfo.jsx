@@ -6,7 +6,7 @@ import './UserChangeInfo.css'
 
 const UserChangeInfo = () => {
   const [formUser, setFormUser] = useState(null)
-  const { user, updateUser } = useUserContext()
+  const { user, updateUser, updateUserLoading } = useUserContext()
   const { register, handleSubmit, reset } = useForm()
   const { token } = useAuthContext()
 
@@ -123,7 +123,7 @@ const UserChangeInfo = () => {
           />
         </div>
         <button type="submit" className="user-change__submit">
-          Update Info
+          {!updateUserLoading ? 'Update Info' : 'Loading...'}
         </button>
         <button
           type="button"
