@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
       await axios
         .get(`http://localhost:3000/api/v1/users/${userId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token.token}`,
           },
         })
         .then((response) => {
@@ -56,7 +56,7 @@ export const UserProvider = ({ children }) => {
     try {
       await axios.delete(`http://localhost:3000/api/v1/users/${userId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token.token}`,
         },
       })
 
@@ -73,6 +73,7 @@ export const UserProvider = ({ children }) => {
       user
     const decodedToken = decodeToken(token)
     const { userId } = decodedToken
+
     dispatch({ type: 'UPDATE_USER_START' })
     try {
       await axios
@@ -81,7 +82,7 @@ export const UserProvider = ({ children }) => {
           { name, email, phone, street, apartment, city, country, zip },
           {
             headers: {
-              Authorization: `Bearer: ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         )
