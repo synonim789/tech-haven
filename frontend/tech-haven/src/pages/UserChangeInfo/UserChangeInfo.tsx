@@ -27,7 +27,7 @@ const UserChangeInfo = () => {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      street: user.phone,
+      street: user.street,
       apartment: user.apartment,
       city: user.city,
       zip: user.zip,
@@ -80,7 +80,7 @@ const UserChangeInfo = () => {
           />
         </div>
         <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+          <label htmlFor="street" className="user-change__label">
             Street:
           </label>
           <input
