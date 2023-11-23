@@ -11,6 +11,8 @@ const {
   updateProduct,
 } = require("../controllers/productController");
 const storage = require("../config/multerStorage");
+const verifyJWT = require("../helpers/jwt");
+const verifyRoles = require("../helpers/verifyRoles");
 
 const uploadOptions = multer({ storage: storage });
 
@@ -18,6 +20,8 @@ router.get(`/`, getAllProducts);
 router.get("/:id", getSingleProduct);
 router.post(
   `/`,
+  verifyJWT,
+  verifyRoles("admin"),
   uploadOptions.fields([
     {
       name: "image",
@@ -28,11 +32,17 @@ router.post(
       maxCount: 10,
     },
   ]),
+  verifyJWT,
   addProduct,
 );
-router.put("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
-router.get("/get/count", getProductsCount);
-router.get("/get/featured/:count", getFeaturedCount);
+router.put("/:id", verifyJWT, verifyRoles("admin"), updateProduct);
+router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteProduct);
+router.get("/get/count", verifyJWT, verifyRoles("admin"), getProductsCount);
+router.get(
+  "/get/featured/:count",
+  verifyJWT,
+  verifyRoles("admin"),
+  getFeaturedCount,
+);
 
 module.exports = router;

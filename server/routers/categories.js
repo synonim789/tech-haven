@@ -8,11 +8,13 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../controllers/categoryController");
+const verifyJWT = require("../helpers/jwt");
+const verifyRoles = require("../helpers/verifyRoles");
 
 router.get("/", getAllCategories);
 router.get("/:id", getSingleCategory);
-router.post("/", addCategory);
-router.put("/:id", updateCategory);
-router.delete("/:id", deleteCategory);
+router.post("/", verifyJWT, verifyRoles("admin"), addCategory);
+router.put("/:id", verifyJWT, verifyRoles("admin"), updateCategory);
+router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteCategory);
 
 module.exports = router;

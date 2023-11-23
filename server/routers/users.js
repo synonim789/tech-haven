@@ -1,6 +1,4 @@
 const express = require("express");
-const router = express.Router();
-
 const {
   getAllUser,
   addUser,
@@ -12,15 +10,18 @@ const {
   userForgotPassword,
   updateUser,
 } = require("../controllers/userController");
+const verifyJWT = require("../helpers/jwt");
+const verifyRoles = require("../helpers/verifyRoles");
+const router = express.Router();
 
-router.get("/", getAllUser);
+router.get("/", verifyJWT, verifyRoles("admin"), getAllUser);
 router.post("/", addUser);
-router.get("/:id", getUser);
+router.get("/:id", verifyJWT, verifyRoles("admin", "user"), getUser);
 router.post("/login", loginUser);
 router.post("/sign-up", signUpUser);
-router.get("/get/count", getUserCount);
-router.delete("/:id", deleteUser);
+router.get("/get/count", verifyJWT, verifyRoles("admin"), getUserCount);
+router.delete("/:id", verifyJWT, verifyRoles("user"), deleteUser);
 router.post("/forget-password", userForgotPassword);
-router.put("/:id", updateUser);
+router.put("/:id", verifyJWT, verifyRoles("user"), updateUser);
 
 module.exports = router;

@@ -13,12 +13,13 @@ const getAllUser = asyncHandler(async (req, res) => {
 });
 
 const addUser = asyncHandler(async (req, res) => {
+  console.log(req.body.name);
   let user = new User({
     name: req.body.name,
     email: req.body.email,
     passwordHash: bcrypt.hashSync(req.body.password, 10),
     phone: req.body.phone,
-    isAdmin: req.body.isAdmin,
+    role: req.body.role,
     street: req.body.street,
     apartment: req.body.apartment,
     city: req.body.city,
@@ -36,9 +37,7 @@ const getUser = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).send("Invalid User ID");
   }
-  const user = await User.findById(req.params.id).select(
-    "-passwordHash -isAdmin",
-  );
+  const user = await User.findById(req.params.id).select("-passwordHash -role");
   if (!user) {
     return res
       .status(500)
@@ -63,7 +62,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const token = jwt.sign(
       {
         userId: user.id,
-        isAdmin: user.isAdmin,
+        role: user.role,
       },
       secret,
       { expiresIn: "1d" },
@@ -92,7 +91,7 @@ const signUpUser = asyncHandler(async (req, res) => {
 
   user = await user.save();
   const secret = process.env.secret;
-  const token = jwt.sign({ userId: user.id, isAdmin: user.isAdmin }, secret, {
+  const token = jwt.sign({ userId: user.id, role: user.role }, secret, {
     expiresIn: "1d",
   });
   if (!user) {
@@ -116,70 +115,80 @@ const getUserCount = asyncHandler(async (req, res) => {
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
-    if (!mongoose.isValidObjectId(req.params.id)) {
-      return res.status(400).send("Invalid User ID");
-    }
-    User.findByIdAndRemove(req.params.id)
-      .then((user) => {
-        if (user) {
-          return res
-            .status(200)
-            .json({ success: true, message: "the user is deleted" });
-        } else {
-          return res
-            .status(404)
-            .json({ success: false, message: "user not found" });
-        }
-      })
-      .catch((err) => {
-        return res.status(400).json({ success: false, error: err });
-      });
-})
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return res.status(400).send("Invalid User ID");
+  }
+  User.findByIdAndRemove(req.params.id)
+    .then((user) => {
+      if (user) {
+        return res
+          .status(200)
+          .json({ success: true, message: "the user is deleted" });
+      } else {
+        return res
+          .status(404)
+          .json({ success: false, message: "user not found" });
+      }
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, error: err });
+    });
+});
 
 const userForgotPassword = asyncHandler(async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
-    if (!user) {
-      return res.status(404).send("No User with that email find");
-    }
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(404).send("No User with that email find");
+  }
 
-    const secret = process.env.secret;
-    const token = jwt.sign({ email: user.email, id: user.id }, secret, {
-      expiresIn: "1d",
-    });
-    return res.status(200).send({ success: true });
-})
+  const secret = process.env.secret;
+  const token = jwt.sign({ email: user.email, id: user.id }, secret, {
+    expiresIn: "1d",
+  });
+  return res.status(200).send({ success: true });
+});
 
 const updateUser = asyncHandler(async (req, res) => {
-    if (!mongoose.isValidObjectId(req.params.id)) {
-      return res.status(400).send("Invalid User ID");
-    }
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return res.status(400).send("Invalid User ID");
+  }
 
-    const user = await User.findById(req.params.id);
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
-      user.phone = req.body.phone || user.phone;
-      user.street = req.body.street || user.street;
-      user.apartment = req.body.apartment || user.apartment;
-      user.city = req.body.city || user.city;
-      user.zip = req.body.zip || user.zip;
-      user.country = req.body.country || user.country;
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.phone = req.body.phone || user.phone;
+    user.street = req.body.street || user.street;
+    user.apartment = req.body.apartment || user.apartment;
+    user.city = req.body.city || user.city;
+    user.zip = req.body.zip || user.zip;
+    user.country = req.body.country || user.country;
 
-      const updatedUser = await user.save();
-      res.status(200).json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        phone: updatedUser.phone,
-        street: updatedUser.street,
-        apartment: updatedUser.apartment,
-        city: updatedUser.city,
-        zip: updatedUser.zip,
-        country: updatedUser.country,
-      });
-    } else {
-      res.status(404).json({ message: "User not found" });
-    }
-})
+    const updatedUser = await user.save();
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      street: updatedUser.street,
+      apartment: updatedUser.apartment,
+      city: updatedUser.city,
+      zip: updatedUser.zip,
+      country: updatedUser.country,
+    });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
 
-module.exports = { getAllUser, addUser, getUser, loginUser, signUpUser, getUserCount, deleteUser, userForgotPassword, updateUser };
+module.exports = {
+  getAllUser,
+  addUser,
+  getUser,
+  loginUser,
+  signUpUser,
+  getUserCount,
+  deleteUser,
+  userForgotPassword,
+  updateUser,
+};

@@ -9,13 +9,15 @@ const {
   getOrderCount,
   updateOrder,
 } = require("../controllers/orderController");
+const verifyJWT = require("../helpers/jwt");
+const verifyRoles = require("../helpers/verifyRoles");
 
-router.get("/", getAllOrders);
-router.get("/:id", getSingleOrder);
-router.post("/", addOrder);
-router.put("/:id", updateOrder);
-router.delete("/:id", deleteOrder);
-router.get("/get/totalsales", getTotalSales);
-router.get("/get/count", getOrderCount);
+router.get("/", verifyJWT, verifyRoles("admin"), getAllOrders);
+router.get("/:id", verifyJWT, verifyRoles("admin", "user"), getSingleOrder);
+router.post("/", verifyJWT, verifyRoles("admin"), addOrder);
+router.put("/:id", verifyJWT, verifyRoles("admin"), updateOrder);
+router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteOrder);
+router.get("/get/totalsales", verifyJWT, verifyRoles("admin"), getTotalSales);
+router.get("/get/count", verifyJWT, verifyRoles("admin"), getOrderCount);
 
 module.exports = router;

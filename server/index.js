@@ -10,6 +10,7 @@ const categoriesRouter = require("./routers/categories");
 const usersRouter = require("./routers/users");
 const errorHandler = require("./helpers/error-handler");
 const ordersRouter = require("./routers/orders");
+const verifyJWT = require("./helpers/jwt");
 
 app.use(cors());
 app.options("*", cors());
@@ -18,10 +19,8 @@ app.options("*", cors());
 
 app.use(bodyParser.json());
 app.use(morgan("tiny"));
-app.use(authJwt());
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
-
 require("dotenv/config");
 const api = process.env.API_URL;
 

@@ -1,33 +1,16 @@
-const { expressjwt: jwt } = require("express-jwt");
-require("dotenv/config");
-const secret = process.env.secret;
-const api = process.env.API_URL;
-function authJwt() {
-  return jwt({
-    secret,
-    algorithms: ["HS256"],
-    isRevoked: isRevoked,
-  }).unless({
-    path: [
-      { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
-      { url: /\/api\/v1\/products(.*)/, methods: ["GET", "OPTIONS"] },
-      { url: /\/api\/v1\/categories(.*)/, methods: ["GET", "OPTIONS"] },
-      {
-        url: /\/api\/v1\/users(.*)/,
-        methods: ["GET", "OPTIONS", "DELETE", "PUT"],
-      },
-      `${api}/users/login`,
-      `${api}/users/sign-up`,
-      `${api}/users/forget-password`,
-    ],
-  });
-}
+const jwt = require("jsonwebtoken");
 
-const isRevoked = async (req, jwt) => {
-  const payload = jwt.payload;
-  if (!payload.isAdmin) {
-    return true;
-  }
-  return false;
+const verifyJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+  if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
+  const token = authHeader.split(" ")[1];
+  console.log(process.env.secret);
+  jwt.verify(token, process.env.secret, (err, decoded) => {
+    if (err) return res.sendStatus(403);
+    req.userId = decoded.userId;
+    req.role = decoded.role;
+    next();
+  });
 };
-module.exports = authJwt;
+
+module.exports = verifyJWT;
