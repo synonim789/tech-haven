@@ -1,16 +1,15 @@
 import ReactDOM from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import App from './App.jsx'
-import { AuthProvider } from './context/AuthContext.jsx'
+import App from './App.tsx'
+import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/cart_context.jsx'
 import { FilterProvider } from './context/filter_context.jsx'
 import { ProductsProvider } from './context/products_context.jsx'
 import { UserProvider } from './context/UserContext.jsx'
-
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <AuthProvider>
     <UserProvider>
       <ProductsProvider>
