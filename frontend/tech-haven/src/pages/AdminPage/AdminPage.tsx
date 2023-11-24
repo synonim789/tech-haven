@@ -6,7 +6,9 @@ const AdminPage = () => {
   return (
     <>
       <AdminSidebar />
-      <Outlet />
+      <main className="admin-page__main">
+        <Outlet />
+      </main>
     </>
   )
 }

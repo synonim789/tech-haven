@@ -8,16 +8,26 @@ import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
 import ScrollToTop from './helpers/ScrollToTop'
 import AboutPage from './pages/AboutPage/AboutPage'
+import AddCategory from './pages/AddCategoryPage/AddCategory'
+import AddProductPage from './pages/AddProductPage/AddProductPage'
+import AddUserPage from './pages/AddUserPage/AddUserPage'
 import AdminPage from './pages/AdminPage/AdminPage'
+import AdminWelcomePage from './pages/AdminWelcomePage/AdminWelcomePage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
+import EditCategoryPage from './pages/EditCategoryPage/EditCategoryPage'
+import EdictProductPage from './pages/EditProductPage/EdictProductPage'
 import ForgotPassword from './pages/ForgotPasswordPage/ForgotPassword'
 import Homepage from './pages/Homepage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import ProductPage from './pages/ProductPage/ProductPage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import RemoveCategoryPage from './pages/RemoveCategoryPage/RemoveCategoryPage'
+import RemoveProductPage from './pages/RemoveProductPage/RemoveProductPage'
+import RemoveUserPage from './pages/RemoveUserPage/RemoveUserPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
+import StatisticsPage from './pages/StatisticsPage/StatisticsPage'
 import UserChangeInfo from './pages/UserChangeInfo/UserChangeInfo'
 import UserOrderPage from './pages/UserOrderPage/UserOrderPage'
 import UserProfileInfo from './pages/UserProfileInfo/UserProfileInfo'
@@ -100,18 +110,40 @@ function App() {
               </AdminRoute>
             }
           >
-            <Route path="addProduct" />
-            <Route path="products" />
-            <Route path="removeProduct" />
-            <Route path="editProduct" />
-            <Route path="categories" />
-            <Route path="addCategory" />
-            <Route path="removeCategory" />
-            <Route path="editCategory" />
-            <Route path="users" />
-            <Route path="addAdminUser" />
-            <Route path="removeUser" />
-            <Route path="statistics" />
+            <Route index element={<AdminWelcomePage />} />
+            <Route path="addProduct" element={<AddProductPage />} />
+            <Route
+              path="products"
+              element={
+                <div>
+                  <h1>Products</h1>
+                </div>
+              }
+            />
+            <Route path="removeProduct" element={<RemoveProductPage />} />
+            <Route path="editProduct" element={<EdictProductPage />} />
+            <Route
+              path="categories"
+              element={
+                <div>
+                  <h1>Categories</h1>
+                </div>
+              }
+            />
+            <Route path="addCategory" element={<AddCategory />} />
+            <Route path="removeCategory" element={<RemoveCategoryPage />} />
+            <Route path="editCategory" element={<EditCategoryPage />} />
+            <Route
+              path="users"
+              element={
+                <div>
+                  <h1>Users</h1>
+                </div>
+              }
+            />
+            <Route path="addAdminUser" element={<AddUserPage />} />
+            <Route path="removeUser" element={<RemoveUserPage />} />
+            <Route path="statistics" element={<StatisticsPage />} />
           </Route>
         </Routes>
         <Footer />

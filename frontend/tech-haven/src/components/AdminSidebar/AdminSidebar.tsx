@@ -6,7 +6,7 @@ import './AdminSidebar.css'
 import { AdminSidebarData } from './AdminSidebartData'
 
 const AdminSidebar = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   return (
     <div className="admin-sidebar">
       <IoIosMenu
