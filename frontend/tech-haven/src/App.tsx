@@ -8,6 +8,7 @@ import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
 import ScrollToTop from './helpers/ScrollToTop'
 import AboutPage from './pages/AboutPage/AboutPage'
+import AdminPage from './pages/AdminPage/AdminPage'
 import CartPage from './pages/CartPage/CartPage'
 import ContactPage from './pages/ContactPage/ContactPage'
 import ForgotPassword from './pages/ForgotPasswordPage/ForgotPassword'
@@ -22,6 +23,7 @@ import UserOrderPage from './pages/UserOrderPage/UserOrderPage'
 import UserProfileInfo from './pages/UserProfileInfo/UserProfileInfo'
 import UserSettingsPage from './pages/UserSettingsPage/UserSettingsPage'
 import UserWelcomePage from './pages/UserWelcomePage/UserWelcomePage'
+import AdminRoute from './routes/AdminRoute'
 import AuthRoute from './routes/AuthRoute'
 import GuestRoute from './routes/GuestRoute'
 
@@ -89,6 +91,27 @@ function App() {
             <Route path="orders" element={<UserOrderPage />} />
             <Route path="settings" element={<UserSettingsPage />} />
             <Route path="settings/update" element={<UserChangeInfo />} />
+          </Route>
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminPage />
+              </AdminRoute>
+            }
+          >
+            <Route path="addProduct" />
+            <Route path="products" />
+            <Route path="removeProduct" />
+            <Route path="editProduct" />
+            <Route path="categories" />
+            <Route path="addCategory" />
+            <Route path="removeCategory" />
+            <Route path="editCategory" />
+            <Route path="users" />
+            <Route path="addAdminUser" />
+            <Route path="removeUser" />
+            <Route path="statistics" />
           </Route>
         </Routes>
         <Footer />

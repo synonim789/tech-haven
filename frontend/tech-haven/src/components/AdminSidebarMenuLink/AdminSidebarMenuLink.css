@@ -1,0 +1,19 @@
+.admin-sidebar__menu-item {
+  color: #fff;
+  height: 70px;
+  display: block;
+  background-color: #3b444b;
+  padding-left: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.admin-sidebar__menu-item:hover {
+  background-color: #120b90;
+}
+
+.admin-sidebar__link div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
