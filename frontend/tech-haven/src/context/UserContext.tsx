@@ -4,6 +4,7 @@ import { createContext, useContext, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import UserReducer from '../reducer/UserReducer'
 import { ChildrenType, TokenType, UserType, UserWithTokenType } from '../types'
+import { decodeToken } from '../utils/decodeToken'
 import { useAuthContext } from './AuthContext'
 
 type UserContextType = {
@@ -34,17 +35,7 @@ export const UserProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(UserReducer, initialState)
   const { logoutUser } = useAuthContext()!
 
-  const decodeToken = (token: TokenType | string) => {
-    const decodedToken = jwtDecode(
-      typeof token === 'string' ? token : token.token
-    )
-    const { userId, role, exp } = decodedToken as {
-      userId: string
-      role: string
-      exp: number
-    }
-    return { userId, role, exp }
-  }
+
 
   const getUser = async (token: TokenType) => {
     const decodedToken = decodeToken(token)
