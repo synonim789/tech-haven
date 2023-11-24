@@ -37,7 +37,7 @@ const UserChangeInfo = () => {
   }, [])
 
   useEffect(() => {
-    reset(formUser)
+    reset(formUser!)
   }, [formUser])
 
   return (
