@@ -4,7 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body,
@@ -45,5 +45,5 @@ body {
 .container {
   width: 80%;
   margin: 0 auto;
-  max-width: 1400px ;
+  max-width: 1400px;
 }
