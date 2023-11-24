@@ -20,6 +20,7 @@ import EdictProductPage from './pages/EditProductPage/EdictProductPage'
 import ForgotPassword from './pages/ForgotPasswordPage/ForgotPassword'
 import Homepage from './pages/Homepage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import ProductPage from './pages/ProductPage/ProductPage'
 import ProductsPage from './pages/ProductsPage/ProductsPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
@@ -145,6 +146,7 @@ function App() {
             <Route path="removeUser" element={<RemoveUserPage />} />
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </Router>
