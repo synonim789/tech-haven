@@ -1,95 +1,99 @@
-const asyncHandler = require("express-async-handler");
-const multer = require("multer");
-const Product = require("../models/product");
-const Category = require("../models/category");
-const mongoose = require("mongoose");
+const asyncHandler = require('express-async-handler')
+const multer = require('multer')
+const Product = require('../models/product')
+const Category = require('../models/category')
+const mongoose = require('mongoose')
 
 const getAllProducts = asyncHandler(async (req, res) => {
-  let filter = {};
+  let filter = {}
   if (req.query.categories) {
-    filter = { category: req.query.categories.split(",") };
+    filter = { category: req.query.categories.split(',') }
   }
-  const productList = await Product.find(filter).populate("category");
+  const productList = await Product.find(filter).populate('category')
   if (!productList) {
-    return res.status(500).json({ success: false });
+    return res.status(500).json({ success: false })
   }
-  res.status(200).json(productList);
-});
+  res.status(200).json(productList)
+})
 
 const getSingleProduct = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).send("Invalid Product ID");
+    return res.status(400).json({ message: 'Invalid Product ID' })
   }
-  const product = await Product.findById(req.params.id).populate("category");
+  const product = await Product.findById(req.params.id).populate('category')
   if (!product) {
-    return res.status(500).json({ success: false });
+    return res.status(500).json({ success: false })
   }
-  res.status(200).json(product);
-});
+  res.status(200).json(product)
+})
 
 const getProductsCount = asyncHandler(async (req, res) => {
   const productCount = await Product.countDocuments()
     .then((count) => count)
     .catch((err) => {
-      return res.sendStatus(400).json({ success: false, error: err });
-    });
+      return res.status(400).json({ success: false, error: err })
+    })
   if (!productCount) {
-    return res.status(500).json({ success: false });
+    return res.status(500).json({ success: false })
   }
   res.status(200).json({
     count: productCount,
-  });
-});
+  })
+})
 
 const getFeaturedCount = asyncHandler(async (req, res) => {
-  const count = req.params.count ? req.params.count : 0;
+  const count = req.params.count ? req.params.count : 0
   const featuredProducts = await Product.find({ isFeatured: true }).limit(
-    +count,
-  );
+    +count
+  )
   if (!featuredProducts) {
-    return res.status(500).json({ success: false });
+    return res.status(500).json({ success: false })
   }
-  res.status(200).json(featuredProducts);
-});
+  res.status(200).json(featuredProducts)
+})
 
 const deleteProduct = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).send("Invalid Product ID");
+    return res.status(400).json({ message: 'Invalid Product ID' })
   }
   Product.findByIdAndRemove(req.params.id)
     .then((product) => {
       if (product) {
         return res
           .status(200)
-          .json({ success: true, message: "the product is deleted" });
+          .json({ success: true, message: 'the product is deleted' })
       } else {
         return res
           .status(404)
-          .json({ success: false, message: "product not found" });
+          .json({ success: false, message: 'product not found' })
       }
     })
     .catch((err) => {
-      return res.status(400).json({ success: false, error: err });
-    });
-});
+      return res.status(400).json({ success: false, error: err })
+    })
+})
 
 const addProduct = asyncHandler(async (req, res) => {
-  const category = await Category.findById(req.body.category);
-  if (!category) {
-    return res.status(400).send("Invalid Category");
+  const exist = await Product.findOne({ name: req.body.name })
+  if (exist) {
+    return res.status(400).json({ message: 'Product already exist' })
   }
-  const files = req.files.images;
+  const category = await Category.findById(req.body.category)
+  if (!category) {
+    return res.status(400).json({ message: 'Invalid Category' })
+  }
+  const files = req.files.images
 
   if (!files || files.length === 0) {
-    return res.status(400).send("No image in the request");
+    return res.status(400).json({ message: 'No image in the request' })
   }
-  let imagesPath = [];
+  let imagesPath = []
 
-  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+  const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`
   if (files) {
     files.map((file) => {
-      imagesPath.push(`${basePath}${file.filename}`);
-    });
+      imagesPath.push(`${basePath}${file.filename}`)
+    })
   }
   let product = new Product({
     name: req.body.name,
@@ -103,18 +107,18 @@ const addProduct = asyncHandler(async (req, res) => {
     rating: req.body.rating,
     numReviews: req.body.numReviews,
     isFeatured: req.body.isFeatured,
-  });
+  })
 
-  product = await product.save();
+  product = await product.save()
   if (!product) {
-    return res.status(500).send("The product cannot be created");
+    return res.status(500).json({ message: 'The product cannot be created' })
   }
-  res.status(200).json(product);
-});
+  res.status(200).json(product)
+})
 
 const updateProduct = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).send("Invalid Product ID");
+    return res.status(400).json({ message: 'Invalid Product ID' })
   }
 
   const product = await Product.findByIdAndUpdate(
@@ -130,13 +134,13 @@ const updateProduct = asyncHandler(async (req, res) => {
       numReviews: req.body.numReviews,
       isFeatured: req.body.isFeatured,
     },
-    { new: true },
-  );
+    { new: true }
+  )
   if (!product) {
-    return res.status(404).send("the product cannot be updated!");
+    return res.status(404).json({ message: 'the product cannot be updated!' })
   }
-  res.status(200).json(product);
-});
+  res.status(200).json(product)
+})
 
 module.exports = {
   getAllProducts,
@@ -146,4 +150,4 @@ module.exports = {
   deleteProduct,
   addProduct,
   updateProduct,
-};
+}
