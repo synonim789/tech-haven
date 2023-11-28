@@ -27,7 +27,7 @@ const CartContext = createContext<CartContextType | null>(null)
 const initialState = {
   cart: localStorage.getItem('cart')
     ? JSON.parse(localStorage.getItem('cart')!)
-    : null,
+    : [],
   total_amount: 0,
   total_items: 0,
 }

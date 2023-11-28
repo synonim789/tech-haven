@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios'
-import { jwtDecode } from 'jwt-decode'
 import { createContext, useContext, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import UserReducer from '../reducer/UserReducer'
@@ -22,7 +21,7 @@ const UserContext = createContext<UserContextType | null>(null)
 
 const initialState = {
   userLoading: true,
-  user: undefined,
+  user: null,
   userError: false,
   deleteUserError: false,
   deleteUserLoading: false,
@@ -35,10 +34,9 @@ export const UserProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(UserReducer, initialState)
   const { logoutUser } = useAuthContext()!
 
-
-
   const getUser = async (token: TokenType) => {
     const decodedToken = decodeToken(token)
+
     const { userId } = decodedToken
     dispatch({ type: 'GET_USER_START' })
     try {
@@ -49,11 +47,17 @@ export const UserProvider = ({ children }: ChildrenType) => {
           },
         })
         .then((response) => {
-          dispatch({ type: 'GET_USER_SUCCESS', payload: response.data })
+          dispatch({
+            type: 'GET_USER_SUCCESS',
+            payload: response.data,
+          })
         })
     } catch (error) {
       const err = error as AxiosError
-      dispatch({ type: 'GET_USER_ERROR', payload: err?.response?.data })
+      dispatch({
+        type: 'GET_USER_ERROR',
+        payload: err?.response?.data?.message,
+      })
     } finally {
       dispatch({ type: 'GET_USER_LOADING_SUCCESS' })
     }
@@ -75,7 +79,10 @@ export const UserProvider = ({ children }: ChildrenType) => {
       toast.success('Account Deleted Successfully')
     } catch (error) {
       const err = error as AxiosError
-      dispatch({ type: 'DELETE_USER_ERROR', payload: err?.response?.data })
+      dispatch({
+        type: 'DELETE_USER_ERROR',
+        payload: err?.response?.data?.message,
+      })
     }
   }
 

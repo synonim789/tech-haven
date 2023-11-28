@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Footer from './components/Footer/Footer'
 import FullscreenLoading from './components/FullscreenLoading/FullscreenLoading'
 import Header from './components/Header/Header'

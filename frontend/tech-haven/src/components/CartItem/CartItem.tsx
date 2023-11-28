@@ -15,8 +15,6 @@ type CartItemPropsType = {
 }
 
 const CartItem = ({ item }: CartItemPropsType) => {
-  console.log(item)
-
   const { name, image, price, amount, id } = item
   const { removeFromCart, changeAmount } = useCartContext()!
   const increase = () => {

@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: ChildrenType) => {
       dispatch({ type: 'LOGIN', payload: loggedUser })
     } catch (error) {
       const err = error as AxiosError
-      dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data })
+      dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data?.message })
     }
   }
 
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }: ChildrenType) => {
       dispatch({ type: 'REGISTER', payload: registeredUser })
     } catch (error) {
       const err = error as AxiosError
-      dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data })
+      dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data?.message })
     }
   }
 
@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }: ChildrenType) => {
       }
     } catch (error) {
       const err = error as AxiosError
-      dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data })
+      dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data?.message })
     }
   }
 
