@@ -7,6 +7,8 @@ type reducerState = {
   categories: []
   categoryLoading: boolean
   categoryError: boolean
+  addProductError: boolean
+  addProductLoading: boolean
 }
 
 const AdminReducer = (state: reducerState, action: reducerAction) => {
@@ -24,6 +26,18 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
   }
   if (action.type === 'GET_CATEGORIES_ERROR') {
     return { ...state, categoryLoading: false, categoryError: true }
+  }
+
+  if (action.type === 'ADD_PRODUCT_START') {
+    return { ...state, addProductLoading: true, addProductError: false }
+  }
+
+  if (action.type === 'ADD_PRODUCT_ERROR') {
+    return { ...state, addProductLoading: false, addProductError: true }
+  }
+
+  if (action.type === 'ADD_PRODUCT_SUCCESS') {
+    return { ...state, addProductLoading: false, addProductError: false }
   }
   throw new Error(`Cannot find ${action.type} action type`)
 }
