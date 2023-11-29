@@ -87,6 +87,20 @@ const addProduct = asyncHandler(async (req, res) => {
   if (!files || files.length === 0) {
     return res.status(400).json({ message: "No image in the request" });
   }
+
+  if (
+    !req.body.name ||
+    !req.body.description ||
+    !req.body.price ||
+    !req.body.brand ||
+    !req.body.category ||
+    !req.body.countInStock ||
+    !req.body.rating ||
+    !req.body.numReviews ||
+    !req.body.isFeatured
+  ) {
+    res.status(400).json({ message: "All Fields must be filled" });
+  }
   let imagesPath = [];
 
   const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
@@ -96,17 +110,17 @@ const addProduct = asyncHandler(async (req, res) => {
     });
   }
   let product = new Product({
-    name: req.body.name, 
-    description: req.body.description, 
+    name: req.body.name,
+    description: req.body.description,
     image: `${basePath}${req.files.image[0].filename}`,
-    images: imagesPath, 
-    price: req.body.price, 
-    brand: req.body.brand, 
-    category: req.body.category, 
-    countInStock: req.body.countInStock, 
-    rating: req.body.rating, 
-    numReviews: req.body.numReviews, 
-    isFeatured: req.body.isFeatured, 
+    images: imagesPath,
+    price: req.body.price,
+    brand: req.body.brand,
+    category: req.body.category,
+    countInStock: req.body.countInStock,
+    rating: req.body.rating,
+    numReviews: req.body.numReviews,
+    isFeatured: req.body.isFeatured,
   });
 
   product = await product.save();
@@ -151,3 +165,4 @@ module.exports = {
   addProduct,
   updateProduct,
 };
+
