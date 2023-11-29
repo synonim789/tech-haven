@@ -56,7 +56,7 @@ export const UserProvider = ({ children }: ChildrenType) => {
       const err = error as AxiosError
       dispatch({
         type: 'GET_USER_ERROR',
-        payload: err?.response?.data?.message,
+        payload: err?.response?.data,
       })
     } finally {
       dispatch({ type: 'GET_USER_LOADING_SUCCESS' })
@@ -81,7 +81,7 @@ export const UserProvider = ({ children }: ChildrenType) => {
       const err = error as AxiosError
       dispatch({
         type: 'DELETE_USER_ERROR',
-        payload: err?.response?.data?.message,
+        payload: err?.response?.data,
       })
     }
   }
