@@ -30,11 +30,16 @@ const AddProductPage = () => {
   const [image, setImage] = useState('')
   const [images, setImages] = useState('')
 
-  const { categories, addProduct, getCategories, addProductError } =
-    useAdminContext()!
+  const {
+    categories,
+    addProduct,
+    getCategories,
+    addProductError,
+    addProductSuccess,
+  } = useAdminContext()!
   const { token } = useAuthContext()!
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, reset } = useForm({
     defaultValues: {
       token: token.token,
       name: '',
@@ -66,6 +71,10 @@ const AddProductPage = () => {
     const filesArray = Array.from(files)
     setImages(filesArray)
   }
+
+  useEffect(() => {
+    reset()
+  }, [addProductSuccess])
 
   return (
     <main className="add-product-page">

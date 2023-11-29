@@ -12,6 +12,7 @@ type AdminContextState = {
   addProduct: (data: AddProductData) => void
   addProductError: boolean
   addProductLoading: boolean
+  addProductSuccess: boolean
 }
 
 type AddProductData = {
@@ -39,6 +40,7 @@ const initialState = {
   categoryError: false,
   addProductLoading: false,
   addProductError: false,
+  addProductSuccess: false,
 }
 
 export const AdminProvider = ({ children }: ChildrenType) => {
@@ -89,15 +91,11 @@ export const AdminProvider = ({ children }: ChildrenType) => {
           }
         )
         .then((response) => {
-          console.log(response)
-
           dispatch({ type: 'ADD_PRODUCT_SUCCESS' })
           toast.success('Product Added Successfully')
         })
     } catch (error) {
       const err = error as AxiosError
-      console.log(err)
-
       dispatch({
         type: 'ADD_PRODUCT_ERROR',
         payload: err?.response?.data?.message,
