@@ -1,4 +1,4 @@
 const AddCategory = () => {
-  return <div>AddCategory</div>
+  return <main>AddCategory</main>
 }
 export default AddCategory

@@ -43,11 +43,7 @@ const UserChangeInfo = () => {
   return (
     <main className="user-change">
       <h1 className="user-change__title">Update Profile</h1>
-      <form
-        action="#"
-        className="user-change__form"
-        onSubmit={handleSubmit(updateUser)}
-      >
+      <form className="user-change__form" onSubmit={handleSubmit(updateUser)}>
         <div className="user-change__form-container">
           <label htmlFor="name" className="user-change__label">
             Name:
