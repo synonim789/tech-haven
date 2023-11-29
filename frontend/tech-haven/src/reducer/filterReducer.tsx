@@ -97,7 +97,7 @@ const filterReducer = (
     }
     if (rating === 1) {
       filteredProducts = filteredProducts.filter(
-        (product) => product.rating > 1
+        (product) => product.rating >= 1
       )
     }
     filteredProducts = filteredProducts.filter(
