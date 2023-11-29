@@ -21,7 +21,7 @@ router.get("/:id", getSingleProduct);
 router.post(
   `/`,
   verifyJWT,
-  verifyRoles("admin"),
+
   uploadOptions.fields([
     {
       name: "image",
@@ -32,7 +32,7 @@ router.post(
       maxCount: 10,
     },
   ]),
-  verifyJWT,
+  verifyRoles("admin"),
   addProduct,
 );
 router.put("/:id", verifyJWT, verifyRoles("admin"), updateProduct);
