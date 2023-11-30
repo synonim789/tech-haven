@@ -14,7 +14,7 @@ const verifyRoles = require("../helpers/verifyRoles");
 
 router.get("/", verifyJWT, verifyRoles("admin"), getAllOrders);
 router.get("/:id", verifyJWT, verifyRoles("admin", "user"), getSingleOrder);
-router.post("/", verifyJWT, verifyRoles("admin"), addOrder);
+router.post("/", verifyJWT, verifyRoles("user"), addOrder);
 router.put("/:id", verifyJWT, verifyRoles("admin"), updateOrder);
 router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteOrder);
 router.get("/get/totalsales", verifyJWT, verifyRoles("admin"), getTotalSales);
