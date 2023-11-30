@@ -10,6 +10,7 @@ type AdminContextState = {
   categoryError: boolean
   getCategories: () => void
   addProduct: (data: AddProductData) => void
+  deleteProduct: ({ id, token }: DeleteProduct) => void
   addProductError: boolean
   addProductLoading: boolean
   addProductSuccess: boolean
@@ -41,6 +42,15 @@ const initialState = {
   addProductLoading: false,
   addProductError: false,
   addProductSuccess: false,
+  deleteProductLoading: false,
+  deleteProductError: false
+}
+
+type DeleteProduct = {
+  id: string
+  token: {
+    token: string
+  }
 }
 
 export const AdminProvider = ({ children }: ChildrenType) => {
@@ -103,8 +113,28 @@ export const AdminProvider = ({ children }: ChildrenType) => {
     }
   }
 
+  const deleteProduct = async ({ id, token }: DeleteProduct) => {
+    dispatch({ type: 'DELETE_PRODUCT_START' })
+    try {
+      await axios.delete(`http://localhost:3000/api/v1/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+        },
+      })
+      dispatch({ type: 'DELETE_PRODUCT_SUCCESS' })
+      toast.success('Product Successfully Deleted')
+    } catch (err) {
+      dispatch({
+        type: 'DELETE_PRODUCT_ERROR',
+        payload: err?.response?.data?.message,
+      })
+    }
+  }
+
   return (
-    <AdminContext.Provider value={{ ...state, getCategories, addProduct }}>
+    <AdminContext.Provider
+      value={{ ...state, getCategories, addProduct, deleteProduct }}
+    >
       {children}
     </AdminContext.Provider>
   )

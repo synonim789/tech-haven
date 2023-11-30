@@ -140,7 +140,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     {
       name: req.body.name,
       description: req.body.description,
-      image: req.body.image,
       brand: req.body.brand,
       category: req.body.category,
       countInStock: req.body.countInStock,
@@ -165,4 +164,3 @@ module.exports = {
   addProduct,
   updateProduct,
 };
-

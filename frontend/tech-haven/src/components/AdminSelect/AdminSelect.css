@@ -79,4 +79,10 @@
 
 .admin-select__image {
   width: 80px;
+  border-radius: 4px;
+}
+
+.admin-select__option:hover {
+  background-color: #120b90;
+  color: white;
 }

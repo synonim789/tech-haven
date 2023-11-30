@@ -45,6 +45,22 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
       addProductSuccess: true,
     }
   }
+
+  if (action.type === 'DELETE_PRODUCT_START') {
+    return { ...state, deleteProductLoading: true, deleteProductError: false }
+  }
+
+  if (action.type === 'DELETE_PRODUCT_SUCCESS') {
+    return { ...state, deleteProductLoading: false, deleteProductError: false }
+  }
+
+  if (action.type === 'DELETE_PRODUCT_ERROR') {
+    return {
+      ...state,
+      deleteProductLoading: false,
+      deleteProductError: action.payload,
+    }
+  }
   throw new Error(`Cannot find ${action.type} action type`)
 }
 
