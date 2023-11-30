@@ -6,6 +6,7 @@ import { ChildrenType, ProductType } from '../types'
 type ProductsContextType = {
   getSingleProduct: (url: string) => void
   clearSingleProduct: () => void
+  getAllProducts: () => void
   products: ProductType[] | null
   productsLoading: boolean
   productsError: boolean
@@ -68,6 +69,7 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
       value={{
         getSingleProduct,
         clearSingleProduct,
+        getAllProducts,
         ...state,
       }}
     >

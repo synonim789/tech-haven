@@ -28,13 +28,6 @@
   font-size: 18px;
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-.sign-up svg {
-  position: absolute;
-  left: -18px;
-  top: -2px;
 }
 
 .sign-up__title a {
@@ -87,7 +80,7 @@
 
 .sign-up__password-container svg {
   position: absolute;
-  top: 10px;
+  top: 30%;
   right: 10px;
   cursor: pointer;
   padding: 0;

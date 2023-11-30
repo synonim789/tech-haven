@@ -10,6 +10,9 @@ type reducerState = {
   addProductError: boolean
   addProductLoading: boolean
   addProductSuccess: boolean
+  deleteProductLoading: boolean
+  deleteProductError: boolean
+  deleteProductSuccess: boolean
 }
 
 const AdminReducer = (state: reducerState, action: reducerAction) => {
@@ -43,6 +46,7 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
       addProductLoading: false,
       addProductError: false,
       addProductSuccess: true,
+      deleteProductSuccess: false,
     }
   }
 
@@ -51,7 +55,12 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
   }
 
   if (action.type === 'DELETE_PRODUCT_SUCCESS') {
-    return { ...state, deleteProductLoading: false, deleteProductError: false }
+    return {
+      ...state,
+      deleteProductLoading: false,
+      deleteProductError: false,
+      deleteProductSuccess: true,
+    }
   }
 
   if (action.type === 'DELETE_PRODUCT_ERROR') {
@@ -59,6 +68,7 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
       ...state,
       deleteProductLoading: false,
       deleteProductError: action.payload,
+      deleteProductSuccess: false,
     }
   }
   throw new Error(`Cannot find ${action.type} action type`)

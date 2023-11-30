@@ -85,7 +85,7 @@
 
 .login-page__password-container svg {
   position: absolute;
-  top: 10px;
+  top: 30%;
   right: 10px;
   cursor: pointer;
   padding: 0;
@@ -119,6 +119,8 @@
 
 .login-page__back {
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .login-page__back a {
@@ -127,11 +129,4 @@
   font-size: 18px;
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-.login-page__back svg {
-  position: absolute;
-  left: -18px;
-  top: -2px;
 }

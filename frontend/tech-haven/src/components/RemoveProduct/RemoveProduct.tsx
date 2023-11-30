@@ -5,9 +5,10 @@ import './RemoveProduct.css'
 
 type RemoveProductProps = {
   product: ProductType
+  clear: () => void
 }
 
-const RemoveProduct = ({ product }: RemoveProductProps) => {
+const RemoveProduct = ({ product, clear }: RemoveProductProps) => {
   const [openModal, setOpenModal] = useState(false)
   const closeModal = () => {
     setOpenModal(false)
@@ -30,7 +31,7 @@ const RemoveProduct = ({ product }: RemoveProductProps) => {
       >
         Delete Product
       </button>
-      {openModal && <RemoveProductModal close={closeModal} id={product.id} />}
+      {openModal && <RemoveProductModal close={closeModal} id={product.id} clear={clear}/>}
     </section>
   )
 }

@@ -1,8 +1,9 @@
 import axios, { AxiosError } from 'axios'
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import AdminReducer from '../reducer/AdminReducer'
 import { ChildrenType } from '../types'
+import { useProductsContext } from './products_context'
 
 type AdminContextState = {
   categories: []
@@ -14,6 +15,7 @@ type AdminContextState = {
   addProductError: boolean
   addProductLoading: boolean
   addProductSuccess: boolean
+  deleteProductSuccess: boolean
 }
 
 type AddProductData = {
@@ -29,8 +31,8 @@ type AddProductData = {
   rating: number
   revCount: number
   isFeatured: boolean
-  image: File[] | null
-  images: File[] | null
+  image: File[]
+  images: File[]
 }
 
 const AdminContext = createContext<AdminContextState | null>(null)
@@ -43,7 +45,8 @@ const initialState = {
   addProductError: false,
   addProductSuccess: false,
   deleteProductLoading: false,
-  deleteProductError: false
+  deleteProductError: false,
+  deleteProductSuccess: false,
 }
 
 type DeleteProduct = {
@@ -55,6 +58,12 @@ type DeleteProduct = {
 
 export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
+  const { getAllProducts } = useProductsContext()!
+
+  useEffect(() => {
+    getAllProducts()
+    console.log(state.deleteProductSuccess)
+  }, [state.addProductSuccess, state.deleteProductSuccess])
 
   const getCategories = async () => {
     dispatch({ type: 'GET_CATEGORIES_START' })
@@ -69,7 +78,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
   }
 
   const addProduct = async (data: AddProductData) => {
-    const formData = new FormData()
+    const formData: any = new FormData()
     for (let i = 0; i < data.images.length; i++) {
       formData.append('images', data.images[i])
     }

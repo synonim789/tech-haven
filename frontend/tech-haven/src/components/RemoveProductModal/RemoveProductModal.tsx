@@ -4,10 +4,11 @@ import './RemoveProductModal.css'
 
 type RemoveProductModalProps = {
   close: () => void
+  clear: () => void
   id: string
 }
 
-const RemoveProductModal = ({ close, id }: RemoveProductModalProps) => {
+const RemoveProductModal = ({ close, id, clear }: RemoveProductModalProps) => {
   const { deleteProduct } = useAdminContext()!
   const { token } = useAuthContext()!
   return (
@@ -22,6 +23,7 @@ const RemoveProductModal = ({ close, id }: RemoveProductModalProps) => {
             onClick={() => {
               deleteProduct({ id, token })
               close()
+              clear()
             }}
           >
             Yes, I do

@@ -1,14 +1,21 @@
 import { useState } from 'react'
+import { ProductType } from '../../types'
 import './AdminSelect.css'
 
-const AdminSelect = ({ options, value, onChange }) => {
+type AdminSelectProps = {
+  options: ProductType[] | null
+  value: ProductType | null
+  onChange: (value: ProductType | null) => void
+}
+
+const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const clearOptions = () => {
     onChange(null)
   }
 
-  const selectOption = (option) => {
+  const selectOption = (option: ProductType) => {
     onChange(option)
   }
   return (
@@ -33,26 +40,27 @@ const AdminSelect = ({ options, value, onChange }) => {
           ` ${isOpen && 'admin-select__options--show'}`
         }
       >
-        {options.map((option) => {
-          return (
-            <li
-              key={option.id}
-              className="admin-select__option"
-              onClick={(e) => {
-                e.stopPropagation()
-                selectOption(option)
-                setIsOpen(false)
-              }}
-            >
-              <img
-                src={option.image}
-                alt={option.name}
-                className="admin-select__image"
-              />
-              {option.name}
-            </li>
-          )
-        })}
+        {options &&
+          options.map((option) => {
+            return (
+              <li
+                key={option.id}
+                className="admin-select__option"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  selectOption(option)
+                  setIsOpen(false)
+                }}
+              >
+                <img
+                  src={option.image}
+                  alt={option.name}
+                  className="admin-select__image"
+                />
+                {option.name}
+              </li>
+            )
+          })}
       </ul>
     </div>
   )

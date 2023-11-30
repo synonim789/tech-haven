@@ -15,7 +15,8 @@
   font-size: 30px;
   font-weight: bold;
   color: black;
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 

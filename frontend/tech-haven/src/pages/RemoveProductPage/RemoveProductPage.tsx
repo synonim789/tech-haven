@@ -2,10 +2,11 @@ import { useState } from 'react'
 import AdminSelect from '../../components/AdminSelect/AdminSelect'
 import RemoveProduct from '../../components/RemoveProduct/RemoveProduct'
 import { useProductsContext } from '../../context/products_context'
+import { ProductType } from '../../types'
 import './RemoveProductPage.css'
 
 const RemoveProductPage = () => {
-  const [value, setValue] = useState(undefined)
+  const [value, setValue] = useState<ProductType | null>(null)
   const { products } = useProductsContext()!
 
   return (
@@ -14,9 +15,9 @@ const RemoveProductPage = () => {
       <AdminSelect
         options={products}
         value={value}
-        onChange={(option) => setValue(option)}
+        onChange={(option: ProductType | null) => setValue(option)}
       />
-      {value && <RemoveProduct product={value} />}
+      {value && <RemoveProduct product={value} clear={() => setValue(null)} />}
     </section>
   )
 }
