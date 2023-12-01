@@ -1,5 +1,5 @@
-import Hero from '../../components/Hero/Hero'
-import HomepageProducts from '../../components/HomepageProducts/HomepageProducts'
+import Hero from '../components/Hero'
+import HomepageProducts from '../components/HomepageProducts'
 
 const Homepage = () => {
   return (
