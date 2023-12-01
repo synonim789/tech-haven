@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './ImageGallery.css'
+// import './ImageGallery.css'
 
 const ImageGallery = ({ images = [''] }) => {
   const [main, setMain] = useState(images[0])
@@ -8,11 +8,13 @@ const ImageGallery = ({ images = [''] }) => {
   }, [images])
 
   return (
-    <div className="image-gallery">
-      <div className="image-gallery__main">
-        <img src={main} alt="" />
-      </div>
-      <div className="image-gallery__gallery">
+    <div className="flex flex-col justify-center items-center gap-6 lg:w-2/4">
+      <img
+        src={main}
+        className="w-auto h-[400px] aspect-square object-cover rounded-xl overflow-hidden"
+      />
+
+      <div className="flex gap-3 flex-row justify-between h-24">
         {images.map((image, index) => {
           return (
             <img
@@ -20,7 +22,10 @@ const ImageGallery = ({ images = [''] }) => {
               alt=""
               key={index}
               onClick={() => setMain(images[index])}
-              className={image === main ? 'image-gallery__active' : ''}
+              className={
+                'w-32 h-32 rounded-md cursor-pointer object-cover hover:scale-110 ' +
+                (image === main ? 'opacity-30' : '')
+              }
             />
           )
         })}
