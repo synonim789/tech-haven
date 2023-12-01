@@ -10,6 +10,9 @@ export default {
       backgroundImage: {
         hero: 'url(./src/assets/6017768.jpg)',
       },
+      aspectRatio: {
+        '3/5': '3 / 5',
+      },
     },
   },
   plugins: [],
