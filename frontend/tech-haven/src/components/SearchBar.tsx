@@ -1,23 +1,18 @@
-import { BiSearchAlt } from 'react-icons/bi'
-import { useFilterContext } from '../../context/filter_context'
-import './SearchBar.css'
+import { useFilterContext } from '../context/filter_context'
 
 const SearchBar = () => {
   const { filters, updateFilters } = useFilterContext()!
 
   return (
-    <div className="search-bar">
+    <div className="flex items-center justify-center">
       <input
         type="text"
         placeholder="Search..."
-        className="search-bar__search"
+        className="p-4 w-full overflow-hidden my-10 rounded-full text-2xl shadow-sm"
         name="search"
         onChange={updateFilters}
         value={filters.search}
       />
-      <button className="search-bar__button">
-        <BiSearchAlt />
-      </button>
     </div>
   )
 }
