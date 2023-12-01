@@ -33,7 +33,7 @@ const Navbar = () => {
           </NavLink>
         </p>
         <nav className="flex gap-4 items-center">
-          <ul className="text-2xl font-bold relative">
+          <ul className="text-2xl font-semibold relative">
             <NavLink
               to="/products"
               className={({ isActive, isPending }) =>
@@ -47,7 +47,7 @@ const Navbar = () => {
               Products
             </NavLink>
           </ul>
-          <ul className="text-2xl font-bold relative">
+          <ul className="text-2xl font-semibold relative">
             <NavLink
               to="/about"
               className={({ isActive, isPending }) =>
@@ -61,7 +61,7 @@ const Navbar = () => {
               About Us
             </NavLink>
           </ul>
-          <ul className="text-2xl font-bold relative">
+          <ul className="text-2xl font-semibold relative">
             <NavLink
               to="/contact"
               className={({ isActive, isPending }) =>
@@ -75,7 +75,7 @@ const Navbar = () => {
               Contact
             </NavLink>
           </ul>
-          <ul className="text-2xl font-bold">
+          <ul className="text-2xl font-semibold">
             <NavLink
               to="/cart"
               className={({ isActive, isPending }) =>
