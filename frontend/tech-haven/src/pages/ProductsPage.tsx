@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import Filters from '../components/Filters/Filters'
-import { Pagination } from '../components/Pagination/Pagination'
+import Filters from '../components/Filters'
+import { Pagination } from '../components/Pagination'
 import ProductsList from '../components/ProductsList/ProductsList'
 import SearchBar from '../components/SearchBar'
-import Sort from '../components/Sort/Sort'
+import Sort from '../components/Sort'
 import { useFilterContext } from '../context/filter_context'
 
 const ProductsPage = () => {
@@ -18,7 +18,7 @@ const ProductsPage = () => {
       <div className="max-w-6xl mx-auto">
         <SearchBar />
         <Sort />
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-7">
           <Filters />
           <ProductsList />
         </div>
