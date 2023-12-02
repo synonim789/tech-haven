@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { Link } from 'react-router-dom'
-import './AdminSidebarMenuLink.css'
 
 type AdminSidebarMenuLinkPropsType = {
   item:
@@ -32,10 +31,10 @@ const AdminSidebarMenuLink = ({
     <>
       <Link
         to={item.path}
-        className="admin-sidebar__link"
+        className="text-white text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:bg-[#353839] hover:border-l-[5px] hover:border-solid hover:border-l-[#120b90]"
         onClick={() => setShowSubMenu(!showSubMenu)}
       >
-        <div>
+        <div className="flex items-center gap-3">
           {item.icon}
           <span>{item.title}</span>
         </div>
@@ -53,7 +52,7 @@ const AdminSidebarMenuLink = ({
             <Link
               to={menu.path}
               key={menu.path}
-              className="admin-sidebar__menu-item"
+              className="text-white h-[60px]  bg-[#3b444b]  pl-10 flex items-center hover:bg-[#192b90]"
               onClick={hideMenu}
             >
               {menu.title}
