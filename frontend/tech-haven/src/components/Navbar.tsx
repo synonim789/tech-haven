@@ -1,7 +1,6 @@
 import { GrCart } from 'react-icons/gr'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useCartContext } from '../context/cart_context'
-// import './Navbar.css'
 
 const Navbar = () => {
   const location = useLocation()

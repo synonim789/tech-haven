@@ -109,7 +109,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
             },
           }
         )
-        .then((response) => {
+        .then(() => {
           dispatch({ type: 'ADD_PRODUCT_SUCCESS' })
           toast.success('Product Added Successfully')
         })

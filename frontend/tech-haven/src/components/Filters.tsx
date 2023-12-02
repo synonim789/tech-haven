@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useFilterContext } from '../context/filter_context'
 import { ProductType } from '../types'
-// import './Filters.css'
 
 const Filters = () => {
   const [categories, setCategories] = useState<string[]>([])

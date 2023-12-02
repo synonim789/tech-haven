@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import './ImageGallery.css'
 
 const ImageGallery = ({ images = [''] }) => {
   const [main, setMain] = useState(images[0])

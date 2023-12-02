@@ -1,5 +1,4 @@
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
-// import './AmountButtons.css'
 
 type AmountButtonsPropsType = {
   amount: number

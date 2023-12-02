@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAdminContext } from '../context/AdminContext'
@@ -9,8 +10,8 @@ type CategoryType = {
 }
 
 const AddProductPage = () => {
-  const [image, setImage] = useState(null)
-  const [images, setImages] = useState(null)
+  const [image, setImage] = useState<File | null>(null)
+  const [images, setImages] = useState<File[] | null>(null)
 
   const {
     categories,
@@ -43,15 +44,19 @@ const AddProductPage = () => {
     getCategories()
   }, [])
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0]
-    setImage(file)
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setImage(file)
+    }
   }
 
-  const handleImagesChange = (event) => {
+  const handleImagesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
-    const filesArray = Array.from(files)
-    setImages(filesArray)
+    if (files) {
+      const filesArray = Array.from(files)
+      setImages(filesArray)
+    }
   }
 
   useEffect(() => {

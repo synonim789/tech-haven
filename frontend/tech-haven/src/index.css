@@ -10,24 +10,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.hero,
-.homepage-products,
-.footer,
-.about-us,
-.product-page,
-.cart-page,
-.contact-page,
-.profile-page {
-  padding-left: 200px;
-  padding-right: 200px;
-}
-
 .toast-fontSize {
   font-size: 25px;
-}
-
-.container {
-  width: 80%;
-  margin: 0 auto;
-  max-width: 1400px;
 }
