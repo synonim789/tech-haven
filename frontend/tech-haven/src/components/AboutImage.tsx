@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
-import './AboutImage.css'
 
 type AboutImagePropType = {
   src: string
@@ -25,10 +24,12 @@ const AboutImage = ({ src }: AboutImagePropType) => {
           resolutionX={32}
           resolutionY={32}
           punch={1}
-          className="about__blurred--image"
+          className="rounded-xl overflow-hidden"
         />
       )}
-      {imageLoaded && <img src={src} alt="" className="about-image" />}
+      {imageLoaded && (
+        <img src={src} alt="" className="rounded-xl w-[400px] h-auto" />
+      )}
     </>
   )
 }
