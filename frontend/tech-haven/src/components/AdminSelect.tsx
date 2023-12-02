@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { ProductType } from '../../types'
-import './AdminSelect.css'
+import { ProductType } from '../types'
 
 type AdminSelectProps = {
   options: ProductType[] | null
@@ -19,12 +18,15 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
     onChange(option)
   }
   return (
-    <div className="admin-select" onClick={() => setIsOpen((prev) => !prev)}>
-      <span className="admin-select__value">
+    <div
+      className="relative min-w-[500px] bg-white min-h-[50px] rounded-xl shadow-xl flex items-center p-5 gap-2"
+      onClick={() => setIsOpen((prev) => !prev)}
+    >
+      <span className="grow flex flex-wrap text-3xl">
         {value ? value.name : 'Choose Product'}
       </span>
       <button
-        className="admin-select__clear-btn"
+        className="text-3xl text-slate-600 hover:text-slate-400"
         onClick={(e) => {
           e.stopPropagation()
           clearOptions()
@@ -32,12 +34,12 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
       >
         &times;
       </button>
-      <div className="admin-select__divider"></div>
-      <div className="admin-select__caret"></div>
+      <div className="self-stretch w-[1px] bg-slate-600"></div>
+      <div className="border-[7px] border-solid border-t-[#777] bg-none cursor-pointer translate-x-0 translate-y-1/4"></div>
       <ul
         className={
-          'admin-select__options' +
-          ` ${isOpen && 'admin-select__options--show'}`
+          'absolute left-0 p-0 w-full top-[calc(100%+5px)] bg-white rounded-xl max-h-[400px] overflow-auto ' +
+          ` ${isOpen ? 'block' : 'hidden'}`
         }
       >
         {options &&
@@ -45,7 +47,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
             return (
               <li
                 key={option.id}
-                className="admin-select__option"
+                className="text-2xl p-3 cursor-pointer flex items-center gap-5 font-bold text-left hover:bg-[#120b90] hover:text-white"
                 onClick={(e) => {
                   e.stopPropagation()
                   selectOption(option)
@@ -55,7 +57,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
                 <img
                   src={option.image}
                   alt={option.name}
-                  className="admin-select__image"
+                  className="w-[80px] rounded-md"
                 />
                 {option.name}
               </li>
