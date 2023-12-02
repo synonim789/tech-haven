@@ -1,17 +1,16 @@
 import { useState } from 'react'
-import AdminSelect from '../../components/AdminSelect/AdminSelect'
-import RemoveProduct from '../../components/RemoveProduct/RemoveProduct'
-import { useProductsContext } from '../../context/products_context'
-import { ProductType } from '../../types'
-import './RemoveProductPage.css'
+import AdminSelect from '../components/AdminSelect/AdminSelect'
+import RemoveProduct from '../components/RemoveProduct/RemoveProduct'
+import { useProductsContext } from '../context/products_context'
+import { ProductType } from '../types'
 
 const RemoveProductPage = () => {
   const [value, setValue] = useState<ProductType | null>(null)
   const { products } = useProductsContext()!
 
   return (
-    <section className="remove-product-page">
-      <h1 className="remove-product-page__title">Remove Product</h1>
+    <section className="text-center">
+      <h1 className="text-4xl font-bold mb-[30px]">Remove Product</h1>
       <AdminSelect
         options={products}
         value={value}
