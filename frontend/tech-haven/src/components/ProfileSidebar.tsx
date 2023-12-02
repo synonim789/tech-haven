@@ -1,14 +1,16 @@
 import { FaHistory, FaInfoCircle } from 'react-icons/fa'
 import { IoSettingsSharp } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
-import './ProfileSidebar.css'
+
 const ProfileSidebar = () => {
   return (
-    <aside className="profile-sidebar">
+    <aside className="flex p-4 bg-white shadow-xl rounded-full mb-6 items-center">
       <NavLink
         to="info"
         className={({ isActive }) =>
-          isActive ? 'profile__link profile__link--active' : 'profile__link'
+          isActive
+            ? 'flex items-center px-8 py-4 text-3xl font-semibold gap-3 bg-[#120b90] text-white rounded-full'
+            : 'flex items-center px-8 py-4 text-3xl font-semibold gap-3'
         }
       >
         <FaInfoCircle />
@@ -17,7 +19,9 @@ const ProfileSidebar = () => {
       <NavLink
         to="orders"
         className={({ isActive }) =>
-          isActive ? 'profile__link profile__link--active' : 'profile__link'
+          isActive
+            ? 'flex items-center px-8 py-4  text-3xl font-semibold gap-3 bg-[#120b90] text-white rounded-full'
+            : 'flex items-center px-8 py-4  text-3xl font-semibold gap-3'
         }
       >
         <FaHistory />
@@ -26,7 +30,9 @@ const ProfileSidebar = () => {
       <NavLink
         to="settings"
         className={({ isActive }) =>
-          isActive ? 'profile__link profile__link--active' : 'profile__link'
+          isActive
+            ? 'flex items-center px-8 py-4 text-3xl font-semibold gap-3 bg-[#120b90] text-white rounded-full'
+            : 'flex items-center px-8 py-4 text-3xl font-semibold gap-3'
         }
       >
         <IoSettingsSharp />
