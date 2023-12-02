@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import DeleteUserModal from '../components/DeleteUserModal/DeleteUserModal'
+import DeleteUserModal from '../components/DeleteUserModal'
 
 const UserSettingsPage = () => {
   const [modalOpen, setIsModalOpen] = useState(false)
