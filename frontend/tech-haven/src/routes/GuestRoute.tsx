@@ -12,6 +12,6 @@ const GuestRoute = ({ children }: ChildrenType) => {
     return <Navigate to="/" />
   }
 
-  return children
+  return <>{children}</>
 }
 export default GuestRoute

@@ -12,7 +12,7 @@ const AdminRoute = ({ children }: ChildrenType) => {
   const { role } = decodedToken
 
   if (role == 'admin') {
-    return children
+    return <>{children}</>
   }
   return <Navigate to="/" />
 }

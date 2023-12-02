@@ -11,8 +11,7 @@ const AuthRoute = ({ children }: ChildrenType) => {
   if (!user) {
     return <Navigate to="/" />
   }
-  if (user) {
-    return children
-  }
+
+  return <>{children}</>
 }
 export default AuthRoute
