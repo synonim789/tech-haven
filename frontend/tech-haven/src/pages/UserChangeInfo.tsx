@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useAuthContext } from '../../context/AuthContext'
-import { useUserContext } from '../../context/UserContext'
-import './UserChangeInfo.css'
+import { useAuthContext } from '../context/AuthContext'
+import { useUserContext } from '../context/UserContext'
 
 type userChangeInfoType = {
   name: string
@@ -41,102 +40,108 @@ const UserChangeInfo = () => {
   }, [formUser])
 
   return (
-    <main className="user-change">
-      <h1 className="user-change__title">Update Profile</h1>
-      <form className="user-change__form" onSubmit={handleSubmit(updateUser)}>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+    <main>
+      <h1 className="text-4xl font-bold mb-7">Update Profile</h1>
+      <form
+        className="grid grid-cols-2 gap-14"
+        onSubmit={handleSubmit(updateUser)}
+      >
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             Name:
           </label>
           <input
             type="text"
             {...register('name')}
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             Email:
           </label>
           <input
             type="email"
             {...register('email')}
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             Phone:
           </label>
           <input
             type="text"
             {...register('phone')}
             placeholder="Enter Phone"
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="street" className="user-change__label">
+        <div>
+          <label htmlFor="street" className="block text-3xl font-semibold mb-3">
             Street:
           </label>
           <input
             type="text"
             {...register('street')}
             placeholder="Enter Street"
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             Apartment:
           </label>
           <input
             type="text"
             {...register('apartment')}
             placeholder="Enter Apartment"
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             City:
           </label>
           <input
             type="text"
             {...register('city')}
             placeholder="Enter City"
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             ZIP:
           </label>
           <input
             type="text"
             {...register('zip')}
             placeholder="Enter ZIP"
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <div className="user-change__form-container">
-          <label htmlFor="name" className="user-change__label">
+        <div>
+          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
             Country:
           </label>
           <input
             type="text"
             {...register('country')}
             placeholder="Enter Country"
-            className="user-change__input"
+            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
           />
         </div>
-        <button type="submit" className="user-change__submit">
+        <button
+          type="submit"
+          className="w-fit justify-self-center bg-[#120b90] block text-2xl font-bold text-white rounded-xl transition hover:opacity-90 hover:scale-105 px-4 py-2"
+        >
           {!updateUserLoading ? 'Update Info' : 'Loading...'}
         </button>
         <button
           type="button"
           onClick={() => reset()}
-          className="user-change__reset"
+          className="w-fit justify-self-center bg-red-500 block text-2xl font-bold text-white rounded-xl transition hover:opacity-90 hover:scale-105 px-4 py-2"
         >
           Reset Info
         </button>
