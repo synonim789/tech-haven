@@ -1,34 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
-import './AddProductPage.css'
+import { useAdminContext } from '../context/AdminContext'
+import { useAuthContext } from '../context/AuthContext'
 
 type CategoryType = {
   _id: string
   name: string
 }
 
-type AddProductType = {
-  name: string
-  description: string
-  brand: string
-  category: string
-  price: number
-  stock: number
-  rating: number
-  revCount: number
-  isFeatured: boolean
-  image: string
-  images: string
-}
-
 const AddProductPage = () => {
-  const [addProductForm, setAddProductForm] = useState<AddProductType | null>(
-    null
-  )
-  const [image, setImage] = useState('')
-  const [images, setImages] = useState('')
+  const [image, setImage] = useState(null)
+  const [images, setImages] = useState(null)
 
   const {
     categories,
@@ -77,12 +59,12 @@ const AddProductPage = () => {
   }, [addProductSuccess])
 
   return (
-    <main className="add-product-page">
-      <h1 className="add-product-page__title">Add Product</h1>
+    <main className="text-center mb-10">
+      <h1 className="mb-8 text-4xl font-bold">Add Product</h1>
       <form onSubmit={handleSubmit(addProduct)}>
-        <div className="add-product__container">
+        <div className="flex">
           <div>
-            <div className="add-product__input-container add-product__input-container--name">
+            <div className="flex flex-col text-left mb-8">
               <label htmlFor="name">Name:</label>
               <input
                 type="text"
@@ -91,12 +73,13 @@ const AddProductPage = () => {
                   required: 'Product Name is required',
                 })}
                 placeholder="Enter Name"
+                className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl "
               />
               {errors.name?.message && (
-                <p className="add-product__error">{errors.name?.message}</p>
+                <p className="text-red-500 font-bold">{errors.name?.message}</p>
               )}
             </div>
-            <div className="add-product__input-container add-product__input-container--description">
+            <div className="flex flex-col text-left mb-8 ">
               <label htmlFor="description">Description:</label>
               <textarea
                 id="description"
@@ -105,15 +88,16 @@ const AddProductPage = () => {
                   required: 'Description is required',
                 })}
                 placeholder="Enter Description"
+                className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
               />
               {errors.description?.message && (
-                <p className="add-product__error">
+                <p className="text-red-500 font-bold">
                   {errors.description?.message}
                 </p>
               )}
             </div>
-            <div className="add-product__small">
-              <div className="add-product__input-container">
+            <div className="grid grid-cols-2 gap-8">
+              <div className="flex flex-col text-left">
                 <label htmlFor="brand">Brand:</label>
                 <input
                   type="text"
@@ -122,18 +106,22 @@ const AddProductPage = () => {
                     required: 'Brand is required',
                   })}
                   placeholder="Enter Brand"
+                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
                 />
                 {errors.brand?.message && (
-                  <p className="add-product__error">{errors.brand?.message}</p>
+                  <p className="text-red-500 font-bold">
+                    {errors.brand?.message}
+                  </p>
                 )}
               </div>
-              <div className="add-product__input-container">
+              <div className="flex flex-col text-left">
                 <label htmlFor="category">Category:</label>
                 <select
                   id="category"
                   {...register('category', {
                     required: 'Category is required',
                   })}
+                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
                 >
                   <option value="" disabled>
                     Choose Category
@@ -147,12 +135,12 @@ const AddProductPage = () => {
                   })}
                 </select>
                 {errors.category?.message && (
-                  <p className="add-product__error">
+                  <p className="text-red-500 font-bold">
                     {errors.category?.message}
                   </p>
                 )}
               </div>
-              <div className="add-product__input-container">
+              <div className="flex flex-col text-left">
                 <label htmlFor="price">Price:</label>
                 <div>
                   <input
@@ -161,14 +149,17 @@ const AddProductPage = () => {
                     {...register('price', {
                       required: 'Price is required',
                     })}
+                    className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
                   />
                   <span>$</span>
                 </div>
                 {errors.price?.message && (
-                  <p className="add-product__error">{errors.price?.message}</p>
+                  <p className="text-red-500 font-bold">
+                    {errors.price?.message}
+                  </p>
                 )}
               </div>
-              <div className="add-product__input-container">
+              <div className="flex flex-col text-left">
                 <label htmlFor="stock">Stock:</label>
                 <input
                   type="number"
@@ -176,12 +167,15 @@ const AddProductPage = () => {
                   {...register('stock', {
                     required: 'Stock is required',
                   })}
+                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
                 />
                 {errors.stock?.message && (
-                  <p className="add-product__error">{errors.stock?.message}</p>
+                  <p className="text-red-500 font-bold">
+                    {errors.stock?.message}
+                  </p>
                 )}
               </div>
-              <div className="add-product__input-container">
+              <div className="flex flex-col text-left">
                 <label htmlFor="rating">Rating:</label>
                 <input
                   type="number"
@@ -189,12 +183,15 @@ const AddProductPage = () => {
                   {...register('rating', {
                     required: 'Rating is required',
                   })}
+                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
                 />
                 {errors.rating?.message && (
-                  <p className="add-product__error">{errors.rating?.message}</p>
+                  <p className="text-red-500 font-bold">
+                    {errors.rating?.message}
+                  </p>
                 )}
               </div>
-              <div className="add-product__input-container">
+              <div className="flex flex-col text-left">
                 <label htmlFor="revCount">Rev Count:</label>
                 <input
                   type="number"
@@ -202,79 +199,99 @@ const AddProductPage = () => {
                   {...register('revCount', {
                     required: 'Rev Count is required',
                   })}
+                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
                 />
                 {errors.revCount?.message && (
-                  <p className="add-product__error">
+                  <p className="text-red-500 font-bold">
                     {errors.revCount?.message}
                   </p>
                 )}
               </div>
             </div>
-            <div className="add-product__checkbox">
+            <div className="mt-8 flex justify-end gap-3 text-[20px]">
               <label htmlFor="featured">Featured:</label>
               <input
                 type="checkbox"
                 id="featured"
                 {...register('isFeatured')}
+                className="w-5 accent-[#120b90]"
               />
             </div>
           </div>
-          <div className="add-product__images">
-            <div className="add-product__image-container">
+          <div className="flex flex-col justify-between gap-[70px] ml-[30px]">
+            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-14 flex flex-col items-center justify-center p-[10px]">
               {image && (
                 <img
                   src={URL.createObjectURL(image)}
-                  className="add-product__image"
+                  className="block w-[120px]"
                 />
               )}
-              <label htmlFor="mainImage">Choose Main Image...</label>
+              <label
+                htmlFor="mainImage"
+                className="text-2xl text-white bg-[#120b90] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
+              >
+                Choose Main Image...
+              </label>
 
               <input
                 type="file"
                 id="mainImage"
-                className="add-product__image-cta"
+                className="w-0 h-0 opacity-0 overflow-hidden absolute -z-10"
                 {...register('image', {
                   required: 'Main Image is required',
                 })}
                 onChange={handleImageChange}
               />
               {errors.image?.message && (
-                <p className="add-product__error">{errors.image?.message}</p>
+                <p className="text-red-500 font-bold">
+                  {errors.image?.message}
+                </p>
               )}
             </div>
 
-            <div className="add-product__image-container">
+            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-14 flex flex-col items-center justify-center p-[10px]">
               {images && (
-                <div>
-                  {images.map((item) => {
-                    return (
-                      <img
-                        src={URL.createObjectURL(item)}
-                        className="add-product__small-image"
-                      />
-                    )
-                  })}
+                <div className="flex">
+                  {images &&
+                    images.map((item) => {
+                      return (
+                        <img
+                          src={URL.createObjectURL(item)}
+                          className="w-[60px]"
+                        />
+                      )
+                    })}
                 </div>
               )}
-              <label htmlFor="allImages">Choose All Images...</label>
+              <label
+                htmlFor="allImages"
+                className="text-2xl text-white bg-[#120b90] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
+              >
+                Choose All Images...
+              </label>
               <input
                 type="file"
                 id="allImages"
                 multiple
-                className="add-product__image-cta"
+                className="w-0 h-0 opacity-0 overflow-hidden absolute -z-10"
                 {...register('images', {
                   required: 'All Image is required',
                 })}
                 onChange={handleImagesChange}
               />
               {errors.images?.message && (
-                <p className="add-product__error">{errors.images?.message}</p>
+                <p className="text-red-500 font-bold">
+                  {errors.images?.message}
+                </p>
               )}
             </div>
           </div>
         </div>
         {addProductError && <p>{addProductError}</p>}
-        <button type="submit" className="add-product__cta">
+        <button
+          type="submit"
+          className="bg-[#120b90] text-white px-6 py-3 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
+        >
           Add Product
         </button>
       </form>
