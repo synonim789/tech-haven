@@ -22,7 +22,7 @@ const Footer = () => {
   let date = new Date()
 
   return (
-    <footer className="bg-white  py-8">
+    <footer className="bg-white  py-8 mt-auto">
       <div className="mx-auto max-w-5xl flex justify-between ">
         <div className="basis-1/3 flex flex-col items-center">
           <p className="text-[#120b90] font-bold text-center relative text-3xl after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:absolute after:-bottom-1 after:left-0 after:right-0 after:mx-auto">
