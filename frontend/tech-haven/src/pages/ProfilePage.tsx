@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import ProfileSidebar from '../../components/ProfileSidebar/ProfileSidebar'
-import { useUserContext } from '../../context/UserContext'
-import './ProfilePage.css'
+import ProfileSidebar from '../components/ProfileSidebar/ProfileSidebar'
+import { useUserContext } from '../context/UserContext'
 
 const ProfilePage = () => {
   const { userLoading } = useUserContext()!
@@ -9,7 +8,7 @@ const ProfilePage = () => {
     return <p>Loading...</p>
   }
   return (
-    <div className="profile-page">
+    <div className="max-w-5xl mx-auto flex flex-col justify-between my-5 text-center">
       <ProfileSidebar />
 
       <Outlet />
