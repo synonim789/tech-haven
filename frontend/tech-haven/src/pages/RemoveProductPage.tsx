@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import AdminSelect from '../components/AdminSelect'
-import RemoveProduct from '../components/RemoveProduct/RemoveProduct'
+import RemoveProduct from '../components/RemoveProduct'
 import { useProductsContext } from '../context/products_context'
 import { ProductType } from '../types'
 
