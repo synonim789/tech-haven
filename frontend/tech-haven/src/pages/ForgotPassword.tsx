@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useAuthContext } from '../../context/AuthContext'
-import './ForgotPassword.css'
+import { useAuthContext } from '../context/AuthContext'
 
 type ForgotPasswordFormType = {
   email: string
@@ -18,25 +17,25 @@ const ForgotPassword = () => {
     forgetPassword,
   } = useAuthContext()!
   return (
-    <div className="forgot-password">
-      <div className="forgot-password__container">
-        <div className="login-page__back">
-          <Link to="/">
+    <div className="min-h-screen flex justify-center items-center">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
+        <div className="w-full text-[#120b90] font-bold">
+          <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />
             Back Home
           </Link>
         </div>
-        <h1 className="forgot-password__title">Forgot Password</h1>
+        <h1 className="text-2xl font-bold text-[#120b90]">Forgot Password</h1>
         <form
-          className="forgot-password__form"
+          className="flex flex-col w-full justify-center items-center gap-7"
           onSubmit={handleSubmit(forgetPassword)}
         >
-          <label>
+          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
             <span>Email</span>
             <input
               type="email"
               id="email"
-              className="forgot-password__input"
+              className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
               placeholder="Enter Email"
               {...register('email', {
                 required: 'Email is required',
@@ -47,16 +46,22 @@ const ForgotPassword = () => {
                 },
               })}
             />
-            <p className="forgot-password__input-error">
+            <p className="font-bold text-red-600 flex flex-col">
               {errors.email?.message}
             </p>
           </label>
-          {error ? <p className="forgot-password__error">{error}</p> : null}
-          <button type="submit" className="forgot-password__cta">
+          {error ? <p className="font-bold text-red-600">{error}</p> : null}
+          <button
+            type="submit"
+            className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+          >
             {loading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
-        <Link to="/login" className="forgot-password__link">
+        <Link
+          to="/login"
+          className="font-bold text-[#120b90] text-right w-full text-[20px]"
+        >
           Login
         </Link>
       </div>
