@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Filters from '../components/Filters'
 import { Pagination } from '../components/Pagination'
-import ProductsList from '../components/ProductsList/ProductsList'
+import ProductsList from '../components/ProductsList'
 import SearchBar from '../components/SearchBar'
 import Sort from '../components/Sort'
 import { useFilterContext } from '../context/filter_context'

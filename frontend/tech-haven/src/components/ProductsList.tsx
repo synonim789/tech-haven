@@ -1,7 +1,6 @@
-import { useFilterContext } from '../../context/filter_context'
-import GridView from '../GridView'
-import ListView from '../ListView/ListView'
-import './ProductsList.css'
+import { useFilterContext } from '../context/filter_context'
+import GridView from './GridView'
+import ListView from './ListView'
 
 const ProductsList = () => {
   const { pagedProducts: products, listView } = useFilterContext()!
