@@ -2,7 +2,6 @@ import emailjs from '@emailjs/browser'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import './ContactForm.css'
 
 type ContactFormSubmitData = {
   email: string
@@ -33,18 +32,18 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="contact-form">
+    <div className="mb-4">
       <form
         action="#"
-        className="contact-form__form"
+        className="flex flex-col gap-8"
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <label className="contact-form__label">
+        <label className="flex flex-col font-bold text-[20px]">
           <span>Your Email</span>
           <input
             type="email"
-            className="contact-form__input"
+            className="px-4 py-3 rounded-xl border border-solid border-slate-300 shadow-md"
             placeholder="Enter your email"
             {...register('email', {
               required: 'Email is required',
@@ -56,15 +55,15 @@ const ContactForm = () => {
             })}
           />
           {errors?.email && (
-            <p className="contact-form__error">{errors.email.message}</p>
+            <p className="text-red-600 font-bold">{errors.email.message}</p>
           )}
         </label>
 
-        <label className="contact-form__label">
+        <label className="flex flex-col font-bold text-[20px]">
           <span>Your Name</span>
           <input
             type="text"
-            className="contact-form__input"
+            className="px-4 py-3 rounded-xl border border-solid border-slate-300 shadow-md  "
             placeholder="Enter your name"
             {...register('name', {
               required: 'Name is Required',
@@ -76,24 +75,27 @@ const ContactForm = () => {
             })}
           />
           {errors?.name && (
-            <p className="contact-form__error">{errors.name.message}</p>
+            <p className="text-red-600 font-bold">{errors.name.message}</p>
           )}
         </label>
-        <label className="contact-form__label">
+        <label className="flex flex-col font-bold text-[20px]">
           <span>Your Message</span>
           <textarea
             rows={7}
-            className="contact-form__input"
+            className="px-4 py-3 rounded-xl border border-solid border-slate-300 shadow-md resize-none"
             placeholder="Enter your message"
             {...register('message', {
               required: 'Message is Required',
             })}
           />
           {errors?.message && (
-            <p className="contact-form__error">{errors.message.message}</p>
+            <p className="text-red-600 font-bold ">{errors.message.message}</p>
           )}
         </label>
-        <button type="submit" className="contact-form__cta">
+        <button
+          type="submit"
+          className="bg-[#120b90] text-white px-2 py-4 w-fit rounded-xl font-bold text-[20px] hover:opacity-60 hover:scale-105 transition-all "
+        >
           {loading ? 'Sending...' : 'Send Message'}
         </button>
       </form>
