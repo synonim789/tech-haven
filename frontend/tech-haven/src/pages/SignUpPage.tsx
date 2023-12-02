@@ -6,8 +6,7 @@ import {
   AiOutlineEyeInvisible,
 } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useAuthContext } from '../../context/AuthContext'
-import './SignUpPage.css'
+import { useAuthContext } from '../context/AuthContext'
 
 type SignUpFormType = {
   email: string
@@ -28,24 +27,28 @@ const SignUpPage = () => {
   } = useAuthContext()!
 
   return (
-    <div className="sign-up-page">
-      <div className="sign-up__container">
-        <div className="sign-up__back">
-          <Link to="/">
+    <div className="min-h-screen flex justify-center items-center">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
+        <div className="w-full text-[#120b90] font-bold">
+          <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />
             Back Home
           </Link>
         </div>
-        <h1 className="sign-up__title">
-          <Link to="/login">Log In</Link> | <span>Sign Up</span>
+        <h1 className="text-slate-600 text-2xl font-bold">
+          <Link to="/login">Log In</Link> |{' '}
+          <span className="text-[#120b90]">Sign Up</span>
         </h1>
-        <form onSubmit={handleSubmit(registerUser)} className="sign-up__form">
-          <label>
+        <form
+          onSubmit={handleSubmit(registerUser)}
+          className="flex flex-col w-full justify-center items-center gap-7"
+        >
+          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
             <span>Email</span>
             <input
               type="email"
               id="email"
-              className="sign-up__input"
+              className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
               placeholder="Enter Email"
               {...register('email', {
                 required: 'Email is required',
@@ -56,30 +59,34 @@ const SignUpPage = () => {
                 },
               })}
             />
-            <p className="sign-up__input-error">{errors.email?.message}</p>
+            <p className="font-bold text-red-600 flex flex-col">
+              {errors.email?.message}
+            </p>
           </label>
-          <label>
+          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
             <span>Name</span>
             <input
               type="text"
               id="name"
-              className="sign-up__input"
+              className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
               placeholder="Enter Name"
               {...register('name', {
                 required: 'Name is Required',
               })}
             />
-            <p className="sign-up__input-error">{errors.name?.message}</p>
+            <p className="font-bold text-red-600 flex flex-col">
+              {errors.name?.message}
+            </p>
           </label>
-          <label>
+          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
             <span>Password</span>
-            <div className="sign-up__password-container">
+            <div className="relative px-3 py-2  border-[2px] border-solid border-slate-300 shadow-lg rounded-xl flex justify-between">
               <input
                 type={visiblePassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="on"
                 placeholder="Enter Password"
-                className="sign-up__password-input"
+                className="h-[100%] text-[20px] outline-none"
                 {...register('password', {
                   required: 'Password is required',
                   pattern: {
@@ -93,10 +100,14 @@ const SignUpPage = () => {
                   setVisiblePassword(!visiblePassword)
                 }}
               >
-                {visiblePassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                {visiblePassword ? (
+                  <AiOutlineEyeInvisible className="absolute top-[30%] right-[10px] cursor-pointer" />
+                ) : (
+                  <AiOutlineEye className="absolute top-[30%] right-[10px] cursor-pointer" />
+                )}
               </div>
             </div>
-            <p className="sign-up__input-error">
+            <p className="font-bold text-red-600 flex flex-col flex-wrap">
               {errors.password && errors.password.type === 'pattern' && (
                 <>
                   <span>- at least 8 characters</span>
@@ -112,8 +123,13 @@ const SignUpPage = () => {
                 'Password is required'}
             </p>
           </label>
-          {error ? <p className="sign-up__error">{error}</p> : null}
-          <button type="submit" className="sign-up__cta">
+          {error ? (
+            <p className="font-bold text-red-600 text-[20px]">{error}</p>
+          ) : null}
+          <button
+            type="submit"
+            className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+          >
             {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>
