@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { useCartContext } from '../../context/cart_context'
-import { ProductType } from '../../types'
-import AmountButtons from '../AmountButtons/AmountButtons'
-import './AddToCart.css'
+import { useCartContext } from '../context/cart_context'
+import { ProductType } from '../types'
+import AmountButtons from './AmountButtons'
 
 type AddCoCartPropType = {
   product: ProductType
@@ -34,10 +33,10 @@ const AddToCart = ({ product }: AddCoCartPropType) => {
   }
 
   return (
-    <div className="addtocart-container">
+    <div className="flex justify-end gap-20">
       <AmountButtons increase={increase} decrease={decrease} amount={amount} />
       <button
-        className="addtocart-cta"
+        className="p-3 bg-[#120b90] text-white font-bold text-[20px] rounded-xl hover:opacity-75"
         onClick={() => {
           addToCart(id, amount, product)
         }}
