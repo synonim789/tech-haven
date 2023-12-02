@@ -1,7 +1,6 @@
 import { BiSolidTrash } from 'react-icons/bi'
-import { useCartContext } from '../../context/cart_context'
-import AmountButtons from '../AmountButtons'
-import './CartItem.css'
+import { useCartContext } from '../context/cart_context'
+import AmountButtons from './AmountButtons'
 
 type CartItemPropsType = {
   item: {
@@ -26,14 +25,17 @@ const CartItem = ({ item }: CartItemPropsType) => {
   }
 
   return (
-    <div key={name} className="cart-item">
-      <img src={image} alt={name} className="cart-item__image" />
+    <div
+      key={name}
+      className="grid grid-cols-5 gap-5 items-center bg-white mb-10 rounded-xl overflow-hidden text-center shadow-md text-4xl p-5"
+    >
+      <img src={image} alt={name} />
       <p key={name}>{name}</p>
 
       <AmountButtons amount={amount} increase={increase} decrease={decrease} />
-      <p className="cart-item__price">${price * amount}</p>
+      <p className="text-[#192b90] font-semibold">${price * amount}</p>
       <BiSolidTrash
-        className="cart-item__trash"
+        className="text-4xl text-slate-600 hover:text-black cursor-pointer transition-all hover:scale-105"
         onClick={() => {
           removeFromCart(id)
         }}
