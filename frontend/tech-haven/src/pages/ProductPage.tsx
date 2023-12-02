@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import AddToCart from '../components/AddToCart'
-import FullscreenLoading from '../components/FullscreenLoading/FullscreenLoading'
+import FullscreenLoading from '../components/FullscreenLoading'
 import ImageGallery from '../components/ImageGallery'
 import { useProductsContext } from '../context/products_context'
 
