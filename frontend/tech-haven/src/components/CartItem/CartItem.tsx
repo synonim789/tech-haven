@@ -1,6 +1,6 @@
 import { BiSolidTrash } from 'react-icons/bi'
 import { useCartContext } from '../../context/cart_context'
-import AmountButtons from '../AmountButtons/AmountButtons'
+import AmountButtons from '../AmountButtons'
 import './CartItem.css'
 
 type CartItemPropsType = {

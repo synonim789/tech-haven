@@ -1,5 +1,5 @@
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
-import './AmountButtons.css'
+// import './AmountButtons.css'
 
 type AmountButtonsPropsType = {
   amount: number
@@ -13,12 +13,20 @@ const AmountButtons = ({
   decrease,
 }: AmountButtonsPropsType) => {
   return (
-    <div className="amount-container__amount">
-      <button className="amount-decrease" onClick={decrease}>
+    <div className="flex">
+      <button
+        className="bg-[#120b90] text-white text-[20px] font-bold p-3"
+        onClick={decrease}
+      >
         <MdKeyboardArrowDown />
       </button>
-      <p className="amount-number">{amount}</p>
-      <button className="amount-increase" onClick={increase}>
+      <p className="p-4 bg-white text-[20px] min-w-[60px] text-center">
+        {amount}
+      </p>
+      <button
+        className="bg-[#120b90] text-white text-[20px] font-bold p-3"
+        onClick={increase}
+      >
         <MdKeyboardArrowUp />
       </button>
     </div>
