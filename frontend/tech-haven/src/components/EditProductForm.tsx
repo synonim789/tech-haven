@@ -1,0 +1,166 @@
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useAdminContext } from '../context/AdminContext'
+import { useAuthContext } from '../context/AuthContext'
+import { CategoryType, ProductType } from '../types'
+import FormButton from './FormButton'
+import FormInput from './FormInput'
+import FormTextarea from './FormTextarea'
+
+type EditProductFormProps = {
+  product: ProductType
+}
+
+type EditProductType = {
+  name: string
+  description: string
+  brand: string
+  category: string
+  countInStock: number
+  rating: number
+  numReviews: number
+  isFeatured: boolean
+  price: number
+  token: string
+}
+
+const EditProductForm = ({ product }: EditProductFormProps) => {
+  const [editForm, setEditForm] = useState<EditProductType | null>(null)
+
+  const { token } = useAuthContext()!
+  const { categories } = useAdminContext()!
+
+  const { register, handleSubmit, reset, formState } =
+    useForm<EditProductType>()
+
+  const { errors } = formState
+
+  useEffect(() => {
+    setEditForm({
+      name: product.name,
+      description: product.description,
+      brand: product.brand,
+      category: product.category._id,
+      countInStock: product.countInStock,
+      rating: product.rating,
+      numReviews: product.numReviews,
+      isFeatured: product.isFeatured,
+      token: token.token,
+      price: product.price,
+    })
+  }, [product])
+
+  useEffect(() => {
+    reset(editForm!)
+  }, [editForm])
+
+  const submitHandler = (data) => {
+    console.log(data)
+  }
+
+  return (
+    <>
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <FormInput
+          type="text"
+          name="name"
+          register={{ ...register('name', { required: 'Name is required' }) }}
+          error={errors?.name?.message}
+        />
+        <FormTextarea
+          name="description"
+          register={{
+            ...register('description', {
+              required: 'Description is required',
+            }),
+          }}
+          error={errors?.description?.message}
+        />
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <FormInput
+            name="brand"
+            type="text"
+            register={{
+              ...register('brand', {
+                required: 'brand is required',
+              }),
+            }}
+            error={errors?.brand?.message}
+          />
+          <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-2">
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              {...register('category', {
+                required: 'Category is required',
+              })}
+              className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl placeholder:capitalize"
+            >
+              <option value="" disabled>
+                Choose Category
+              </option>
+              {categories.map((category: CategoryType) => {
+                return (
+                  <option value={category._id} key={category._id}>
+                    {category.name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <FormInput
+            name="price"
+            type="number"
+            register={{
+              ...register('price', {
+                required: 'Price is required',
+              }),
+            }}
+            error={errors?.price?.message}
+          />
+          <FormInput
+            name="stock"
+            type="number"
+            register={{
+              ...register('countInStock', {
+                required: 'stock is required',
+              }),
+            }}
+            error={errors?.brand?.message}
+          />
+          <FormInput
+            name="rating"
+            type="number"
+            register={{
+              ...register('rating', {
+                required: 'Rating is required',
+              }),
+            }}
+          />
+          <FormInput
+            name="reviews"
+            type="number"
+            register={{
+              ...register('numReviews', {
+                required: 'Number of Reviews is required',
+              }),
+            }}
+            error={errors?.numReviews?.message}
+          />
+          <div className="mt-8 flex justify-end gap-3 text-[20px]">
+            <label htmlFor="featured">Featured:</label>
+            <input
+              type="checkbox"
+              id="featured"
+              {...register('isFeatured')}
+              className="w-5 accent-[#120b90]"
+            />
+          </div>
+        </div>
+        <FormButton text="Edit Product" loading={false} />
+      </form>
+    </>
+  )
+}
+export default EditProductForm
