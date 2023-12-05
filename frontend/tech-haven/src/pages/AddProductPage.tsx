@@ -15,13 +15,8 @@ const AddProductPage = () => {
   const [image, setImage] = useState<File | null>(null)
   const [images, setImages] = useState<File[] | null>(null)
 
-  const {
-    categories,
-    addProduct,
-    getCategories,
-    addProductError,
-    addProductSuccess,
-  } = useAdminContext()!
+  const { categories, addProduct, addProductError, addProductSuccess } =
+    useAdminContext()!
   const { token } = useAuthContext()!
 
   const { register, handleSubmit, formState, reset } = useForm({
@@ -42,9 +37,6 @@ const AddProductPage = () => {
   })
 
   const { errors } = formState
-  useEffect(() => {
-    getCategories()
-  }, [])
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
