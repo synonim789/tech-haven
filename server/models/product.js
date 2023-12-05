@@ -4,6 +4,7 @@ const productSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
@@ -30,6 +31,12 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   countInStock: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 255,
+  },
+  numReviews: {
     type: Number,
     required: true,
     min: 0,
