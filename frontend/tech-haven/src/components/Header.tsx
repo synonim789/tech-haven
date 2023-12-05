@@ -31,10 +31,10 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#120b90] w-full py-3 relative text-right">
-      <div className="max-w-5xl mx-auto">
+    <header className="bg-[#120b90] w-full py-3 relative">
+      <div className="max-w-5xl mx-auto px-4">
         {headerRole === 'user' && (
-          <div className="flex justify-end items-center gap-5">
+          <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
               className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
               onClick={logoutUser}
@@ -51,7 +51,7 @@ const Header = () => {
           </div>
         )}
         {headerRole === 'admin' && (
-          <div className="flex justify-end items-center gap-5">
+          <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
               className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
               onClick={logoutUser}
@@ -69,7 +69,7 @@ const Header = () => {
         )}
 
         {!user && (
-          <div className="flex justify-end gap-3">
+          <div className="flex justify-center sm:justify-end gap-3">
             <Link
               to="/login"
               className="text-white text-2xl font-bold transition-opacity hover:opacity-60"
