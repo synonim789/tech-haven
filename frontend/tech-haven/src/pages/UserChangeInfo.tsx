@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import FormButton from '../components/FormButton'
+import FormInput from '../components/FormInput'
 import { useAuthContext } from '../context/AuthContext'
 import { useUserContext } from '../context/UserContext'
 
@@ -46,102 +48,43 @@ const UserChangeInfo = () => {
         className="grid grid-cols-2 gap-14"
         onSubmit={handleSubmit(updateUser)}
       >
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            Name:
-          </label>
-          <input
-            type="text"
-            {...register('name')}
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            Email:
-          </label>
-          <input
-            type="email"
-            {...register('email')}
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            Phone:
-          </label>
-          <input
-            type="text"
-            {...register('phone')}
-            placeholder="Enter Phone"
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="street" className="block text-3xl font-semibold mb-3">
-            Street:
-          </label>
-          <input
-            type="text"
-            {...register('street')}
-            placeholder="Enter Street"
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            Apartment:
-          </label>
-          <input
-            type="text"
-            {...register('apartment')}
-            placeholder="Enter Apartment"
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            City:
-          </label>
-          <input
-            type="text"
-            {...register('city')}
-            placeholder="Enter City"
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            ZIP:
-          </label>
-          <input
-            type="text"
-            {...register('zip')}
-            placeholder="Enter ZIP"
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <div>
-          <label htmlFor="name" className="block text-3xl font-semibold mb-3">
-            Country:
-          </label>
-          <input
-            type="text"
-            {...register('country')}
-            placeholder="Enter Country"
-            className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-fit justify-self-center bg-[#120b90] block text-2xl font-bold text-white rounded-xl transition hover:opacity-90 hover:scale-105 px-4 py-2"
-        >
-          {!updateUserLoading ? 'Update Info' : 'Loading...'}
-        </button>
+        <FormInput name="name" type="text" register={{ ...register('name') }} />
+        <FormInput
+          name="email"
+          type="email"
+          register={{ ...register('email') }}
+        />
+        <FormInput
+          name="phone"
+          type="text"
+          register={{ ...register('phone') }}
+        />
+        <FormInput
+          name="street"
+          type="text"
+          register={{ ...register('street') }}
+        />
+        <FormInput
+          name="apartment"
+          type="text"
+          register={{ ...register('street') }}
+        />
+        <FormInput name="city" type="text" register={{ ...register('city') }} />
+        <FormInput name="zip" type="text" register={{ ...register('zip') }} />
+        <FormInput
+          name="country"
+          type="text"
+          register={{ ...register('country') }}
+        />
+        <FormButton
+          loading={updateUserLoading}
+          loadingText="Loading..."
+          text="Update Info"
+        />
         <button
           type="button"
           onClick={() => reset()}
-          className="w-fit justify-self-center bg-red-500 block text-2xl font-bold text-white rounded-xl transition hover:opacity-90 hover:scale-105 px-4 py-2"
+          className="font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition bg-red-500 text-white"
         >
           Reset Info
         </button>
