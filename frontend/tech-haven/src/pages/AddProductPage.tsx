@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import FormInput from '../components/FormInput'
+import FormTextarea from '../components/FormTextarea'
 import { useAdminContext } from '../context/AdminContext'
 import { useAuthContext } from '../context/AuthContext'
 
@@ -64,69 +66,50 @@ const AddProductPage = () => {
   }, [addProductSuccess])
 
   return (
-    <main className="text-center mb-10">
-      <h1 className="mb-8 text-4xl font-bold">Add Product</h1>
+    <main className="text-left mb-10">
+      <h1 className="mb-8 text-4xl font-bold text-center">Add Product</h1>
       <form onSubmit={handleSubmit(addProduct)}>
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <div>
-            <div className="flex flex-col text-left mb-8">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                {...register('name', {
+            <FormInput
+              name="name"
+              type="text"
+              register={{
+                ...register('name', {
                   required: 'Product Name is required',
-                })}
-                placeholder="Enter Name"
-                className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl "
-              />
-              {errors.name?.message && (
-                <p className="text-red-500 font-bold">{errors.name?.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col text-left mb-8 ">
-              <label htmlFor="description">Description:</label>
-              <textarea
-                id="description"
-                rows={4}
-                {...register('description', {
+                }),
+              }}
+              error={errors.name?.message}
+            />
+            <FormTextarea
+              name="description"
+              error={errors?.description?.message}
+              register={{
+                ...register('description', {
                   required: 'Description is required',
-                })}
-                placeholder="Enter Description"
-                className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
-              />
-              {errors.description?.message && (
-                <p className="text-red-500 font-bold">
-                  {errors.description?.message}
-                </p>
-              )}
-            </div>
-            <div className="grid grid-cols-2 gap-8">
-              <div className="flex flex-col text-left">
-                <label htmlFor="brand">Brand:</label>
-                <input
-                  type="text"
-                  id="brand"
-                  {...register('brand', {
+                }),
+              }}
+            />
+
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <FormInput
+                name="brand"
+                type="text"
+                error={errors.brand?.message}
+                register={{
+                  ...register('brand', {
                     required: 'Brand is required',
-                  })}
-                  placeholder="Enter Brand"
-                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
-                />
-                {errors.brand?.message && (
-                  <p className="text-red-500 font-bold">
-                    {errors.brand?.message}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col text-left">
-                <label htmlFor="category">Category:</label>
+                  }),
+                }}
+              />
+              <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-2">
+                <label htmlFor="category">Category</label>
                 <select
                   id="category"
                   {...register('category', {
                     required: 'Category is required',
                   })}
-                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
+                  className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl placeholder:capitalize"
                 >
                   <option value="" disabled>
                     Choose Category
@@ -145,73 +128,46 @@ const AddProductPage = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col text-left">
-                <label htmlFor="price">Price:</label>
-                <div>
-                  <input
-                    type="number"
-                    id="price"
-                    {...register('price', {
-                      required: 'Price is required',
-                    })}
-                    className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
-                  />
-                  <span>$</span>
-                </div>
-                {errors.price?.message && (
-                  <p className="text-red-500 font-bold">
-                    {errors.price?.message}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col text-left">
-                <label htmlFor="stock">Stock:</label>
-                <input
-                  type="number"
-                  id="stock"
-                  {...register('stock', {
+              <FormInput
+                name="price"
+                type="number"
+                register={{
+                  ...register('price', {
+                    required: 'Price is required',
+                  }),
+                }}
+                error={errors?.price?.message}
+              />
+              <FormInput
+                name="stock"
+                type="number"
+                register={{
+                  ...register('stock', {
                     required: 'Stock is required',
-                  })}
-                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
-                />
-                {errors.stock?.message && (
-                  <p className="text-red-500 font-bold">
-                    {errors.stock?.message}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col text-left">
-                <label htmlFor="rating">Rating:</label>
-                <input
-                  type="number"
-                  id="rating"
-                  {...register('rating', {
+                  }),
+                }}
+                error={errors?.stock?.message}
+              />
+              <FormInput
+                name="rating"
+                type="number"
+                register={{
+                  ...register('rating', {
                     required: 'Rating is required',
-                  })}
-                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
-                />
-                {errors.rating?.message && (
-                  <p className="text-red-500 font-bold">
-                    {errors.rating?.message}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col text-left">
-                <label htmlFor="revCount">Rev Count:</label>
-                <input
-                  type="number"
-                  id="revCount"
-                  {...register('revCount', {
+                  }),
+                }}
+                error={errors?.rating?.message}
+              />
+              <FormInput
+                name="reviews"
+                type="number"
+                register={{
+                  ...register('revCount', {
                     required: 'Rev Count is required',
-                  })}
-                  className="px-6 py-3 text-[20px] border-solid border-slate-300 shadow-lg rounded-xl resize-none"
-                />
-                {errors.revCount?.message && (
-                  <p className="text-red-500 font-bold">
-                    {errors.revCount?.message}
-                  </p>
-                )}
-              </div>
+                  }),
+                }}
+                error={errors?.revCount?.message}
+              />
             </div>
             <div className="mt-8 flex justify-end gap-3 text-[20px]">
               <label htmlFor="featured">Featured:</label>
@@ -256,13 +212,13 @@ const AddProductPage = () => {
 
             <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-14 flex flex-col items-center justify-center p-[10px]">
               {images && (
-                <div className="flex">
+                <div className="flex gap-4">
                   {images &&
                     images.map((item) => {
                       return (
                         <img
                           src={URL.createObjectURL(item)}
-                          className="w-[60px]"
+                          className="w-[60px] rounded-md"
                         />
                       )
                     })}
@@ -295,7 +251,7 @@ const AddProductPage = () => {
         {addProductError && <p>{addProductError}</p>}
         <button
           type="submit"
-          className="bg-[#120b90] text-white px-6 py-3 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
+          className="bg-[#120b90] text-white px-4 py-2 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
         >
           Add Product
         </button>

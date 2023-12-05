@@ -36,7 +36,7 @@ const AddToCart = ({ product }: AddCoCartPropType) => {
     <div className="flex justify-end gap-20">
       <AmountButtons increase={increase} decrease={decrease} amount={amount} />
       <button
-        className="p-3 bg-[#120b90] text-white font-bold text-[20px] rounded-xl hover:opacity-75"
+        className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
         onClick={() => {
           addToCart(id, amount, product)
         }}
