@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-white  py-8 mt-auto">
-      <div className="mx-auto max-w-5xl flex justify-between ">
+      <div className="mx-auto max-w-5xl flex justify-between flex-col lg:flex-row gap-10 ">
         <div className="basis-1/3 flex flex-col items-center">
           <p className="text-[#120b90] font-bold text-center relative text-3xl after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:absolute after:-bottom-1 after:left-0 after:right-0 after:mx-auto">
             TechHaven
@@ -49,7 +49,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-7 basis-1/3">
+        <div className="hidden flex-col items-center gap-7 basis-1/3 lg:flex">
           <p className="text-3xl font-bold uppercase text-[#120b90] relative after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:absolute after:-bottom-1 after:left-0 after:right-0 after:mx-auto">
             Newsletter
           </p>
