@@ -19,7 +19,7 @@ const CartPage = () => {
 
       <div className="flex justify-between items-end">
         <button
-          className="px-4 py-2 bg-red-600 text-white font-bold text-[20px]  rounded-lg hover:opacity-90 hover:scale-105 transition-all"
+          className="bg-red-500 text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
           onClick={removeAllItemsFromCart}
         >
           Remove All items
@@ -28,7 +28,7 @@ const CartPage = () => {
           <h3 className="text-5xl font-semibold">
             Total: <span className="text-[#192b90]">{total_amount}$</span>
           </h3>
-          <button className="bg-[#192b90] px-4 py-2 text-white font-bold text-[20px] rounded-lg hover:opacity-90 hover:scale-105 transition-all">
+          <button className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition">
             Continue {'>'}
           </button>
         </div>
