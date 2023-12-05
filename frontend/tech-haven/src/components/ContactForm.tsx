@@ -2,6 +2,8 @@ import emailjs from '@emailjs/browser'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import FormButton from './FormButton'
+import FormInput from './FormInput'
 
 type ContactFormSubmitData = {
   email: string
@@ -39,45 +41,38 @@ const ContactForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <label className="flex flex-col font-bold text-[20px]">
-          <span>Your Email</span>
-          <input
-            type="email"
-            className="px-4 py-3 rounded-xl border border-solid border-slate-300 shadow-md"
-            placeholder="Enter your email"
-            {...register('email', {
+        <FormInput
+          name="email"
+          type="email"
+          error={errors?.email?.message}
+          register={{
+            ...register('email', {
               required: 'Email is required',
               pattern: {
                 value:
                   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
                 message: 'Invalid email',
               },
-            })}
-          />
-          {errors?.email && (
-            <p className="text-red-600 font-bold">{errors.email.message}</p>
-          )}
-        </label>
+            }),
+          }}
+        />
 
-        <label className="flex flex-col font-bold text-[20px]">
-          <span>Your Name</span>
-          <input
-            type="text"
-            className="px-4 py-3 rounded-xl border border-solid border-slate-300 shadow-md  "
-            placeholder="Enter your name"
-            {...register('name', {
+        <FormInput
+          name="name"
+          type="text"
+          register={{
+            ...register('name', {
               required: 'Name is Required',
               pattern: {
                 value:
                   /[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/,
                 message: 'Invalid name',
               },
-            })}
-          />
-          {errors?.name && (
-            <p className="text-red-600 font-bold">{errors.name.message}</p>
-          )}
-        </label>
+            }),
+          }}
+          error={errors?.name?.message}
+        />
+
         <label className="flex flex-col font-bold text-[20px]">
           <span>Your Message</span>
           <textarea
@@ -92,12 +87,11 @@ const ContactForm = () => {
             <p className="text-red-600 font-bold ">{errors.message.message}</p>
           )}
         </label>
-        <button
-          type="submit"
-          className="bg-[#120b90] text-white px-2 py-4 w-fit rounded-xl font-bold text-[20px] hover:opacity-60 hover:scale-105 transition-all "
-        >
-          {loading ? 'Sending...' : 'Send Message'}
-        </button>
+        <FormButton
+          text="Send Message"
+          loading={loading}
+          loadingText="Sending..."
+        />
       </form>
     </div>
   )
