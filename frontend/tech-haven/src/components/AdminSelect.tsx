@@ -19,7 +19,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
   }
   return (
     <div
-      className="relative min-w-[500px] bg-white min-h-[50px] rounded-xl shadow-xl flex items-center p-5 gap-2"
+      className="flex-grow relative bg-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-[400px]"
       onClick={() => setIsOpen((prev) => !prev)}
     >
       <span className="grow flex flex-wrap text-3xl">
