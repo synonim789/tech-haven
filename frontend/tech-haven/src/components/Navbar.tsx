@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <section className="py-5 bg-white w-full sticky top-0 z-20">
-      <div className="flex justify-between items-center max-w-5xl mx-auto">
+      <div className="flex justify-between items-center max-w-5xl mx-auto px-4">
         <p className="font-bold text-3xl text-[#120b90] relative">
           <NavLink
             to="/"
@@ -31,7 +31,7 @@ const Navbar = () => {
             TechHaven
           </NavLink>
         </p>
-        <nav className="flex gap-4 items-center">
+        <nav className=" gap-4 items-center hidden sm:flex">
           <ul className="text-2xl font-semibold relative">
             <NavLink
               to="/products"
