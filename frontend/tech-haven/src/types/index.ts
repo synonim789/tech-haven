@@ -13,10 +13,12 @@ export type ProductType = {
   name: string
   price: number
   rating: number
+  numReviews: number
 }
 
 export type CategoryType = {
   name: string
+  _id: string
 }
 
 export type ChildrenType = {
