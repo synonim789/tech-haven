@@ -15,8 +15,8 @@ const AdminSidebar = () => {
       <nav
         className={
           isOpen
-            ? 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 left-0 transition-all ease-in-out duration-300'
-            : 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 -left-[100%] transition-all ease-in-out duration-300'
+            ? 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 left-0 transition-all ease-in-out duration-300 z-20'
+            : 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 -left-[100%] transition-all ease-in-out duration-300 z-20'
         }
       >
         <div
