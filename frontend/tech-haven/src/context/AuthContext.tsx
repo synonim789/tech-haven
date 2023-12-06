@@ -62,8 +62,6 @@ export const AuthProvider = ({ children }: ChildrenType) => {
       dispatch({ type: 'LOGIN', payload: loggedUser })
     } catch (error) {
       const err = error as AxiosError
-      console.log(err)
-
       dispatch({ type: 'LOGIN_ERROR', payload: err?.response?.data })
     }
   }
@@ -75,7 +73,6 @@ export const AuthProvider = ({ children }: ChildrenType) => {
 
   const registerUser = async (user: registerUserType) => {
     const { email, name, password } = user
-    console.log(user)
 
     dispatch({ type: 'REGISTER_START' })
     try {
