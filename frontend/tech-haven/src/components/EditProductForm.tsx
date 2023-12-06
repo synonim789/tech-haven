@@ -29,7 +29,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
   const [editForm, setEditForm] = useState<EditProductType | null>(null)
 
   const { token } = useAuthContext()!
-  const { categories, editProduct } = useAdminContext()!
+  const { categories, editProduct, editProductError } = useAdminContext()!
 
   const { register, handleSubmit, reset, formState } =
     useForm<EditProductType>()
@@ -159,6 +159,9 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
             className="w-5 accent-[#120b90]"
           />
         </div>
+        <p className="font-bold text-red-600 flex flex-col">
+          {editProductError}
+        </p>
         <FormButton text="Edit Product" loading={false} />
       </form>
     </>
