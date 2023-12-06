@@ -14,7 +14,7 @@ const ProfileSidebar = () => {
         }
       >
         <FaInfoCircle />
-        <span>Info</span>
+        <span className="hidden md:block">Info</span>
       </NavLink>
       <NavLink
         to="orders"
@@ -25,7 +25,7 @@ const ProfileSidebar = () => {
         }
       >
         <FaHistory />
-        <span>Orders</span>
+        <span className="hidden md:block">Orders</span>
       </NavLink>
       <NavLink
         to="settings"
@@ -36,7 +36,7 @@ const ProfileSidebar = () => {
         }
       >
         <IoSettingsSharp />
-        <span>Settings</span>
+        <span className="hidden md:block">Settings</span>
       </NavLink>
     </aside>
   )
