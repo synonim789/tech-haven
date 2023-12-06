@@ -5,6 +5,7 @@ import FullscreenLoading from './components/FullscreenLoading'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import { useAuthContext } from './context/AuthContext'
+import { useProductsContext } from './context/products_context'
 import { useUserContext } from './context/UserContext'
 import ScrollToTop from './helpers/ScrollToTop'
 import AboutPage from './pages/AboutPage'
@@ -15,8 +16,8 @@ import AdminPage from './pages/AdminPage'
 import AdminWelcomePage from './pages/AdminWelcomePage'
 import CartPage from './pages/CartPage'
 import ContactPage from './pages/ContactPage'
-import EdictProductPage from './pages/EditProductPage'
 import EditCategoryPage from './pages/EditCategoryPage'
+import EdictProductPage from './pages/EditProductPage'
 import ForgotPassword from './pages/ForgotPassword'
 import Homepage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -41,6 +42,7 @@ import GuestRoute from './routes/GuestRoute'
 function App() {
   const { token } = useAuthContext()!
   const { getUser, clearUser, userLoading } = useUserContext()!
+  const { productsLoading } = useProductsContext()!
   useEffect(() => {
     if (token) {
       getUser(token)
@@ -49,7 +51,7 @@ function App() {
     }
   }, [token])
 
-  if (userLoading) {
+  if (userLoading || productsLoading) {
     return <FullscreenLoading />
   }
   return (
