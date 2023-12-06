@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { IoIosMenu, IoMdClose } from 'react-icons/io'
 import { Link } from 'react-router-dom'
-import { AdminSidebarData } from './AdminSidebartData'
 import AdminSidebarMenuLink from './AdminSidebarMenuLink'
+import { AdminSidebarData } from './AdminSidebartData'
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,8 +15,8 @@ const AdminSidebar = () => {
       <nav
         className={
           isOpen
-            ? 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 left-0 transition duration-700'
-            : 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 -left-[100%]'
+            ? 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 left-0 transition-all ease-in-out duration-300'
+            : 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 -left-[100%] transition-all ease-in-out duration-300'
         }
       >
         <div
