@@ -6,7 +6,7 @@ const GridView = () => {
   const { pagedProducts: products } = useFilterContext()!
 
   return (
-    <div className="grid grid-cols-3 gap-9 text-center h-full">
+    <div className="grid grid-cols-1 gap-9 text-center h-full sm:grid-cols-2 md:grid-cols-3">
       {products.map((product: ProductType) => {
         return <SingleProduct key={product.id} {...product} />
       })}
