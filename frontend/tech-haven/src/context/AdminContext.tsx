@@ -13,6 +13,7 @@ type AdminContextState = {
   addProduct: (data: AddProductData) => void
   deleteProduct: ({ id, token }: DeleteProduct) => void
   editProduct: (data: editProductDataType) => void
+  addCategory: (data: addCategoryDataType) => void
   addProductError: boolean | string
   addProductLoading: boolean
   addProductSuccess: boolean
@@ -20,6 +21,9 @@ type AdminContextState = {
   editProductSuccess: boolean
   editProductLoading: boolean
   editProductError: boolean | string
+  addCategoryLoading: boolean
+  addCategoryError: boolean | string
+  addCategorySuccess: boolean
 }
 
 type AddProductData = {
@@ -53,6 +57,18 @@ type editProductDataType = {
   id: string
 }
 
+type addCategoryDataType = {
+  token: string
+  category: string
+}
+
+type DeleteProduct = {
+  id: string
+  token: {
+    token: string
+  }
+}
+
 const AdminContext = createContext<AdminContextState | null>(null)
 
 const initialState = {
@@ -68,13 +84,9 @@ const initialState = {
   editProductLoading: false,
   editProductError: false,
   editProductSuccess: false,
-}
-
-type DeleteProduct = {
-  id: string
-  token: {
-    token: string
-  }
+  addCategoryLoading: false,
+  addCategoryError: false,
+  addCategorySuccess: false,
 }
 
 export const AdminProvider = ({ children }: ChildrenType) => {
@@ -83,7 +95,6 @@ export const AdminProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     getAllProducts()
-    console.log(state.editProductSuccess)
   }, [
     state.addProductSuccess,
     state.deleteProductSuccess,
@@ -206,6 +217,28 @@ export const AdminProvider = ({ children }: ChildrenType) => {
     }
   }
 
+  const addCategory = async ({ category, token }: addCategoryDataType) => {
+    dispatch({ type: 'ADD_CATEGORY_START' })
+    try {
+      await axios.post(
+        'http://localhost:3000/api/v1/categories',
+        { name: category },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      dispatch({ type: 'ADD_CATEGORY_SUCCESS' })
+      toast.success('Category Added Successfully')
+    } catch (error) {
+      dispatch({
+        type: 'ADD_CATEGORY_ERROR',
+        payload: error.response.data.message,
+      })
+    }
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -214,6 +247,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
         addProduct,
         deleteProduct,
         editProduct,
+        addCategory,
       }}
     >
       {children}
