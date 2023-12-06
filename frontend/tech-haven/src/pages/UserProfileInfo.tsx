@@ -3,7 +3,7 @@ import { useUserContext } from '../context/UserContext'
 const UserProfileInfo = () => {
   const { user } = useUserContext()!
   return (
-    <div className="grid grid-cols-2 gap-10">
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
       <div>
         <h3 className="text-3xl font-semibold">Name:</h3>
         <p className="text-2xl">{user.name ? user.name : 'Not set'}</p>
