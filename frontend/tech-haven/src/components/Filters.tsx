@@ -30,7 +30,7 @@ const Filters = () => {
   }, [allProducts])
 
   return (
-    <div className="bg-white h-full top-20 sticky shadow-sm rounded-xl p-8">
+    <div className="bg-white h-full top-20  shadow-sm rounded-xl p-8 hidden lg:block">
       <p className="font-bold text-2xl mb-5">Category:</p>
       {categories.map((category, index) => {
         return (
