@@ -4,10 +4,10 @@ import AdminSidebar from '../components/AdminSidebar'
 import { useAdminContext } from '../context/AdminContext'
 
 const AdminPage = () => {
-  const { getCategories } = useAdminContext()!
+  const { getCategories, addCategorySuccess } = useAdminContext()!
   useEffect(() => {
     getCategories()
-  }, [])
+  }, [addCategorySuccess])
   return (
     <>
       <AdminSidebar />
