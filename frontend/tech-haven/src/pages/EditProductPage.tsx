@@ -7,12 +7,11 @@ import { ProductType } from '../types'
 
 const EdictProductPage = () => {
   const [value, setValue] = useState<ProductType | null>(null)
-  console.log(value)
 
   const { products } = useProductsContext()!
   return (
     <>
-      <h4 className="text-3xl font-semibold">Edit Product</h4>
+      <h4 className="text-3xl font-semibold mb-4">Edit Product</h4>
       <AdminSelect
         options={products}
         value={value}

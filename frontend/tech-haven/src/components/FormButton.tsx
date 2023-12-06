@@ -1,7 +1,7 @@
 type FormButtonProps = {
-    loading: boolean
-    loadingText?: string
-    text: string
+  loading: boolean
+  loadingText?: string
+  text: string
 }
 
 const FormButton = ({ loading, loadingText, text }: FormButtonProps) => {

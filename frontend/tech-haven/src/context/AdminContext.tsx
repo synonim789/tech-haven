@@ -8,14 +8,18 @@ import { useProductsContext } from './products_context'
 type AdminContextState = {
   categories: []
   categoryLoading: boolean
-  categoryError: boolean
+  categoryError: boolean | string
   getCategories: () => void
   addProduct: (data: AddProductData) => void
   deleteProduct: ({ id, token }: DeleteProduct) => void
-  addProductError: boolean
+  editProduct: (data: editProductDataType) => void
+  addProductError: boolean | string
   addProductLoading: boolean
   addProductSuccess: boolean
   deleteProductSuccess: boolean
+  editProductSuccess: boolean
+  editProductLoading: boolean
+  editProductError: boolean | string
 }
 
 type AddProductData = {
@@ -35,6 +39,20 @@ type AddProductData = {
   images: File[]
 }
 
+type editProductDataType = {
+  token: string
+  name: string
+  description: string
+  brand: string
+  category: string
+  price: number
+  countInStock: number
+  rating: number
+  numReviews: number
+  isFeatured: boolean
+  id: string
+}
+
 const AdminContext = createContext<AdminContextState | null>(null)
 
 const initialState = {
@@ -47,6 +65,9 @@ const initialState = {
   deleteProductLoading: false,
   deleteProductError: false,
   deleteProductSuccess: false,
+  editProductLoading: false,
+  editProductError: false,
+  editProductSuccess: false,
 }
 
 type DeleteProduct = {
@@ -62,8 +83,12 @@ export const AdminProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     getAllProducts()
-    console.log(state.deleteProductSuccess)
-  }, [state.addProductSuccess, state.deleteProductSuccess])
+    console.log(state.editProductSuccess)
+  }, [
+    state.addProductSuccess,
+    state.deleteProductSuccess,
+    state.editProductSuccess,
+  ])
 
   const getCategories = async () => {
     dispatch({ type: 'GET_CATEGORIES_START' })
@@ -140,9 +165,56 @@ export const AdminProvider = ({ children }: ChildrenType) => {
     }
   }
 
+  const editProduct = async (data: editProductDataType) => {
+    const {
+      brand,
+      category,
+      countInStock,
+      description,
+      id,
+      isFeatured,
+      name,
+      numReviews,
+      price,
+      rating,
+      token,
+    } = data
+
+    dispatch({ type: 'EDIT_PRODUCT_START' })
+    try {
+      await axios.put(
+        `http://localhost:3000/api/v1/products/${id}`,
+        {
+          brand,
+          category,
+          countInStock,
+          description,
+          isFeatured,
+          name,
+          numReviews,
+          price,
+          rating,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      dispatch({ type: 'EDIT_PRODUCT_SUCCESS' })
+    } catch (error) {
+      dispatch({
+        type: 'EDIT_PRODUCT_ERROR',
+        payload: error?.response?.data?.message,
+      })
+    }
+  }
+
   return (
     <AdminContext.Provider
-      value={{ ...state, getCategories, addProduct, deleteProduct }}
+      value={{
+        ...state,
+        getCategories,
+        addProduct,
+        deleteProduct,
+        editProduct,
+      }}
     >
       {children}
     </AdminContext.Provider>
