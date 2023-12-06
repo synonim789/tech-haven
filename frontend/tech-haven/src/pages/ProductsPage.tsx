@@ -15,10 +15,10 @@ const ProductsPage = () => {
   }, [])
   return (
     <section className="flex flex-col justify-center">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto w-full px-4">
         <SearchBar />
         <Sort />
-        <div className="flex justify-between gap-7">
+        <div className="flex gap-7 w-fit">
           <Filters />
           <ProductsList />
         </div>
