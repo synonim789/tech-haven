@@ -22,13 +22,14 @@ type EditProductType = {
   isFeatured: boolean
   price: number
   token: string
+  id: string
 }
 
 const EditProductForm = ({ product }: EditProductFormProps) => {
   const [editForm, setEditForm] = useState<EditProductType | null>(null)
 
   const { token } = useAuthContext()!
-  const { categories } = useAdminContext()!
+  const { categories, editProduct } = useAdminContext()!
 
   const { register, handleSubmit, reset, formState } =
     useForm<EditProductType>()
@@ -47,6 +48,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
       isFeatured: product.isFeatured,
       token: token.token,
       price: product.price,
+      id: product.id,
     })
   }, [product])
 
@@ -54,13 +56,12 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
     reset(editForm!)
   }, [editForm])
 
-  const submitHandler = (data) => {
-    console.log(data)
-  }
-
   return (
     <>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form
+        onSubmit={handleSubmit(editProduct)}
+        className="flex flex-col justify-center items-center"
+      >
         <FormInput
           type="text"
           name="name"
@@ -148,15 +149,15 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
             }}
             error={errors?.numReviews?.message}
           />
-          <div className="mt-8 flex justify-end gap-3 text-[20px]">
-            <label htmlFor="featured">Featured:</label>
-            <input
-              type="checkbox"
-              id="featured"
-              {...register('isFeatured')}
-              className="w-5 accent-[#120b90]"
-            />
-          </div>
+        </div>
+        <div className="my-8 flex gap-3 text-[20px]">
+          <label htmlFor="featured">Featured:</label>
+          <input
+            type="checkbox"
+            id="featured"
+            {...register('isFeatured')}
+            className="w-5 accent-[#120b90]"
+          />
         </div>
         <FormButton text="Edit Product" loading={false} />
       </form>
