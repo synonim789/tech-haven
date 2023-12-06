@@ -6,7 +6,7 @@ const ProductsList = () => {
   const { pagedProducts: products, listView } = useFilterContext()!
 
   if (products.length < 1) {
-    return <h1>No Products Found</h1>
+    return <h2 className="text-4xl font-bold">No Products Found </h2>
   }
 
   if (listView) {
