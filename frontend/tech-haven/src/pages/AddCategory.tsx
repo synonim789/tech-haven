@@ -28,7 +28,7 @@ const AddCategory = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <section className="flex flex-col gap-4 items-center">
       <h4 className="text-4xl font-semibold">Add Category</h4>
       <form
         className="flex flex-col items-center gap-4"
@@ -44,7 +44,7 @@ const AddCategory = () => {
         />
         <FormButton text="Add Category" loading={false} />
       </form>
-    </div>
+    </section>
   )
 }
 export default AddCategory
