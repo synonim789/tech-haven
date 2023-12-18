@@ -35,6 +35,7 @@ export type UserType = {
   city: string
   zip: string
   country: string
+  role: string
 }
 
 export type TokenType = {
