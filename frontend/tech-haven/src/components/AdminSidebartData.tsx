@@ -53,8 +53,8 @@ export const AdminSidebarData = [
     icon: <FaUsers />,
     subMenu: [
       {
-        title: 'Add Admin User',
-        path: 'addAdminUser',
+        title: 'Edit User Role',
+        path: 'editUserRole',
       },
       {
         title: 'Remove User',

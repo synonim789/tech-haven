@@ -1,13 +1,14 @@
-import { AxiosError } from 'axios'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import AdminReducer from '../reducer/AdminReducer'
-import { ChildrenType } from '../types'
+import { CategoryType, ChildrenType, UserType } from '../types'
 import { customFetch } from '../utils/customFetch'
+import { decodeToken } from '../utils/decodeToken'
+import { useAuthContext } from './AuthContext'
 import { useProductsContext } from './products_context'
 
 type AdminContextState = {
-  categories: []
+  categories: Array<CategoryType>
   categoryLoading: boolean
   categoryError: boolean | string
   getCategories: () => void
@@ -17,6 +18,8 @@ type AdminContextState = {
   addCategory: (data: addCategoryDataType) => void
   deleteCategory: ({ id, token }: DeleteCategory) => void
   editCategory: ({ id, token, name }: EditCategory) => void
+  getAllUsers: ({ token }: GetAllUsers) => void
+  changeUserRole: ({ id, token }: ChangeUserRole) => void
   addProductError: boolean | string
   addProductLoading: boolean
   addProductSuccess: boolean
@@ -32,6 +35,14 @@ type AdminContextState = {
   deleteCategorySuccess: boolean | null
   editCategoryError: boolean | string
   editCategorySuccess: boolean
+  editCategoryLoading: boolean
+  getAllUsersError: boolean | string
+  getAllUsersLoading: boolean
+  getAllUsersSuccess: boolean
+  allUsers?: Array<UserType>
+  changeUserRoleSuccess: boolean
+  changeUserRoleLoading: boolean
+  changeUserRoleError: boolean | string
 }
 
 type AddProductData = {
@@ -82,8 +93,17 @@ type DeleteCategory = {
   token: string
 }
 
+type GetAllUsers = {
+  token: string
+}
+
 type EditCategory = {
   name: string
+  token: string
+  id: string
+}
+
+type ChangeUserRole = {
   token: string
   id: string
 }
@@ -111,12 +131,20 @@ const initialState = {
   deleteCategorySuccess: false,
   editCategorySuccess: false,
   editCategoryError: false,
-  EditCategoryLoading: false,
+  editCategoryLoading: false,
+  getAllUsersLoading: false,
+  getAllUsersSuccess: false,
+  getAllUsersError: false,
+  allUsers: null,
+  changeUserRoleLoading: false,
+  changeUserRoleError: false,
+  changeUserRoleSuccess: false,
 }
 
 export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
   const { getAllProducts } = useProductsContext()!
+  const { logoutUser } = useAuthContext()!
 
   useEffect(() => {
     getAllProducts()
@@ -166,11 +194,10 @@ export const AdminProvider = ({ children }: ChildrenType) => {
           dispatch({ type: 'ADD_PRODUCT_SUCCESS' })
           toast.success('Product Added Successfully')
         })
-    } catch (error) {
-      const err = error as AxiosError
+    } catch (error: any) {
       dispatch({
         type: 'ADD_PRODUCT_ERROR',
-        payload: err?.response?.data?.message,
+        payload: error?.response?.data?.message,
       })
     }
   }
@@ -185,7 +212,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
       })
       dispatch({ type: 'DELETE_PRODUCT_SUCCESS' })
       toast.success('Product Successfully Deleted')
-    } catch (err) {
+    } catch (err: any) {
       dispatch({
         type: 'DELETE_PRODUCT_ERROR',
         payload: err?.response?.data?.message,
@@ -226,7 +253,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       dispatch({ type: 'EDIT_PRODUCT_SUCCESS' })
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: 'EDIT_PRODUCT_ERROR',
         payload: error?.response?.data?.message,
@@ -249,7 +276,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
       dispatch({ type: 'ADD_CATEGORY_SUCCESS' })
 
       toast.success('Category Added Successfully')
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: 'ADD_CATEGORY_ERROR',
         payload: error.response.data.message,
@@ -267,7 +294,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
       })
       dispatch({ type: 'DELETE_CATEGORY_SUCCESS' })
       toast.success('Category Deleted Successfully')
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: 'DELETE_CATEGORY_ERROR',
         payload: error.response.data.message,
@@ -285,9 +312,46 @@ export const AdminProvider = ({ children }: ChildrenType) => {
       )
       dispatch({ type: 'EDIT_CATEGORY_SUCCESS' })
       toast.success('Category edited successfully')
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: 'EDIT_CATEGORY_ERROR',
+        payload: error.response.data.message,
+      })
+    }
+  }
+
+  const getAllUsers = async ({ token }: GetAllUsers) => {
+    dispatch({ type: 'GET_ALL_USERS_START' })
+    try {
+      const response = await customFetch.get('/users', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      dispatch({ type: 'GET_ALL_USERS_SUCCESS', payload: response.data })
+    } catch (error: any) {
+      dispatch({
+        type: 'GET_ALL_USERS_ERROR',
+        payload: error.response.data.message,
+      })
+    }
+  }
+
+  const changeUserRole = async ({ id, token }: ChangeUserRole) => {
+    dispatch({ type: 'CHANGE_USER_ROLE_START' })
+    const { userId } = decodeToken(token)
+
+    try {
+      await customFetch.put(`/users/change-role/${id}`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      dispatch({ type: 'CHANGE_USER_ROLE_SUCCESS' })
+      await getAllUsers({ token: token })
+      toast.success('User Role changed Successfully')
+      if (userId === id) {
+        logoutUser()
+      }
+    } catch (error: any) {
+      dispatch({
+        type: 'CHANGE_USER_ROLE_ERROR',
         payload: error.response.data.message,
       })
     }
@@ -304,6 +368,8 @@ export const AdminProvider = ({ children }: ChildrenType) => {
         addCategory,
         deleteCategory,
         editCategory,
+        getAllUsers,
+        changeUserRole,
       }}
     >
       {children}

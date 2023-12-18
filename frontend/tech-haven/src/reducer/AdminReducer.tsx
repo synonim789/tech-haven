@@ -1,10 +1,12 @@
+import { CategoryType, UserType } from '../types'
+
 type reducerAction = {
   type: string
   payload?: any
 }
 
 type reducerState = {
-  categories: []
+  categories: Array<CategoryType>
   categoryLoading: boolean
   categoryError: boolean | string
   addProductError: boolean | string
@@ -24,7 +26,14 @@ type reducerState = {
   deleteCategorySuccess: boolean | null
   editCategorySuccess: boolean
   editCategoryError: boolean | string
-  EditCategoryLoading: boolean
+  editCategoryLoading: boolean
+  getAllUsersLoading: boolean
+  getAllUsersError: boolean | string
+  getAllUsersSuccess: boolean
+  allUsers?: Array<UserType>
+  changeUserRoleSuccess: boolean
+  changeUserRoleLoading: boolean
+  changeUserRoleError: boolean | string
 }
 
 const AdminReducer = (state: reducerState, action: reducerAction) => {
@@ -180,6 +189,60 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
       editCategoryLoading: false,
       editCategoryError: action.payload,
       editCategorySuccess: false,
+    }
+  }
+
+  if (action.type === 'GET_ALL_USERS_START') {
+    return {
+      ...state,
+      getAllUsersLoading: true,
+      getAllUsersError: false,
+      getAllUsersSuccess: false,
+    }
+  }
+
+  if (action.type === 'GET_ALL_USERS_SUCCESS') {
+    return {
+      ...state,
+      getAllUsersLoading: false,
+      getAllUsersSuccess: true,
+      getAllUsersError: false,
+      allUsers: action.payload,
+    }
+  }
+
+  if (action.type === 'GET_ALL_USERS_ERROR') {
+    return {
+      ...state,
+      getAllUsersLoading: false,
+      getAllUsersError: action.payload,
+      getAllUsersSuccess: false,
+    }
+  }
+
+  if (action.type === 'CHANGE_USER_ROLE_START') {
+    return {
+      ...state,
+      changeUserRoleLoading: true,
+      changeUserRoleError: false,
+      changeUserRoleSuccess: false,
+    }
+  }
+
+  if (action.type === 'CHANGE_USER_ROLE_SUCCESS') {
+    return {
+      ...state,
+      changeUserRoleLoading: false,
+      changeUserRoleError: false,
+      changeUserRoleSuccess: true,
+    }
+  }
+  if (action.type === 'CHANGE_USER_ROLE_ERROR') {
+    return {
+      ...state,
+      changeUserRoleLoading: false,
+      changeUserRoleError: action.payload,
+      changeUserRoleSuccess: false,
     }
   }
 

@@ -1,23 +1,23 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import FullscreenLoading from './components/FullscreenLoading'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import { useAuthContext } from './context/AuthContext'
-import { useProductsContext } from './context/products_context'
 import { useUserContext } from './context/UserContext'
+import { useProductsContext } from './context/products_context'
 import ScrollToTop from './helpers/ScrollToTop'
 import AboutPage from './pages/AboutPage'
 import AddCategory from './pages/AddCategory'
 import AddProductPage from './pages/AddProductPage'
-import AddUserPage from './pages/AddUserPage'
 import AdminPage from './pages/AdminPage'
 import AdminWelcomePage from './pages/AdminWelcomePage'
 import CartPage from './pages/CartPage'
 import ContactPage from './pages/ContactPage'
 import EditCategoryPage from './pages/EditCategoryPage'
 import EdictProductPage from './pages/EditProductPage'
+import AddUserPage from './pages/EditUserRolePage'
 import ForgotPassword from './pages/ForgotPassword'
 import Homepage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -38,6 +38,7 @@ import UserWelcomePage from './pages/UserWelcomePage'
 import AdminRoute from './routes/AdminRoute'
 import AuthRoute from './routes/AuthRoute'
 import GuestRoute from './routes/GuestRoute'
+import EditUserRole from './pages/EditUserRolePage'
 
 function App() {
   const { token } = useAuthContext()!
@@ -144,7 +145,7 @@ function App() {
                 </div>
               }
             />
-            <Route path="addAdminUser" element={<AddUserPage />} />
+            <Route path="editUserRole" element={<EditUserRole />} />
             <Route path="removeUser" element={<RemoveUserPage />} />
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>
