@@ -16,6 +16,7 @@ type AdminContextState = {
   editProduct: (data: editProductDataType) => void
   addCategory: (data: addCategoryDataType) => void
   deleteCategory: ({ id, token }: DeleteCategory) => void
+  editCategory: ({ id, token, name }: EditCategory) => void
   addProductError: boolean | string
   addProductLoading: boolean
   addProductSuccess: boolean
@@ -29,6 +30,8 @@ type AdminContextState = {
   deleteCategoryLoading: boolean
   deleteCategoryError: boolean | string
   deleteCategorySuccess: boolean | null
+  editCategoryError: boolean | string
+  editCategorySuccess: boolean
 }
 
 type AddProductData = {
@@ -79,6 +82,12 @@ type DeleteCategory = {
   token: string
 }
 
+type EditCategory = {
+  name: string
+  token: string
+  id: string
+}
+
 const AdminContext = createContext<AdminContextState | null>(null)
 
 const initialState = {
@@ -100,6 +109,9 @@ const initialState = {
   deleteCategoryLoading: false,
   deleteCategoryError: false,
   deleteCategorySuccess: false,
+  editCategorySuccess: false,
+  editCategoryError: false,
+  EditCategoryLoading: false,
 }
 
 export const AdminProvider = ({ children }: ChildrenType) => {
@@ -235,6 +247,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
         }
       )
       dispatch({ type: 'ADD_CATEGORY_SUCCESS' })
+
       toast.success('Category Added Successfully')
     } catch (error) {
       dispatch({
@@ -262,6 +275,24 @@ export const AdminProvider = ({ children }: ChildrenType) => {
     }
   }
 
+  const editCategory = async ({ id, name, token }: EditCategory) => {
+    dispatch({ type: 'EDIT_CATEGORY_START' })
+    try {
+      await customFetch.put(
+        `/categories/${id}`,
+        { name: name },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      dispatch({ type: 'EDIT_CATEGORY_SUCCESS' })
+      toast.success('Category edited successfully')
+    } catch (error) {
+      dispatch({
+        type: 'EDIT_CATEGORY_ERROR',
+        payload: error.response.data.message,
+      })
+    }
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -272,6 +303,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
         editProduct,
         addCategory,
         deleteCategory,
+        editCategory,
       }}
     >
       {children}

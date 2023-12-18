@@ -13,13 +13,13 @@ const getAllCategories = asyncHandler(async (req, res) => {
 
 const getSingleCategory = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).json({ message: "Invalid Category ID" });
+    return res.status(400).json({ message: "Invalid Category ID." });
   }
   const category = await Category.findById(req.params.id);
   if (!category) {
     res
       .status(500)
-      .json({ message: "The category with the given ID was not found" });
+      .json({ message: "The category with the given ID was not found." });
   }
   res.status(200).json(category);
 });
@@ -31,7 +31,7 @@ const addCategory = asyncHandler(async (req, res) => {
 
   category = await category.save();
   if (!category) {
-    return res.status(404).json({ message: "the category cannot be created!" });
+    return res.status(404).json({ message: "The category cannot be created!" });
   }
   res.status(200).json(category);
 });
@@ -40,6 +40,7 @@ const updateCategory = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ message: "Invalid Category ID" });
   }
+
   const category = await Category.findByIdAndUpdate(
     req.params.id,
     {
@@ -48,10 +49,11 @@ const updateCategory = asyncHandler(async (req, res) => {
     { new: true },
   );
   if (!category) {
-    return res.status(404).json({ message: "the category cannot be updated!" });
+    return res.status(404).json({ message: "The category cannot be updated!" });
   }
   res.status(200).json(category);
 });
+
 
 const deleteCategory = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {

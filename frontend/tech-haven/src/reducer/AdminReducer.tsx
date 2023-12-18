@@ -21,7 +21,10 @@ type reducerState = {
   addCategoryError: boolean | string
   deleteCategoryLoading: boolean
   deleteCategoryError: boolean | string
-  deleteCategorySuccess?: boolean
+  deleteCategorySuccess: boolean | null
+  editCategorySuccess: boolean
+  editCategoryError: boolean | string
+  EditCategoryLoading: boolean
 }
 
 const AdminReducer = (state: reducerState, action: reducerAction) => {
@@ -150,6 +153,33 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
       ...state,
       deleteCategoryLoading: false,
       deleteCategoryError: action.payload,
+    }
+  }
+
+  if (action.type === 'EDIT_CATEGORY_START') {
+    return {
+      ...state,
+      editCategoryLoading: true,
+      editCategoryError: false,
+      editCategorySuccess: false,
+    }
+  }
+
+  if (action.type === 'EDIT_CATEGORY_SUCCESS') {
+    return {
+      ...state,
+      editCategoryLoading: false,
+      editCategorySuccess: true,
+      editCategoryError: false,
+    }
+  }
+
+  if (action.type === 'EDIT_CATEGORY_ERROR') {
+    return {
+      ...state,
+      editCategoryLoading: false,
+      editCategoryError: action.payload,
+      editCategorySuccess: false,
     }
   }
 
