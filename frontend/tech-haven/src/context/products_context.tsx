@@ -1,7 +1,7 @@
-import axios from 'axios'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import productsReducer from '../reducer/productsReducer'
 import { ChildrenType, ProductType } from '../types'
+import { customFetch } from '../utils/customFetch'
 
 type ProductsContextType = {
   getSingleProduct: (url: string) => void
@@ -35,7 +35,7 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
     dispatch({ type: 'GET_PRODUCTS_BEGIN' })
 
     try {
-      const response = await axios.get('http://localhost:3000/api/v1/products')
+      const response = await customFetch.get('/products')
       const products = response.data
       dispatch({ type: 'GET_PRODUCTS_SUCCESS', payload: products })
     } catch (error) {
@@ -46,7 +46,7 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
   const getSingleProduct = async (url: string) => {
     dispatch({ type: 'GET_SINGLE_PRODUCT_BEGIN' })
     try {
-      const response = await axios.get(url)
+      const response = await customFetch.get(`/products/${url}`)
       const singleProduct = response.data
       dispatch({ type: 'GET_SINGLE_PRODUCT_SUCCESS', payload: singleProduct })
     } catch (error) {

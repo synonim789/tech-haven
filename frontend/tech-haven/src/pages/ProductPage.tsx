@@ -18,7 +18,7 @@ const ProductPage = () => {
   } = useProductsContext()!
 
   useEffect(() => {
-    getSingleProduct(`http://localhost:3000/api/v1/products/${id}`)
+    getSingleProduct(`${id}`)
     return function cleanup() {
       clearSingleProduct()
     }

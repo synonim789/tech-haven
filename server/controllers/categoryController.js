@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Category = require("../models/category");
 const mongoose = require("mongoose");
+const Product = require("../models/product");
 
 const getAllCategories = asyncHandler(async (req, res) => {
   const categoryList = await Category.find();
@@ -56,21 +57,29 @@ const deleteCategory = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ message: "Invalid Category ID" });
   }
-  Category.findByIdAndRemove(req.params.id)
-    .then((category) => {
-      if (category) {
-        return res
-          .status(200)
-          .json({ success: true, message: "the category is deleted" });
-      } else {
-        return res
-          .status(404)
-          .json({ success: false, message: "category not found" });
-      }
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, error: err });
-    });
+
+  const category = await Category.findById(req.params.id);
+  if (category.name === "other") {
+    return res
+      .status(403)
+      .json({ message: "Deletion of 'other' category is not allowed" });
+  }
+
+  try {
+    await Product.updateMany(
+      { category: req.params.id },
+      { category: "6538e0a5358270e91b410aac" },
+    );
+
+    const deletedCategory = await Category.findByIdAndRemove(req.params.id);
+    if (deletedCategory) {
+      return res.status(200).json({ message: "The Category is deleted" });
+    } else {
+      return res.status(404).json({ message: "Category not found." });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
 });
 
 module.exports = {
