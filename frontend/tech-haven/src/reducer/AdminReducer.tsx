@@ -19,6 +19,9 @@ type reducerState = {
   addCategorySuccess: boolean
   addCategoryLoading: boolean
   addCategoryError: boolean | string
+  deleteCategoryLoading: boolean
+  deleteCategoryError: boolean | string
+  deleteCategorySuccess?: boolean
 }
 
 const AdminReducer = (state: reducerState, action: reducerAction) => {
@@ -100,7 +103,12 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
   }
 
   if (action.type === 'ADD_CATEGORY_START') {
-    return { ...state, addCategoryLoading: true, addCategoryError: false }
+    return {
+      ...state,
+      addCategoryLoading: true,
+      addCategoryError: false,
+      addCategorySuccess: false,
+    }
   }
 
   if (action.type === 'ADD_CATEGORY_SUCCESS') {
@@ -117,6 +125,31 @@ const AdminReducer = (state: reducerState, action: reducerAction) => {
       ...state,
       addCategoryError: action.payload,
       addCategoryLoading: false,
+    }
+  }
+
+  if (action.type === 'DELETE_CATEGORY_START') {
+    return {
+      ...state,
+      deleteCategoryLoading: true,
+      deleteCategoryError: false,
+      deleteCategorySuccess: false,
+    }
+  }
+
+  if (action.type === 'DELETE_CATEGORY_SUCCESS') {
+    return {
+      ...state,
+      deleteCategorySuccess: true,
+      deleteCategoryLoading: false,
+    }
+  }
+
+  if (action.type === 'DELETE_CATEGORY_ERROR') {
+    return {
+      ...state,
+      deleteCategoryLoading: false,
+      deleteCategoryError: action.payload,
     }
   }
 

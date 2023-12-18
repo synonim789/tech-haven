@@ -1,8 +1,9 @@
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { createContext, useContext, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import AuthReducer from '../reducer/AuthReducer'
 import { ChildrenType } from '../types'
+import { customFetch } from '../utils/customFetch'
 
 type userLoginType = {
   email: string
@@ -52,8 +53,8 @@ export const AuthProvider = ({ children }: ChildrenType) => {
     const { email, password } = user
     dispatch({ type: 'LOGIN_START' })
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/v1/users/login',
+      const response = await customFetch.post(
+        '/users/login',
         { email, password },
         { headers: { 'Content-Type': 'application/json' } }
       )
@@ -76,8 +77,8 @@ export const AuthProvider = ({ children }: ChildrenType) => {
 
     dispatch({ type: 'REGISTER_START' })
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/v1/users/sign-up',
+      const response = await customFetch.post(
+        '/users/sign-up',
         { email, name, password },
         { headers: { 'Content-Type': 'application/json' } }
       )
@@ -95,8 +96,8 @@ export const AuthProvider = ({ children }: ChildrenType) => {
     const { email } = user
     dispatch({ type: 'FORGOT_PASSWORD_START' })
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/v1/users/forget-password',
+      const response = await customFetch.post(
+        '/users/forget-password',
         { email },
         { headers: { 'Content-Type': 'application/json' } }
       )

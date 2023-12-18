@@ -1,8 +1,9 @@
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { createContext, useContext, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import UserReducer from '../reducer/UserReducer'
 import { ChildrenType, TokenType, UserType, UserWithTokenType } from '../types'
+import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
 import { useAuthContext } from './AuthContext'
 
@@ -40,8 +41,8 @@ export const UserProvider = ({ children }: ChildrenType) => {
     const { userId } = decodedToken
     dispatch({ type: 'GET_USER_START' })
     try {
-      await axios
-        .get(`http://localhost:3000/api/v1/users/${userId}`, {
+      await customFetch
+        .get(`/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token.token}`,
           },
@@ -68,7 +69,7 @@ export const UserProvider = ({ children }: ChildrenType) => {
     const { userId } = decodedToken
     dispatch({ type: 'DELETE_USER_START' })
     try {
-      await axios.delete(`http://localhost:3000/api/v1/users/${userId}`, {
+      await customFetch.delete(`/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token.token}`,
         },
@@ -95,9 +96,9 @@ export const UserProvider = ({ children }: ChildrenType) => {
 
     dispatch({ type: 'UPDATE_USER_START' })
     try {
-      await axios
+      await customFetch
         .put(
-          `http://localhost:3000/api/v1/users/${userId}`,
+          `/users/${userId}`,
           { name, email, phone, street, apartment, city, country, zip },
           {
             headers: {

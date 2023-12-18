@@ -1,8 +1,9 @@
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import AdminReducer from '../reducer/AdminReducer'
 import { ChildrenType } from '../types'
+import { customFetch } from '../utils/customFetch'
 import { useProductsContext } from './products_context'
 
 type AdminContextState = {
@@ -14,6 +15,7 @@ type AdminContextState = {
   deleteProduct: ({ id, token }: DeleteProduct) => void
   editProduct: (data: editProductDataType) => void
   addCategory: (data: addCategoryDataType) => void
+  deleteCategory: ({ id, token }: DeleteCategory) => void
   addProductError: boolean | string
   addProductLoading: boolean
   addProductSuccess: boolean
@@ -24,6 +26,9 @@ type AdminContextState = {
   addCategoryLoading: boolean
   addCategoryError: boolean | string
   addCategorySuccess: boolean
+  deleteCategoryLoading: boolean
+  deleteCategoryError: boolean | string
+  deleteCategorySuccess: boolean | null
 }
 
 type AddProductData = {
@@ -69,6 +74,11 @@ type DeleteProduct = {
   }
 }
 
+type DeleteCategory = {
+  id: string
+  token: string
+}
+
 const AdminContext = createContext<AdminContextState | null>(null)
 
 const initialState = {
@@ -87,6 +97,9 @@ const initialState = {
   addCategoryLoading: false,
   addCategoryError: false,
   addCategorySuccess: false,
+  deleteCategoryLoading: false,
+  deleteCategoryError: false,
+  deleteCategorySuccess: false,
 }
 
 export const AdminProvider = ({ children }: ChildrenType) => {
@@ -104,9 +117,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
   const getCategories = async () => {
     dispatch({ type: 'GET_CATEGORIES_START' })
     try {
-      const response = await axios.get(
-        'http://localhost:3000/api/v1/categories'
-      )
+      const response = await customFetch.get('/categories')
       dispatch({ type: 'GET_CATEGORIES_SUCCESS', payload: response.data })
     } catch (error) {
       dispatch({ type: 'GET_CATEGORIES_ERROR' })
@@ -132,19 +143,13 @@ export const AdminProvider = ({ children }: ChildrenType) => {
 
     dispatch({ type: 'ADD_PRODUCT_START' })
     try {
-      await axios
-        .post(
-          'http://localhost:3000/api/v1/products/',
-
-          formData,
-
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+      await customFetch
+        .post('/products/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then(() => {
           dispatch({ type: 'ADD_PRODUCT_SUCCESS' })
           toast.success('Product Added Successfully')
@@ -161,7 +166,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
   const deleteProduct = async ({ id, token }: DeleteProduct) => {
     dispatch({ type: 'DELETE_PRODUCT_START' })
     try {
-      await axios.delete(`http://localhost:3000/api/v1/products/${id}`, {
+      await customFetch.delete(`/products/${id}`, {
         headers: {
           Authorization: `Bearer ${token.token}`,
         },
@@ -193,8 +198,8 @@ export const AdminProvider = ({ children }: ChildrenType) => {
 
     dispatch({ type: 'EDIT_PRODUCT_START' })
     try {
-      await axios.put(
-        `http://localhost:3000/api/v1/products/${id}`,
+      await customFetch.put(
+        `/products/${id}`,
         {
           brand,
           category,
@@ -220,8 +225,8 @@ export const AdminProvider = ({ children }: ChildrenType) => {
   const addCategory = async ({ category, token }: addCategoryDataType) => {
     dispatch({ type: 'ADD_CATEGORY_START' })
     try {
-      await axios.post(
-        'http://localhost:3000/api/v1/categories',
+      await customFetch.post(
+        '/categories',
         { name: category },
         {
           headers: {
@@ -239,6 +244,24 @@ export const AdminProvider = ({ children }: ChildrenType) => {
     }
   }
 
+  const deleteCategory = async ({ id, token }: DeleteCategory) => {
+    dispatch({ type: 'DELETE_CATEGORY_START' })
+    try {
+      await customFetch.delete(`/categories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      dispatch({ type: 'DELETE_CATEGORY_SUCCESS' })
+      toast.success('Category Deleted Successfully')
+    } catch (error) {
+      dispatch({
+        type: 'DELETE_CATEGORY_ERROR',
+        payload: error.response.data.message,
+      })
+    }
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -248,6 +271,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
         deleteProduct,
         editProduct,
         addCategory,
+        deleteCategory,
       }}
     >
       {children}
