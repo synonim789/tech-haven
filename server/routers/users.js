@@ -9,6 +9,7 @@ const {
   deleteUser,
   userForgotPassword,
   updateUser,
+  changeUserRole,
 } = require("../controllers/userController");
 const verifyJWT = require("../helpers/jwt");
 const verifyRoles = require("../helpers/verifyRoles");
@@ -23,5 +24,6 @@ router.get("/get/count", verifyJWT, verifyRoles("admin"), getUserCount);
 router.delete("/:id", verifyJWT, verifyRoles("user"), deleteUser);
 router.post("/forget-password", userForgotPassword);
 router.put("/:id", verifyJWT, verifyRoles("user"), updateUser);
+router.put("/change-role/:id", verifyJWT, verifyRoles("admin"), changeUserRole);
 
 module.exports = router;

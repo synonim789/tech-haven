@@ -180,6 +180,30 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+const changeUserRole = asyncHandler(async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return res.status(400).json({ message: "Invalid User ID" });
+  }
+
+  const user = await User.findById(req.params.id);
+  if (user) {
+    if (user.role === "admin" && user.name !== "admin") {
+      user.role = "user";
+    } else if (user.role === "user") {
+      user.role = "admin";
+    } else {
+      return res
+        .status(401)
+        .json({ message: "Basic Admin Role cannot be changed" });
+    }
+
+    await user.save();
+    return res.status(200).json({ message: "User changed" });
+  } else {
+    res.status(404).json({ message: "User Not Found" });
+  }
+});
+
 module.exports = {
   getAllUser,
   addUser,
@@ -190,4 +214,5 @@ module.exports = {
   deleteUser,
   userForgotPassword,
   updateUser,
+  changeUserRole,
 };
