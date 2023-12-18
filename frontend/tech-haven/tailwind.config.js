@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        hero: "url('./src/assets/6017768.jpg')",
+        hero: "url('/src/assets/6017768.jpg')",
       },
       aspectRatio: {
         '3/5': '3 / 5',
