@@ -11,7 +11,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
   }
   const productList = await Product.find(filter).populate("category");
   if (!productList) {
-    return res.status(500).json({ success: false });
+    return res.status(500).json({ message: "No Product List found" });
   }
   res.status(200).json(productList);
 });
@@ -155,6 +155,18 @@ const updateProduct = asyncHandler(async (req, res) => {
   res.status(200).json(product);
 });
 
+const getFeaturedProducts = asyncHandler(async (req, res) => {
+  const featuredProducts = await Product.find({ isFeatured: true })
+    .sort({
+      dateCreated: -1,
+    })
+    .limit(3);
+  if (!featuredProducts) {
+    return res.status(500).json({ message: "No Featured Products found" });
+  }
+  return res.status(200).json(featuredProducts);
+});
+
 module.exports = {
   getAllProducts,
   getSingleProduct,
@@ -163,4 +175,5 @@ module.exports = {
   deleteProduct,
   addProduct,
   updateProduct,
+  getFeaturedProducts,
 };

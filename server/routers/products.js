@@ -9,6 +9,7 @@ const {
   deleteProduct,
   addProduct,
   updateProduct,
+  getFeaturedProducts,
 } = require("../controllers/productController");
 const storage = require("../config/multerStorage");
 const verifyJWT = require("../helpers/jwt");
@@ -44,5 +45,6 @@ router.get(
   verifyRoles("admin"),
   getFeaturedCount,
 );
+router.get("/get/featured-product", getFeaturedProducts);
 
 module.exports = router;
