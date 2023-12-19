@@ -1,14 +1,11 @@
 import { Navigate } from 'react-router-dom'
-import { useUserContext } from '../context/UserContext'
+import { useAuthContext2 } from '../context/AuthContext2'
 import { ChildrenType } from '../types'
 
 const GuestRoute = ({ children }: ChildrenType) => {
-  const { user, userLoading } = useUserContext()!
+  const { token } = useAuthContext2()!
 
-  if (userLoading) {
-    return <p>Loading...</p>
-  }
-  if (user) {
+  if (token) {
     return <Navigate to="/" />
   }
 

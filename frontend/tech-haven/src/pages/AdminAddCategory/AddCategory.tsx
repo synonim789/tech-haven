@@ -4,14 +4,14 @@ import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthContext2 } from '../../context/AuthContext2'
 
 const AddCategory = () => {
-  const { token } = useAuthContext()!
+  const { token } = useAuthContext2()!
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: {
       category: '',
-      token: token.token,
+      token: token,
     },
   })
 

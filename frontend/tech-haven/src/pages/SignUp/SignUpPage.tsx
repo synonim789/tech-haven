@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useAuthContext } from '../../context/AuthContext'
+import { useRegisterUser } from '../../features/auth/useRegisterUser'
 
 type SignUpFormType = {
   email: string
@@ -13,16 +12,14 @@ type SignUpFormType = {
 }
 
 const SignUpPage = () => {
-  const [visiblePassword, setVisiblePassword] = useState(false)
   const form = useForm<SignUpFormType>()
   const { register, handleSubmit, formState } = form
   const { errors } = formState
+  const mutation = useRegisterUser()
 
-  const {
-    signingError: error,
-    signingLoading: loading,
-    registerUser,
-  } = useAuthContext()!
+  const submitHandler = (data: SignUpFormType) => {
+    mutation.mutate(data)
+  }
 
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -38,7 +35,7 @@ const SignUpPage = () => {
           <span className="text-[#120b90]">Sign Up</span>
         </h1>
         <form
-          onSubmit={handleSubmit(registerUser)}
+          onSubmit={handleSubmit(submitHandler)}
           className="flex flex-col w-full justify-center items-center gap-7"
         >
           <FormInput
@@ -77,11 +74,13 @@ const SignUpPage = () => {
               }),
             }}
           />
-          {error ? (
-            <p className="font-bold text-red-600 text-[20px]">{error}</p>
+          {mutation.isError ? (
+            <p className="font-bold text-red-600 text-[20px]">
+              {mutation.error.message}
+            </p>
           ) : null}
           <FormButton
-            loading={loading}
+            loading={mutation.isPending}
             text="Sign Up"
             loadingText="Signing Up..."
           />

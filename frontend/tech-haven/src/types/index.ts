@@ -39,7 +39,7 @@ export type UserType = {
 }
 
 export type TokenType = {
-  token: string
+  token: string | null
 }
 
 export type UserWithTokenType = {

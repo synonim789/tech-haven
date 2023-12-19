@@ -4,7 +4,7 @@ import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthContext2 } from '../../context/AuthContext2'
 import { CategoryType, ProductType } from '../../types'
 
 type EditProductFormProps = {
@@ -21,14 +21,14 @@ type EditProductType = {
   numReviews: number
   isFeatured: boolean
   price: number
-  token: string
+  token: string | null
   id: string
 }
 
 const EditProductForm = ({ product }: EditProductFormProps) => {
   const [editForm, setEditForm] = useState<EditProductType | null>(null)
 
-  const { token } = useAuthContext()!
+  const { token } = useAuthContext2()!
   const { categories, editProduct, editProductError } = useAdminContext()!
 
   const { register, handleSubmit, reset, formState } =
@@ -46,7 +46,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
       rating: product.rating,
       numReviews: product.numReviews,
       isFeatured: product.isFeatured,
-      token: token.token,
+      token: token,
       price: product.price,
       id: product.id,
     })

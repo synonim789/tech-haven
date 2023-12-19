@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
+import { Cookies } from 'react-cookie'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import FullscreenLoading from './components/ui/FullscreenLoading'
-import { useAuthContext } from './context/AuthContext'
-import { useUserContext } from './context/UserContext'
+import { useAuthContext2 } from './context/AuthContext2'
 import ScrollToTop from './helpers/ScrollToTop'
 import Footer from './layout/Footer'
 import Header from './layout/Header'
@@ -39,19 +38,26 @@ import AuthRoute from './routes/AuthRoute'
 import GuestRoute from './routes/GuestRoute'
 
 function App() {
-  const { token } = useAuthContext()!
-  const { getUser, clearUser, userLoading } = useUserContext()!
-  useEffect(() => {
-    if (token) {
-      getUser(token)
-    } else {
-      clearUser()
-    }
-  }, [token])
+  const { token, loginUserInContext } = useAuthContext2()!
 
-  if (userLoading) {
-    return <FullscreenLoading />
-  }
+  const cookies = new Cookies()
+  // useEffect(() => {
+  //   if (token) {
+  //     getUser(token)
+  //   } else {
+  //     clearUser()
+  //   }
+  // }, [token])
+
+  useEffect(() => {
+    if (token === null) {
+      const jwt = cookies.get('jwt')
+      if (jwt) {
+        loginUserInContext(jwt)
+      }
+    }
+  }, [token, cookies, loginUserInContext])
+
   return (
     <>
       <Router>

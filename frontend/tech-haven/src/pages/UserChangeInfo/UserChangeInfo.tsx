@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthContext2 } from '../../context/AuthContext2'
 import { useUserContext } from '../../context/UserContext'
 
 type userChangeInfoType = {
@@ -14,14 +14,14 @@ type userChangeInfoType = {
   city: string
   zip: string
   country: string
-  token: string
+  token: string | null
 }
 
 const UserChangeInfo = () => {
   const [formUser, setFormUser] = useState<userChangeInfoType | null>(null)
   const { user, updateUser, updateUserLoading } = useUserContext()!
   const { register, handleSubmit, reset } = useForm<userChangeInfoType>()
-  const { token } = useAuthContext()!
+  const { token } = useAuthContext2()!
 
   useEffect(() => {
     setFormUser({
@@ -33,7 +33,7 @@ const UserChangeInfo = () => {
       city: user.city,
       zip: user.zip,
       country: user.country,
-      token: token.token,
+      token: token,
     })
   }, [])
 

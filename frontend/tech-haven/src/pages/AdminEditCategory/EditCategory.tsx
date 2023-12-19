@@ -4,7 +4,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthContext2 } from '../../context/AuthContext2'
 
 type Props = {
   name: string
@@ -17,11 +17,11 @@ type data = {
 const EditCategory = ({ name, id }: Props) => {
   const [openCategory, setOpenCategory] = useState(false)
   const { register, handleSubmit } = useForm()
-  const { token } = useAuthContext()!
+  const { token } = useAuthContext2()!
   const { editCategory } = useAdminContext()!
 
   const submit = async (data: data) => {
-    editCategory({ id: id, name: data.name, token: token.token })
+    editCategory({ id: id, name: data.name, token: token })
     setOpenCategory(false)
   }
 

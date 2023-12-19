@@ -1,6 +1,6 @@
 import { FaUser } from 'react-icons/fa'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { useAuthContext2 } from '../../context/AuthContext2'
 import { UserType } from '../../types'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const EditSingleUser = ({ user }: Props) => {
   const { name, email, role } = user
   const { changeUserRole } = useAdminContext()!
-  const { token } = useAuthContext()!
+  const { token } = useAuthContext2()!
   return (
     <div className="flex gap-5 items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl">
       <FaUser size={'30px'} />
@@ -23,7 +23,7 @@ const EditSingleUser = ({ user }: Props) => {
             <button
               className="px-2 py-3 bg-[#120b90] text-white font-bold rounded-xl hover:scale-105 transition hover:opacity-70"
               onClick={() =>
-                changeUserRole({ id: user._id, token: token.token })
+                changeUserRole({ id: user._id, token: token })
               }
             >
               Change to User
@@ -36,7 +36,7 @@ const EditSingleUser = ({ user }: Props) => {
             <button
               className="px-2 py-3 bg-blue-500 text-white font-bold rounded-xl hover:scale-105 transition hover:opacity-70"
               onClick={() =>
-                changeUserRole({ id: user._id, token: token.token })
+                changeUserRole({ id: user._id, token: token })
               }
             >
               Change to Admin
