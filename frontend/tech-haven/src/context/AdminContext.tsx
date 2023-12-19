@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
+import { useGetAllProducts } from '../features/products/useGetAllProducts'
 import AdminReducer from '../reducer/AdminReducer'
 import { CategoryType, ChildrenType, UserType } from '../types'
 import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
 import { useAuthContext } from './AuthContext'
-import { useProductsContext } from './products_context'
 
 type AdminContextState = {
   categories: Array<CategoryType>
@@ -143,12 +143,10 @@ const initialState = {
 
 export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
-  const { getAllProducts } = useProductsContext()!
+  const { data } = useGetAllProducts()
   const { logoutUser } = useAuthContext()!
 
-  useEffect(() => {
-    getAllProducts()
-  }, [
+  useEffect(() => {}, [
     state.addProductSuccess,
     state.deleteProductSuccess,
     state.editProductSuccess,

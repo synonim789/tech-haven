@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
+import FullscreenLoading from '../components/ui/FullscreenLoading'
+import { useGetAllProducts } from '../features/products/useGetAllProducts'
 import filterReducer from '../reducer/filterReducer'
 import { ChildrenType, ProductType } from '../types'
-import { useProductsContext } from './products_context'
 
 const initialState = {
   allProducts: [],
@@ -33,6 +34,7 @@ type FilterContextType = {
   updatePagination: (e: React.SyntheticEvent<HTMLButtonElement>) => void
   setGridView: () => void
   setListView: () => void
+  getProducts: (data: Array<ProductType>) => void
   filters: {
     search: string
     category: string
@@ -53,12 +55,12 @@ type FilterContextType = {
 const FilterContext = createContext<FilterContextType | null>(null)
 
 export const FilterProvider = ({ children }: ChildrenType) => {
-  const productsContext = useProductsContext()
+  const { data, isLoading, isSuccess } = useGetAllProducts()
 
   const [state, dispatch] = useReducer(filterReducer, initialState)
 
   const getProducts = () => {
-    dispatch({ type: 'LOAD_PRODUCTS', payload: productsContext?.products })
+    dispatch({ type: 'LOAD_PRODUCTS', payload: data })
   }
 
   const filterProducts = () => {
@@ -72,10 +74,6 @@ export const FilterProvider = ({ children }: ChildrenType) => {
   const getPagination = () => {
     dispatch({ type: 'GET_PAGINATION' })
   }
-
-  useEffect(() => {
-    getProducts()
-  }, [productsContext?.products])
 
   useEffect(() => {
     filterProducts()
@@ -131,6 +129,11 @@ export const FilterProvider = ({ children }: ChildrenType) => {
     dispatch({ type: 'UPDATE_LIMIT', payload: 4 })
     dispatch({ type: 'SET_LIST_VIEW' })
   }
+
+  if (isLoading) {
+    return <FullscreenLoading />
+  }
+
   return (
     <FilterContext.Provider
       value={{
@@ -141,6 +144,7 @@ export const FilterProvider = ({ children }: ChildrenType) => {
         updatePagination,
         setGridView,
         setListView,
+        getProducts,
       }}
     >
       {children}

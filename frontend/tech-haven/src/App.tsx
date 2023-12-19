@@ -3,7 +3,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import FullscreenLoading from './components/ui/FullscreenLoading'
 import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
-import { useProductsContext } from './context/products_context'
 import ScrollToTop from './helpers/ScrollToTop'
 import Footer from './layout/Footer'
 import Header from './layout/Header'
@@ -13,10 +12,12 @@ import AddCategory from './pages/AdminAddCategory/AddCategory'
 import AddProductPage from './pages/AdminAddProduct/AddProductPage'
 import RemoveCategoryPage from './pages/AdminDeleteCategory/RemoveCategoryPage'
 import RemoveProductPage from './pages/AdminDeleteProduct/RemoveProductPage'
+import RemoveUserPage from './pages/AdminDeleteUser/RemoveUserPage'
 import EditCategoryPage from './pages/AdminEditCategory/EditCategoryPage'
 import EdictProductPage from './pages/AdminEditProduct/EditProductPage'
 import EditUserRole from './pages/AdminEditUserRole/EditUserRolePage'
 import AdminPage from './pages/AdminPage/AdminPage'
+import StatisticsPage from './pages/AdminStatistics/StatisticsPage'
 import AdminWelcomePage from './pages/AdminWelcome/AdminWelcomePage'
 import CartPage from './pages/Cart/CartPage'
 import ContactPage from './pages/Contact/ContactPage'
@@ -26,9 +27,7 @@ import LoginPage from './pages/Login/LoginPage'
 import NotFoundPage from './pages/NotFound/NotFoundPage'
 import ProductPage from './pages/Product/ProductPage'
 import ProductsPage from './pages/Products/ProductsPage'
-import RemoveUserPage from './pages/AdminDeleteUser/RemoveUserPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
-import StatisticsPage from './pages/AdminStatistics/StatisticsPage'
 import UserChangeInfo from './pages/UserChangeInfo/UserChangeInfo'
 import UserProfileInfo from './pages/UserInfo/UserProfileInfo'
 import UserOrderPage from './pages/UserOrders/UserOrderPage'
@@ -42,7 +41,6 @@ import GuestRoute from './routes/GuestRoute'
 function App() {
   const { token } = useAuthContext()!
   const { getUser, clearUser, userLoading } = useUserContext()!
-  const { productsLoading } = useProductsContext()!
   useEffect(() => {
     if (token) {
       getUser(token)
@@ -51,7 +49,7 @@ function App() {
     }
   }, [token])
 
-  if (userLoading || productsLoading) {
+  if (userLoading) {
     return <FullscreenLoading />
   }
   return (
