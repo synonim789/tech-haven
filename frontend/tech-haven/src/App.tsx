@@ -3,7 +3,10 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import FullscreenLoading from './components/ui/FullscreenLoading'
 import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
+<<<<<<< HEAD
 import { useProductsContext } from './context/products_context'
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 import ScrollToTop from './helpers/ScrollToTop'
 import Footer from './layout/Footer'
 import Header from './layout/Header'
@@ -42,7 +45,10 @@ import GuestRoute from './routes/GuestRoute'
 function App() {
   const { token } = useAuthContext()!
   const { getUser, clearUser, userLoading } = useUserContext()!
+<<<<<<< HEAD
   const { productsLoading } = useProductsContext()!
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
   useEffect(() => {
     if (token) {
       getUser(token)
@@ -51,7 +57,11 @@ function App() {
     }
   }, [token])
 
+<<<<<<< HEAD
   if (userLoading || productsLoading) {
+=======
+  if (userLoading) {
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
     return <FullscreenLoading />
   }
   return (
