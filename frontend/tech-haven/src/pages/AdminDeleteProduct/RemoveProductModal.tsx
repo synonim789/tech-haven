@@ -1,5 +1,5 @@
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext2 } from '../../context/AuthContext2'
+import { useAuthContext } from '../../context/AuthContext'
 
 type RemoveProductModalProps = {
   close: () => void
@@ -9,7 +9,7 @@ type RemoveProductModalProps = {
 
 const RemoveProductModal = ({ close, id, clear }: RemoveProductModalProps) => {
   const { deleteProduct } = useAdminContext()!
-  const { token } = useAuthContext2()!
+  const { token } = useAuthContext()!
   return (
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />

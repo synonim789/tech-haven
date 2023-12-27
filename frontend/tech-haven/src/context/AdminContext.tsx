@@ -5,7 +5,7 @@ import AdminReducer from '../reducer/AdminReducer'
 import { CategoryType, ChildrenType, UserType } from '../types'
 import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
-import { useAuthContext2 } from './AuthContext2'
+import { useAuthContext } from './AuthContext'
 
 type AdminContextState = {
   categories: Array<CategoryType>
@@ -83,26 +83,28 @@ type addCategoryDataType = {
 
 type DeleteProduct = {
   id: string
-  token: string | null
+  token: {
+    token: string
+  }
 }
 
 type DeleteCategory = {
   id: string
-  token: string | null
+  token: string
 }
 
 type GetAllUsers = {
-  token: string | null
+  token: string
 }
 
 type EditCategory = {
   name: string
-  token: string | null
+  token: string
   id: string
 }
 
 type ChangeUserRole = {
-  token: string | null
+  token: string
   id: string
 }
 
@@ -142,7 +144,7 @@ const initialState = {
 export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
   const { data } = useGetAllProducts()
-  const { logoutUserInContext } = useAuthContext2()!
+  const { logoutUser } = useAuthContext()!
 
   useEffect(() => {}, [
     state.addProductSuccess,
@@ -343,7 +345,7 @@ export const AdminProvider = ({ children }: ChildrenType) => {
       await getAllUsers({ token: token })
       toast.success('User Role changed Successfully')
       if (userId === id) {
-        logoutUserInContext()
+        logoutUser()
       }
     } catch (error: any) {
       dispatch({

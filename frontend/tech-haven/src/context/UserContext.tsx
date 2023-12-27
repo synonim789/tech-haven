@@ -5,7 +5,7 @@ import UserReducer from '../reducer/UserReducer'
 import { ChildrenType, TokenType, UserType, UserWithTokenType } from '../types'
 import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
-import { useAuthContext2 } from './AuthContext2'
+import { useAuthContext } from './AuthContext'
 
 type UserContextType = {
   getUser: (token: TokenType) => void
@@ -33,7 +33,7 @@ const initialState = {
 
 export const UserProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(UserReducer, initialState)
-  const { logoutUserInContext } = useAuthContext2()!
+  const { logoutUser } = useAuthContext()!
 
   const getUser = async (token: TokenType) => {
     const decodedToken = decodeToken(token)
@@ -76,7 +76,7 @@ export const UserProvider = ({ children }: ChildrenType) => {
       })
 
       dispatch({ type: 'DELETE_USER_SUCCESS' })
-      logoutUserInContext()
+      logoutUser()
       toast.success('Account Deleted Successfully')
     } catch (error) {
       const err = error as AxiosError

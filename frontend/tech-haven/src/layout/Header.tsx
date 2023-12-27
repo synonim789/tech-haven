@@ -1,22 +1,16 @@
 import { useEffect, useState } from 'react'
-import { Cookies } from 'react-cookie'
 import { CgProfile } from 'react-icons/cg'
 import { RiAdminLine } from 'react-icons/ri'
 import { Link, useLocation } from 'react-router-dom'
-import { useAuthContext2 } from '../context/AuthContext2'
+import { useAuthContext } from '../context/AuthContext'
+import { useUserContext } from '../context/UserContext'
 import { decodeToken } from '../utils/decodeToken'
 
 const Header = () => {
   const [headerRole, setHeaderRole] = useState('')
   const location = useLocation()
-  const { token, logoutUserInContext, loginUserInContext } = useAuthContext2()!
-  const cookies = new Cookies()
-
-  const logout = () => {
-    logoutUserInContext()
-    cookies.remove('jwt')
-  }
-
+  const { logoutUser, token } = useAuthContext()!
+  const { user } = useUserContext()!
   useEffect(() => {
     if (token) {
       const decodedToken = decodeToken(token)
@@ -25,7 +19,7 @@ const Header = () => {
     } else {
       setHeaderRole('')
     }
-  }, [token])
+  }, [user])
 
   if (
     location.pathname === '/login' ||
@@ -43,7 +37,7 @@ const Header = () => {
           <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
               className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
-              onClick={() => logout()}
+              onClick={logoutUser}
             >
               Log out
             </button>
@@ -51,7 +45,7 @@ const Header = () => {
               className="text-white font-bold underline flex items-center text-xl gap-2"
               to={`/profile/`}
             >
-              {token && 'username: TODO'}
+              {user && user.name.split(' ')[0]}
               <CgProfile className="h-8 w-8" />
             </Link>
           </div>
@@ -60,7 +54,7 @@ const Header = () => {
           <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
               className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
-              onClick={() => logout()}
+              onClick={logoutUser}
             >
               Log out
             </button>
@@ -74,7 +68,7 @@ const Header = () => {
           </div>
         )}
 
-        {!token && (
+        {!user && (
           <div className="flex justify-center sm:justify-end gap-3">
             <Link
               to="/login"

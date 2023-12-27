@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import App from './App.tsx'
 import { AdminProvider } from './context/AdminContext'
-import { AuthContext2Provider } from './context/AuthContext2.tsx'
+import { AuthProvider } from './context/AuthContext'
 import { UserProvider } from './context/UserContext.jsx'
 import { CartProvider } from './context/cart_context.jsx'
 import { FilterProvider } from './context/filter_context.jsx'
@@ -14,7 +14,7 @@ const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
-    <AuthContext2Provider>
+    <AuthProvider>
       <UserProvider>
         <FilterProvider>
           <CartProvider>
@@ -37,6 +37,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           </CartProvider>
         </FilterProvider>
       </UserProvider>
-    </AuthContext2Provider>
+    </AuthProvider>
   </QueryClientProvider>
 )

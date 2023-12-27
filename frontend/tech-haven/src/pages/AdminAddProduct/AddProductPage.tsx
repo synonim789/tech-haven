@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext2 } from '../../context/AuthContext2'
+import { useAuthContext } from '../../context/AuthContext'
 
 type CategoryType = {
   _id: string
@@ -17,11 +17,11 @@ const AddProductPage = () => {
 
   const { categories, addProduct, addProductError, addProductSuccess } =
     useAdminContext()!
-  const { token } = useAuthContext2()!
+  const { token } = useAuthContext()!
 
   const { register, handleSubmit, formState, reset } = useForm({
     defaultValues: {
-      token: token,
+      token: token.token,
       name: '',
       description: '',
       brand: '',

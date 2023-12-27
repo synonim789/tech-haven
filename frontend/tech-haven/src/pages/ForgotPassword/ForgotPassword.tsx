@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useForgotPassword } from '../../features/auth/useForgotPassword'
+import { useAuthContext } from '../../context/AuthContext'
 
 type ForgotPasswordFormType = {
   email: string
@@ -11,10 +11,11 @@ const ForgotPassword = () => {
   const form = useForm<ForgotPasswordFormType>()
   const { register, handleSubmit, formState } = form
   const { errors } = formState
-  const mutation = useForgotPassword()
-  const submitHandler = (data) => {
-    mutation.mutate(data)
-  }
+  const {
+    forgotLoading: loading,
+    forgotError: error,
+    forgetPassword,
+  } = useAuthContext()!
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
@@ -27,7 +28,7 @@ const ForgotPassword = () => {
         <h1 className="text-2xl font-bold text-[#120b90]">Forgot Password</h1>
         <form
           className="flex flex-col w-full justify-center items-center gap-7"
-          onSubmit={handleSubmit(submitHandler)}
+          onSubmit={handleSubmit(forgetPassword)}
         >
           <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
             <span>Email</span>
@@ -49,14 +50,12 @@ const ForgotPassword = () => {
               {errors.email?.message}
             </p>
           </label>
-          {mutation.isError ? (
-            <p className="font-bold text-red-600">{mutation.error.message}</p>
-          ) : null}
+          {error ? <p className="font-bold text-red-600">{error}</p> : null}
           <button
             type="submit"
             className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
           >
-            {mutation.isPending ? 'Submitting...' : 'Submit'}
+            {loading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
         <Link

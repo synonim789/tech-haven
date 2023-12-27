@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext2 } from '../../context/AuthContext2'
+import { useAuthContext } from '../../context/AuthContext'
 import EditSingleUser from './EditSingleUser'
 
 const EditUserRolePage = () => {
   const { getAllUsers, allUsers, changeUserRoleError } = useAdminContext()!
-  const { token } = useAuthContext2()!
+  const { token } = useAuthContext()!
 
   useEffect(() => {
-    getAllUsers({ token: token })
+    getAllUsers({ token: token.token })
   }, [])
 
   return (

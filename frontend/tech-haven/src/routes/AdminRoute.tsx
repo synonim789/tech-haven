@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router'
-import { useAuthContext2 } from '../context/AuthContext2'
+import { useAuthContext } from '../context/AuthContext'
 import { ChildrenType } from '../types'
 import { decodeToken } from '../utils/decodeToken'
 
 const AdminRoute = ({ children }: ChildrenType) => {
-  const { token } = useAuthContext2()!
+  const { token } = useAuthContext()!
   if (!token) {
     return <Navigate to="/" />
   }

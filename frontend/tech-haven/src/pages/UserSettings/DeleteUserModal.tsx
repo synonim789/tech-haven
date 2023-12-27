@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { useAuthContext2 } from '../../context/AuthContext2'
+import { useAuthContext } from '../../context/AuthContext'
 import { useUserContext } from '../../context/UserContext'
 
 type DeleteUserModalPropsType = {
@@ -9,7 +9,7 @@ type DeleteUserModalPropsType = {
 
 const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
   const { deleteUser, deleteUserLoading } = useUserContext()!
-  const { token } = useAuthContext2()!
+  const { token } = useAuthContext()!
 
   if (deleteUserLoading) {
     return (
