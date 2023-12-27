@@ -5,16 +5,7 @@ import { CategoryType, ChildrenType, UserType } from '../types'
 import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
 import { useAuthContext } from './AuthContext'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useProductsContext } from './products_context'
-=======
->>>>>>> parent of f084b2c (convert AuthContext to react query)
-=======
->>>>>>> parent of f084b2c (convert AuthContext to react query)
-=======
->>>>>>> parent of f084b2c (convert AuthContext to react query)
 
 type AdminContextState = {
   categories: Array<CategoryType>
@@ -152,17 +143,9 @@ const initialState = {
 
 export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
-<<<<<<< HEAD
+
   const { getAllProducts } = useProductsContext()!
-=======
-  const { data } = useGetAllProducts()
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of f084b2c (convert AuthContext to react query)
-=======
->>>>>>> parent of f084b2c (convert AuthContext to react query)
-=======
->>>>>>> parent of f084b2c (convert AuthContext to react query)
+
   const { logoutUser } = useAuthContext()!
 
   useEffect(() => {
