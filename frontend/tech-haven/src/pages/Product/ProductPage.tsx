@@ -1,29 +1,41 @@
+import { useEffect } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
-import { useGetSingleProduct } from '../../features/products/useGetSingleProduct'
+import { useProductsContext } from '../../context/products_context'
 import AddToCart from './AddToCart'
 import ImageGallery from './ImageGallery'
 
 const ProductPage = () => {
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams()
 
-  const { data: product, isLoading, isError } = useGetSingleProduct(id)!
+  const {
+    singleProduct: product,
+    singleProductLoading: loading,
+    singleProductError: error,
+    getSingleProduct,
+    clearSingleProduct,
+  } = useProductsContext()!
 
-  if (isLoading) {
+  useEffect(() => {
+    getSingleProduct(`${id}`)
+    return function cleanup() {
+      clearSingleProduct()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+
+  if (loading) {
     return <FullscreenLoading />
   }
 
-  if (isError) {
+  if (error) {
     return (
       <h1 className="min-h-[80vh] flex items-center justify-center text-6xl">
         Product not Found
       </h1>
     )
   }
-
-  console.log(product)
-
   const { name, description, images, brand, price, countInStock, rating } =
     product
 

@@ -45,6 +45,6 @@ router.get(
   verifyRoles("admin"),
   getFeaturedCount,
 );
-router.get("/get/featured-products", getFeaturedProducts);
+router.get("/get/featured-product", getFeaturedProducts);
 
 module.exports = router;

@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom'
-import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import SingleProduct from '../../components/ui/SingleProduct'
-import { useGetFeaturedProducts } from '../../features/products/useGetFeaturedProducts'
+import { useProductsContext } from '../../context/products_context'
 
 const HomepageProducts = () => {
-  const { data: featuredProducts, isLoading } = useGetFeaturedProducts()
+  const data = useProductsContext()!
 
-  if (isLoading) {
-    return <FullscreenLoading />
-  }
+  const { featuredProducts: featured } = data
 
   return (
     <section className="pt-10 text-center mb-12 px-4">
@@ -17,7 +14,7 @@ const HomepageProducts = () => {
           Products
         </h2>
         <div className="flex flex-col sm:flex-row gap-10">
-          {featuredProducts.map((product) => {
+          {featured.map((product) => {
             return <SingleProduct key={product.id} {...product} />
           })}
         </div>

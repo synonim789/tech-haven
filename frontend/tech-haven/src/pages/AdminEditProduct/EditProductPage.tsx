@@ -4,13 +4,13 @@ import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useAdminContext } from '../../context/AdminContext'
 import EditProductForm from './EditProductForm'
 
-import { useGetAllProducts } from '../../features/products/useGetAllProducts'
+import { useProductsContext } from '../../context/products_context'
 import { ProductType } from '../../types'
 
 const EdictProductPage = () => {
   const [value, setValue] = useState<ProductType | null>(null)
 
-  const { data: products } = useGetAllProducts()!
+  const { products } = useProductsContext()!
   const { editProductLoading } = useAdminContext()!
 
   if (editProductLoading) {
