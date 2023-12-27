@@ -7,7 +7,10 @@ import { AuthProvider } from './context/AuthContext'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
 import { UserProvider } from './context/UserContext.jsx'

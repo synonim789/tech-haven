@@ -5,7 +5,10 @@ import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useProductsContext } from './context/products_context'
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
@@ -50,7 +53,10 @@ function App() {
   const { getUser, clearUser, userLoading } = useUserContext()!
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   const { productsLoading } = useProductsContext()!
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
@@ -65,7 +71,11 @@ function App() {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   if (userLoading || productsLoading) {
+=======
+  if (userLoading) {
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
   if (userLoading) {
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
