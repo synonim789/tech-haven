@@ -5,7 +5,10 @@ import App from './App.tsx'
 import { AdminProvider } from './context/AdminContext'
 import { AuthProvider } from './context/AuthContext'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 import { UserProvider } from './context/UserContext.jsx'
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
 import { CartProvider } from './context/cart_context.jsx'

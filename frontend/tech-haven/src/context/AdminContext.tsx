@@ -6,7 +6,10 @@ import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
 import { useAuthContext } from './AuthContext'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useProductsContext } from './products_context'
+=======
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
 =======
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
 
@@ -150,6 +153,9 @@ export const AdminProvider = ({ children }: ChildrenType) => {
   const { getAllProducts } = useProductsContext()!
 =======
   const { data } = useGetAllProducts()
+<<<<<<< HEAD
+>>>>>>> parent of f084b2c (convert AuthContext to react query)
+=======
 >>>>>>> parent of f084b2c (convert AuthContext to react query)
   const { logoutUser } = useAuthContext()!
 
