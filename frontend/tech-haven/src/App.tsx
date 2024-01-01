@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import FullscreenLoading from './components/ui/FullscreenLoading'
 import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
-import { useProductsContext } from './context/products_context'
 import ScrollToTop from './helpers/ScrollToTop'
 import Footer from './layout/Footer'
 import Header from './layout/Header'
@@ -43,8 +41,6 @@ function App() {
   const { token } = useAuthContext()!
   const { getUser, clearUser, userLoading } = useUserContext()!
 
-  const { productsLoading } = useProductsContext()!
-
   useEffect(() => {
     if (token) {
       getUser(token)
@@ -53,9 +49,6 @@ function App() {
     }
   }, [token])
 
-  if (userLoading || productsLoading) {
-    return <FullscreenLoading />
-  }
   return (
     <>
       <Router>
