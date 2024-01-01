@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
+import { countCartTotal } from './features/cart/cart'
 import ScrollToTop from './helpers/ScrollToTop'
 import Footer from './layout/Footer'
 import Header from './layout/Header'
@@ -36,11 +38,13 @@ import UserWelcomePage from './pages/UserWelcome/UserWelcomePage'
 import AdminRoute from './routes/AdminRoute'
 import AuthRoute from './routes/AuthRoute'
 import GuestRoute from './routes/GuestRoute'
+import { RootState } from './store'
 
 function App() {
   const { token } = useAuthContext()!
   const { getUser, clearUser, userLoading } = useUserContext()!
-
+  const cart = useSelector((state: RootState) => state.cart.cart)
+  const dispatch = useDispatch()
   useEffect(() => {
     if (token) {
       getUser(token)
@@ -48,6 +52,10 @@ function App() {
       clearUser()
     }
   }, [token])
+
+  useEffect(() => {
+    dispatch(countCartTotal())
+  }, [cart])
 
   return (
     <>

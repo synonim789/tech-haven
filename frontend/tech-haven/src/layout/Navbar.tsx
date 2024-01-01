@@ -1,10 +1,11 @@
 import { GrCart } from 'react-icons/gr'
+import { useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
-import { useCartContext } from '../context/cart_context'
+import { RootState } from '../store'
 
 const Navbar = () => {
   const location = useLocation()
-  const { total_items } = useCartContext()!
+  const totalItems = useSelector((state: RootState) => state.cart.totalItems)
   if (
     location.pathname === '/login' ||
     location.pathname === '/sign-up' ||
@@ -86,9 +87,9 @@ const Navbar = () => {
               }
             >
               <GrCart />
-              {total_items > 0 ? (
+              {totalItems > 0 ? (
                 <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] right-[-14px]">
-                  {total_items}
+                  {totalItems}
                 </p>
               ) : null}
             </NavLink>

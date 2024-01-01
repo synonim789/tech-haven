@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import AmountButtons from '../../components/ui/AmountButtons'
-import { useCartContext } from '../../context/cart_context'
+import { addToCart } from '../../features/cart/cart'
 import { ProductType } from '../../types'
 
 type AddCoCartPropType = {
@@ -8,8 +9,9 @@ type AddCoCartPropType = {
 }
 
 const AddToCart = ({ product }: AddCoCartPropType) => {
-  const { addToCart } = useCartContext()!
+  // const { addToCart } = useCartContext()!
   const { countInStock: count, id: id } = product
+  const dispatch = useDispatch()
 
   const [amount, setAmount] = useState(1)
   const decrease = () => {
@@ -38,7 +40,7 @@ const AddToCart = ({ product }: AddCoCartPropType) => {
       <button
         className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
         onClick={() => {
-          addToCart(id, amount, product)
+          dispatch(addToCart({ id, amount, product }))
         }}
       >
         Add To Cart

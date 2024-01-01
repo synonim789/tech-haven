@@ -8,23 +8,6 @@ import ImageGallery from './ImageGallery'
 const ProductPage = () => {
   const { id } = useParams()
   const { data: product, isLoading, isError } = useGetSingleProductQuery(id)
-
-  // const {
-  //   singleProduct: product,
-  //   singleProductLoading: loading,
-  //   singleProductError: error,
-  //   getSingleProduct,
-  //   clearSingleProduct,
-  // } = useProductsContext()!
-
-  // useEffect(() => {
-  //   getSingleProduct(`${id}`)
-  //   return function cleanup() {
-  //     clearSingleProduct()
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [id])
-
   if (isLoading) {
     return <FullscreenLoading />
   }

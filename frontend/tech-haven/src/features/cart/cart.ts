@@ -1,0 +1,122 @@
+import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
+import { CartItemType } from '../../context/cart_context'
+
+type cartItem = {
+  id: string
+  amount: number
+  product: string
+}
+
+const cartFromLocalStorage = localStorage.getItem('cart')
+const cart =
+  cartFromLocalStorage && typeof cartFromLocalStorage === 'string'
+    ? JSON.parse(cartFromLocalStorage)
+    : []
+
+const initialState = {
+  cart: cart,
+  totalPrice: 0,
+  totalItems: 0,
+}
+
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    addToCart: (state, action) => {
+      const { id, amount, product } = action.payload
+      if (state.cart) {
+        const item = state.cart.find((item: cartItem) => item.id === id)
+        if (item) {
+          const tempCart = state.cart.map((cartItem: CartItemType) => {
+            if (cartItem.id === id) {
+              let newAmount = cartItem.amount + amount
+              if (newAmount > cartItem.max) {
+                newAmount = cartItem.max
+              }
+              return { ...cartItem, amount: newAmount }
+            } else {
+              return cartItem
+            }
+          })
+          state.cart = tempCart
+        } else {
+          const newProduct = {
+            id: id,
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            max: product.countInStock,
+            amount,
+          }
+          state.cart.push(newProduct)
+        }
+        cartSlice.caseReducers.countCartTotal(state)
+        toast.info('Product Added to Cart')
+      }
+    },
+    removeItemFromCart: (state, action) => {
+      const newCart = state.cart.filter(
+        (cartItem) => cartItem.id !== action.payload
+      )
+      state.cart = newCart
+      cartSlice.caseReducers.countCartTotal(state)
+    },
+    removeAllItemsFromCart: (state) => {
+      state.cart = []
+      state.totalItems = 0
+      state.totalPrice = 0
+      localStorage.setItem('cart', JSON.stringify([]))
+    },
+    countCartTotal: (state) => {
+      const { totalPrice, totalItems } = state.cart.reduce(
+        (total, cartItem) => {
+          const { amount, price } = cartItem
+          total.totalItems += amount
+          total.totalPrice += price * amount
+          return total
+        },
+        { totalItems: 0, totalPrice: 0 }
+      )
+      state.totalPrice = totalPrice
+      state.totalItems = totalItems
+
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
+    changeAmount: (state, action) => {
+      const { id, value } = action.payload
+      const newCart = state.cart.map((cartItem) => {
+        if (cartItem.id === id) {
+          if (value === 'increase') {
+            let newAmount = cartItem.amount + 1
+            if (newAmount > cartItem.max) {
+              newAmount = cartItem.max
+            }
+            return { ...cartItem, amount: newAmount }
+          }
+
+          if (value === 'decrease') {
+            let newAmount = cartItem.amount - 1
+            if (newAmount < 1) {
+              newAmount = 1
+            }
+            return { ...cartItem, amount: newAmount }
+          }
+        }
+        return cartItem
+      })
+      state.cart = newCart
+    },
+  },
+})
+
+export const {
+  addToCart,
+  removeItemFromCart,
+  removeAllItemsFromCart,
+  countCartTotal,
+  changeAmount,
+} = cartSlice.actions
+
+export default cartSlice.reducer

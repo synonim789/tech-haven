@@ -1,6 +1,7 @@
 import { BiSolidTrash } from 'react-icons/bi'
+import { useDispatch } from 'react-redux'
 import AmountButtons from '../../components/ui/AmountButtons'
-import { useCartContext } from '../../context/cart_context'
+import { changeAmount, removeItemFromCart } from '../../features/cart/cart'
 
 type CartItemPropsType = {
   item: {
@@ -15,13 +16,13 @@ type CartItemPropsType = {
 
 const CartItem = ({ item }: CartItemPropsType) => {
   const { name, image, price, amount, id } = item
-  const { removeFromCart, changeAmount } = useCartContext()!
+  const dispatch = useDispatch()
   const increase = () => {
-    changeAmount(id, 'increase')
+    dispatch(changeAmount({ id: id, value: 'increase' }))
   }
 
   const decrease = () => {
-    changeAmount(id, 'decrease')
+    dispatch(changeAmount({ id: id, value: 'decrease' }))
   }
 
   return (
@@ -37,7 +38,7 @@ const CartItem = ({ item }: CartItemPropsType) => {
       <BiSolidTrash
         className="text-4xl text-slate-600 hover:text-black cursor-pointer transition-all hover:scale-105"
         onClick={() => {
-          removeFromCart(id)
+          dispatch(removeItemFromCart(id))
         }}
       />
     </div>
