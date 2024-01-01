@@ -1,12 +1,12 @@
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useFilterContext } from '../../context/filter_context'
 
 const ListView = () => {
-  const { pagedProducts: products } = useFilterContext()!
+  const pagedProducts = useSelector((state) => state.filters.pagedProducts)
 
   return (
     <div className="flex flex-col gap-10">
-      {products.map((product, index) => {
+      {pagedProducts.map((product, index) => {
         return (
           <div
             className="bg-white rounded-xl shadow-md hover:scale-105 transition"

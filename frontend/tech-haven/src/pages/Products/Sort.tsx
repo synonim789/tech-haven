@@ -1,23 +1,27 @@
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { BsFillGridFill } from 'react-icons/bs'
-import { useFilterContext } from '../../context/filter_context'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setGridView,
+  setListView,
+  updateSort,
+} from '../../features/products/filters'
+import { RootState } from '../../store'
 
 const Sort = () => {
-  const {
-    filteredProducts,
-    updateSort,
-    setGridView,
-    setListView,
-    gridView,
-    listView,
-  } = useFilterContext()!
+  const dispatch = useDispatch()
+  const filteredProducts = useSelector(
+    (state: RootState) => state.filters.filteredProducts
+  )
+  const listView = useSelector((state: RootState) => state.filters.listView)
+  const gridView = useSelector((state: RootState) => state.filters.gridView)
 
   return (
     <div className="mb-5 flex justify-end items-center gap-5">
       <select
         name="sort"
         className="p-3 rounded-full shadow-md"
-        onChange={updateSort}
+        onChange={(e) => dispatch(updateSort(e.currentTarget.value))}
       >
         <option value="name-asc">Name A-Z</option>
         <option value="name-desc">Name Z-A</option>
@@ -30,7 +34,7 @@ const Sort = () => {
             ? 'text-white bg-[#120b90]'
             : 'bg-white border border-solid border-slate-100'
         }`}
-        onClick={setGridView}
+        onClick={() => dispatch(setGridView())}
       >
         <BsFillGridFill />
       </button>
@@ -40,7 +44,7 @@ const Sort = () => {
             ? 'text-white bg-[#120b90]'
             : 'bg-white border border-solid border-slate-100'
         }`}
-        onClick={setListView}
+        onClick={() => dispatch(setListView())}
       >
         <AiOutlineUnorderedList />
       </button>

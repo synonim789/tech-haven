@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import { useFilterContext } from '../../context/filter_context'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearFilters, updateFilter } from '../../features/products/filters'
+import { RootState } from '../../store'
 import { ProductType } from '../../types'
 
-const Filters = () => {
+type Props = {
+  allProducts: ProductType[]
+}
+
+const Filters = ({ allProducts }: Props) => {
   const [categories, setCategories] = useState<string[]>([])
 
   const [brands, setBrands] = useState<string[]>([])
-
-  const { filters, updateFilters, allProducts, clearFilters } =
-    useFilterContext()!
+  const filters = useSelector((state: RootState) => state.filters.filters)
+  const dispatch = useDispatch()
 
   const getCategories = () => {
     let unique = allProducts.map(
@@ -26,8 +31,27 @@ const Filters = () => {
   useEffect(() => {
     getCategories()
     getBrands()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allProducts])
+
+  const handleChange = (event: Event) => {
+    if (event.target instanceof HTMLInputElement) {
+      let name = event.target.name
+      let value = event.target.value
+      if (name === 'category') {
+        value = event.target.textContent || ''
+      }
+      if (name === 'minPrice' || name === 'maxPrice') {
+        value = value !== null ? Number(value) : 0
+      }
+      if (name === 'brand') {
+        value = (event.target as HTMLInputElement).value
+      }
+      if (name === 'rating') {
+        value = Number(value)
+      }
+      dispatch(updateFilter({ name, value }))
+    }
+  }
 
   return (
     <div className="bg-white h-full top-20  shadow-sm rounded-xl p-8 hidden lg:block">
@@ -42,7 +66,7 @@ const Filters = () => {
                 : 'text-[18px] capitalize mb-2 block'
             }
             name="category"
-            onClick={updateFilters}
+            onClick={(e) => handleChange(e)}
           >
             {category}
           </button>
@@ -52,7 +76,7 @@ const Filters = () => {
       <select
         name="brand"
         className="p-3 rounded-2xl capitalize cursor-pointer border border-solid border-slate-400"
-        onChange={updateFilters}
+        onChange={(e) => handleChange(e)}
       >
         {brands.map((brand, index) => {
           return (
@@ -73,7 +97,7 @@ const Filters = () => {
           max={filters.maxPrice}
           id="price1"
           name="minPrice"
-          onChange={updateFilters}
+          onChange={(e) => handleChange(e)}
         />
       </div>
       <div>
@@ -86,7 +110,7 @@ const Filters = () => {
           max={filters.maxPrice}
           id="price2"
           name="maxPrice"
-          onChange={updateFilters}
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -99,7 +123,7 @@ const Filters = () => {
             id="rating5"
             checked={filters.rating === 5}
             value={5}
-            onChange={updateFilters}
+            onChange={(e) => handleChange(e)}
           />
           <label htmlFor="rating5" className="flex flex-row items-center gap-1">
             5 <AiFillStar className="text-yellow-500" />
@@ -116,7 +140,7 @@ const Filters = () => {
             id="rating4"
             checked={filters.rating === 4}
             value={4}
-            onChange={updateFilters}
+            onChange={(e) => handleChange(e)}
           />
           <label htmlFor="rating4" className="flex flex-row items-center gap-1">
             From 4 <AiFillStar className="text-yellow-500" />
@@ -133,7 +157,7 @@ const Filters = () => {
             id="rating3"
             checked={filters.rating === 3}
             value={3}
-            onChange={updateFilters}
+            onChange={(e) => handleChange(e)}
           />
           <label
             htmlFor="rating3"
@@ -154,7 +178,7 @@ const Filters = () => {
             id="rating2"
             checked={filters.rating === 2}
             value={2}
-            onChange={updateFilters}
+            onChange={(e) => handleChange(e)}
           />
           <label htmlFor="rating2" className="flex flex-row items-center gap-1">
             From 2 <AiFillStar className="text-yellow-500" />
@@ -171,7 +195,7 @@ const Filters = () => {
             id="rating1"
             checked={filters.rating === 1}
             value={1}
-            onChange={updateFilters}
+            onChange={(e) => handleChange(e)}
           />
           <label htmlFor="rating1" className="flex flex-row items-center gap-1">
             From 1 <AiFillStar className="text-yellow-500" />
@@ -183,7 +207,7 @@ const Filters = () => {
         </div>
         <button
           className="text-2xl font-bold text-[#120b90] mt-3 hover:underline"
-          onClick={clearFilters}
+          onClick={() => dispatch(clearFilters())}
         >
           Clear Filters
         </button>

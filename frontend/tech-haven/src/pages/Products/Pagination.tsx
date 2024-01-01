@@ -1,8 +1,16 @@
-import { useFilterContext } from '../../context/filter_context'
+import { useDispatch, useSelector } from 'react-redux'
+import { updatePagination } from '../../features/products/filters'
+import { RootState } from '../../store'
 
 export const Pagination = () => {
-  const { filteredProducts, limit, updatePagination, currentPage } =
-    useFilterContext()!
+  const filteredProducts = useSelector(
+    (state: RootState) => state.filters.filteredProducts
+  )
+  const currentPage = useSelector(
+    (state: RootState) => state.filters.currentPage
+  )
+  const dispatch = useDispatch()
+  const limit = useSelector((state: RootState) => state.filters.limit)
 
   let pageNumbers = []
 
@@ -15,7 +23,9 @@ export const Pagination = () => {
       {pageNumbers.map((number) => {
         return (
           <button
-            onClick={updatePagination}
+            onClick={(e) =>
+              dispatch(updatePagination(e.currentTarget.textContent))
+            }
             className={
               number == currentPage
                 ? 'w-[50px] h-[50px] bg-[#120b90] border border-solid border-slate-200 rounded-full text-white font-bold text-[20px]'
