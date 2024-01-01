@@ -1,9 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useAuthContext } from '../../context/AuthContext'
+import { useRegisterUserMutation } from '../../features/auth/authApiSlice'
+import { setData } from '../../features/auth/authSlice'
 
 type SignUpFormType = {
   email: string
@@ -15,12 +17,20 @@ const SignUpPage = () => {
   const form = useForm<SignUpFormType>()
   const { register, handleSubmit, formState } = form
   const { errors } = formState
+  const dispatch = useDispatch()
 
-  const {
-    signingError: error,
-    signingLoading: loading,
-    registerUser,
-  } = useAuthContext()!
+  const [registerUser, { isLoading, isError, error }] =
+    useRegisterUserMutation()
+
+  const submitHandler = async (data) => {
+    try {
+      const { email, name, password } = data
+      const token = await registerUser({ email, name, password })
+      dispatch(setData(token.data.token))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -36,7 +46,7 @@ const SignUpPage = () => {
           <span className="text-[#120b90]">Sign Up</span>
         </h1>
         <form
-          onSubmit={handleSubmit(registerUser)}
+          onSubmit={handleSubmit(submitHandler)}
           className="flex flex-col w-full justify-center items-center gap-7"
         >
           <FormInput
@@ -75,11 +85,13 @@ const SignUpPage = () => {
               }),
             }}
           />
-          {error ? (
-            <p className="font-bold text-red-600 text-[20px]">{error}</p>
+          {isError ? (
+            <p className="font-bold text-red-600 text-[20px]">
+              {error.data.message}
+            </p>
           ) : null}
           <FormButton
-            loading={loading}
+            loading={isLoading}
             text="Sign Up"
             loadingText="Signing Up..."
           />

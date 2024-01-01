@@ -1,11 +1,12 @@
 import { BiSolidTrash } from 'react-icons/bi'
+import { useSelector } from 'react-redux'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { RootState } from '../../store'
 import { CategoryType } from '../../types'
 
 const RemoveCategoryPage = () => {
   const { categories, deleteCategory, deleteCategoryError } = useAdminContext()!
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
 
   return (
     <section className="flex flex-col items-center justify-center gap-6">
@@ -20,7 +21,7 @@ const RemoveCategoryPage = () => {
             <BiSolidTrash
               className="text-3xl cursor-pointer hover:opacity-75 text-red-600 hover:scale-110 transition"
               onClick={() => {
-                deleteCategory({ id: category._id, token: token.token })
+                deleteCategory({ id: category._id, token: token })
               }}
             />
           </div>

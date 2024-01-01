@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { useAuthContext } from './context/AuthContext'
 import { useUserContext } from './context/UserContext'
 import { countCartTotal } from './features/cart/cart'
 import ScrollToTop from './helpers/ScrollToTop'
@@ -41,7 +40,7 @@ import GuestRoute from './routes/GuestRoute'
 import { RootState } from './store'
 
 function App() {
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
   const { getUser, clearUser, userLoading } = useUserContext()!
   const cart = useSelector((state: RootState) => state.cart.cart)
   const dispatch = useDispatch()

@@ -5,7 +5,6 @@ import UserReducer from '../reducer/UserReducer'
 import { ChildrenType, TokenType, UserType, UserWithTokenType } from '../types'
 import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
-import { useAuthContext } from './AuthContext'
 
 type UserContextType = {
   getUser: (token: TokenType) => void
@@ -33,7 +32,7 @@ const initialState = {
 
 export const UserProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(UserReducer, initialState)
-  const { logoutUser } = useAuthContext()!
+  // const { logoutUser } = useAuthContext()!
 
   const getUser = async (token: TokenType) => {
     const decodedToken = decodeToken(token)
@@ -44,7 +43,7 @@ export const UserProvider = ({ children }: ChildrenType) => {
       await customFetch
         .get(`/users/${userId}`, {
           headers: {
-            Authorization: `Bearer ${token.token}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {

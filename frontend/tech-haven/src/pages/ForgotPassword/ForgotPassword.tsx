@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { useAuthContext } from '../../context/AuthContext'
+import { toast } from 'react-toastify'
+import { useForgotPasswordMutation } from '../../features/auth/authApiSlice'
 
 type ForgotPasswordFormType = {
   email: string
@@ -10,12 +11,29 @@ type ForgotPasswordFormType = {
 const ForgotPassword = () => {
   const form = useForm<ForgotPasswordFormType>()
   const { register, handleSubmit, formState } = form
+  const [forgotPassword, { isLoading, isError, error }] =
+    useForgotPasswordMutation()
   const { errors } = formState
-  const {
-    forgotLoading: loading,
-    forgotError: error,
-    forgetPassword,
-  } = useAuthContext()!
+
+  const submitHandler = async (data) => {
+    try {
+      const { email } = data
+      const result = await forgotPassword({ email })
+      toast.success('Link to reset password was sent to your email')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  // const {
+  //   forgotLoading: loading,
+  //   forgotError: error,
+  //   forgetPassword,
+  // } = useAuthContext()!
+  // const forgetPassword = () => {
+  //   console.log('xdd')
+  // }
+  // const [loading, setLoading] = useState(false)
+  // const [error, setError] = useState(false)
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
@@ -28,7 +46,7 @@ const ForgotPassword = () => {
         <h1 className="text-2xl font-bold text-[#120b90]">Forgot Password</h1>
         <form
           className="flex flex-col w-full justify-center items-center gap-7"
-          onSubmit={handleSubmit(forgetPassword)}
+          onSubmit={handleSubmit(submitHandler)}
         >
           <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
             <span>Email</span>
@@ -50,12 +68,14 @@ const ForgotPassword = () => {
               {errors.email?.message}
             </p>
           </label>
-          {error ? <p className="font-bold text-red-600">{error}</p> : null}
+          {error ? (
+            <p className="font-bold text-red-600">{error.data.message}</p>
+          ) : null}
           <button
             type="submit"
             className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
           >
-            {loading ? 'Submitting...' : 'Submit'}
+            {isLoading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
         <Link

@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { RootState } from '../../store'
 
 type CategoryType = {
   _id: string
@@ -17,11 +18,11 @@ const AddProductPage = () => {
 
   const { categories, addProduct, addProductError, addProductSuccess } =
     useAdminContext()!
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
 
   const { register, handleSubmit, formState, reset } = useForm({
     defaultValues: {
-      token: token.token,
+      token: token,
       name: '',
       description: '',
       brand: '',

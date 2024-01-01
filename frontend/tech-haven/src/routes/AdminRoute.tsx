@@ -1,10 +1,11 @@
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
-import { useAuthContext } from '../context/AuthContext'
+import { RootState } from '../store'
 import { ChildrenType } from '../types'
 import { decodeToken } from '../utils/decodeToken'
 
 const AdminRoute = ({ children }: ChildrenType) => {
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
   if (!token) {
     return <Navigate to="/" />
   }

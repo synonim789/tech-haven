@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { RootState } from '../../store'
 
 const AddCategory = () => {
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: {
       category: '',
-      token: token.token,
+      token: token,
     },
   })
 

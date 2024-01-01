@@ -1,6 +1,7 @@
 import { FaUser } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { RootState } from '../../store'
 import { UserType } from '../../types'
 
 type Props = {
@@ -9,7 +10,8 @@ type Props = {
 const EditSingleUser = ({ user }: Props) => {
   const { name, email, role } = user
   const { changeUserRole } = useAdminContext()!
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
+
   return (
     <div className="flex gap-5 items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl">
       <FaUser size={'30px'} />

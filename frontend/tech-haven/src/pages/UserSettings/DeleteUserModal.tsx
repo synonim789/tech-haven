@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom'
-import { useAuthContext } from '../../context/AuthContext'
+import { useSelector } from 'react-redux'
 import { useUserContext } from '../../context/UserContext'
+import { RootState } from '../../store'
 
 type DeleteUserModalPropsType = {
   open: boolean
@@ -9,7 +10,7 @@ type DeleteUserModalPropsType = {
 
 const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
   const { deleteUser, deleteUserLoading } = useUserContext()!
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
 
   if (deleteUserLoading) {
     return (

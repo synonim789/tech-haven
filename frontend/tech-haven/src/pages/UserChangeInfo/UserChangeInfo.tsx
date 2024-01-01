@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useAuthContext } from '../../context/AuthContext'
 import { useUserContext } from '../../context/UserContext'
+import { RootState } from '../../store'
 
 type userChangeInfoType = {
   name: string
@@ -21,7 +22,7 @@ const UserChangeInfo = () => {
   const [formUser, setFormUser] = useState<userChangeInfoType | null>(null)
   const { user, updateUser, updateUserLoading } = useUserContext()!
   const { register, handleSubmit, reset } = useForm<userChangeInfoType>()
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
 
   useEffect(() => {
     setFormUser({
@@ -33,7 +34,7 @@ const UserChangeInfo = () => {
       city: user.city,
       zip: user.zip,
       country: user.country,
-      token: token.token,
+      token: token,
     })
   }, [])
 

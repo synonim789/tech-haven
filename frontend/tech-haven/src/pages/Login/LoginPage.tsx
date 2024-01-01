@@ -1,9 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useAuthContext } from '../../context/AuthContext'
+import { useLoginMutation } from '../../features/auth/authApiSlice'
+import { setData } from '../../features/auth/authSlice'
 
 type LoginFormType = {
   email: string
@@ -11,15 +13,27 @@ type LoginFormType = {
 }
 
 const LoginPage = () => {
-  const {
-    loggingError: error,
-    loggingLoading: loading,
-    loginUser,
-  } = useAuthContext()!
+  // const {
+  //   loggingError: error,
+  //   loggingLoading: loading,
+  //   loginUser,
+  // } = useAuthContext()!
+  const [login, { isLoading, error, isError }] = useLoginMutation()
 
   const form = useForm<LoginFormType>()
   const { register, handleSubmit, formState } = form
   const { errors } = formState
+  const dispatch = useDispatch()
+
+  const submitHandler = async (data) => {
+    try {
+      const token = await login(data)
+      dispatch(setData(token.data.token))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
@@ -37,7 +51,7 @@ const LoginPage = () => {
         </h1>
         <form
           className="flex flex-col w-full justify-center items-center gap-7"
-          onSubmit={handleSubmit(loginUser)}
+          onSubmit={handleSubmit(submitHandler)}
         >
           <FormInput
             name="email"
@@ -65,9 +79,11 @@ const LoginPage = () => {
             }}
           />
 
-          {error ? <p className="font-bold text-red-600">{error}</p> : null}
+          {isError ? (
+            <p className="font-bold text-red-600">{error.data.message}</p>
+          ) : null}
           <FormButton
-            loading={loading}
+            loading={isLoading}
             loadingText="Logging In..."
             text="Log In"
           />

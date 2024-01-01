@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import { useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+import { RootState } from '../../store'
 
 type Props = {
   name: string
@@ -17,7 +18,8 @@ type data = {
 const EditCategory = ({ name, id }: Props) => {
   const [openCategory, setOpenCategory] = useState(false)
   const { register, handleSubmit } = useForm()
-  const { token } = useAuthContext()!
+  const token = useSelector((state: RootState) => state.auth.token)
+  // const { token } = useAuthContext()!
   const { editCategory } = useAdminContext()!
 
   const submit = async (data: data) => {

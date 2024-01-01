@@ -1,14 +1,16 @@
 import { useEffect } from 'react'
 import { useAdminContext } from '../../context/AdminContext'
-import { useAuthContext } from '../../context/AuthContext'
+
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import EditSingleUser from './EditSingleUser'
 
 const EditUserRolePage = () => {
   const { getAllUsers, allUsers, changeUserRoleError } = useAdminContext()!
-  const { token } = useAuthContext()!
 
+  const token = useSelector((state: RootState) => state.auth.token)
   useEffect(() => {
-    getAllUsers({ token: token.token })
+    getAllUsers({ token: token })
   }, [])
 
   return (

@@ -4,7 +4,6 @@ import AdminReducer from '../reducer/AdminReducer'
 import { CategoryType, ChildrenType, UserType } from '../types'
 import { customFetch } from '../utils/customFetch'
 import { decodeToken } from '../utils/decodeToken'
-import { useAuthContext } from './AuthContext'
 
 type AdminContextState = {
   categories: Array<CategoryType>
@@ -143,7 +142,8 @@ const initialState = {
 export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
 
-  const { logoutUser } = useAuthContext()!
+  // const { logoutUser } = useAuthContext()!
+  
 
   const getCategories = async () => {
     dispatch({ type: 'GET_CATEGORIES_START' })
