@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
@@ -13,7 +12,6 @@ type SignUpFormType = {
 }
 
 const SignUpPage = () => {
-  const [visiblePassword, setVisiblePassword] = useState(false)
   const form = useForm<SignUpFormType>()
   const { register, handleSubmit, formState } = form
   const { errors } = formState

@@ -1,35 +1,35 @@
-import { useEffect } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
-import { useProductsContext } from '../../context/products_context'
+import { useGetSingleProductQuery } from '../../features/products/products'
 import AddToCart from './AddToCart'
 import ImageGallery from './ImageGallery'
 
 const ProductPage = () => {
   const { id } = useParams()
+  const { data: product, isLoading, isError } = useGetSingleProductQuery(id)
 
-  const {
-    singleProduct: product,
-    singleProductLoading: loading,
-    singleProductError: error,
-    getSingleProduct,
-    clearSingleProduct,
-  } = useProductsContext()!
+  // const {
+  //   singleProduct: product,
+  //   singleProductLoading: loading,
+  //   singleProductError: error,
+  //   getSingleProduct,
+  //   clearSingleProduct,
+  // } = useProductsContext()!
 
-  useEffect(() => {
-    getSingleProduct(`${id}`)
-    return function cleanup() {
-      clearSingleProduct()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  // useEffect(() => {
+  //   getSingleProduct(`${id}`)
+  //   return function cleanup() {
+  //     clearSingleProduct()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [id])
 
-  if (loading) {
+  if (isLoading) {
     return <FullscreenLoading />
   }
 
-  if (error) {
+  if (isError) {
     return (
       <h1 className="min-h-[80vh] flex items-center justify-center text-6xl">
         Product not Found

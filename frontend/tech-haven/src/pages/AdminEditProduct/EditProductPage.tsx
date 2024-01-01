@@ -2,15 +2,14 @@ import { useState } from 'react'
 import AdminSelect from '../../components/ui/AdminSelect'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useAdminContext } from '../../context/AdminContext'
-import EditProductForm from './EditProductForm'
-
-import { useProductsContext } from '../../context/products_context'
+import { useGetAllProductsQuery } from '../../features/products/products'
 import { ProductType } from '../../types'
+import EditProductForm from './EditProductForm'
 
 const EdictProductPage = () => {
   const [value, setValue] = useState<ProductType | null>(null)
 
-  const { products } = useProductsContext()!
+  const { data: products } = useGetAllProductsQuery()
   const { editProductLoading } = useAdminContext()!
 
   if (editProductLoading) {

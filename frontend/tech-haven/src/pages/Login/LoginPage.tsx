@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
@@ -12,7 +11,6 @@ type LoginFormType = {
 }
 
 const LoginPage = () => {
-  const [visiblePassword, setVisiblePassword] = useState(false)
   const {
     loggingError: error,
     loggingLoading: loading,

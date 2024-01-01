@@ -1,11 +1,10 @@
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import App from './App.tsx'
 import { AdminProvider } from './context/AdminContext'
 import { AuthProvider } from './context/AuthContext'
-
-import { Provider } from 'react-redux'
 import { UserProvider } from './context/UserContext.jsx'
 import { CartProvider } from './context/cart_context.jsx'
 import './index.css'

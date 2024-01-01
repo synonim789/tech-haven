@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import AdminSelect from '../../components/ui/AdminSelect'
-import { useProductsContext } from '../../context/products_context'
+import { useGetAllProductsQuery } from '../../features/products/products'
 import { ProductType } from '../../types'
 import RemoveProduct from './RemoveProduct'
 
 const RemoveProductPage = () => {
   const [value, setValue] = useState<ProductType | null>(null)
-  const { products } = useProductsContext()!
+  const { data: products } = useGetAllProductsQuery()!
 
   return (
     <section className="text-center">
