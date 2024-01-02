@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
-import { useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useAdminContext } from '../../context/AdminContext'
-import { RootState } from '../../store'
+import { useEditCategoryMutation } from '../../features/adminCategories/categoriesApiSlice'
 
 type Props = {
   name: string
@@ -18,12 +16,12 @@ type data = {
 const EditCategory = ({ name, id }: Props) => {
   const [openCategory, setOpenCategory] = useState(false)
   const { register, handleSubmit } = useForm()
-  const token = useSelector((state: RootState) => state.auth.token)
-  // const { token } = useAuthContext()!
-  const { editCategory } = useAdminContext()!
+  const [editCategory] = useEditCategoryMutation()
 
-  const submit = async (data: data) => {
-    editCategory({ id: id, name: data.name, token: token.token })
+  const submit = async (data) => {
+    const result = await editCategory({ id: id, name: data.name })
+    console.log(result)
+
     setOpenCategory(false)
   }
 
