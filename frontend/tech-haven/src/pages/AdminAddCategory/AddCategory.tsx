@@ -1,30 +1,27 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
-import { useAdminContext } from '../../context/AdminContext'
-import { RootState } from '../../store'
+import { useAddCategoryMutation } from '../../features/adminCategories/categoriesApiSlice'
 
 const AddCategory = () => {
-  const token = useSelector((state: RootState) => state.auth.token)
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: {
       category: '',
-      token: token,
     },
   })
 
-  const { addCategory, addCategorySuccess, addCategoryLoading } =
-    useAdminContext()!
+  // const { addCategory, addCategorySuccess, addCategoryLoading } =
+  //   useAdminContext()!
+  const [addCategory, { isLoading, isSuccess }] = useAddCategoryMutation()
 
   useEffect(() => {
     reset()
-  }, [addCategorySuccess])
+  }, [isSuccess])
   const { errors } = formState
 
-  if (addCategoryLoading) {
+  if (isLoading) {
     return <FullscreenLoading />
   }
 
