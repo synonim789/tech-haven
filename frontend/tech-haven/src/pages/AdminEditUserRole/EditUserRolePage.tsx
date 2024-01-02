@@ -8,7 +8,7 @@ const EditUserRolePage = () => {
   // const { getAllUsers, allUsers, changeUserRoleError } = useAdminContext()!
 
   const { data: allUsers } = useGetUsersQuery()
-  const [changeUserRole, { error, isLoading }] = useChangeUserRoleMutation()
+  const [changeUserRole, { error }] = useChangeUserRoleMutation()
 
   return (
     <section>
@@ -22,7 +22,7 @@ const EditUserRolePage = () => {
       </div>
       {error && (
         <p className="text-center mt-5 text-2xl font-bold text-red-500">
-          {error}
+          {error.data.message}
         </p>
       )}
     </section>
