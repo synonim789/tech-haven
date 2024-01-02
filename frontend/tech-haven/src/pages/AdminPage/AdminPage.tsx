@@ -1,14 +1,7 @@
-import { useEffect } from 'react'
 import { Outlet } from 'react-router'
-import { useAdminContext } from '../../context/AdminContext'
 import AdminSidebar from '../../layout/AdminSidebar'
 
 const AdminPage = () => {
-  const { getCategories, addCategorySuccess, deleteCategorySuccess } =
-    useAdminContext()!
-  useEffect(() => {
-    getCategories()
-  }, [addCategorySuccess, deleteCategorySuccess])
   return (
     <>
       <AdminSidebar />

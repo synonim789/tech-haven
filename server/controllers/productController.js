@@ -78,7 +78,9 @@ const addProduct = asyncHandler(async (req, res) => {
   if (exist) {
     return res.status(400).json({ message: "Product already exist" });
   }
+  
   const category = await Category.findById(req.body.category);
+
   if (!category) {
     return res.status(400).json({ message: "Invalid Category" });
   }

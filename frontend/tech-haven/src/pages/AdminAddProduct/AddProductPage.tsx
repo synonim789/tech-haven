@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
-import { useAdminContext } from '../../context/AdminContext'
-import { RootState } from '../../store'
+import { useGetCategoriesQuery } from '../../features/adminCategories/categoriesApiSlice'
+import { useAddProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
 
 type CategoryType = {
   _id: string
@@ -16,13 +16,12 @@ const AddProductPage = () => {
   const [image, setImage] = useState<File | null>(null)
   const [images, setImages] = useState<File[] | null>(null)
 
-  const { categories, addProduct, addProductError, addProductSuccess } =
-    useAdminContext()!
-  const token = useSelector((state: RootState) => state.auth.token)
+  const { data: categories } = useGetCategoriesQuery()
+  const [addProduct, { error: addProductError, isSuccess }] =
+    useAddProductMutation()
 
   const { register, handleSubmit, formState, reset } = useForm({
     defaultValues: {
-      token: token,
       name: '',
       description: '',
       brand: '',
@@ -56,12 +55,36 @@ const AddProductPage = () => {
 
   useEffect(() => {
     reset()
-  }, [addProductSuccess])
+  }, [isSuccess])
+
+  const submitHandler = async (data) => {
+    const formData: any = new FormData()
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append('images', data.images[i])
+    }
+    formData.append('image', data.image[0])
+    formData.append('name', data.name)
+    formData.append('description', data.description)
+    formData.append('brand', data.brand)
+    formData.append('category', data.category)
+    formData.append('price', data.price)
+    formData.append('countInStock', data.stock)
+    formData.append('rating', data.rating)
+    formData.append('numReviews', data.revCount)
+    formData.append('isFeatured', data.isFeatured)
+    try {
+      await addProduct(formData)
+      toast.success('Product Added Successfully')
+      console.log(data)
+    } catch (err) {
+      toast.error(err)
+    }
+  }
 
   return (
     <main className="text-left mb-10">
       <h1 className="mb-8 text-4xl font-bold text-center">Add Product</h1>
-      <form onSubmit={handleSubmit(addProduct)}>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <div className="flex flex-col md:flex-row">
           <div>
             <FormInput
@@ -107,7 +130,7 @@ const AddProductPage = () => {
                   <option value="" disabled>
                     Choose Category
                   </option>
-                  {categories.map((category: CategoryType) => {
+                  {categories?.map((category: CategoryType) => {
                     return (
                       <option value={category._id} key={category._id}>
                         {category.name}
@@ -207,11 +230,12 @@ const AddProductPage = () => {
               {images && (
                 <div className="flex gap-4">
                   {images &&
-                    images.map((item) => {
+                    images.map((item, index) => {
                       return (
                         <img
                           src={URL.createObjectURL(item)}
                           className="w-[60px] rounded-md"
+                          key={index}
                         />
                       )
                     })}
@@ -241,7 +265,11 @@ const AddProductPage = () => {
             </div>
           </div>
         </div>
-        {addProductError && <p>{addProductError}</p>}
+        {addProductError && (
+          <p className="text-center text-red-500 text-2xl font-bold">
+            {addProductError.data.message}
+          </p>
+        )}
         <button
           type="submit"
           className="bg-[#120b90] text-white px-4 py-2 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
