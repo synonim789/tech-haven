@@ -1,17 +1,35 @@
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { useUserContext } from '../context/UserContext'
+import FullscreenLoading from '../components/ui/FullscreenLoading'
+import { useGetUserQuery } from '../features/user/userApiSlice'
+import { RootState } from '../store'
 import { ChildrenType } from '../types'
+import { decodeToken } from '../utils/decodeToken'
 
 const AuthRoute = ({ children }: ChildrenType) => {
-  const { userLoading, user } = useUserContext()!
-  if (userLoading && !user) {
-    return <p>Loading...</p>
+  const token = useSelector((state: RootState) => state.auth.token)
+  const user = useSelector((state: RootState) => state.user.user)
+  const decodedToken = decodeToken(token)
+
+  const { isLoading, isError } = useGetUserQuery(
+    {
+      id: decodedToken?.userId,
+    },
+    {
+      skip: !token,
+    }
+  )
+
+  if (isLoading) {
+    return <FullscreenLoading />
   }
 
-  if (!user) {
+  if (user) {
+    return <>{children}</>
+  }
+
+  if (!token) {
     return <Navigate to="/" />
   }
-
-  return <>{children}</>
 }
 export default AuthRoute

@@ -3,8 +3,8 @@ import { CgProfile } from 'react-icons/cg'
 import { RiAdminLine } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { useUserContext } from '../context/UserContext'
 import { logout } from '../features/auth/authSlice'
+import { setUser } from '../features/user/userSlice'
 import { RootState } from '../store'
 import { decodeToken } from '../utils/decodeToken'
 
@@ -13,7 +13,8 @@ const Header = () => {
   const location = useLocation()
   const token = useSelector((state: RootState) => state.auth.token)
   const dispatch = useDispatch()
-  const { user } = useUserContext()!
+  const user = useSelector((state: RootState) => state.user.user)
+
   useEffect(() => {
     if (token) {
       const decodedToken = decodeToken(token)
@@ -33,6 +34,11 @@ const Header = () => {
     return null
   }
 
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch(setUser(null))
+  }
+
   return (
     <header className="bg-[#120b90] w-full py-3 relative">
       <div className="max-w-5xl mx-auto px-4">
@@ -40,7 +46,7 @@ const Header = () => {
           <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
               className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
-              onClick={() => dispatch(logout())}
+              onClick={() => handleLogout()}
             >
               Log out
             </button>
@@ -57,7 +63,7 @@ const Header = () => {
           <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
               className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
-              onClick={() => dispatch(logout())}
+              onClick={() => handleLogout()}
             >
               Log out
             </button>

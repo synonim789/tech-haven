@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { useUserContext } from './context/UserContext'
+import FullscreenLoading from './components/ui/FullscreenLoading'
 import { countCartTotal } from './features/cart/cart'
+import { useGetUserQuery } from './features/user/userApiSlice'
+import { setUser } from './features/user/userSlice'
 import ScrollToTop from './helpers/ScrollToTop'
 import Footer from './layout/Footer'
 import Header from './layout/Header'
@@ -38,23 +40,30 @@ import AdminRoute from './routes/AdminRoute'
 import AuthRoute from './routes/AuthRoute'
 import GuestRoute from './routes/GuestRoute'
 import { RootState } from './store'
+import { decodeToken } from './utils/decodeToken'
 
 function App() {
   const token = useSelector((state: RootState) => state.auth.token)
-  const { getUser, clearUser, userLoading } = useUserContext()!
+  const decodedToken = token ? decodeToken(token) : null
   const cart = useSelector((state: RootState) => state.cart.cart)
   const dispatch = useDispatch()
+  const { data, isLoading } = useGetUserQuery(
+    { id: decodedToken?.userId },
+    { skip: !token }
+  )
   useEffect(() => {
     if (token) {
-      getUser(token)
-    } else {
-      clearUser()
+      dispatch(setUser(data))
     }
-  }, [token])
+  }, [data, token])
 
   useEffect(() => {
     dispatch(countCartTotal())
   }, [cart])
+
+  if (isLoading) {
+    return <FullscreenLoading />
+  }
 
   return (
     <>

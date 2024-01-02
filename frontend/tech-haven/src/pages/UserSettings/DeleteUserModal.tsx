@@ -1,7 +1,10 @@
 import { createPortal } from 'react-dom'
-import { useSelector } from 'react-redux'
-import { useUserContext } from '../../context/UserContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../features/auth/authSlice'
+import { useDeleteUserMutation } from '../../features/user/userApiSlice'
+import { clearUser } from '../../features/user/userSlice'
 import { RootState } from '../../store'
+import { decodeToken } from '../../utils/decodeToken'
 
 type DeleteUserModalPropsType = {
   open: boolean
@@ -9,10 +12,18 @@ type DeleteUserModalPropsType = {
 }
 
 const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
-  const { deleteUser, deleteUserLoading } = useUserContext()!
+  const [deleteUser, { isLoading }] = useDeleteUserMutation()
+  const dispatch = useDispatch()
   const token = useSelector((state: RootState) => state.auth.token)
 
-  if (deleteUserLoading) {
+  const deleteHandler = () => {
+    const { userId } = decodeToken(token)
+    deleteUser(userId)
+    dispatch(logout())
+    dispatch(clearUser())
+  }
+
+  if (isLoading) {
     return (
       <div className="fixed top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-14 flex flex-col items-center gap-14 rounded-3xl">
         Loading...
@@ -29,7 +40,7 @@ const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
           <button
             className="px-4 py-2 text-[20px] font-bold text-white bg-green-700 rounded-xl hover:scale-105 hover:opacity-75"
             onClick={() => {
-              deleteUser(token)
+              deleteHandler()
             }}
           >
             Yes, I do

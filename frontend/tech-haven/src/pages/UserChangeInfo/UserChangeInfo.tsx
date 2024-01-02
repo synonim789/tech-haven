@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
-import { useUserContext } from '../../context/UserContext'
+import { useUpdateUserMutation } from '../../features/user/userApiSlice'
+import { setUser } from '../../features/user/userSlice'
 import { RootState } from '../../store'
+import { decodeToken } from '../../utils/decodeToken'
 
-type userChangeInfoType = {
-  name: string
-  email: string
-  phone: string
-  street: string
-  apartment: string
-  city: string
-  zip: string
-  country: string
-  token: string
-}
+// type userChangeInfoType = {
+//   name: string
+//   email: string
+//   phone: string
+//   street: string
+//   apartment: string
+//   city: string
+//   zip: string
+//   country: string
+//   token: string
+// }
 
 const UserChangeInfo = () => {
-  const [formUser, setFormUser] = useState<userChangeInfoType | null>(null)
-  const { user, updateUser, updateUserLoading } = useUserContext()!
-  const { register, handleSubmit, reset } = useForm<userChangeInfoType>()
+  const [formUser, setFormUser] = useState(null)
+  const { register, handleSubmit, reset } = useForm()
+  const user = useSelector((state: RootState) => state.user.user)
   const token = useSelector((state: RootState) => state.auth.token)
+  const [updateUser, { isLoading }] = useUpdateUserMutation()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setFormUser({
@@ -34,7 +38,6 @@ const UserChangeInfo = () => {
       city: user.city,
       zip: user.zip,
       country: user.country,
-      token: token,
     })
   }, [])
 
@@ -42,12 +45,22 @@ const UserChangeInfo = () => {
     reset(formUser!)
   }, [formUser])
 
+  const submitHandler = async (data) => {
+    try {
+      const { userId } = decodeToken(token)
+      const result = await updateUser({ id: userId, data })
+      dispatch(setUser(result.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <main>
       <h1 className="text-4xl font-bold mb-7">Update Profile</h1>
       <form
         className="grid grid-cols-2 gap-14"
-        onSubmit={handleSubmit(updateUser)}
+        onSubmit={handleSubmit(submitHandler)}
       >
         <FormInput name="name" type="text" register={{ ...register('name') }} />
         <FormInput
@@ -78,7 +91,7 @@ const UserChangeInfo = () => {
           register={{ ...register('country') }}
         />
         <FormButton
-          loading={updateUserLoading}
+          loading={isLoading}
           loadingText="Loading..."
           text="Update Info"
         />

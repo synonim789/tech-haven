@@ -80,7 +80,7 @@ const LoginPage = () => {
           />
 
           {isError ? (
-            <p className="font-bold text-red-600">{error.data.message}</p>
+            <p className="font-bold text-red-600">{error.data}</p>
           ) : null}
           <FormButton
             loading={isLoading}

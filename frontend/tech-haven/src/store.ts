@@ -3,12 +3,14 @@ import { api } from './api/api'
 import authSlice from './features/auth/authSlice'
 import cart from './features/cart/cart'
 import filters from './features/products/filters'
+import userSlice from './features/user/userSlice'
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   filters: filters,
   cart: cart,
   auth: authSlice,
+  user: userSlice,
 })
 
 export const store = configureStore({

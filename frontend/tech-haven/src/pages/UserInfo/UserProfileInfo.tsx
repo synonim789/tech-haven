@@ -1,7 +1,8 @@
-import { useUserContext } from '../../context/UserContext'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 
 const UserProfileInfo = () => {
-  const { user } = useUserContext()!
+  const user = useSelector((state: RootState) => state.user.user)
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
       <div>
