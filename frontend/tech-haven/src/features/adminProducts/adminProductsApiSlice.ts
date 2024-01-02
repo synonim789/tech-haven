@@ -10,7 +10,15 @@ const adminProductsApiSlice = api.injectEndpoints({
       }),
       invalidatesTags: ['Products'],
     }),
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Products'],
+    }),
   }),
 })
 
-export const { useAddProductMutation } = adminProductsApiSlice
+export const { useAddProductMutation, useDeleteProductMutation } =
+  adminProductsApiSlice
