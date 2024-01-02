@@ -1,17 +1,24 @@
 import { BiSolidTrash } from 'react-icons/bi'
-import { useSelector } from 'react-redux'
-import { useAdminContext } from '../../context/AdminContext'
-import { RootState } from '../../store'
+import FullscreenLoading from '../../components/ui/FullscreenLoading'
+import {
+  useDeleteCategoryMutation,
+  useGetCategoriesQuery,
+} from '../../features/adminCategories/categoriesApiSlice'
 import { CategoryType } from '../../types'
 
 const RemoveCategoryPage = () => {
-  const { categories, deleteCategory, deleteCategoryError } = useAdminContext()!
-  const token = useSelector((state: RootState) => state.auth.token)
+  const { data: categories, isLoading } = useGetCategoriesQuery()
+  const [deleteCategory, { error: deleteCategoryError }] =
+    useDeleteCategoryMutation()
+
+  if (isLoading) {
+    return <FullscreenLoading />
+  }
 
   return (
     <section className="flex flex-col items-center justify-center gap-6">
       <h4 className="text-4xl font-semibold">Remove Category</h4>
-      {categories.map((category: CategoryType) => {
+      {categories?.map((category: CategoryType) => {
         return (
           <div
             className="bg-white w-full p-4 shadow-lg rounded-lg flex justify-between items-center"
@@ -21,13 +28,17 @@ const RemoveCategoryPage = () => {
             <BiSolidTrash
               className="text-3xl cursor-pointer hover:opacity-75 text-red-600 hover:scale-110 transition"
               onClick={() => {
-                deleteCategory({ id: category._id, token: token })
+                deleteCategory(category._id)
               }}
             />
           </div>
         )
       })}
-      <p className="font-bold text-red-600">{deleteCategoryError}</p>
+      {deleteCategoryError && (
+        <p className="font-bold text-red-600">
+          {deleteCategoryError.data.message}
+        </p>
+      )}
     </section>
   )
 }
