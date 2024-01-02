@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
-import { useAdminContext } from '../../context/AdminContext'
-import { RootState } from '../../store'
+import { useGetCategoriesQuery } from '../../features/adminCategories/categoriesApiSlice'
+import { useEditProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
 import { CategoryType, ProductType } from '../../types'
 
 type EditProductFormProps = {
@@ -22,15 +21,14 @@ type EditProductType = {
   numReviews: number
   isFeatured: boolean
   price: number
-  token: string
   id: string
 }
 
 const EditProductForm = ({ product }: EditProductFormProps) => {
   const [editForm, setEditForm] = useState<EditProductType | null>(null)
 
-  const token = useSelector((state: RootState) => state.auth.token)
-  const { categories, editProduct, editProductError } = useAdminContext()!
+  const { data: categories } = useGetCategoriesQuery()
+  const [editProduct, { error: editProductError }] = useEditProductMutation()
 
   const { register, handleSubmit, reset, formState } =
     useForm<EditProductType>()
@@ -47,7 +45,6 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
       rating: product.rating,
       numReviews: product.numReviews,
       isFeatured: product.isFeatured,
-      token: token.token,
       price: product.price,
       id: product.id,
     })
@@ -56,7 +53,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
   useEffect(() => {
     reset(editForm!)
   }, [editForm])
-
+  
   return (
     <>
       <form
@@ -102,7 +99,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
               <option value="" disabled>
                 Choose Category
               </option>
-              {categories.map((category: CategoryType) => {
+              {categories?.map((category: CategoryType) => {
                 return (
                   <option value={category._id} key={category._id}>
                     {category.name}

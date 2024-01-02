@@ -17,8 +17,19 @@ const adminProductsApiSlice = api.injectEndpoints({
       }),
       invalidatesTags: ['Products'],
     }),
+    editProduct: builder.mutation({
+      query: (body) => ({
+        url: `/products/${body.id}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Products'],
+    }),
   }),
 })
 
-export const { useAddProductMutation, useDeleteProductMutation } =
-  adminProductsApiSlice
+export const {
+  useAddProductMutation,
+  useDeleteProductMutation,
+  useEditProductMutation,
+} = adminProductsApiSlice

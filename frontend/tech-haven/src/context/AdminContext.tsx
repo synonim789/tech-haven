@@ -143,7 +143,6 @@ export const AdminProvider = ({ children }: ChildrenType) => {
   const [state, dispatch] = useReducer(AdminReducer, initialState)
 
   // const { logoutUser } = useAuthContext()!
-  
 
   const getCategories = async () => {
     dispatch({ type: 'GET_CATEGORIES_START' })
