@@ -1,17 +1,14 @@
-import { useEffect } from 'react'
-import { useAdminContext } from '../../context/AdminContext'
-
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import {
+  useChangeUserRoleMutation,
+  useGetUsersQuery,
+} from '../../features/adminUser/adminUserApiSlice'
 import EditSingleUser from './EditSingleUser'
 
 const EditUserRolePage = () => {
-  const { getAllUsers, allUsers, changeUserRoleError } = useAdminContext()!
+  // const { getAllUsers, allUsers, changeUserRoleError } = useAdminContext()!
 
-  const token = useSelector((state: RootState) => state.auth.token)
-  useEffect(() => {
-    getAllUsers({ token: token })
-  }, [])
+  const { data: allUsers } = useGetUsersQuery()
+  const [changeUserRole, { error, isLoading }] = useChangeUserRoleMutation()
 
   return (
     <section>
@@ -23,9 +20,9 @@ const EditUserRolePage = () => {
           return <EditSingleUser user={user} key={user._id} />
         })}
       </div>
-      {changeUserRoleError && (
+      {error && (
         <p className="text-center mt-5 text-2xl font-bold text-red-500">
-          {changeUserRoleError}
+          {error}
         </p>
       )}
     </section>
