@@ -34,7 +34,7 @@ const Filters = ({ allProducts }: Props) => {
   }, [allProducts])
 
   const handleChange = (event: Event) => {
-    if (event.target instanceof HTMLInputElement) {
+    if (event.target) {
       let name = event.target.name
       let value = event.target.value
       if (name === 'category') {
@@ -49,6 +49,8 @@ const Filters = ({ allProducts }: Props) => {
       if (name === 'rating') {
         value = Number(value)
       }
+      console.log(value)
+
       dispatch(updateFilter({ name, value }))
     }
   }

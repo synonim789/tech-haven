@@ -17,12 +17,12 @@ const CartPage = () => {
     )
   }
   return (
-    <div className="my-10 max-w-5xl mx-auto">
+    <div className="my-10 max-w-5xl mx-auto px-5">
       {cart.map((item) => {
         return <CartItem item={item} key={item.name} />
       })}
 
-      <div className="flex justify-between items-end">
+      <div className="flex justify-between md:items-end flex-col md:flex-row items-center gap-5">
         <button
           className="bg-red-500 text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
           onClick={() => dispatch(removeAllItemsFromCart())}
