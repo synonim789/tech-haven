@@ -3,11 +3,8 @@ import { CategoryType } from '../../types'
 import EditCategory from './EditCategory'
 
 const EditCategoryPage = () => {
-  // const { categories, editCategorySuccess, getCategories } = useAdminContext()!
   const { data: categories } = useGetCategoriesQuery()
-  // useEffect(() => {
-  //   getCategories()
-  // }, [editCategorySuccess])
+
   return (
     <section>
       <h4 className="text-4xl font-semibold text-center mb-8">Edit Category</h4>

@@ -1,6 +1,4 @@
-import { useSelector } from 'react-redux'
 import { useDeleteProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
-import { RootState } from '../../store'
 
 type RemoveProductModalProps = {
   close: () => void
@@ -9,9 +7,7 @@ type RemoveProductModalProps = {
 }
 
 const RemoveProductModal = ({ close, id, clear }: RemoveProductModalProps) => {
-  // const { deleteProduct } = useAdminContext()!
   const [deleteProduct] = useDeleteProductMutation()
-  const token = useSelector((state: RootState) => state.auth.token)
   return (
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />

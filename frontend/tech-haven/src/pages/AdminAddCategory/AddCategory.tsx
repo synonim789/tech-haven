@@ -11,9 +11,6 @@ const AddCategory = () => {
       category: '',
     },
   })
-
-  // const { addCategory, addCategorySuccess, addCategoryLoading } =
-  //   useAdminContext()!
   const [addCategory, { isLoading, isSuccess }] = useAddCategoryMutation()
 
   useEffect(() => {
