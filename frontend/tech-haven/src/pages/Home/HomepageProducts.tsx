@@ -26,7 +26,7 @@ const HomepageProducts = () => {
           Products
         </h2>
         <div className="flex flex-col sm:flex-row gap-10">
-          {featuredProducts.map((product) => {
+          {featuredProducts?.map((product) => {
             return <SingleProduct key={product.id} {...product} />
           })}
         </div>

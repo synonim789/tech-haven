@@ -158,6 +158,7 @@ const Navbar = () => {
                         ? 'none relative'
                         : 'relative'
                     }
+                    onClick={() => setShowNavigation(false)}
                   >
                     <GrCart />
                     {totalItems > 0 ? (

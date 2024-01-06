@@ -87,7 +87,7 @@ const SignUpPage = () => {
           />
           {isError ? (
             <p className="font-bold text-red-600 text-[20px]">
-              {error.data.message}
+              {error?.data.message}
             </p>
           ) : null}
           <FormButton

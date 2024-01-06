@@ -23,7 +23,7 @@ const ProductPage = () => {
     product
 
   return (
-    <div className="max-w-6xl mx-auto flex  flex-col justify-between lg:flex-row gap-16 mt-10 mb-20 h-full">
+    <div className="max-w-6xl mx-auto flex  flex-col justify-between lg:flex-row gap-16 mt-10 mb-20 h-full px-4">
       <ImageGallery images={images} />
 
       <section className="flex flex-col gap-4 lg:w-2/4">

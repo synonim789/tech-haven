@@ -18,7 +18,7 @@ const EditCategory = ({ name, id }: Props) => {
   const { register, handleSubmit } = useForm()
   const [editCategory] = useEditCategoryMutation()
 
-  const submit = async (data) => {
+  const submit = async (data: data) => {
     const result = await editCategory({ id: id, name: data.name })
     console.log(result)
 
