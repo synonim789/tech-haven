@@ -12,7 +12,7 @@ const EditSingleUser = ({ user }: Props) => {
   return (
     <div className="flex gap-5 items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl">
       <FaUser size={'30px'} />
-
+    
       <div>
         <p className="font-semibold text-xl">{name}</p>
         <p>{email}</p>
