@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearFilters, updateFilter } from '../../features/products/filters'
@@ -6,7 +6,7 @@ import { RootState } from '../../store'
 import { ProductType } from '../../types'
 
 type Props = {
-  allProducts: ProductType[]
+  allProducts?: ProductType[]
 }
 
 const Filters = ({ allProducts }: Props) => {
@@ -17,14 +17,14 @@ const Filters = ({ allProducts }: Props) => {
   const dispatch = useDispatch()
 
   const getCategories = () => {
-    let unique = allProducts.map(
+    let unique = allProducts?.map(
       (product: ProductType) => product['category'].name
     )
     setCategories(['all', ...new Set(unique)])
   }
 
   const getBrands = () => {
-    let unique = allProducts.map((product: ProductType) => product['brand'])
+    let unique = allProducts?.map((product: ProductType) => product['brand'])
     setBrands(['all', ...new Set(unique)])
   }
 
@@ -33,24 +33,28 @@ const Filters = ({ allProducts }: Props) => {
     getBrands()
   }, [allProducts])
 
-  const handleChange = (event: Event) => {
-    if (event.target) {
-      let name = event.target.name
-      let value = event.target.value
+  const handleChange = (
+    event:
+      | ChangeEvent<HTMLInputElement | HTMLSelectElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if ('target' in event) {
+      let name = (event.target as HTMLInputElement | HTMLSelectElement).name
+      let value = (event.target as HTMLInputElement | HTMLSelectElement).value
       if (name === 'category') {
-        value = event.target.textContent || ''
+        value = (event.target as HTMLButtonElement).textContent || ''
       }
       if (name === 'minPrice' || name === 'maxPrice') {
-        value = value !== null ? Number(value) : 0
+        value = value
       }
-      if (name === 'brand') {
-        value = (event.target as HTMLInputElement).value
-      }
-      if (name === 'rating') {
-        value = Number(value)
-      }
-      console.log(value)
 
+      if (name === 'brand') {
+        value = (event.target as HTMLSelectElement).value
+      }
+
+      if (name === 'rating') {
+        value = value
+      }
       dispatch(updateFilter({ name, value }))
     }
   }

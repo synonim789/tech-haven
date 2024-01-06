@@ -1,7 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ProductType } from '../../types'
 
-const initialState = {
+type initialStateType = {
+  allProducts: ProductType[]
+  filters: {
+    search: string
+    category: string
+    brand: string
+    minPrice: number
+    maxPrice: number
+    rating: number
+  }
+  limit: number
+  currentPage: number
+  gridView: boolean
+  listView: boolean
+  filteredProducts: ProductType[]
+  pagedProducts: ProductType[]
+  sort: string
+}
+
+const initialState: initialStateType = {
   allProducts: [],
   filters: {
     search: '',
@@ -37,13 +56,13 @@ const filterSlice = createSlice({
         state.filters.brand = value
       }
       if (name === 'minPrice') {
-        state.filters.minPrice = value
+        state.filters.minPrice = Number(value)
       }
       if (name === 'maxPrice') {
-        state.filters.maxPrice = value
+        state.filters.maxPrice = Number(value)
       }
       if (name === 'rating') {
-        state.filters.rating = value
+        state.filters.rating = Number(value)
       }
       if (name === 'search') {
         state.filters.search = value
@@ -130,7 +149,7 @@ const filterSlice = createSlice({
     },
     sortProducts: (state) => {
       const { sort, filteredProducts } = state
-      let sortedProducts = []
+      let sortedProducts: ProductType[] = []
       if (sort === 'name-asc') {
         sortedProducts = filteredProducts.sort((a, b) => {
           return a.name.localeCompare(b.name)
