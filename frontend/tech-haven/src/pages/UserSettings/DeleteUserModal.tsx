@@ -17,8 +17,8 @@ const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
   const token = useSelector((state: RootState) => state.auth.token)
 
   const deleteHandler = () => {
-    const { userId } = decodeToken(token)
-    deleteUser(userId)
+    const decodedToken = decodeToken(token)
+    deleteUser(decodedToken?.userId)
     dispatch(logout())
     dispatch(clearUser())
   }

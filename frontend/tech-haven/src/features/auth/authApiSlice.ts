@@ -1,9 +1,7 @@
 import { api } from '../../api/api'
 
 type TokenType = {
-  data: {
-    token: string
-  }
+  token: string
 }
 
 export const authApiSlice = api.injectEndpoints({

@@ -68,7 +68,7 @@ const loginUser = asyncHandler(async (req, res) => {
     );
     res.status(200).json({ token: token });
   } else {
-    res.status(400).json("Incorrect password");
+    res.status(400).json({ message: "Incorrect password" });
   }
 });
 

@@ -20,11 +20,13 @@ const LoginPage = () => {
   const { errors } = formState
   const dispatch = useDispatch()
 
-  const submitHandler = async (data) => {
+  const submitHandler = async (data: LoginFormType) => {
     try {
-      const token = await login(data)
-      if('data' in token) {
-        dispatch(setData(token.data.token))
+      const response = await login(data)
+
+      if ('data' in response && response.data) {
+        const token = response.data.token
+        dispatch(setData(token))
       }
     } catch (err) {
       console.log(err)
@@ -76,9 +78,11 @@ const LoginPage = () => {
             }}
           />
 
-          {isError ? (
-            <p className="font-bold text-red-600">{error.data}</p>
-          ) : null}
+          {error && (
+            <p className="font-bold text-red-600">
+              {'data' in error ? error.data.message : ''}
+            </p>
+          )}
           <FormButton
             loading={isLoading}
             loadingText="Logging In..."

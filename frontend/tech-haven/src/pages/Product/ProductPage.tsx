@@ -12,7 +12,7 @@ const ProductPage = () => {
     return <FullscreenLoading />
   }
 
-  if (isError) {
+  if (isError || !product) {
     return (
       <h1 className="min-h-[80vh] flex items-center justify-center text-6xl">
         Product not Found

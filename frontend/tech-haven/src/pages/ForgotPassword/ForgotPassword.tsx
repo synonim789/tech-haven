@@ -11,8 +11,7 @@ type ForgotPasswordFormType = {
 const ForgotPassword = () => {
   const form = useForm<ForgotPasswordFormType>()
   const { register, handleSubmit, formState } = form
-  const [forgotPassword, { isLoading, isError, error }] =
-    useForgotPasswordMutation()
+  const [forgotPassword, { isLoading, error }] = useForgotPasswordMutation()
   const { errors } = formState
 
   const submitHandler = async (data: ForgotPasswordFormType) => {

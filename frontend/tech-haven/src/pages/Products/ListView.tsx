@@ -1,8 +1,11 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { RootState } from '../../store'
 
 const ListView = () => {
-  const pagedProducts = useSelector((state) => state.filters.pagedProducts)
+  const pagedProducts = useSelector(
+    (state: RootState) => state.filters.pagedProducts
+  )
 
   return (
     <div className="flex flex-col gap-10">
