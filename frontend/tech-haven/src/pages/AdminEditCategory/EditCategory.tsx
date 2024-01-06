@@ -9,8 +9,9 @@ type Props = {
   name: string
   id: string
 }
-type data = {
-  name: string
+
+type DataType = {
+  name?: string
 }
 
 const EditCategory = ({ name, id }: Props) => {
@@ -18,7 +19,9 @@ const EditCategory = ({ name, id }: Props) => {
   const { register, handleSubmit } = useForm()
   const [editCategory] = useEditCategoryMutation()
 
-  const submit = async (data: data) => {
+  const submit = async (data: DataType) => {
+    console.log(data)
+
     const result = await editCategory({ id: id, name: data.name })
     console.log(result)
 

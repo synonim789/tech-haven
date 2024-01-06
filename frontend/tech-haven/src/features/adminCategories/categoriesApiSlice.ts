@@ -3,7 +3,7 @@ import { CategoryType } from '../../types'
 
 const categoriesApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    getCategories: builder.query<CategoryType, void>({
+    getCategories: builder.query<CategoryType[], void>({
       query: () => ({
         url: '/categories',
       }),

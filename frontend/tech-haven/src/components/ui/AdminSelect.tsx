@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ProductType } from '../../types'
 
 type AdminSelectProps = {
-  options: ProductType[] | null
+  options: ProductType[] | undefined
   value: ProductType | null
   onChange: (value: ProductType | null) => void
 }

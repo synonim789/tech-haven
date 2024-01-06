@@ -1,5 +1,16 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+  BaseQueryFn,
+  FetchArgs,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react'
 import { RootState } from '../store'
+
+interface CustomError {
+  data: {
+    message: string
+  }
+}
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3000/api/v1/',
@@ -9,7 +20,7 @@ const baseQuery = fetchBaseQuery({
       headers.set('Authorization', `Bearer ${token}`)
     }
   },
-})
+}) as BaseQueryFn<string | FetchArgs, unknown, CustomError, {}>
 
 export const api = createApi({
   reducerPath: 'api',

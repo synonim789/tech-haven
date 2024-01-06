@@ -5,7 +5,6 @@ import {
 import EditSingleUser from './EditSingleUser'
 
 const EditUserRolePage = () => {
-
   const { data: allUsers } = useGetUsersQuery()
   const [changeUserRole, { error }] = useChangeUserRoleMutation()
 
@@ -21,7 +20,7 @@ const EditUserRolePage = () => {
       </div>
       {error && (
         <p className="text-center mt-5 text-2xl font-bold text-red-500">
-          {error.data.message}
+          {'data' in error ? error.data.message : ''}
         </p>
       )}
     </section>

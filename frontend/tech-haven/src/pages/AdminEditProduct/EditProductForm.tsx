@@ -53,7 +53,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
   useEffect(() => {
     reset(editForm!)
   }, [editForm])
-  
+
   return (
     <>
       <form
@@ -157,9 +157,12 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
             className="w-5 accent-[#120b90]"
           />
         </div>
-        <p className="font-bold text-red-600 flex flex-col">
-          {editProductError}
-        </p>
+        {editProductError && (
+          <p className="font-bold text-red-600 flex flex-col">
+            {'data' in editProductError ? editProductError.data.message : ''}
+          </p>
+        )}
+
         <FormButton text="Edit Product" loading={false} />
       </form>
     </>

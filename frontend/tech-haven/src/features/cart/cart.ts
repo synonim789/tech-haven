@@ -1,11 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
-import { CartItemType } from '../../context/cart_context'
 
 type cartItem = {
   id: string
   amount: number
-  product: string
+  price: number
+  max: number
+  image: string
+  name: string
+}
+
+type CartState = {
+  cart: cartItem[]
+  totalPrice: number
+  totalItems: number
 }
 
 const cartFromLocalStorage = localStorage.getItem('cart')
@@ -14,7 +22,7 @@ const cart =
     ? JSON.parse(cartFromLocalStorage)
     : []
 
-const initialState = {
+const initialState: CartState = {
   cart: cart,
   totalPrice: 0,
   totalItems: 0,
@@ -29,7 +37,7 @@ const cartSlice = createSlice({
       if (state.cart) {
         const item = state.cart.find((item: cartItem) => item.id === id)
         if (item) {
-          const tempCart = state.cart.map((cartItem: CartItemType) => {
+          const tempCart = state.cart.map((cartItem) => {
             if (cartItem.id === id) {
               let newAmount = cartItem.amount + amount
               if (newAmount > cartItem.max) {

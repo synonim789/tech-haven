@@ -23,7 +23,9 @@ const LoginPage = () => {
   const submitHandler = async (data) => {
     try {
       const token = await login(data)
-      dispatch(setData(token.data.token))
+      if('data' in token) {
+        dispatch(setData(token.data.token))
+      }
     } catch (err) {
       console.log(err)
     }

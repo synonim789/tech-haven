@@ -36,7 +36,11 @@ const RemoveCategoryPage = () => {
       })}
       {deleteCategoryError && (
         <p className="font-bold text-red-600">
-          {deleteCategoryError.data.message}
+          {'data' in deleteCategoryError ? (
+            <>{deleteCategoryError.data.message}</>
+          ) : (
+            ''
+          )}
         </p>
       )}
     </section>

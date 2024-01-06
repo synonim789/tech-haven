@@ -12,6 +12,20 @@ type CategoryType = {
   name: string
 }
 
+type DataType = {
+  name: string
+  category: string
+  description: string
+  image: FileList[] | null
+  images: FileList[] | null
+  isFeatured: boolean
+  price: number
+  rating: number
+  revCount: number
+  stock: number
+  brand: string
+}
+
 const AddProductPage = () => {
   const [image, setImage] = useState<File | null>(null)
   const [images, setImages] = useState<File[] | null>(null)
@@ -57,12 +71,18 @@ const AddProductPage = () => {
     reset()
   }, [isSuccess])
 
-  const submitHandler = async (data) => {
+  const submitHandler = async (data: DataType) => {
     const formData: any = new FormData()
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append('images', data.images[i])
+    if (data.images) {
+      for (let i = 0; i < data.images.length; i++) {
+        formData.append('images', data.images[i])
+      }
     }
-    formData.append('image', data.image[0])
+
+    if (data.image) {
+      formData.append('image', data.image[0])
+    }
+
     formData.append('name', data.name)
     formData.append('description', data.description)
     formData.append('brand', data.brand)
@@ -267,7 +287,9 @@ const AddProductPage = () => {
         </div>
         {addProductError && (
           <p className="text-center text-red-500 text-2xl font-bold">
-            {addProductError.data.message}
+            {'data' in addProductError ? (
+              <>{addProductError.data.message}</>
+            ) : undefined}
           </p>
         )}
         <button

@@ -1,8 +1,14 @@
 import { api } from '../../api/api'
 
+type TokenType = {
+  data: {
+    token: string
+  }
+}
+
 export const authApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
+    login: builder.mutation<TokenType, { email: string; password: string }>({
       query: ({ email, password }) => ({
         url: '/users/login',
         method: 'POST',

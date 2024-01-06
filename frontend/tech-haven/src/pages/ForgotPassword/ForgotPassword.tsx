@@ -15,10 +15,10 @@ const ForgotPassword = () => {
     useForgotPasswordMutation()
   const { errors } = formState
 
-  const submitHandler = async (data) => {
+  const submitHandler = async (data: ForgotPasswordFormType) => {
     try {
       const { email } = data
-      const result = await forgotPassword({ email })
+      await forgotPassword({ email })
       toast.success('Link to reset password was sent to your email')
     } catch (err) {
       console.log(err)
@@ -59,9 +59,12 @@ const ForgotPassword = () => {
               {errors.email?.message}
             </p>
           </label>
-          {error ? (
-            <p className="font-bold text-red-600">{error.data.message}</p>
-          ) : null}
+          {error &&
+            ('data' in error ? (
+              <p className="font-bold text-red-600">{error.data.message}</p>
+            ) : (
+              ''
+            ))}
           <button
             type="submit"
             className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
