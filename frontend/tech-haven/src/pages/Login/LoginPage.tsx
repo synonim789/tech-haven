@@ -13,11 +13,6 @@ type LoginFormType = {
 }
 
 const LoginPage = () => {
-  // const {
-  //   loggingError: error,
-  //   loggingLoading: loading,
-  //   loginUser,
-  // } = useAuthContext()!
   const [login, { isLoading, error, isError }] = useLoginMutation()
 
   const form = useForm<LoginFormType>()

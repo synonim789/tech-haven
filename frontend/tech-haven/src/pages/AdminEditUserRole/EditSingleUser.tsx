@@ -8,9 +8,7 @@ type Props = {
 const EditSingleUser = ({ user }: Props) => {
   const { name, email, role } = user
   const [changeUserRole, { isLoading }] = useChangeUserRoleMutation()
-  // if (isLoading) {
-  //   return <FullscreenLoading />
-  // }
+
   return (
     <div className="flex gap-5 items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl">
       <FaUser size={'30px'} />

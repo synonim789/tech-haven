@@ -24,16 +24,7 @@ const ForgotPassword = () => {
       console.log(err)
     }
   }
-  // const {
-  //   forgotLoading: loading,
-  //   forgotError: error,
-  //   forgetPassword,
-  // } = useAuthContext()!
-  // const forgetPassword = () => {
-  //   console.log('xdd')
-  // }
-  // const [loading, setLoading] = useState(false)
-  // const [error, setError] = useState(false)
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">

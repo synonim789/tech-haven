@@ -5,7 +5,6 @@ import {
 import EditSingleUser from './EditSingleUser'
 
 const EditUserRolePage = () => {
-  // const { getAllUsers, allUsers, changeUserRoleError } = useAdminContext()!
 
   const { data: allUsers } = useGetUsersQuery()
   const [changeUserRole, { error }] = useChangeUserRoleMutation()

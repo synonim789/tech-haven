@@ -1,6 +1,6 @@
 import image from '../../assets/gadgets.jpg'
 import AboutImage from './AboutImage'
-// import './AboutPage.css'
+
 const AboutPage = () => {
   return (
     <main className="max-w-5xl mx-auto flex flex-col md:flex-row my-10 justify-between gap-20 items-center">

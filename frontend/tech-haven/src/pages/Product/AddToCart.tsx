@@ -9,7 +9,6 @@ type AddCoCartPropType = {
 }
 
 const AddToCart = ({ product }: AddCoCartPropType) => {
-  // const { addToCart } = useCartContext()!
   const { countInStock: count, id: id } = product
   const dispatch = useDispatch()
 

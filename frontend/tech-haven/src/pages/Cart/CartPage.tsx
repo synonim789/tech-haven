@@ -4,7 +4,6 @@ import { RootState } from '../../store'
 import CartItem from './CartItem'
 
 const CartPage = () => {
-  // const { cart, removeAllItemsFromCart, total_amount } = useCartContext()!
   const cart = useSelector((state: RootState) => state.cart.cart)
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
   const dispatch = useDispatch()

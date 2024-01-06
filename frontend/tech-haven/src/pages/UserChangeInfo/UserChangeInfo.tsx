@@ -8,18 +8,6 @@ import { setUser } from '../../features/user/userSlice'
 import { RootState } from '../../store'
 import { decodeToken } from '../../utils/decodeToken'
 
-// type userChangeInfoType = {
-//   name: string
-//   email: string
-//   phone: string
-//   street: string
-//   apartment: string
-//   city: string
-//   zip: string
-//   country: string
-//   token: string
-// }
-
 const UserChangeInfo = () => {
   const [formUser, setFormUser] = useState(null)
   const { register, handleSubmit, reset } = useForm()
