@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import { useRegisterUserMutation } from '../../features/auth/authApiSlice'
@@ -19,16 +20,18 @@ const SignUpPage = () => {
   const { errors } = formState
   const dispatch = useDispatch()
 
-  const [registerUser, { isLoading, isError, error }] =
-    useRegisterUserMutation()
+  const [registerUser, { isLoading, error }] = useRegisterUserMutation()
 
-  const submitHandler = async (data) => {
+  const submitHandler = async (data: SignUpFormType) => {
     try {
       const { email, name, password } = data
-      const token = await registerUser({ email, name, password })
-      dispatch(setData(token.data.token))
+      const response = await registerUser({ email, name, password }).unwrap()
+      if ('data' in response && response.data) {
+        const token = response.data.token
+        dispatch(setData(token))
+      }
     } catch (err) {
-      console.log(err)
+      toast.error(err.data.message)
     }
   }
 
@@ -85,11 +88,11 @@ const SignUpPage = () => {
               }),
             }}
           />
-          {isError ? (
-            <p className="font-bold text-red-600 text-[20px]">
-              {error?.data.message}
+          {error && (
+            <p className="font-bold text-red-600">
+              {'data' in error ? error.data.message : ''}
             </p>
-          ) : null}
+          )}
           <FormButton
             loading={isLoading}
             text="Sign Up"

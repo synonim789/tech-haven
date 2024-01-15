@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import { useUpdateUserMutation } from '../../features/user/userApiSlice'
@@ -36,10 +37,10 @@ const UserChangeInfo = () => {
   const submitHandler = async (data) => {
     try {
       const { userId } = decodeToken(token)
-      const result = await updateUser({ id: userId, data })
+      const result = await updateUser({ id: userId, data }).unwrap()
       dispatch(setUser(result.data))
     } catch (err) {
-      console.log(err)
+      toast.error(err.data.message)
     }
   }
 

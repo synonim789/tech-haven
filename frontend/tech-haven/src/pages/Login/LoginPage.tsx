@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
@@ -23,13 +24,12 @@ const LoginPage = () => {
   const submitHandler = async (data: LoginFormType) => {
     try {
       const response = await login(data)
-
       if ('data' in response && response.data) {
         const token = response.data.token
         dispatch(setData(token))
       }
     } catch (err) {
-      console.log(err)
+      toast.error(error.data.message)
     }
   }
 
