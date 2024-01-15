@@ -3,11 +3,11 @@ import ContactInfo from './ContactInfo'
 
 const ContactPage = () => {
   return (
-    <section className="max-w-5xl mx-auto my-10 flex flex-col  items-center">
+    <section className="container mx-auto my-10 flex flex-col items-center">
       <h1 className="font-bold text-5xl text-center text-[#120b90] relative after:content-[''] after:absolute after:bg-orange-500 after:w-4/5 after:h-1 after:-bottom-1 after:left-0 after:right-0 after:mx-auto">
         Contact
       </h1>
-      <div className="flex gap-5 flex-col md:flex-row px-4">
+      <div className="flex md:gap-20 flex-col md:flex-row px-4">
         <ContactForm />
         <ContactInfo />
       </div>

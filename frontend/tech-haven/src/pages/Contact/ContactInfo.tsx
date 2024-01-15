@@ -3,7 +3,7 @@ import { HiOutlineMapPin } from 'react-icons/hi2'
 
 const ContactInfo = () => {
   return (
-    <section className="flex flex-col items-center justify-center gap-5 break-all ">
+    <section className="flex flex-col items-center justify-center gap-5 w-full text-center">
       <p className="text-[20px] font-bold flex items-center gap-2 md:text-[25px] flex-col">
         <span className="flex flex-row items-center">
           <AiOutlinePhone /> Phone:

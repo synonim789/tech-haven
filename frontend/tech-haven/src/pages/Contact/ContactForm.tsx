@@ -34,7 +34,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <form
         action="#"
         className="flex flex-col gap-8"
