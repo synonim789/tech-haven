@@ -27,6 +27,8 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import Homepage from './pages/Home/HomePage'
 import LoginPage from './pages/Login/LoginPage'
 import NotFoundPage from './pages/NotFound/NotFoundPage'
+import OrderInfoPage from './pages/OrderInfo/OrderInfoPage'
+import OrderSummary from './pages/OrderSummary/OrderSummary'
 import ProductPage from './pages/Product/ProductPage'
 import ProductsPage from './pages/Products/ProductsPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
@@ -160,6 +162,8 @@ function App() {
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/order/info" element={<OrderInfoPage />} />
+          <Route path="/order/summary" element={<OrderSummary />} />
         </Routes>
         <Footer />
       </Router>
