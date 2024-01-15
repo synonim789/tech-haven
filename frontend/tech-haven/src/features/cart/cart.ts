@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
-type cartItem = {
+export type cartItem = {
   id: string
   amount: number
   price: number

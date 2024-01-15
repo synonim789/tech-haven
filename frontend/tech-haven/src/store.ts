@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { api } from './api/api'
 import authSlice from './features/auth/authSlice'
 import cart from './features/cart/cart'
+import ordersSlice from './features/orders/ordersSlice'
 import filters from './features/products/filters'
 import userSlice from './features/user/userSlice'
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   cart: cart,
   auth: authSlice,
   user: userSlice,
+  order: ordersSlice,
 })
 
 export const store = configureStore({
