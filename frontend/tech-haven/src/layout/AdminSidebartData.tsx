@@ -1,5 +1,5 @@
 import { BiCategoryAlt } from 'react-icons/bi'
-import { FaChartBar, FaUsers } from 'react-icons/fa'
+import { FaUsers } from 'react-icons/fa'
 import { IoIosHome } from 'react-icons/io'
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md'
 
@@ -61,10 +61,5 @@ export const AdminSidebarData = [
         path: 'removeUser',
       },
     ],
-  },
-  {
-    title: 'Statistics',
-    path: 'statistics',
-    icon: <FaChartBar />,
   },
 ]
