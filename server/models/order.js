@@ -2,9 +2,22 @@ const mongoose = require("mongoose");
 const orderSchema = mongoose.Schema({
   orderItems: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "OrderItem",
-      required: true,
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
     },
   ],
   shippingAddress1: {
@@ -24,8 +37,9 @@ const orderSchema = mongoose.Schema({
     required: true,
     default: "Pending",
   },
-  totalPrice: {
+  total: {
     type: Number,
+    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +48,10 @@ const orderSchema = mongoose.Schema({
   dateOrdered: {
     type: Date,
     default: Date.now,
+  },
+  subtotal: {
+    type: Number,
+    required: true,
   },
 });
 
