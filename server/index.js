@@ -4,13 +4,12 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const authJwt = require("./helpers/jwt");
 const productsRouter = require("./routers/products");
 const categoriesRouter = require("./routers/categories");
 const usersRouter = require("./routers/users");
 const errorHandler = require("./helpers/error-handler");
 const ordersRouter = require("./routers/orders");
-const verifyJWT = require("./helpers/jwt");
+const stripeRouter = require("./routers/stripe");
 
 app.use(cors());
 app.options("*", cors());
@@ -28,6 +27,7 @@ app.use(`${api}/products`, productsRouter);
 app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
+app.use(`${api}/stripe`, stripeRouter);
 
 mongoose
   .connect(process.env.CONNECTION_STRING)
