@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
@@ -54,10 +55,21 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
     reset(editForm!)
   }, [editForm])
 
+  const submitHandler = async (data: EditProductType) => {
+    try {
+      const response = await editProduct(data).unwrap()
+      console.log(response)
+
+      toast.success('Product updated')
+    } catch (error) {
+      toast.error(error.data.message)
+    }
+  }
+
   return (
     <>
       <form
-        onSubmit={handleSubmit(editProduct)}
+        onSubmit={handleSubmit(submitHandler)}
         className="flex flex-col justify-center items-center"
       >
         <FormInput
