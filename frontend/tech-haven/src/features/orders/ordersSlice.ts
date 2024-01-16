@@ -39,7 +39,7 @@ const orderSlice = createSlice({
       state.order = {
         orderItems: products,
         addressLine1: `${country}, ${zip}, ${city}`,
-        addressLine2: `${street}/${apartment}`,
+        addressLine2: `${street} ${apartment}`,
         phone: phone,
         payment: payment,
         productsPrice: productsPrice,
