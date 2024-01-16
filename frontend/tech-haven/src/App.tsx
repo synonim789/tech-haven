@@ -27,6 +27,7 @@ import Homepage from './pages/Home/HomePage'
 import LoginPage from './pages/Login/LoginPage'
 import NotFoundPage from './pages/NotFound/NotFoundPage'
 import OrderInfoPage from './pages/OrderInfo/OrderInfoPage'
+import OrderSuccess from './pages/OrderSuccess/OrderSuccess'
 import OrderSummary from './pages/OrderSummary/OrderSummary'
 import ProductPage from './pages/Product/ProductPage'
 import ProductsPage from './pages/Products/ProductsPage'
@@ -162,6 +163,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/order/info" element={<OrderInfoPage />} />
           <Route path="/order/summary" element={<OrderSummary />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
         </Routes>
         <Footer />
       </Router>

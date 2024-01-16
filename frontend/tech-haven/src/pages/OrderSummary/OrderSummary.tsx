@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { RootState } from '../../store'
 import OrderSummaryProduct from './OrderSummaryProduct'
 
@@ -16,6 +17,7 @@ const OrderSummary = () => {
   const order = useSelector((state: RootState) => state.order.order)
   const user = useSelector((state: RootState) => state.user.user?._id)
   const [orderItems, setOrderItems] = useState<OrderedItems[] | undefined>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const orderedItems = order?.orderItems.map((orderItem) => {
@@ -37,18 +39,31 @@ const OrderSummary = () => {
     )
   }
 
+  if (loading) {
+    return <FullscreenLoading />
+  }
+
   const handleCheckout = () => {
-    axios
-      .post('http://localhost:3000/api/v1/stripe/create-checkout-session', {
-        products: orderItems,
-        userId: user,
-      })
-      .then((res) => {
-        if (res.data.url) {
-          window.location.href = res.data.url
-        }
-      })
-      .catch((err) => toast.error(err.message))
+    if (order.payment === 'stripe') {
+      setLoading(true)
+      axios
+        .post('http://localhost:3000/api/v1/stripe/create-checkout-session', {
+          products: orderItems,
+          userId: user,
+          shippingAddress1: order.addressLine1,
+          shippingAddress2: order.addressLine2,
+          phone: order.phone,
+        })
+        .then((res) => {
+          if (res.data.url) {
+            window.location.href = res.data.url
+          }
+          setLoading(false)
+        })
+        .catch((err) => toast.error(err.message))
+    } else {
+      toast.success('Paypal TODO')
+    }
   }
 
   return (
@@ -87,7 +102,7 @@ const OrderSummary = () => {
           </div>
           <button
             onClick={() => handleCheckout()}
-            className="text-white bg-[#120b90] py-1 px-2 block w-fit font-bold"
+            className="bg-[#120b90] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5 hover:scale-105 hover:opacity-75 transition"
           >
             Continue
           </button>
