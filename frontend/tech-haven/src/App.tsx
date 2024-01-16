@@ -19,7 +19,6 @@ import EditCategoryPage from './pages/AdminEditCategory/EditCategoryPage'
 import EdictProductPage from './pages/AdminEditProduct/EditProductPage'
 import EditUserRole from './pages/AdminEditUserRole/EditUserRolePage'
 import AdminPage from './pages/AdminPage/AdminPage'
-import StatisticsPage from './pages/AdminStatistics/StatisticsPage'
 import AdminWelcomePage from './pages/AdminWelcome/AdminWelcomePage'
 import CartPage from './pages/Cart/CartPage'
 import ContactPage from './pages/Contact/ContactPage'
@@ -159,7 +158,6 @@ function App() {
             />
             <Route path="editUserRole" element={<EditUserRole />} />
             <Route path="removeUser" element={<RemoveUserPage />} />
-            <Route path="statistics" element={<StatisticsPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/order/info" element={<OrderInfoPage />} />
