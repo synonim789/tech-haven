@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { CiDeliveryTruck } from 'react-icons/ci'
+import { FaStripeS } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import FormInput from '../../components/form/FormInput'
@@ -43,7 +45,7 @@ const OrderInfoPage = () => {
     reset(orderInfoForm!)
   }, [orderInfoForm])
 
-  const submitHandler = (data) => {
+  const submitHandler = (data: OrderInfo) => {
     navigate('/order/summary')
     dispatch(placeOrder(data))
   }
@@ -132,19 +134,9 @@ const OrderInfoPage = () => {
           <h4 className="text-3xl mt-4 font-bold col-span-2">
             Payment method:
           </h4>
-          <div className="md:col-span-2 flex justify-between">
+          <div className="md:col-span-2 flex justify-between flex-col gap-4 md:flex-row mt-4">
             <div className="flex flex-col gap-4 md:flex-row">
-              <div className="flex items-center gap-3 text-2xl">
-                <input
-                  type="radio"
-                  value="paypal"
-                  {...register('payment', {
-                    required: 'Payment form is required',
-                  })}
-                />
-                <label htmlFor="">Paypal</label>
-              </div>
-              <div className="flex items-center gap-3 text-2xl">
+              <div className="flex items-center text-2xl gap-2">
                 <input
                   type="radio"
                   value="stripe"
@@ -152,7 +144,20 @@ const OrderInfoPage = () => {
                     required: 'Payment form is required',
                   })}
                 />
-                <label htmlFor="stripe">Stripe</label>
+                <FaStripeS />
+                <label htmlFor="">Stripe</label>
+              </div>
+              <div className="flex items-center gap-2 text-2xl">
+                <input
+                  type="radio"
+                  value="Cash On Delivery"
+                  {...register('payment', {
+                    required: 'Payment form is required',
+                  })}
+                />
+                <CiDeliveryTruck />
+
+                <label htmlFor="stripe">Cash On Delivery</label>
               </div>
             </div>
 

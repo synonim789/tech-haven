@@ -12,6 +12,7 @@ const {
 const verifyJWT = require("../helpers/jwt");
 const verifyRoles = require("../helpers/verifyRoles");
 
+router.post("/", verifyJWT, verifyRoles("admin", "user"), addOrder);
 router.get("/", verifyJWT, verifyRoles("admin"), getAllOrders);
 router.put("/:id", verifyJWT, verifyRoles("admin"), updateOrder);
 router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteOrder);

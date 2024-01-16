@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
+import { usePostOrderMutation } from '../../features/orders/ordersApiSlice'
 import { RootState } from '../../store'
 import OrderSummaryProduct from './OrderSummaryProduct'
 
@@ -10,7 +12,7 @@ type OrderedItems = {
   quantity: number
   price: number
   name: string
-  id: string
+  productId: string
 }
 
 const OrderSummary = () => {
@@ -18,6 +20,8 @@ const OrderSummary = () => {
   const user = useSelector((state: RootState) => state.user.user?._id)
   const [orderItems, setOrderItems] = useState<OrderedItems[] | undefined>([])
   const [loading, setLoading] = useState(false)
+  const [addOrder, { isLoading, isSuccess }] = usePostOrderMutation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const orderedItems = order?.orderItems.map((orderItem) => {
@@ -25,7 +29,7 @@ const OrderSummary = () => {
         quantity: orderItem.amount,
         price: orderItem.price,
         name: orderItem.name,
-        id: orderItem.id,
+        productId: orderItem.id,
       }
     })
     setOrderItems(orderedItems)
@@ -43,10 +47,10 @@ const OrderSummary = () => {
     return <FullscreenLoading />
   }
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (order.payment === 'stripe') {
       setLoading(true)
-      axios
+      await axios
         .post('http://localhost:3000/api/v1/stripe/create-checkout-session', {
           products: orderItems,
           userId: user,
@@ -60,10 +64,29 @@ const OrderSummary = () => {
           }
           setLoading(false)
         })
-        .catch((err) => toast.error(err.message))
-    } else {
-      toast.success('Paypal TODO')
+        .catch((err) => {
+          toast.error(err.message)
+          setLoading(false)
+        })
+    } else if (order.payment === 'Cash On Delivery') {
+      try {
+        await addOrder({
+          products: orderItems,
+          userId: user,
+          shippingAddress1: order.addressLine1,
+          shippingAddress2: order.addressLine2,
+          phone: order.phone,
+          total: order.total,
+          subtotal: order.subtotal,
+        }).unwrap()
+      } catch (error) {
+        toast.error(err.message)
+      }
     }
+  }
+
+  if (isSuccess) {
+    return <Navigate to="/order-success" />
   }
 
   return (
@@ -77,14 +100,14 @@ const OrderSummary = () => {
         </div>
         <div className="bg-white px-4 w-full basis-1/4 shadow-md rounded-lg flex flex-col gap-4 items-center justify-around">
           <p className="flex gap-1 my-4">
-            <span className="font-bold">Subtotal: </span>${order.productsPrice}
+            <span className="font-bold">Subtotal: </span>${order.subtotal}
           </p>
           <p className="flex gap-1 my-4">
             <span className="font-bold">Shipping: </span>${order.delivery}
           </p>
           <div className="w-full bg-gray-500 h-1 rounded-full" />
           <p className="flex gap-1 my-4">
-            <b>Total: </b>${order.fullPrice}
+            <b>Total: </b>${order.total}
           </p>
         </div>
       </div>

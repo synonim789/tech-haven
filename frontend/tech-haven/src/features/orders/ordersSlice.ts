@@ -11,9 +11,9 @@ type OrderType = {
   addressLine1: string
   addressLine2: string
   payment: string
-  productsPrice: number
+  subtotal: number
   delivery: number
-  fullPrice: number
+  total: number
 }
 
 const initialState: initialStateType = {
@@ -42,9 +42,9 @@ const orderSlice = createSlice({
         addressLine2: `${street} ${apartment}`,
         phone: phone,
         payment: payment,
-        productsPrice: productsPrice,
+        subtotal: productsPrice,
         delivery: delivery,
-        fullPrice: productsPrice + delivery,
+        total: productsPrice + delivery,
       }
     },
   },

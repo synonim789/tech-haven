@@ -66,10 +66,34 @@ const getOrderCount = asyncHandler(async (req, res) => {
   });
 });
 
+const addOrder = asyncHandler(async (req, res) => {
+  const products = req.body.order.products;
+
+  const newOrder = new Order({
+    orderItems: products,
+    shippingAddress1: req.body.order.shippingAddress1,
+    shippingAddress2: req.body.order.shippingAddress2,
+    phone: req.body.order.phone,
+    user: req.body.order.userId,
+    subtotal: req.body.order.subtotal,
+    total: req.body.order.total,
+  });
+
+  try {
+    const savedOrder = await newOrder.save();
+    console.log(`Processed Order: ${savedOrder}`);
+    return res.status(200).json(newOrder);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "Cannot Post Order" });
+  }
+});
+
 module.exports = {
   getAllOrders,
   updateOrder,
   deleteOrder,
   getTotalSales,
   getOrderCount,
+  addOrder,
 };
