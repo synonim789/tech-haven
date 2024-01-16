@@ -93,7 +93,7 @@ const AddProductPage = () => {
     formData.append('numReviews', data.revCount)
     formData.append('isFeatured', data.isFeatured)
     try {
-      await addProduct(formData)
+      await addProduct(formData).unwrap()
       toast.success('Product Added Successfully')
       console.log(data)
     } catch (err) {
