@@ -7,7 +7,7 @@ type FormInputProps = {
 
 const FormInput = ({ name, type, error, register }: FormInputProps) => {
   return (
-    <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-2">
+    <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize">
       <label htmlFor={name} id={name}>
         {name}
       </label>

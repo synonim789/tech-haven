@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
+import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useGetCategoriesQuery } from '../../features/adminCategories/categoriesApiSlice'
 import { useAddProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
 
@@ -31,7 +32,7 @@ const AddProductPage = () => {
   const [images, setImages] = useState<File[] | null>(null)
 
   const { data: categories } = useGetCategoriesQuery()
-  const [addProduct, { error: addProductError, isSuccess }] =
+  const [addProduct, { error: addProductError, isSuccess, isLoading }] =
     useAddProductMutation()
 
   const { register, handleSubmit, formState, reset } = useForm({
@@ -68,7 +69,11 @@ const AddProductPage = () => {
   }
 
   useEffect(() => {
-    reset()
+    if (isSuccess) {
+      reset()
+      setImage(null)
+      setImages(null)
+    }
   }, [isSuccess])
 
   const submitHandler = async (data: DataType) => {
@@ -97,15 +102,19 @@ const AddProductPage = () => {
       toast.success('Product Added Successfully')
       console.log(data)
     } catch (err) {
-      toast.error(err)
+      toast.error(err.message)
     }
+  }
+
+  if (isLoading) {
+    return <FullscreenLoading />
   }
 
   return (
     <main className="text-left mb-10">
       <h1 className="mb-8 text-4xl font-bold text-center">Add Product</h1>
       <form onSubmit={handleSubmit(submitHandler)}>
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row md:gap-x-5">
           <div>
             <FormInput
               name="name"
@@ -215,8 +224,8 @@ const AddProductPage = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col justify-between gap-[70px] ml-[30px]">
-            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-14 flex flex-col items-center justify-center p-[10px]">
+          <div className="flex flex-col justify-between gap-5 mt-4 md:mt-0">
+            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
               {image && (
                 <img
                   src={URL.createObjectURL(image)}
@@ -246,15 +255,15 @@ const AddProductPage = () => {
               )}
             </div>
 
-            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-14 flex flex-col items-center justify-center p-[10px]">
+            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
               {images && (
-                <div className="flex gap-4">
+                <div className="grid gap-2 grid-cols-4">
                   {images &&
                     images.map((item, index) => {
                       return (
                         <img
                           src={URL.createObjectURL(item)}
-                          className="w-[60px] rounded-md"
+                          className="w-[60px] rounded-md block"
                           key={index}
                         />
                       )

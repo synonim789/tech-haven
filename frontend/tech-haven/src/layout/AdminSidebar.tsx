@@ -7,20 +7,18 @@ import { AdminSidebarData } from './AdminSidebartData'
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <div className="bg-white text-black">
+    <div className="bg-white text-black w-fit">
       <IoIosMenu
-        className="text-6xl ml-6 cursor-pointer"
+        className="text-6xl ml-6 cursor-pointer lg:hidden"
         onClick={() => setIsOpen(true)}
       />
       <nav
-        className={
-          isOpen
-            ? 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 left-0 transition-all ease-in-out duration-300 z-20'
-            : 'bg-[#0e1111] text-white min-h-screen w-[250px] fixed top-0 -left-[100%] transition-all ease-in-out duration-300 z-20'
-        }
+        className={` bg-white text-gray-400 min-h-screen w-[250px] lg:static lg:inset-0 fixed top-0 transition-all ease-in-out duration-300 z-20 ${
+          isOpen ? ' left-0' : 'top-0 -left-[100%] '
+        }`}
       >
         <div
-          className="text-5xl cursor-pointer w-full flex justify-end"
+          className="text-5xl cursor-pointer w-full flex justify-end lg:hidden"
           onClick={() => setIsOpen(false)}
         >
           <IoMdClose />
@@ -36,7 +34,7 @@ const AdminSidebar = () => {
         })}
         <Link
           to="/"
-          className="text-white text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:bg-[#353839] hover:border-l-[5px] hover:border-solid hover:border-l-[#120b90] "
+          className="text-gray-400 text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:border-l-[5px] hover:border-solid hover:border-l-[#120b90] "
         >
           Return To Main Page
         </Link>

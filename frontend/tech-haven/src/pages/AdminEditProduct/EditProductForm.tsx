@@ -62,7 +62,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
 
       toast.success('Product updated')
     } catch (error) {
-      toast.error(error.data.message)
+      toast.error(error.message)
     }
   }
 

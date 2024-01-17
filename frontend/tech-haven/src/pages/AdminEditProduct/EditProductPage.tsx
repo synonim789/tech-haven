@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AdminSelect from '../../components/ui/AdminSelect'
 import { useGetAllProductsQuery } from '../../features/products/products'
 import { ProductType } from '../../types'
@@ -9,8 +9,12 @@ const EdictProductPage = () => {
 
   const { data: products } = useGetAllProductsQuery()
 
+  useEffect(() => {
+    setValue(null)
+  }, [products])
+
   return (
-    <>
+    <section className="text-center w-full">
       <h4 className="text-3xl font-semibold mb-4">Edit Product</h4>
       <AdminSelect
         options={products}
@@ -18,7 +22,7 @@ const EdictProductPage = () => {
         onChange={(option: ProductType | null) => setValue(option)}
       />
       {value && <EditProductForm product={value} />}
-    </>
+    </section>
   )
 }
 export default EdictProductPage

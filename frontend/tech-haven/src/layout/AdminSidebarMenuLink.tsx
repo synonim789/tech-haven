@@ -31,7 +31,7 @@ const AdminSidebarMenuLink = ({
     <>
       <Link
         to={item.path}
-        className="text-white text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:bg-[#353839] hover:border-l-[5px] hover:border-solid hover:border-l-[#120b90]"
+        className="text-gray-400 text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] h hover:border-l-[5px] hover:border-solid hover:border-l-[#120b90]"
         onClick={() => setShowSubMenu(!showSubMenu)}
       >
         <div className="flex items-center gap-3">
@@ -52,7 +52,7 @@ const AdminSidebarMenuLink = ({
             <Link
               to={menu.path}
               key={menu.path}
-              className="text-white h-[60px]  bg-[#3b444b]  pl-10 flex items-center hover:bg-[#192b90]"
+              className="text-gray-500 h-[60px] font-bold pl-10 flex items-center hover:bg-[#192b90]"
               onClick={hideMenu}
             >
               {menu.title}

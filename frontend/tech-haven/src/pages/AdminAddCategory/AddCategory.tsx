@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
@@ -14,7 +15,10 @@ const AddCategory = () => {
   const [addCategory, { isLoading, isSuccess }] = useAddCategoryMutation()
 
   useEffect(() => {
-    reset()
+    if (isSuccess) {
+      reset()
+      toast.success('Category added successfully')
+    }
   }, [isSuccess])
   const { errors } = formState
 
