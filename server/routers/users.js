@@ -10,12 +10,19 @@ const {
   userForgotPassword,
   updateUser,
   changeUserRole,
+  getUserOrder,
 } = require("../controllers/userController");
 const verifyJWT = require("../helpers/jwt");
 const verifyRoles = require("../helpers/verifyRoles");
 const router = express.Router();
 
 router.get("/", verifyJWT, verifyRoles("admin"), getAllUser);
+router.get(
+  "/orders/:id",
+  verifyJWT,
+  verifyRoles("user", "admin"),
+  getUserOrder,
+);
 router.post("/", addUser);
 router.get("/:id", verifyJWT, verifyRoles("admin", "user"), getUser);
 router.post("/login", loginUser);

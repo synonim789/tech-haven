@@ -3,6 +3,7 @@ const User = require("../models/user");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Order = require("../models/order");
 
 const getAllUser = asyncHandler(async (req, res) => {
   const userList = await User.find().select("-passwordHash");
@@ -204,6 +205,24 @@ const changeUserRole = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserOrder = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  const page = parseInt(req.query.page || "0");
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  const userOrders = await Order.find({ user: req.params.id })
+    .limit(5)
+    .skip(5 * page)
+    .sort({ dateOrdered: -1 });
+
+  const orderCount = await Order.countDocuments({ user: req.params.id });
+
+  return res.status(200).json({ total: Math.ceil(orderCount / 5), userOrders });
+});
+
 module.exports = {
   getAllUser,
   addUser,
@@ -215,4 +234,5 @@ module.exports = {
   userForgotPassword,
   updateUser,
   changeUserRole,
+  getUserOrder,
 };
