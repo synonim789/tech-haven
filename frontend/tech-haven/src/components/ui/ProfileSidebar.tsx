@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 const ProfileSidebar = () => {
   return (
-    <aside className="flex p-4 bg-white shadow-xl rounded-full mb-6 items-center">
+    <aside className="flex p-4 bg-white shadow-xl rounded-full mb-6 items-center justify-between">
       <NavLink
         to="info"
         className={({ isActive }) =>
