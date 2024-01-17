@@ -3,9 +3,8 @@ import ProfileSidebar from '../../components/ui/ProfileSidebar'
 
 const ProfilePage = () => {
   return (
-    <div className="max-w-5xl mx-auto flex flex-col justify-between my-5 text-center">
+    <div className="mx-auto py-4">
       <ProfileSidebar />
-
       <Outlet />
     </div>
   )
