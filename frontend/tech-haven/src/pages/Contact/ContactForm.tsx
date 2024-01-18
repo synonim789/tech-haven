@@ -11,7 +11,11 @@ type ContactFormSubmitData = {
   message: string
 }
 
-const ContactForm = () => {
+type ContactFormProps = {
+  className: string
+}
+
+const ContactForm = ({ className }: ContactFormProps) => {
   const form = useForm<ContactFormSubmitData>()
   const { register, handleSubmit, formState, reset } = form
   const { errors } = formState
@@ -34,7 +38,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="mb-4 w-full">
+    <div className={`${className} p-10`}>
       <form
         action="#"
         className="flex flex-col gap-8"

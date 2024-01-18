@@ -17,7 +17,7 @@ const AboutPage = () => {
           aspernatur.
         </p>
       </div>
-      <div>
+      <div className="px-5 md:px-0">
         <AboutImage src={image} />
       </div>
     </main>

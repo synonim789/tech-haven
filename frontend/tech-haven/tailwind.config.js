@@ -9,6 +9,7 @@ export default {
     extend: {
       backgroundImage: {
         hero: "url('/src/assets/6017768.jpg')",
+        contactHero: "url('/src/assets/contactHero.jpg')",
       },
       aspectRatio: {
         '3/5': '3 / 5',
