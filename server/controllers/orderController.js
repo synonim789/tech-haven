@@ -89,6 +89,18 @@ const addOrder = asyncHandler(async (req, res) => {
   }
 });
 
+const getSingleOrder = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const order = await Order.findOne({ _id: id }).populate(
+    "orderItems.productId",
+    "name image price",
+  );
+  if (!order) {
+    return res.status(400).json({ message: "Order Not found" });
+  }
+  return res.status(200).json(order);
+});
+
 module.exports = {
   getAllOrders,
   updateOrder,
@@ -96,4 +108,5 @@ module.exports = {
   getTotalSales,
   getOrderCount,
   addOrder,
+  getSingleOrder,
 };
