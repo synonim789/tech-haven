@@ -32,6 +32,7 @@ import OrderSummary from './pages/OrderSummary/OrderSummary'
 import ProductPage from './pages/Product/ProductPage'
 import ProductsPage from './pages/Products/ProductsPage'
 import SignUpPage from './pages/SignUp/SignUpPage'
+import SingleOrder from './pages/SingleOrder/SingleOrder'
 import UserChangeInfo from './pages/UserChangeInfo/UserChangeInfo'
 import UserProfileInfo from './pages/UserInfo/UserProfileInfo'
 import UserOrderPage from './pages/UserOrders/UserOrderPage'
@@ -74,7 +75,7 @@ function App() {
         <Header />
         <Navbar />
         <Routes>
-          <Route path="/" element={<Homepage />}></Route>
+          <Route path="/" element={<Homepage />} />
           <Route
             path="/login"
             element={
@@ -82,7 +83,7 @@ function App() {
                 <LoginPage />
               </GuestRoute>
             }
-          ></Route>
+          />
           <Route
             path="/sign-up"
             element={
@@ -90,7 +91,7 @@ function App() {
                 <SignUpPage />
               </GuestRoute>
             }
-          ></Route>
+          />
           <Route
             path="/forgot-password"
             element={
@@ -98,12 +99,12 @@ function App() {
                 <ForgotPassword />
               </GuestRoute>
             }
-          ></Route>
-          <Route path="/products" element={<ProductsPage />}></Route>
-          <Route path="/about" element={<AboutPage />}></Route>
-          <Route path="/contact" element={<ContactPage />}></Route>
-          <Route path="/cart" element={<CartPage />}></Route>
-          <Route path="/products/:id" element={<ProductPage />}></Route>
+          />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/products/:id" element={<ProductPage />} />
           <Route
             path="/profile"
             element={
@@ -117,6 +118,7 @@ function App() {
             <Route path="orders" element={<UserOrderPage />} />
             <Route path="settings" element={<UserSettingsPage />} />
             <Route path="settings/update" element={<UserChangeInfo />} />
+            <Route path="orders/:id" element={<SingleOrder />} />
           </Route>
           <Route
             path="/admin"

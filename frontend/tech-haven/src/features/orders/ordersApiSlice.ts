@@ -7,7 +7,7 @@ type GetOrders = {
 
 type OrderType = {
   _id: string
-  orderItems: {}
+  orderItems: OrderItems[]
   shippingAddress1: string
   shippingAddress2: string
   phone: string
@@ -16,6 +16,19 @@ type OrderType = {
   user: string
   subtotal: number
   dateOrdered: string
+}
+
+type OrderItems = {
+  name: string
+  price: number
+  quantity: number
+  productId: {
+    _id: string
+    name: string
+    image: string
+    price: number
+    id: string
+  }
 }
 
 const ordersApiSlice = api.injectEndpoints({
@@ -35,7 +48,16 @@ const ordersApiSlice = api.injectEndpoints({
         url: `users/orders/${id}?page=${page}`,
       }),
     }),
+    getSingleOrder: builder.query<OrderType, string | undefined>({
+      query: (id) => ({
+        url: `orders/${id}`,
+      }),
+    }),
   }),
 })
 
-export const { usePostOrderMutation, useGetUserOrderQuery } = ordersApiSlice
+export const {
+  usePostOrderMutation,
+  useGetUserOrderQuery,
+  useGetSingleOrderQuery,
+} = ordersApiSlice

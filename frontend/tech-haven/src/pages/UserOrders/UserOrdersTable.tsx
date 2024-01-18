@@ -66,7 +66,10 @@ const UserOrdersTable = ({ userOrders }: UserOrdersProps) => {
                 </p>
               </td>
               <td className="block md:table-cell p-2">
-                <Link to="/" className="text-blue-500 font-semibold">
+                <Link
+                  to={`${order._id}`}
+                  className="text-blue-500 font-semibold"
+                >
                   Details
                 </Link>
               </td>
