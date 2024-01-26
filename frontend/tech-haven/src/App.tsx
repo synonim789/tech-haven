@@ -134,7 +134,9 @@ function App() {
               path="products"
               element={
                 <div>
-                  <h1 className="text-6xl font-bold">Products</h1>
+                  <h2 className="text-6xl font-bold text-slate-600">
+                    Products
+                  </h2>
                 </div>
               }
             />
@@ -144,7 +146,9 @@ function App() {
               path="categories"
               element={
                 <div>
-                  <h1 className="text-6xl font-bold">Categories</h1>
+                  <h2 className="text-6xl font-bold text-slate-600">
+                    Categories
+                  </h2>
                 </div>
               }
             />
@@ -155,7 +159,7 @@ function App() {
               path="users"
               element={
                 <div>
-                  <h1 className="text-6xl font-bold">Users</h1>
+                  <h2 className="text-6xl font-bold text-slate-600">Users</h2>
                 </div>
               }
             />

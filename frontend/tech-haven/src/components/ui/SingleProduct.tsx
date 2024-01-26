@@ -6,12 +6,16 @@ const SingleProduct = (product: ProductType) => {
 
   return (
     <Link
-      className="bg-white rounded-3xl overflow-hidden hover:scale-110 duration-300 flex flex-col shadow-sm"
+      className="bg-white dark:bg-[#121212] rounded-md overflow-hidden hover:scale-110 duration-300 flex flex-col shadow-2xl"
       to={`/products/${id}`}
     >
-      <img src={image} alt={name} className="aspect-[4/3] object-cover" />
-      <p className="text-[#120b90] font-semibold text-3xl mt-5 mb-5">{name}</p>
-      <p className="text-orange-500 font-bold text-3xl mb-5">${price}</p>
+      <img src={image} alt={name} className="w-full h-full object-cover" />
+      <div className="px-4 py-3 text-left flex flex-col justify-center">
+        <p className="text-[#405684] font-semibold text-3xl mt-5 mb-5 truncate">
+          {name}
+        </p>
+        <p className="text-orange-500 font-bold text-3xl mb-5">${price}</p>
+      </div>
     </Link>
   )
 }

@@ -2,14 +2,14 @@ import { FaHistory, FaInfoCircle } from 'react-icons/fa'
 import { IoSettingsSharp } from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 
-const ProfileSidebar = () => {
+const ProfileNavbar = () => {
   return (
-    <aside className="flex p-4 bg-white shadow-xl rounded-full mb-6 items-center justify-between">
+    <aside className="flex p-4 bg-white shadow-xl rounded-full mb-6 items-center justify-between dark:bg-[#121212] text-slate-500">
       <NavLink
         to="info"
         className={({ isActive }) =>
           isActive
-            ? 'flex items-center px-8 py-4 text-3xl font-semibold gap-3 bg-[#120b90] text-white rounded-full'
+            ? 'flex items-center px-8 py-4 text-3xl font-semibold gap-3 bg-[#405684] text-white rounded-full'
             : 'flex items-center px-8 py-4 text-3xl font-semibold gap-3'
         }
       >
@@ -20,7 +20,7 @@ const ProfileSidebar = () => {
         to="orders"
         className={({ isActive }) =>
           isActive
-            ? 'flex items-center px-8 py-4  text-3xl font-semibold gap-3 bg-[#120b90] text-white rounded-full'
+            ? 'flex items-center px-8 py-4  text-3xl font-semibold gap-3 bg-[#405684] text-white rounded-full'
             : 'flex items-center px-8 py-4  text-3xl font-semibold gap-3'
         }
       >
@@ -31,7 +31,7 @@ const ProfileSidebar = () => {
         to="settings"
         className={({ isActive }) =>
           isActive
-            ? 'flex items-center px-8 py-4 text-3xl font-semibold gap-3 bg-[#120b90] text-white rounded-full'
+            ? 'flex items-center px-8 py-4 text-3xl font-semibold gap-3 bg-[#405684] text-white rounded-full'
             : 'flex items-center px-8 py-4 text-3xl font-semibold gap-3'
         }
       >
@@ -41,4 +41,4 @@ const ProfileSidebar = () => {
     </aside>
   )
 }
-export default ProfileSidebar
+export default ProfileNavbar

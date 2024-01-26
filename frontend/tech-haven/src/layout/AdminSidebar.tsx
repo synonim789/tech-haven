@@ -7,13 +7,13 @@ import { AdminSidebarData } from './AdminSidebartData'
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <div className="bg-white text-black w-fit">
+    <div className="bg-white text-black w-fit dark:bg-[#121212]">
       <IoIosMenu
         className="text-6xl ml-6 cursor-pointer lg:hidden"
         onClick={() => setIsOpen(true)}
       />
       <nav
-        className={` bg-white text-gray-400 min-h-screen w-[250px] lg:static lg:inset-0 fixed top-0 transition-all ease-in-out duration-300 z-20 ${
+        className={`dark:bg-[#121212] bg-white text-gray-400 min-h-screen w-[250px] lg:static lg:inset-0 fixed top-0 transition-all ease-in-out duration-300 z-20 ${
           isOpen ? ' left-0' : 'top-0 -left-[100%] '
         }`}
       >
@@ -34,7 +34,7 @@ const AdminSidebar = () => {
         })}
         <Link
           to="/"
-          className="text-gray-400 text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:border-l-[5px] hover:border-solid hover:border-l-[#120b90] "
+          className="text-gray-400 text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:border-l-[5px] hover:border-solid hover:border-l-[#405684] "
         >
           Return To Main Page
         </Link>

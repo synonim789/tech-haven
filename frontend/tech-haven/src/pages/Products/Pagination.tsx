@@ -28,8 +28,8 @@ export const Pagination = () => {
             }
             className={
               number == currentPage
-                ? 'w-[50px] h-[50px] bg-[#120b90] border border-solid border-slate-200 rounded-full text-white font-bold text-[20px]'
-                : 'w-[50px] h-[50px] bg-white rounded-full text-[#120b90] font-bold text-[20px]'
+                ? 'w-[50px] h-[50px] bg-[#405684]  rounded-full text-white font-bold text-[20px] shadow-xl scale-125'
+                : 'w-[50px] h-[50px] bg-white dark:bg-slate-400 rounded-full text-[#405684] font-bold text-[20px] shadow-xl'
             }
             key={number}
           >

@@ -1,7 +1,7 @@
+import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFilter } from '../../features/products/filters'
 import { RootState } from '../../store'
-import { ChangeEvent } from 'react'
 
 const SearchBar = () => {
   const filters = useSelector((state: RootState) => state.filters.filters)
@@ -18,7 +18,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search..."
-        className="p-4 w-4/5 overflow-hidden my-10 rounded-full text-2xl shadow-sm"
+        className="p-4 w-full overflow-hidden my-10 rounded-full text-2xl shadow-lg lg:w-3/4 dark:bg-[#575757] dark:text-white placeholder:text-white"
         name="search"
         value={filters.search}
         onChange={(e) => handleSearchChange(e)}

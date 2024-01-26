@@ -1,7 +1,7 @@
 const AdminWelcomePage = () => {
   return (
     <div>
-      <h1 className="text-6xl font-bold">Welcome, Admin</h1>
+      <h2 className="text-6xl font-bold text-slate-600">Welcome, Admin</h2>
     </div>
   )
 }

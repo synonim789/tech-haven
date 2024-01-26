@@ -40,12 +40,12 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#120b90] w-full py-3 relative">
-      <div className="max-w-5xl mx-auto px-4">
+    <header className="bg-[#405684] w-full py-3 relative ">
+      <div className="max-w-screen-xl px-4 mx-auto">
         {headerRole === 'user' && (
           <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
-              className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
+              className="border-[2px] border-solid border-white text-white dark:text-slate-300 text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
               onClick={() => handleLogout()}
             >
               Log out
@@ -62,14 +62,14 @@ const Header = () => {
         {headerRole === 'admin' && (
           <div className="flex justify-center sm:justify-end items-center gap-5">
             <button
-              className="border-[2px] border-solid border-white text-white text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
+              className="border-[2px] border-solid border-white text-white dark:text-slate-300 text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
               onClick={() => handleLogout()}
             >
               Log out
             </button>
             <Link
               to="/admin"
-              className="text-white font-bold text-xl flex items-center gap-2 hover:opacity-90"
+              className="text-white dark:text-slate-300 font-bold text-xl flex items-center gap-2 hover:opacity-90"
             >
               <RiAdminLine className="h-8 w-8" />
               <span>Admin Panel</span>
@@ -81,13 +81,13 @@ const Header = () => {
           <div className="flex justify-center sm:justify-end gap-3">
             <Link
               to="/login"
-              className="text-white text-2xl font-bold transition-opacity hover:opacity-60"
+              className="text-white dark:text-slate-300 text-2xl font-bold transition-opacity hover:opacity-60"
             >
               Login
             </Link>
             <Link
               to="/sign-up"
-              className="text-white text-2xl font-bold transition-opacity hover:opacity-60"
+              className="text-white dark:text-slate-300 text-2xl font-bold transition-opacity hover:opacity-60"
             >
               Sign Up
             </Link>

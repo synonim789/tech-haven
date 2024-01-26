@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom'
+import Phone from '../../assets/rsz_iphone.png'
 
 const Hero = () => {
   return (
-    <section className="min-h-[90vh] bg-hero bg-center bg-no-repeat bg-cover relative flex justify-center items-center">
-      <div className="max-w-5xl mx-auto flex flex-col justify-center items-center gap-16 px-4">
-        <h1 className="uppercase font-bold text-white text-6xl text-center relative after:content-[''] after:w-4/5 after:absolute after:h-2 after:bg-orange-500 after:-bottom-4 after:left-0 after:right-0 after:mx-auto">
-          Make your life a tech haven
+    <section className="grid max-w-screen-xl py-8 mt-5 px-4 mx-auto lg:gap-8 lg:py-16 lg:grid-cols-12">
+      <div className="mr-auto place-self-center text-center lg:col-span-6 w-full mb-5 lg:mb-0">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+          Make your life a Tech Haven
         </h1>
         <Link
           to="/products"
-          className="text-[#120b90] bg-white px-12 py-6 font-semibold text-4xl rounded-full hover:scale-110 transition duration-300"
+          className="inline-flex items-center justify-center px-5 py-3 font-bold text-center text-2xl text-white rounded-full bg-[#405684] hover:scale-105 transition"
         >
           Shop Now
         </Link>
+      </div>
+      <div className="lg:col-span-6 mx-auto lg:ml-auto lg:block">
+        <img src={Phone} className="w-3/4 mx-auto lg:w-full lg:mx-0" />
       </div>
     </section>
   )

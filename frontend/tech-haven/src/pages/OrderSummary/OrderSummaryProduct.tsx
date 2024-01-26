@@ -6,7 +6,7 @@ type OrderSummaryProductProps = {
 
 const OrderSummaryProduct = ({ product }: OrderSummaryProductProps) => {
   return (
-    <div className="bg-white rounded-xl overflow-hidden flex flex-col md:flex-row justify-between items-center shadow-md text-4xl px-6 py-4 h-full">
+    <div className="bg-white rounded-xl overflow-hidden flex flex-col md:flex-row justify-between items-center shadow-md text-4xl px-6 py-4 h-full dark:bg-[#121212] text-slate-600">
       <img
         src={product.image}
         alt={product.name}

@@ -28,16 +28,16 @@ const CartItem = ({ item }: CartItemPropsType) => {
   return (
     <div
       key={name}
-      className="grid gap-6 xl:grid-cols-5 place-items-center bg-white mb-10 rounded-md border border-gray-200 overflow-hidden text-center shadow-md text-4xl p-5"
+      className="grid gap-6 xl:grid-cols-5 place-items-center bg-white mb-10 rounded-md border border-gray-200 overflow-hidden text-center shadow-md text-4xl p-5 dark:bg-[#575757] dark:border-none dark:text-slate-400"
     >
       <img src={image} alt={name} className="w-4/5" />
       <p key={name}>{name}</p>
 
       <AmountButtons amount={amount} increase={increase} decrease={decrease} />
-      <p className="text-[#192b90] font-semibold">${price * amount}</p>
+      <p className="text-slate-400 font-semibold">${price * amount}</p>
 
       <BiSolidTrash
-        className="text-4xl text-slate-600 hover:text-black cursor-pointer transition-all hover:scale-105"
+        className="text-4xl text-slate-600 hover:text-red-500 cursor-pointer transition-all hover:scale-105 dark:text-slate-400"
         onClick={() => {
           dispatch(removeItemFromCart(id))
         }}

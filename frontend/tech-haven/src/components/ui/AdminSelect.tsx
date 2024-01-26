@@ -19,14 +19,14 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
   }
   return (
     <div
-      className="flex-grow relative bg-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
+      className="relative bg-white dark:bg-[#121212] text-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
       onClick={() => setIsOpen((prev) => !prev)}
     >
       <span className="grow flex flex-wrap text-3xl">
         {value ? value.name : 'Choose Product'}
       </span>
       <button
-        className="text-3xl text-slate-600 hover:text-slate-400"
+        className="text-3xl hover:text-slate-400"
         onClick={(e) => {
           e.stopPropagation()
           clearOptions()
@@ -35,10 +35,10 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
         &times;
       </button>
       <div className="self-stretch w-[1px] bg-slate-600"></div>
-      <div className="border-[7px] border-solid border-t-[#777] bg-none cursor-pointer translate-x-0 translate-y-1/4"></div>
+      <div className="border-[7px] border-solid border-t-[#777] bg-transparent cursor-pointer translate-x-0 translate-y-1/4"></div>
       <ul
         className={
-          'absolute left-0 p-0 w-full top-[calc(100%+5px)] bg-white rounded-xl max-h-[400px] overflow-auto ' +
+          'absolute left-0 p-0 w-full top-[calc(100%+5px)] bg-white dark:bg-[#121212] rounded-xl max-h-[400px] overflow-auto ' +
           ` ${isOpen ? 'block' : 'hidden'}`
         }
       >
@@ -47,7 +47,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
             return (
               <li
                 key={option.id}
-                className="text-2xl p-3 cursor-pointer flex items-center gap-5 font-bold text-left hover:bg-[#120b90] hover:text-white"
+                className="text-2xl p-3 cursor-pointer flex items-center gap-5 font-bold text-left hover:bg-[#405684] hover:text-white"
                 onClick={(e) => {
                   e.stopPropagation()
                   selectOption(option)

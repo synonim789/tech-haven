@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
+import FormTextarea from '../../components/form/FormTextarea'
 
 type ContactFormSubmitData = {
   email: string
@@ -76,21 +77,17 @@ const ContactForm = ({ className }: ContactFormProps) => {
           }}
           error={errors?.name?.message}
         />
-
-        <label className="flex flex-col font-bold text-[20px]">
-          <span>Your Message</span>
-          <textarea
-            rows={7}
-            className="px-4 py-3 rounded-xl border border-solid border-slate-300 shadow-md resize-none"
-            placeholder="Enter your message"
-            {...register('message', {
+        <FormTextarea
+          name="Message"
+          register={{
+            ...register('message', {
               required: 'Message is Required',
-            })}
-          />
-          {errors?.message && (
-            <p className="text-red-600 font-bold ">{errors.message.message}</p>
-          )}
-        </label>
+            }),
+          }}
+        />
+        {errors?.message && (
+          <p className="text-red-600 font-bold ">{errors.message.message}</p>
+        )}
         <FormButton
           text="Send Message"
           loading={loading}

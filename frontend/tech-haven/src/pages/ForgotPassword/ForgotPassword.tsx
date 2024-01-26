@@ -26,24 +26,24 @@ const ForgotPassword = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
-        <div className="w-full text-[#120b90] font-bold">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10 dark:bg-[#121212]">
+        <div className="w-full text-[#405684] font-bold">
           <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />
             Back Home
           </Link>
         </div>
-        <h1 className="text-2xl font-bold text-[#120b90]">Forgot Password</h1>
+        <h2 className="text-2xl font-bold text-[#405684]">Forgot Password</h2>
         <form
           className="flex flex-col w-full justify-center items-center gap-7"
           onSubmit={handleSubmit(submitHandler)}
         >
-          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer">
+          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer text-gray-400">
             <span>Email</span>
             <input
               type="email"
               id="email"
-              className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl"
+              className="px-3 py-2 border-[2px] border-solid border-slate-600 shadow-lg rounded-xl dark:bg-transparent dark:text-white"
               placeholder="Enter Email"
               {...register('email', {
                 required: 'Email is required',
@@ -66,14 +66,14 @@ const ForgotPassword = () => {
             ))}
           <button
             type="submit"
-            className="bg-[#120b90] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+            className="bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
           >
             {isLoading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
         <Link
           to="/login"
-          className="font-bold text-[#120b90] text-right w-full text-[20px]"
+          className="font-bold text-[#405684] text-right w-full text-[20px]"
         >
           Login
         </Link>

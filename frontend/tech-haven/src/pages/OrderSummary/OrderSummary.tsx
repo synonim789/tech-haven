@@ -91,14 +91,16 @@ const OrderSummary = () => {
 
   return (
     <section className="text-3xl py-5 max-w-6xl mx-auto w-full px-5">
-      <h2 className="text-5xl font-bold mb-5 text-center">Order Summary</h2>
+      <h2 className="text-5xl font-bold mb-5 text-center text-slate-500">
+        Order Summary
+      </h2>
       <div className="flex flex-col md:flex-row justify-between gap-5">
         <div className="flex flex-col gap-y-5 basis-3/4">
           {order?.orderItems.map((item) => {
             return <OrderSummaryProduct product={item} />
           })}
         </div>
-        <div className="bg-white px-4 w-full basis-1/4 shadow-md rounded-lg flex flex-col gap-4 items-center justify-around">
+        <div className="bg-white px-4 w-full basis-1/4 shadow-md rounded-lg flex flex-col gap-4 items-center justify-around text-slate-600 dark:bg-[#121212]">
           <p className="flex gap-1 my-4">
             <span className="font-bold">Subtotal: </span>${order.subtotal}
           </p>
@@ -112,7 +114,7 @@ const OrderSummary = () => {
         </div>
       </div>
       <div className="mt-5">
-        <div className="bg-white rounded-lg shadow-md p-5 flex justify-between items-center">
+        <div className="bg-white rounded-lg shadow-md p-5 flex justify-between items-center text-slate-600 dark:bg-[#121212]">
           <div>
             <p className="capitalize">
               <b>Payment method:</b> {order.payment}
@@ -125,7 +127,7 @@ const OrderSummary = () => {
           </div>
           <button
             onClick={() => handleCheckout()}
-            className="bg-[#120b90] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5 hover:scale-105 hover:opacity-75 transition"
+            className="bg-[#405684] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5 hover:scale-105 hover:opacity-75 transition"
           >
             Continue
           </button>

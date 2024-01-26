@@ -5,7 +5,9 @@ const UserWelcomePage = () => {
   const user = useSelector((state: RootState) => state.user.user)
   return (
     <main>
-      <h1 className="text-3xl font-semibold">Welcome, {user?.name}</h1>
+      <h2 className="text-3xl font-semibold text-slate-500 text-center">
+        Welcome, {user?.name}
+      </h2>
     </main>
   )
 }

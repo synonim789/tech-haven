@@ -46,7 +46,7 @@ const ProductsPage = () => {
       <div className="max-w-5xl mx-auto w-full px-4">
         <SearchBar />
         <Sort />
-        <div className="flex gap-7 w-fit">
+        <div className="flex gap-7 w-fit flex-col lg:flex-row">
           <Filters allProducts={allProducts} />
           <ProductsList />
         </div>

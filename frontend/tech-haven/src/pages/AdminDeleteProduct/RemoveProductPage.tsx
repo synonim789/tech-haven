@@ -10,7 +10,9 @@ const RemoveProductPage = () => {
 
   return (
     <section className="text-center">
-      <h1 className="text-4xl font-bold mb-[30px]">Remove Product</h1>
+      <h2 className="text-4xl font-bold mb-[30px] text-slate-500">
+        Remove Product
+      </h2>
       <AdminSelect
         options={products}
         value={value}

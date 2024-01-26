@@ -112,7 +112,9 @@ const AddProductPage = () => {
 
   return (
     <main className="text-left mb-10">
-      <h1 className="mb-8 text-4xl font-bold text-center">Add Product</h1>
+      <h2 className="mb-8 text-4xl font-bold text-center text-slate-500">
+        Add Product
+      </h2>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div className="flex flex-col md:flex-row md:gap-x-5">
           <div>
@@ -147,14 +149,16 @@ const AddProductPage = () => {
                   }),
                 }}
               />
-              <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-2">
-                <label htmlFor="category">Category</label>
+              <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize">
+                <label htmlFor="category" className="dark:text-gray-500">
+                  Category
+                </label>
                 <select
                   id="category"
                   {...register('category', {
                     required: 'Category is required',
                   })}
-                  className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl placeholder:capitalize"
+                  className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize "
                 >
                   <option value="" disabled>
                     Choose Category
@@ -220,12 +224,12 @@ const AddProductPage = () => {
                 type="checkbox"
                 id="featured"
                 {...register('isFeatured')}
-                className="w-5 accent-[#120b90]"
+                className="w-5 accent-[#405684]"
               />
             </div>
           </div>
           <div className="flex flex-col justify-between gap-5 mt-4 md:mt-0">
-            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
+            <div className="rounded-xl bg-white dark:bg-[#121212] shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
               {image && (
                 <img
                   src={URL.createObjectURL(image)}
@@ -234,7 +238,7 @@ const AddProductPage = () => {
               )}
               <label
                 htmlFor="mainImage"
-                className="text-2xl text-white bg-[#120b90] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
+                className="text-2xl text-white bg-[#405684] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
               >
                 Choose Main Image...
               </label>
@@ -255,7 +259,7 @@ const AddProductPage = () => {
               )}
             </div>
 
-            <div className="rounded-xl bg-white shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
+            <div className="rounded-xl bg-white dark:bg-[#121212] shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
               {images && (
                 <div className="grid gap-2 grid-cols-4">
                   {images &&
@@ -272,7 +276,7 @@ const AddProductPage = () => {
               )}
               <label
                 htmlFor="allImages"
-                className="text-2xl text-white bg-[#120b90] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
+                className="text-2xl text-white bg-[#405684] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
               >
                 Choose All Images...
               </label>
@@ -303,7 +307,7 @@ const AddProductPage = () => {
         )}
         <button
           type="submit"
-          className="bg-[#120b90] text-white px-4 py-2 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
+          className="bg-[#405684] text-white px-4 py-2 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
         >
           Add Product
         </button>

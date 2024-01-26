@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { GrCart } from 'react-icons/gr'
+import { BsFillCartFill } from 'react-icons/bs'
+
 import { IoMdClose } from 'react-icons/io'
 
 import { RxHamburgerMenu } from 'react-icons/rx'
@@ -21,9 +22,9 @@ const Navbar = () => {
   }
 
   return (
-    <section className="py-5 bg-white w-full sticky top-0 z-20">
-      <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
-        <p className="font-bold text-3xl text-[#120b90] relative">
+    <section className="py-5 bg-white dark:bg-[#121212] dark:text-slate-400 w-full sticky top-0 z-20">
+      <div className="flex justify-between items-center max-w-screen-xl px-4 mx-auto">
+        <p className="font-bold text-3xl text-[#405684] relative">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -92,7 +93,7 @@ const Navbar = () => {
                     : 'relative'
                 }
               >
-                <GrCart />
+                <BsFillCartFill />
                 {totalItems > 0 ? (
                   <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] right-[-14px]">
                     {totalItems}
@@ -108,7 +109,7 @@ const Navbar = () => {
             onClick={() => setShowNavigation(!showNavigation)}
           />
           {showNavigation && (
-            <nav className="flex flex-col items-start justify-start fixed top-0 right-0  w-4/6 h-screen bg-white transition text-4xl">
+            <nav className="flex flex-col items-start justify-start fixed top-0 right-0  w-4/6 h-screen bg-white dark:bg-[#3f3f3f] transition text-4xl">
               <IoMdClose
                 className="cursor-pointer my-5 ml-4 text-6xl"
                 onClick={() => setShowNavigation(false)}
@@ -160,7 +161,7 @@ const Navbar = () => {
                     }
                     onClick={() => setShowNavigation(false)}
                   >
-                    <GrCart />
+                    <BsFillCartFill />
                     {totalItems > 0 ? (
                       <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] left-6">
                         {totalItems}

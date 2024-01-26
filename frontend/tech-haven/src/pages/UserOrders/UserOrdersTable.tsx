@@ -19,7 +19,7 @@ const UserOrdersTable = ({ userOrders }: UserOrdersProps) => {
   return (
     <table className="w-full">
       <thead>
-        <tr className="border-b-2 border-b-gray-500 border-spacing-0 hidden md:table-row">
+        <tr className="border-b-2 border-b-gray-500 border-spacing-0 hidden md:table-row dark:text-slate-400">
           <th>ID</th>
           <th>Date</th>
           <th>To Pay</th>
@@ -30,7 +30,10 @@ const UserOrdersTable = ({ userOrders }: UserOrdersProps) => {
       <tbody>
         {userOrders.map((order) => {
           return (
-            <tr className="border-b-2 border-b-gray-500" key={order._id}>
+            <tr
+              className="border-b-2 border-b-gray-500 dark:text-slate-400"
+              key={order._id}
+            >
               <td
                 className="block md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
                 data-cell="Id"

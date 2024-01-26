@@ -14,9 +14,9 @@ const ProductPage = () => {
 
   if (isError || !product) {
     return (
-      <h1 className="min-h-[80vh] flex items-center justify-center text-6xl">
+      <h2 className="min-h-[80vh] flex items-center justify-center text-6xl">
         Product not Found
-      </h1>
+      </h2>
     )
   }
   const { name, description, images, brand, price, countInStock, rating } =
@@ -27,21 +27,23 @@ const ProductPage = () => {
       <ImageGallery images={images} />
 
       <section className="flex flex-col gap-4 lg:w-2/4">
-        <p className="text-2xl flex items-center">
+        <p className="text-2xl flex items-center text-slate-400">
           <AiFillStar className="text-yellow-500" />
           {rating}
         </p>
-        <h1 className="text-6xl font-bold">{name}</h1>
-        <p className="text-[25px]">{description}</p>
-        <p className="text-[25px]">
+        <h2 className="text-6xl font-bold text-slate-500">{name}</h2>
+        <p className="text-[25px] text-slate-600 font-semibold">
+          {description}
+        </p>
+        <p className="text-[25px] text-slate-500">
           <span className="font-bold ">Brand: </span>
           {brand}
         </p>
-        <p className="text-[25px]">
+        <p className="text-[25px] text-slate-500">
           <span className="font-bold">Available: </span>
           {countInStock > 0 ? 'In Stock' : 'Not in Stock'}
         </p>
-        <h3 className="text-[#120b90] text-6xl mb-8 font-bold">${price}</h3>
+        <h3 className="text-[#405684] text-6xl mb-8 font-bold">${price}</h3>
         <AddToCart product={product} />
       </section>
     </div>

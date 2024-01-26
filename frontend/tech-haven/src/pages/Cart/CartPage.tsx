@@ -13,7 +13,7 @@ const CartPage = () => {
   if (cart.length < 1) {
     return (
       <div className="flex justify-center items-center mt-20">
-        <h1 className="text-4xl font-bold">No Products Found</h1>
+        <h2 className="text-4xl font-bold">No Products Found</h2>
       </div>
     )
   }
@@ -31,20 +31,20 @@ const CartPage = () => {
           Remove All items
         </button>
         <div className="text-right flex flex-col gap-10">
-          <h3 className="text-5xl font-semibold">
-            Total: <span className="text-[#192b90]">{totalPrice}$</span>
+          <h3 className="text-5xl font-semibold dark:text-slate-500">
+            Total: <span className="text-[#405684]">{totalPrice}$</span>
           </h3>
           {user ? (
             <Link
               to="/order/info"
-              className="bg-[#120b90] text-white text-center font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+              className="bg-[#405684] text-white text-center font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
             >
               Continue {'>'}
             </Link>
           ) : (
             <Link
               to="/login"
-              className="bg-[#120b90] text-white text-center font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+              className="bg-[#405684] text-white text-center font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
             >
               Log in
             </Link>

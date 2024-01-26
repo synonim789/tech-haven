@@ -4,7 +4,7 @@ import ContactInfo from './ContactInfo'
 const ContactPage = () => {
   return (
     <section>
-      <div className="bg-contactHero min-h-[400px] bg-cover bg-center flex items-center justify-center"></div>
+      <div className="bg-contactHero min-h-[600px] bg-cover bg-center bg-no-repeat flex items-center justify-center"></div>
       <div className="flex lg:flex-row lg:items-stretch justify-center lg:justify-stretch flex-col w-full">
         <iframe
           id="gmap_canvas"

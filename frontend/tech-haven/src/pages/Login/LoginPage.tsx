@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
 import FormInput from '../../components/form/FormInput'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
@@ -28,26 +27,26 @@ const LoginPage = () => {
         const token = response.data.token
         dispatch(setData(token))
       }
-    } catch (err) {
-      toast.error(error.data.message)
+    } catch (err: any) {
+      console.log(err.message)
     }
   }
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-10 dark:bg-[#121212]">
         <Link
           to="/"
-          className="flex items-center text-[20px] w-full text-[#120b90] font-bold"
+          className="flex items-center text-[20px] w-full text-[#405684] font-bold"
         >
           <AiOutlineArrowLeft />
           Back Home
         </Link>
 
-        <h1 className="text-2xl font-bold text-slate-600">
-          <span className="text-[#120b90]">Log In</span> |
+        <h2 className="text-2xl font-bold text-slate-600">
+          <span className="text-[#405684]">Log In</span> |{' '}
           <Link to="/sign-up">Sign Up</Link>
-        </h1>
+        </h2>
         <form
           className="flex flex-col w-full justify-center items-center gap-7"
           onSubmit={handleSubmit(submitHandler)}
@@ -91,7 +90,7 @@ const LoginPage = () => {
         </form>
         <Link
           to="/forgot-password"
-          className="text-[#120b90] font-bold text-[20px]"
+          className="text-[#405684] font-bold text-[20px]"
         >
           Forgot Password?
         </Link>

@@ -28,7 +28,7 @@ const OrderSuccess = () => {
         </h2>
         <Link
           to="/"
-          className="bg-[#120b90] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5"
+          className="bg-[#405684] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5"
         >
           Back To Home
         </Link>

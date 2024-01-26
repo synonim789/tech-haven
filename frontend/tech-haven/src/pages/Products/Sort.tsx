@@ -17,10 +17,10 @@ const Sort = () => {
   const gridView = useSelector((state: RootState) => state.filters.gridView)
 
   return (
-    <div className="mb-5 flex justify-end items-center gap-5">
+    <div className="mb-5 flex md:justify-end md:gap-5 flex-col md:flex-row md:items-center">
       <select
         name="sort"
-        className="p-3 rounded-full shadow-md"
+        className="p-3 rounded-2xl shadow-lg mb-3 md:mb-0 dark:bg-[#575757] dark:text-white"
         onChange={(e) => dispatch(updateSort(e.currentTarget.value))}
       >
         <option value="name-asc">Name A-Z</option>
@@ -29,9 +29,9 @@ const Sort = () => {
         <option value="price-desc">Price Descending</option>
       </select>
       <button
-        className={`text-3xl p-1  rounded-md ${
+        className={`hidden md:block text-3xl p-1 rounded-md ${
           gridView
-            ? 'text-white bg-[#120b90]'
+            ? 'text-white bg-[#405684]'
             : 'bg-white border border-solid border-slate-100'
         }`}
         onClick={() => dispatch(setGridView())}
@@ -39,9 +39,9 @@ const Sort = () => {
         <BsFillGridFill />
       </button>
       <button
-        className={`text-3xl p-1  rounded-md ${
+        className={`hidden md:block text-3xl p-1  rounded-md ${
           listView
-            ? 'text-white bg-[#120b90]'
+            ? 'text-white bg-[#405684]'
             : 'bg-white border border-solid border-slate-100'
         }`}
         onClick={() => dispatch(setListView())}
@@ -49,7 +49,7 @@ const Sort = () => {
         <AiOutlineUnorderedList />
       </button>
 
-      <p className="text-[20px] font-bold">
+      <p className="text-[20px] font-bold dark:text-slate-300">
         {filteredProducts.length} Products Found
       </p>
     </div>

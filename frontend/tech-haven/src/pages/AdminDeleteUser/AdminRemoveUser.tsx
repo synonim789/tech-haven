@@ -8,7 +8,7 @@ type AdminRemoveUserProps = {
 }
 
 const AdminRemoveUser = ({ user }: AdminRemoveUserProps) => {
-  const { name, role, _id: id } = user
+  const { name, email, role, _id: id } = user
 
   const [adminDeleteUser, { isLoading }] = useAdminDeleteUserMutation()
 
@@ -17,10 +17,11 @@ const AdminRemoveUser = ({ user }: AdminRemoveUserProps) => {
   }
 
   return (
-    <div className="flex items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl justify-between gap-2">
-      <FaUser size={'30px'} />
+    <div className="flex items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl justify-between gap-2 dark:bg-[#121212] dark:border-none">
+      <FaUser size={'30px'} className="dark:text-slate-400" />
       <div className="flex flex-col gap-5">
-        <p className="font-semibold text-xl">{name}</p>
+        <p className="font-semibold text-xl text-slate-400">{name}</p>
+        <p className="text-slate-600">{email}</p>
         {role === 'admin' && (
           <p className="font-bold bg-blue-800 w-fit text-white px-4 py-2 rounded-xl">
             admin

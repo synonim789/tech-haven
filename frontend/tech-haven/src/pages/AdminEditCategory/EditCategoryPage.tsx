@@ -7,7 +7,9 @@ const EditCategoryPage = () => {
 
   return (
     <section>
-      <h4 className="text-4xl font-semibold text-center mb-8">Edit Category</h4>
+      <h4 className="mb-8 text-4xl font-bold text-center text-slate-500">
+        Edit Category
+      </h4>
       {categories?.map((category: CategoryType) => {
         return (
           <EditCategory

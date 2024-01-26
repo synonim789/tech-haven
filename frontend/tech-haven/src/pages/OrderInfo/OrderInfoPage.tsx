@@ -52,12 +52,14 @@ const OrderInfoPage = () => {
 
   return (
     <section className="my-10 max-w-6xl mx-auto px-5">
-      <div className="bg-white shadow-xl w-full p-5 rounded-xl">
+      <div className="bg-white shadow-xl w-full p-5 rounded-xl dark:bg-[#121212]">
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="md:grid md:grid-cols-2 md:gap-x-6"
         >
-          <h4 className="text-3xl mb-4 font-bold">Delivery Info:</h4>
+          <h4 className="text-3xl mb-4 font-bold text-slate-500">
+            Delivery Info:
+          </h4>
           <div className="md:col-span-2">
             <FormInput
               name="name"
@@ -131,7 +133,7 @@ const OrderInfoPage = () => {
             }}
             error={errors?.apartment?.message}
           />
-          <h4 className="text-3xl mt-4 font-bold col-span-2">
+          <h4 className="text-3xl mt-4 font-bold col-span-2 text-slate-500">
             Payment method:
           </h4>
           <div className="md:col-span-2 flex justify-between flex-col gap-4 md:flex-row mt-4">
@@ -144,8 +146,10 @@ const OrderInfoPage = () => {
                     required: 'Payment form is required',
                   })}
                 />
-                <FaStripeS />
-                <label htmlFor="">Stripe</label>
+                <FaStripeS className="dark:text-slate-500" />
+                <label htmlFor="stripe" className="dark:text-slate-500">
+                  Stripe
+                </label>
               </div>
               <div className="flex items-center gap-2 text-2xl">
                 <input
@@ -154,16 +158,22 @@ const OrderInfoPage = () => {
                   {...register('payment', {
                     required: 'Payment form is required',
                   })}
+                  className="dark:text-slate-500"
                 />
-                <CiDeliveryTruck />
+                <CiDeliveryTruck className="dark:text-slate-500" />
 
-                <label htmlFor="stripe">Cash On Delivery</label>
+                <label
+                  htmlFor="Cash On Delivery"
+                  className="dark:text-slate-500"
+                >
+                  Cash On Delivery
+                </label>
               </div>
             </div>
 
             <button
               type="submit"
-              className="text-2xl font-bold bg-[#120b90] text-white px-3 py-1.5 rounded-lg hover:scale-105 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:bg-gray-500"
+              className="text-2xl font-bold bg-[#405684] text-white px-3 py-1.5 rounded-lg hover:scale-105 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:bg-gray-500"
               disabled={!isValid}
             >
               Continue

@@ -25,29 +25,29 @@ const SignUpPage = () => {
   const submitHandler = async (data: SignUpFormType) => {
     try {
       const { email, name, password } = data
-      const response = await registerUser({ email, name, password }).unwrap()
+      const response = await registerUser({ email, name, password })
       if ('data' in response && response.data) {
         const token = response.data.token
         dispatch(setData(token))
       }
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.data.message)
     }
   }
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10">
-        <div className="w-full text-[#120b90] font-bold">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10 dark:bg-[#121212]">
+        <div className="w-full text-[#405684] font-bold">
           <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />
             Back Home
           </Link>
         </div>
-        <h1 className="text-slate-600 text-2xl font-bold">
+        <h2 className="text-slate-600 text-2xl font-bold">
           <Link to="/login">Log In</Link> |{' '}
-          <span className="text-[#120b90]">Sign Up</span>
-        </h1>
+          <span className="text-[#405684]">Sign Up</span>
+        </h2>
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="flex flex-col w-full justify-center items-center gap-7"

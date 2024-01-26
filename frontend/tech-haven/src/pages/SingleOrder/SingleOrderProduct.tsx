@@ -18,7 +18,7 @@ const SingleOrderProduct = ({
   return (
     <Link
       to={`/products/${id}`}
-      className="bg-white shadow-md rounded-lg overflow-hidden p-3 flex justify-between flex-col md:flex-row items-center"
+      className="bg-white shadow-md rounded-lg overflow-hidden p-3 flex justify-between flex-col md:flex-row items-center dark:bg-[#121212] dark:text-slate-400"
     >
       <img src={image} alt="" className="h-20" />
       <p className="text-lg">{name}</p>

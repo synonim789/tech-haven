@@ -3,10 +3,10 @@ import HomepageProducts from './HomepageProducts'
 
 const Homepage = () => {
   return (
-    <div>
+    <main>
       <Hero></Hero>
       <HomepageProducts></HomepageProducts>
-    </div>
+    </main>
   )
 }
 export default Homepage

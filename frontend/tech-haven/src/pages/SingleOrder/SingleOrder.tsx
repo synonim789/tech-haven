@@ -16,7 +16,7 @@ const SingleOrder = () => {
   return (
     <section>
       <div className="flex flex-col gap-5">
-        <div className="grid grid-cols-4 font-semibold">
+        <div className="grid grid-cols-4 font-semibold text-slate-400">
           <p className="col-span-2 text-right">Product</p>
           <p className="col-span-1 text-right">Quantity</p>
           <p className="col-span-1 text-right">Price</p>
@@ -33,7 +33,7 @@ const SingleOrder = () => {
             />
           )
         })}
-        <div className="flex justify-end">
+        <div className="flex justify-end dark:text-slate-400">
           <div className="flex flex-col gap-2 w-fit text-right">
             <p className="text-xl">
               Subtotal: <span className="font-bold">${data?.subtotal}</span>
@@ -47,7 +47,7 @@ const SingleOrder = () => {
             </p>
           </div>
         </div>
-        <div className="bg-white font-semibold text-xl rounded-lg shadow-md p-3">
+        <div className="bg-white font-semibold text-xl rounded-lg shadow-md p-3 dark:bg-[#121212] text-slate-400">
           <p>Address:</p>
           <p>{data?.shippingAddress1}</p>
           <p>{data?.shippingAddress2}</p>

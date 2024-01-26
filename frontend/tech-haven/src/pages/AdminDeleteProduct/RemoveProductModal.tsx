@@ -11,7 +11,7 @@ const RemoveProductModal = ({ close, id, clear }: RemoveProductModalProps) => {
   return (
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />
-      <div className="fixed top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-14 flex flex-col items-center gap-14 rounded-3xl">
+      <div className="fixed top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-14 flex flex-col items-center gap-14 rounded-3xl dark:bg-[#121212] text-slate-500">
         <h3 className="text-3xl font-bold">
           Do you really want to delete this product?
         </h3>

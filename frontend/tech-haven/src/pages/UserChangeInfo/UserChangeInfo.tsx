@@ -39,14 +39,16 @@ const UserChangeInfo = () => {
       const { userId } = decodeToken(token)
       const result = await updateUser({ id: userId, data }).unwrap()
       dispatch(setUser(result.data))
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.data.message)
     }
   }
 
   return (
     <main>
-      <h1 className="text-4xl font-bold mb-7">Update Profile</h1>
+      <h2 className="text-4xl font-bold mb-7 text-center dark:text-slate-500">
+        Update Profile
+      </h2>
       <form
         className="grid grid-cols-2 gap-14"
         onSubmit={handleSubmit(submitHandler)}

@@ -166,7 +166,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
             type="checkbox"
             id="featured"
             {...register('isFeatured')}
-            className="w-5 accent-[#120b90]"
+            className="w-5 accent-[#405684]"
           />
         </div>
         {editProductError && (
