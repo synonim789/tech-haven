@@ -34,7 +34,7 @@ const AddToCart = ({ product }: AddCoCartPropType) => {
   }
 
   return (
-    <div className="flex justify-end gap-20">
+    <div className="flex justify-between gap-20">
       <AmountButtons increase={increase} decrease={decrease} amount={amount} />
       <button
         className="bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
