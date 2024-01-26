@@ -9,8 +9,19 @@ import { setUser } from '../../features/user/userSlice'
 import { RootState } from '../../store'
 import { decodeToken } from '../../utils/decodeToken'
 
+type UserForm = {
+  name?: string
+  email?: string
+  phone?: string
+  street?: string
+  apartment?: string
+  city?: string
+  zip?: string
+  country?: string
+}
+
 const UserChangeInfo = () => {
-  const [formUser, setFormUser] = useState(null)
+  const [formUser, setFormUser] = useState<UserForm | null>(null)
   const { register, handleSubmit, reset } = useForm()
   const user = useSelector((state: RootState) => state.user.user)
   const token = useSelector((state: RootState) => state.auth.token)
@@ -19,14 +30,14 @@ const UserChangeInfo = () => {
 
   useEffect(() => {
     setFormUser({
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      street: user.street,
-      apartment: user.apartment,
-      city: user.city,
-      zip: user.zip,
-      country: user.country,
+      name: user?.name,
+      email: user?.email,
+      phone: user?.phone,
+      street: user?.street,
+      apartment: user?.apartment,
+      city: user?.city,
+      zip: user?.zip,
+      country: user?.country,
     })
   }, [])
 
@@ -34,7 +45,7 @@ const UserChangeInfo = () => {
     reset(formUser!)
   }, [formUser])
 
-  const submitHandler = async (data) => {
+  const submitHandler = async (data: UserForm) => {
     try {
       const { userId } = decodeToken(token)
       const result = await updateUser({ id: userId, data }).unwrap()
