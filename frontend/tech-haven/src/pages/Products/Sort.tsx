@@ -32,7 +32,7 @@ const Sort = () => {
         className={`hidden md:block text-3xl p-1 rounded-md ${
           gridView
             ? 'text-white bg-[#405684]'
-            : 'bg-white border border-solid border-slate-100'
+            : 'dark:bg-slate-300 dark:border-none border border-solid border-slate-100'
         }`}
         onClick={() => dispatch(setGridView())}
       >
@@ -42,7 +42,7 @@ const Sort = () => {
         className={`hidden md:block text-3xl p-1  rounded-md ${
           listView
             ? 'text-white bg-[#405684]'
-            : 'bg-white border border-solid border-slate-100'
+            : 'bg-white dark:bg-slate-300 dark:border-none border border-solid border-slate-100'
         }`}
         onClick={() => dispatch(setListView())}
       >
