@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<title>Prog. nisk. — odpowiedzi do zadań zaliczeniowych</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 8954 2022-01-20 10:10:25Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="prog-nisk-odpowiedzi-do-zadan-zaliczeniowych">
+<h1 class="title">Prog. nisk. — odpowiedzi do zadań zaliczeniowych</h1>
+
+<ol class="arabic simple">
+<li><ol class="first loweralpha">
+<li><tt class="docutils literal">*tab&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10</tt></li>
+<li><tt class="docutils literal">tab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 2293584</tt></li>
+<li><tt class="docutils literal">tab[1]&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20</tt></li>
+<li><tt class="docutils literal">*(tab+4) =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50</tt></li>
+<li><tt class="docutils literal">*tab+4&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14</tt></li>
+<li><tt class="docutils literal">tab+1&nbsp;&nbsp;&nbsp; = 2293588</tt> (za poprawną można również uznać wartość <tt class="docutils literal">2293585</tt>)</li>
+</ol>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="2">
+<li><ol class="first loweralpha">
+<li><tt class="docutils literal">**p&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3</tt></li>
+<li><tt class="docutils literal"><span class="pre">(*p)[1]</span> =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</tt></li>
+<li><tt class="docutils literal"><span class="pre">p[1][1]</span> =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15</tt></li>
+<li><tt class="docutils literal">*(p+2)&nbsp; = 4206656</tt></li>
+<li><tt class="docutils literal">*p+2&nbsp;&nbsp;&nbsp; = 4206624</tt> (za poprawną można również uznać wartość <tt class="docutils literal">4206618</tt>)</li>
+<li><tt class="docutils literal">*p[2]&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp; 120</tt></li>
+</ol>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="3">
+<li><ol class="first loweralpha">
+<li><tt class="docutils literal">**p&nbsp;&nbsp;&nbsp;&nbsp; = 5</tt></li>
+<li><tt class="docutils literal"><span class="pre">(*p)[1]</span> =</tt> <strong>błędne odniesienie</strong></li>
+<li><tt class="docutils literal"><span class="pre">p[1][1]</span> = 200</tt></li>
+<li><tt class="docutils literal">*(p+2)&nbsp; = 1500</tt></li>
+<li><tt class="docutils literal">*p+2&nbsp;&nbsp;&nbsp; = 4008</tt> (za poprawną można również uznać wartość <tt class="docutils literal">4002</tt> lub — w arch. 64-bit. — 4016)</li>
+<li><tt class="docutils literal">*p[2]&nbsp;&nbsp; = 90</tt></li>
+</ol>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="4">
+<li><ul class="first">
+<li><tt class="docutils literal">a = 12</tt></li>
+<li><tt class="docutils literal">b = 400</tt></li>
+<li><tt class="docutils literal">c = 32</tt></li>
+<li><tt class="docutils literal">d = 5000</tt></li>
+<li><tt class="docutils literal">e = 3</tt></li>
+<li><tt class="docutils literal">f = 399</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="5">
+<li><ol class="first loweralpha">
+<li><tt class="docutils literal"><span class="pre">a[0]=3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[1]=2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[2]=2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[3]=13</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[4]=23</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[5]=6</span></tt></li>
+</ol>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="6">
+<li><ul class="first">
+<li><tt class="docutils literal">x =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</tt></li>
+<li><tt class="docutils literal">y = 2340000</tt></li>
+<li><tt class="docutils literal">z =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="7">
+<li><ul class="first">
+<li><tt class="docutils literal">a =&nbsp; 22</tt></li>
+<li><tt class="docutils literal">b =&nbsp; 11</tt></li>
+<li><tt class="docutils literal">c =&nbsp; 58</tt></li>
+<li><tt class="docutils literal">d =&nbsp; 45</tt></li>
+<li><tt class="docutils literal">e =&nbsp; 22</tt></li>
+<li><tt class="docutils literal">f =&nbsp; 58</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="8">
+<li><ul class="first">
+<li><tt class="docutils literal">a = 2</tt></li>
+<li><tt class="docutils literal">b = 1</tt></li>
+<li><tt class="docutils literal">c = 3</tt></li>
+<li><tt class="docutils literal">d = 3</tt></li>
+<li><tt class="docutils literal">e = 6</tt></li>
+<li><tt class="docutils literal">f = 5</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="9">
+<li><ul class="first">
+<li><tt class="docutils literal">a = 1</tt></li>
+<li><tt class="docutils literal">b = 2</tt></li>
+<li><tt class="docutils literal">c = 10</tt></li>
+<li><tt class="docutils literal">d = 10</tt></li>
+<li><tt class="docutils literal">e = 5</tt></li>
+<li><tt class="docutils literal">f = 23</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="10">
+<li><ul class="first">
+<li><tt class="docutils literal"><span class="pre">a[0]=0</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[1]=0</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[2]=4</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[3]=4</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[4]=6</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">a[5]=6</span></tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="11">
+<li><ul class="first">
+<li><tt class="docutils literal">x = 5</tt></li>
+<li>standardowe wyjście: <tt class="docutils literal">abcde</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="12">
+<li><ol class="first loweralpha">
+<li><ul class="first">
+<li><tt class="docutils literal">a[0] = 3</tt></li>
+<li><tt class="docutils literal">a[1] = 4</tt></li>
+<li><tt class="docutils literal">a[2] = 5</tt></li>
+</ul>
+</li>
+<li><ul class="first">
+<li><tt class="docutils literal">a[0] = 3</tt></li>
+<li><tt class="docutils literal">a[1] = 6</tt></li>
+<li><tt class="docutils literal">a[2] = 10</tt></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="13">
+<li><ul class="first">
+<li>dokładność do 1 bajta: 15 B</li>
+<li>dokładność do 2 bajtów: 16 B</li>
+<li>dokładność do 4 bajtów: 20 B</li>
+<li>dokładność do 8 bajtów: 24 B</li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="14">
+<li><ul class="first">
+<li>dokładność do 1 bajta: <tt class="docutils literal">p = 1003</tt>, <tt class="docutils literal">q = 1003</tt></li>
+<li>dokładność do 2 bajtów: <tt class="docutils literal">p = 1004</tt>, <tt class="docutils literal">q = 1004</tt></li>
+<li>dokładność do 4 bajtów: <tt class="docutils literal">p = 1004</tt>, <tt class="docutils literal">q = 1004</tt></li>
+<li>dokładność do 8 bajtów: <tt class="docutils literal">p = 1008</tt>, <tt class="docutils literal">q = 1008</tt></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="15">
+<li><table border="1" class="first docutils">
+<colgroup>
+<col width="35%" />
+<col width="31%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>&nbsp;</td>
+<td>grubokońcówkowe</td>
+<td>cienkokońcówkowe</td>
+</tr>
+<tr><td>printf(&quot;%d&quot;, u.i)</td>
+<td>1107296256</td>
+<td>66</td>
+</tr>
+<tr><td>printf(&quot;%d&quot;, u.s)</td>
+<td>16896</td>
+<td>66</td>
+</tr>
+<tr><td>printf(&quot;%s&quot;, u.a)</td>
+<td>B</td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="16">
+<li><table border="1" class="first docutils">
+<colgroup>
+<col width="20%" />
+<col width="39%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>&nbsp;</td>
+<td>grubokońcówkowe</td>
+<td>cienkokońcówkowe</td>
+</tr>
+<tr><td>ia.a[0]</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr><td>ia.a[1]</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr><td>ia.a[2]</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr><td>ia.a[3]</td>
+<td>10</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="17">
+<li><table border="1" class="first docutils">
+<colgroup>
+<col width="39%" />
+<col width="30%" />
+<col width="32%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>&nbsp;</td>
+<td>grubokońcówkowe</td>
+<td>cienkokońcówkowe</td>
+</tr>
+<tr><td>printf(&quot;%d&quot;, x.c)</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr><td>printf(&quot;%d&quot;, x.i)</td>
+<td>16908291</td>
+<td>50332161</td>
+</tr>
+<tr><td>printf(&quot;%s&quot;, x.s.s2)</td>
+<td>3</td>
+<td>768</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="18">
+<li>Nastąpi wyciek, wielkość: 13 B.</li>
+</ol>
+</div>
+</body>
+</html>

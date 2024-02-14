@@ -1,0 +1,51 @@
+import { Router } from "express";
+import * as multer from "multer";
+import storage from "../config/multerStorage";
+import {
+  addProduct,
+  deleteProduct,
+  getAllProducts,
+  getFeaturedCount,
+  getFeaturedProducts,
+  getProductsCount,
+  getSingleProduct,
+  updateProduct,
+} from "../controllers/productController";
+import verifyJWT from "../helpers/jwt";
+import verifyRoles from "../helpers/verifyRoles";
+
+const router = Router();
+
+const uploadOptions = multer({ storage: storage });
+
+router.get(`/`, getAllProducts);
+router.get("/:id", getSingleProduct);
+router.post(
+  `/`,
+  verifyJWT,
+
+  uploadOptions.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "images",
+      maxCount: 10,
+    },
+  ]),
+  verifyRoles("admin"),
+  addProduct,
+);
+router.put("/:id", verifyJWT, verifyRoles("admin"), updateProduct);
+router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteProduct);
+router.get("/get/count", verifyJWT, verifyRoles("admin"), getProductsCount);
+router.get(
+  "/get/featured/:count",
+  verifyJWT,
+  verifyRoles("admin"),
+  getFeaturedCount,
+);
+router.get("/get/featured-products", getFeaturedProducts);
+
+export default router;
