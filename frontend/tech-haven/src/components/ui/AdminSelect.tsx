@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { ProductType } from '../../types'
 
 type AdminSelectProps = {
@@ -35,7 +36,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
         &times;
       </button>
       <div className="self-stretch w-[1px] bg-slate-600"></div>
-      <div className="border-[7px] border-solid border-t-[#777] bg-transparent cursor-pointer translate-x-0 translate-y-1/4"></div>
+      {isOpen ? <IoMdArrowDropup size={25} /> : <IoMdArrowDropdown size={25} />}
       <ul
         className={
           'absolute left-0 p-0 w-full top-[calc(100%+5px)] bg-white dark:bg-[#121212] rounded-xl max-h-[400px] overflow-auto ' +

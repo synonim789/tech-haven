@@ -111,7 +111,7 @@ const AddProductPage = () => {
   }
 
   return (
-    <main className="text-left mb-10">
+    <section className="text-left mb-10">
       <h2 className="mb-8 text-4xl font-bold text-center text-slate-500">
         Add Product
       </h2>
@@ -312,7 +312,7 @@ const AddProductPage = () => {
           Add Product
         </button>
       </form>
-    </main>
+    </section>
   )
 }
 export default AddProductPage
