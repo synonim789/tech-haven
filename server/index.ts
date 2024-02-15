@@ -1,4 +1,3 @@
-import * as bodyParser from "body-parser";
 import "dotenv/config";
 import * as express from "express";
 import mongoose from "mongoose";
@@ -17,17 +16,18 @@ app.options("*", cors());
 
 // Middleware
 
-app.use(bodyParser.json());
 app.use(morgan("tiny"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
 const api = process.env.API_URL;
 
+app.use(`${api}/stripe`, stripeRouter);
+app.use(express.json());
+
 app.use(`${api}/products`, productsRouter);
 app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
-app.use(`${api}/stripe`, stripeRouter);
 
 if (!process.env.CONNECTION_STRING) {
   throw new Error("No CONNECTION_STRING variable");
