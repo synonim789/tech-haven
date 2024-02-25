@@ -101,7 +101,7 @@ const AddProductPage = () => {
       await addProduct(formData).unwrap()
       toast.success('Product Added Successfully')
       console.log(data)
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.message)
     }
   }
@@ -111,7 +111,7 @@ const AddProductPage = () => {
   }
 
   return (
-    <section className="text-left mb-10">
+    <section className="text-left mb-10 w-full">
       <h2 className="mb-8 text-4xl font-bold text-center text-slate-500">
         Add Product
       </h2>
@@ -229,7 +229,7 @@ const AddProductPage = () => {
             </div>
           </div>
           <div className="flex flex-col justify-between gap-5 mt-4 md:mt-0">
-            <div className="rounded-xl bg-white dark:bg-[#121212] shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
+            <div className="rounded-xl bg-white dark:bg-[#121212] shadow-xl h-full w-full gap-5 flex flex-col items-center justify-center p-[10px]">
               {image && (
                 <img
                   src={URL.createObjectURL(image)}
@@ -259,7 +259,7 @@ const AddProductPage = () => {
               )}
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-[#121212] shadow-xl h-full w-[400px] gap-5 flex flex-col items-center justify-center p-[10px]">
+            <div className="rounded-xl bg-white dark:bg-[#121212] shadow-xl h-full w-full gap-5 flex flex-col items-center justify-center p-[10px]">
               {images && (
                 <div className="grid gap-2 grid-cols-4">
                   {images &&
