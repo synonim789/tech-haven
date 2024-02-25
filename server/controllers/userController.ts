@@ -121,7 +121,7 @@ export const loginUser = async (
         role: user.role,
       },
       secret,
-      { expiresIn: "1d" },
+      { expiresIn: "7d" },
     );
     res.status(200).json({ token: token });
   } else {
