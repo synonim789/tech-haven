@@ -167,8 +167,22 @@ function App() {
             <Route path="removeUser" element={<RemoveUserPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/order/info" element={<OrderInfoPage />} />
-          <Route path="/order/summary" element={<OrderSummary />} />
+          <Route
+            path="/order/info"
+            element={
+              <AuthRoute>
+                <OrderInfoPage />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/order/summary"
+            element={
+              <AuthRoute>
+                <OrderSummary />
+              </AuthRoute>
+            }
+          />
           <Route path="/order-success" element={<OrderSuccess />} />
         </Routes>
         <Footer />

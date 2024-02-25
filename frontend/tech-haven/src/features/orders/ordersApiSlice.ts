@@ -31,13 +31,30 @@ type OrderItems = {
   }
 }
 
+type PostOrder = {
+  products: {
+    quantity: number
+    price: number
+    name: string
+    productId: string
+  }[]
+  userId: string | undefined
+  shippingAddress1: string
+  shippingAddress2: string
+  phone: string
+  total?: number
+  subtotal?: number
+}
+
 const ordersApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     postOrder: builder.mutation({
-      query: (order) => ({
+      query: (order: PostOrder) => ({
         url: 'orders/',
         method: 'POST',
-        body: { order },
+        body: {
+          order,
+        },
       }),
     }),
     getUserOrder: builder.query<
@@ -53,6 +70,13 @@ const ordersApiSlice = api.injectEndpoints({
         url: `orders/${id}`,
       }),
     }),
+    postOrderStripe: builder.mutation({
+      query: (order: PostOrder) => ({
+        url: 'stripe/create-checkout-session',
+        method: 'POST',
+        body: { order },
+      }),
+    }),
   }),
 })
 
@@ -60,4 +84,5 @@ export const {
   usePostOrderMutation,
   useGetUserOrderQuery,
   useGetSingleOrderQuery,
+  usePostOrderStripeMutation,
 } = ordersApiSlice

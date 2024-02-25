@@ -1,10 +1,12 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router'
+import { Navigate } from 'react-router'
 import { toast } from 'react-toastify'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
-import { usePostOrderMutation } from '../../features/orders/ordersApiSlice'
+import {
+  usePostOrderMutation,
+  usePostOrderStripeMutation,
+} from '../../features/orders/ordersApiSlice'
 import { RootState } from '../../store'
 import OrderSummaryProduct from './OrderSummaryProduct'
 
@@ -18,13 +20,26 @@ type OrderedItems = {
 const OrderSummary = () => {
   const order = useSelector((state: RootState) => state.order.order)
   const user = useSelector((state: RootState) => state.user.user?._id)
-  const [orderItems, setOrderItems] = useState<OrderedItems[] | undefined>([])
-  const [loading, setLoading] = useState(false)
-  const [addOrder, { isLoading, isSuccess }] = usePostOrderMutation()
-  const navigate = useNavigate()
+  const [orderItems, setOrderItems] = useState<OrderedItems[]>([])
+  const [
+    addOrder,
+    { isLoading: addOrderIsLoading, isSuccess: addOrderIsSuccess },
+  ] = usePostOrderMutation()
+  const [
+    addStripeOrder,
+    { isLoading: addStripeOrderIsLoading, isSuccess: addStripeOrderIsSuccess },
+  ] = usePostOrderStripeMutation()
+
+  if (!order) {
+    return (
+      <h4 className="text-center text-5xl font-bold max-w-6xl mx-auto px-5 my-auto py-5">
+        You need to place an order to get to summary.
+      </h4>
+    )
+  }
 
   useEffect(() => {
-    const orderedItems = order?.orderItems.map((orderItem) => {
+    const orderedItems = order.orderItems.map((orderItem) => {
       return {
         quantity: orderItem.amount,
         price: orderItem.price,
@@ -35,39 +50,22 @@ const OrderSummary = () => {
     setOrderItems(orderedItems)
   }, [order])
 
-  if (!order) {
-    return (
-      <h4 className="text-center text-5xl font-bold max-w-6xl mx-auto px-5 my-auto py-5">
-        You need to place an order to get to summary.
-      </h4>
-    )
-  }
-
-  if (loading) {
+  if (addOrderIsLoading || addStripeOrderIsLoading) {
     return <FullscreenLoading />
   }
 
   const handleCheckout = async () => {
     if (order.payment === 'stripe') {
-      setLoading(true)
-      await axios
-        .post('http://localhost:3000/api/v1/stripe/create-checkout-session', {
-          products: orderItems,
-          userId: user,
-          shippingAddress1: order.addressLine1,
-          shippingAddress2: order.addressLine2,
-          phone: order.phone,
-        })
-        .then((res) => {
-          if (res.data.url) {
-            window.location.href = res.data.url
-          }
-          setLoading(false)
-        })
-        .catch((err) => {
-          toast.error(err.message)
-          setLoading(false)
-        })
+      await addStripeOrder({
+        products: orderItems,
+        userId: user,
+        shippingAddress1: order.addressLine1,
+        shippingAddress2: order.addressLine2,
+        phone: order.phone,
+      })
+        .unwrap()
+        .then((data) => (window.location.href = data.url))
+        .catch((error: any) => console.log(error))
     } else if (order.payment === 'Cash On Delivery') {
       try {
         await addOrder({
@@ -78,14 +76,14 @@ const OrderSummary = () => {
           phone: order.phone,
           total: order.total,
           subtotal: order.subtotal,
-        }).unwrap()
-      } catch (error) {
-        toast.error(err.message)
+        })
+      } catch (error: any) {
+        toast.error(error.message)
       }
     }
   }
 
-  if (isSuccess) {
+  if (addOrderIsSuccess) {
     return <Navigate to="/order-success" />
   }
 
@@ -97,7 +95,7 @@ const OrderSummary = () => {
       <div className="flex flex-col md:flex-row justify-between gap-5">
         <div className="flex flex-col gap-y-5 basis-3/4">
           {order?.orderItems.map((item) => {
-            return <OrderSummaryProduct product={item} />
+            return <OrderSummaryProduct product={item} key={item.id} />
           })}
         </div>
         <div className="bg-white px-4 w-full basis-1/4 shadow-md rounded-lg flex flex-col gap-4 items-center justify-around text-slate-600 dark:bg-[#121212]">
