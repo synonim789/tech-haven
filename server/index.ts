@@ -1,3 +1,4 @@
+import * as cors from "cors";
 import "dotenv/config";
 import * as express from "express";
 import mongoose from "mongoose";
@@ -8,7 +9,7 @@ import ordersRouter from "./routers/orders";
 import productsRouter from "./routers/products";
 import stripeRouter from "./routers/stripe";
 import usersRouter from "./routers/users";
-const cors = require("cors");
+
 const app = express();
 
 app.use(cors());
@@ -19,11 +20,12 @@ app.options("*", cors());
 app.use(morgan("tiny"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
-const api = process.env.API_URL;
+const api = process.env.API_URL as string;
 
-app.use(`${api}/stripe`, stripeRouter);
+app.use(`${api}/stripe/webhook`, express.raw({ type: "*/*" }));
 app.use(express.json());
 
+app.use(`${api}/stripe`, stripeRouter);
 app.use(`${api}/products`, productsRouter);
 app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/users`, usersRouter);
