@@ -32,7 +32,7 @@ const OrderSummary = () => {
 
   if (!order) {
     return (
-      <h4 className="text-center text-5xl font-bold max-w-6xl mx-auto px-5 my-auto py-5">
+      <h4 className="text-center text-5xl font-bold max-w-6xl mx-auto px-5 my-auto py-5 text-slate-500">
         You need to place an order to get to summary.
       </h4>
     )

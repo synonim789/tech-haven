@@ -24,7 +24,9 @@ const UserOrderPage = () => {
   }, [isSuccess])
 
   if (data?.userOrders && data.userOrders.length < 1) {
-    return <h2 className="text-2xl font-bold">Orders not Found</h2>
+    return (
+      <h2 className="text-2xl font-bold text-slate-500">Orders not Found</h2>
+    )
   }
 
   if (isLoading) {

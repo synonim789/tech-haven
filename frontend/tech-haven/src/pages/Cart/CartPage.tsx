@@ -13,7 +13,7 @@ const CartPage = () => {
   if (cart.length < 1) {
     return (
       <div className="flex justify-center items-center mt-20">
-        <h2 className="text-4xl font-bold">No Products Found</h2>
+        <h2 className="text-4xl font-bold text-slate-500">No Products Found</h2>
       </div>
     )
   }
