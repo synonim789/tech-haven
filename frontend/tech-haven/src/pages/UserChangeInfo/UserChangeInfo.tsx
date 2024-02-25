@@ -48,6 +48,7 @@ const UserChangeInfo = () => {
   const submitHandler = async (data: UserForm) => {
     try {
       const { userId } = decodeToken(token)
+
       const result = await updateUser({ id: userId, data }).unwrap()
       dispatch(setUser(result.data))
     } catch (err: any) {

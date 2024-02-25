@@ -1,7 +1,9 @@
+import { jwtDecode } from 'jwt-decode'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import FullscreenLoading from './components/ui/FullscreenLoading'
+import { logout } from './features/auth/authSlice'
 import { countCartTotal } from './features/cart/cart'
 import { useGetUserQuery } from './features/user/userApiSlice'
 import { setUser } from './features/user/userSlice'
@@ -56,6 +58,10 @@ function App() {
   )
   useEffect(() => {
     if (token) {
+      const { exp } = jwtDecode(token)
+      if (exp && exp < Date.now() / 1000) {
+        dispatch(logout())
+      }
       dispatch(setUser(data))
     }
   }, [data, token])
