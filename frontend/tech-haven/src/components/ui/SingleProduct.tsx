@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ProductType } from '../../types'
 
 const SingleProduct = (product: ProductType) => {
-  const { image, name, price, id } = product
+  const { image, name, price, _id: id } = product
 
   return (
     <Link

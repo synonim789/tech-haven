@@ -27,7 +27,7 @@ const HomepageProducts = () => {
         </h2>
         <div className="flex flex-col sm:flex-row gap-10">
           {featuredProducts?.map((product) => {
-            return <SingleProduct key={product.id} {...product} />
+            return <SingleProduct key={product._id} {...product} />
           })}
         </div>
         <Link

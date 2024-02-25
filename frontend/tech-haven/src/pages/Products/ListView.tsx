@@ -32,7 +32,7 @@ const ListView = () => {
                   {product.description.substring(0, 125)}...
                 </p>
                 <Link
-                  to={`/products/${product.id}`}
+                  to={`/products/${product._id}`}
                   className="bg-[#405684] text-white w-fit font-bold text-2xl py-2 px-4 rounded-xl block"
                 >
                   Go To Product

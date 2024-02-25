@@ -47,7 +47,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
           options.map((option) => {
             return (
               <li
-                key={option.id}
+                key={option._id}
                 className="text-2xl p-3 cursor-pointer flex items-center gap-5 font-bold text-left hover:bg-[#405684] hover:text-white"
                 onClick={(e) => {
                   e.stopPropagation()

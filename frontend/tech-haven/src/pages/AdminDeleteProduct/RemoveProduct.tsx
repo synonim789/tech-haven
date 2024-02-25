@@ -33,7 +33,7 @@ const RemoveProduct = ({ product, clear }: RemoveProductProps) => {
         Delete Product
       </button>
       {openModal && (
-        <RemoveProductModal close={closeModal} id={product.id} clear={clear} />
+        <RemoveProductModal close={closeModal} id={product._id} clear={clear} />
       )}
     </section>
   )

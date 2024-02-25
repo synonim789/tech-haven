@@ -47,7 +47,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
       numReviews: product.numReviews,
       isFeatured: product.isFeatured,
       price: product.price,
-      id: product.id,
+      id: product._id,
     })
   }, [product])
 
@@ -61,7 +61,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
       console.log(response)
 
       toast.success('Product updated')
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message)
     }
   }

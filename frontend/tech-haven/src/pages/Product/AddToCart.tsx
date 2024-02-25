@@ -9,7 +9,7 @@ type AddCoCartPropType = {
 }
 
 const AddToCart = ({ product }: AddCoCartPropType) => {
-  const { countInStock: count, id: id } = product
+  const { countInStock: count, _id: id } = product
   const dispatch = useDispatch()
 
   const [amount, setAmount] = useState(1)
