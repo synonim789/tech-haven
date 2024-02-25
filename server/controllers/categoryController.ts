@@ -8,7 +8,8 @@ interface IParamsId {
 }
 
 export const getAllCategories = async (req: Request, res: Response) => {
-  const categoryList = await Category.find();
+  const categoryList = await Category.find({ deleted: false });
+  await Category.updateMany({}, { deleted: false });
   if (!categoryList) {
     return res.status(500).json({ success: false });
   }
@@ -89,7 +90,10 @@ export const deleteCategory = async (
       { category: "6538e0a5358270e91b410aac" },
     );
 
-    const deletedCategory = await Category.findByIdAndRemove(req.params.id);
+    const deletedCategory = await Category.findOneAndUpdate(
+      { _id: req.params.id },
+      { deleted: true },
+    );
     if (deletedCategory) {
       return res.status(200).json({ message: "The Category is deleted" });
     } else {

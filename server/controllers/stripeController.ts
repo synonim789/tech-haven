@@ -58,6 +58,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
       user: checkoutSessionRequest.userId,
       orderItems: checkoutSessionRequest.products,
       status: "pending",
+      dateOrdered: new Date()
     });
 
     const lineItems = createLineItems(checkoutSessionRequest);

@@ -39,7 +39,7 @@ interface IUpdateProductBody {
 }
 
 export const getAllProducts = async (req: Request, res: Response) => {
-  const products = await Product.find();
+  const products = await Product.find({ deleted: false });
   if (!products) {
     return res.status(500).json({ message: "No Products Found" });
   }
@@ -61,7 +61,7 @@ export const getSingleProduct = async (
 };
 
 export const getProductsCount = async (req: Request, res: Response) => {
-  const productCount = await Product.countDocuments()
+  const productCount = await Product.countDocuments({ deleted: false })
     .then((count) => count)
     .catch((err) => {
       return res.status(400).json({ success: false, error: err });
@@ -92,24 +92,22 @@ export const deleteProduct = async (
   req: Request<IParamsID, unknown, unknown, unknown>,
   res: Response,
 ) => {
-  if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).json({ message: "Invalid Product ID" });
+  try {
+    await Product.findOneAndUpdate({ _id: req.params.id }, { deleted: true });
+    return res.status(200).json({ message: "Product deleted Successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "cannot delete product" });
   }
-  Product.findByIdAndRemove(req.params.id)
-    .then((product) => {
-      if (product) {
-        return res.status(200).json({ message: "Product has been deleted" });
-      } else {
-        return res.status(400).json({ message: "Product not found" });
-      }
-    })
-    .catch((err) => {
-      return res.status(400).json({ error: err });
-    });
 };
 
 export const addProduct = async (req: IAddProductRequest, res: Response) => {
   const exist = await Product.findOne({ name: req.body.name });
+  if (exist?.deleted === true) {
+    return res.status(400).json({
+      message:
+        "product has been deleted if you want to have it restored contact administration",
+    });
+  }
   if (exist) {
     return res.status(400).json({ message: "Product already exist" });
   }
@@ -196,7 +194,10 @@ export const updateProduct = async (
 };
 
 export const getFeaturedProducts = async (req: Request, res: Response) => {
-  const featuredProducts = await Product.find({ isFeatured: true })
+  const featuredProducts = await Product.find({
+    isFeatured: true,
+    deleted: false,
+  })
     .sort({
       dateCreated: -1,
     })

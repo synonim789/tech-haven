@@ -48,7 +48,7 @@ interface IGetUserOrderQuery {
 }
 
 export const getAllUser = async (req: Request, res: Response) => {
-  const userList = await User.find().select("-passwordHash");
+  const userList = await User.find({ deleted: false }).select("-passwordHash");
   if (!userList) {
     res.status(500).json({ message: "Users not found" });
   }
@@ -102,10 +102,13 @@ export const loginUser = async (
     return res.status(400).json({ message: "All fields must be filled" });
   }
   const user = await User.findOne({ email: req.body.email });
-  const secret = process.env.secret;
-  if (!secret) {
-    throw new Error("Environmental variable secret does not exist");
+  if (user?.deleted === true) {
+    return res.status(400).json({
+      message:
+        "User was deleted, contact administration if you want to get it restored",
+    });
   }
+  const secret = process.env.secret as string;
 
   if (!user) {
     return res.status(400).json({ message: "Incorrect email or password" });
@@ -134,6 +137,12 @@ export const signUpUser = async (
     return res.status(400).json({ message: "All fields must be filled" });
   }
   const exist = await User.findOne({ email: req.body.email });
+  if (exist?.deleted === true) {
+    return res.status(500).json({
+      message:
+        "user has been deleted. Contact administration to have it restored",
+    });
+  }
   if (exist) {
     return res.status(400).json({ message: "Email already in use" });
   }
@@ -143,10 +152,8 @@ export const signUpUser = async (
     passwordHash: bcrypt.hashSync(req.body.password, 10),
   });
   user = await user.save();
-  const secret = process.env.secret;
-  if (!secret) {
-    throw new Error("Environmental variable secret not found");
-  }
+  const secret = process.env.secret as string;
+
   const token = jwt.sign({ userId: user.id, role: user.role }, secret, {
     expiresIn: "1d",
   });
@@ -157,7 +164,7 @@ export const signUpUser = async (
 };
 
 export const getUserCount = async (req: Request, res: Response) => {
-  const userCount = await User.countDocuments()
+  const userCount = await User.countDocuments({ deleted: false })
     .then((count) => count)
     .catch((err) => {
       return res
@@ -176,20 +183,12 @@ export const deleteUser = async (
   req: Request<IParamsID, unknown, unknown, unknown>,
   res: Response,
 ) => {
-  if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).json({ message: "Invalid User ID" });
+  try {
+    await User.findOneAndUpdate({ _id: req.params.id }, { deleted: true });
+    return res.status(200).json({ message: "User deleted Successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "cannot delete user" });
   }
-  User.findByIdAndRemove(req.params.id)
-    .then((user) => {
-      if (user) {
-        return res.status(200).json({ message: "User has been deleted" });
-      } else {
-        return res.status(404).json({ message: "User not found" });
-      }
-    })
-    .catch((err) => {
-      return res.status(400).json({ error: err });
-    });
 };
 
 export const userForgotPassword = async (
@@ -197,6 +196,12 @@ export const userForgotPassword = async (
   res: Response,
 ) => {
   const user = await User.findOne({ email: req.body.email });
+  if (user?.deleted === true) {
+    return res.status(500).json({
+      message:
+        "User with this email was deleted. contact with administration to have it restored.",
+    });
+  }
   if (!user) {
     return res.status(404).json({ message: "No User with that email find" });
   }
@@ -212,6 +217,13 @@ export const updateUser = async (
     return res.status(400).json({ message: "Invalid User ID" });
   }
   const user = await User.findById(req.params.id);
+  if (user?.deleted === true) {
+    return res.status(500).json({
+      message:
+        "User is deleted. Contact with administration if you want it changed",
+    });
+  }
+
   if (user) {
     user.name = req.body.name || user.name;
     user.phone = req.body.phone || user.phone;
@@ -246,6 +258,12 @@ export const changeUserRole = async (
     return res.status(400).json({ message: "Invalid User ID" });
   }
   const user = await User.findById(req.params.id);
+  if (user?.deleted === true) {
+    return res.status(500).json({
+      message:
+        "User is deleted. Contact with administration if you want it changed",
+    });
+  }
   if (user) {
     if (user.role === "admin" && user.name !== "admin") {
       user.role = "user";

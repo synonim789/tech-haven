@@ -64,7 +64,7 @@ export const deleteOrder = async (
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ message: "Invalid order ID" });
   }
-  Order.findByIdAndRemove(req.params.id);
+  return res.status(200).json({ message: "test" });
 };
 
 export const getTotalSales = async (req: Request, res: Response) => {
@@ -106,6 +106,8 @@ export const addOrder = async (
     user: req.body.order.userId,
     subtotal: req.body.order.subtotal,
     total: req.body.order.total,
+    status: "inProgress",
+    createdAt: new Date(),
   });
   try {
     const savedOrder = await newOrder.save();
