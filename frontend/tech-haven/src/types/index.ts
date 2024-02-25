@@ -6,7 +6,7 @@ export type ProductType = {
   countInStock: number
   dateCreated: string
   description: string
-  id: string
+  _id: string
   image: string
   images: string[]
   isFeatured: boolean
@@ -14,10 +14,12 @@ export type ProductType = {
   price: number
   rating: number
   numReviews: number
+  deleted: boolean
 }
 
 export type CategoryType = {
   name: string
+  deleted: boolean
   _id: string
 }
 
@@ -36,6 +38,7 @@ export type UserType = {
   zip: string
   country: string
   role: string
+  deleted: boolean
 }
 
 export type TokenType = {
@@ -52,4 +55,5 @@ export type UserWithTokenType = {
   zip: string
   country: string
   token: string
+  deleted: boolean
 }
