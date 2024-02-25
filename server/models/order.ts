@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const orderSchema = new mongoose.Schema({
   orderItems: [
     {
@@ -35,13 +36,17 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    required: true,
-    default: "Pending",
+    enum: [
+      "pending",
+      "paid",
+      "inProgress",
+      "inDelivery",
+      "delivered",
+      "canceled",
+    ],
   },
-  total: {
-    type: Number,
-    required: true,
-  },
+  total: Number,
+
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -50,18 +55,7 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  subtotal: {
-    type: Number,
-    required: true,
-  },
-});
-
-orderSchema.virtual("id").get(function () {
-  return this._id.toHexString();
-});
-
-orderSchema.set("toJSON", {
-  virtuals: true,
+  subtotal: Number,
 });
 
 const Order = mongoose.model("Order", orderSchema);
