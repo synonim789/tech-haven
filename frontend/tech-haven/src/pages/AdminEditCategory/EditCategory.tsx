@@ -51,7 +51,7 @@ const EditCategory = ({ name, id }: Props) => {
       {openCategory && (
         <form
           onSubmit={handleSubmit(submit)}
-          className="md:flex items-end justify-between gap-5 mt-5"
+          className="flex flex-col md:flex-row items-center md:items-end  justify-between gap-5 mt-5"
         >
           <FormInput
             register={{ ...register('name') }}
