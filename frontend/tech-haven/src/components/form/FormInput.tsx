@@ -16,8 +16,9 @@ const FormInput = ({ name, type, error, register }: FormInputProps) => {
         className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize "
         placeholder={`Enter ${name}`}
         {...register}
+        step={0.01}
       />
-      <p className="font-bold text-red-600 flex flex-col">{error}</p>
+      <p className="font-bold text-red-500 flex flex-col">{error}</p>
     </div>
   )
 }

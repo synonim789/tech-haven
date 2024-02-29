@@ -78,7 +78,7 @@ const LoginPage = () => {
           />
 
           {error && (
-            <p className="font-bold text-red-600">
+            <p className="font-bold text-red-500">
               {'data' in error ? error.data.message : ''}
             </p>
           )}

@@ -170,7 +170,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
           />
         </div>
         {editProductError && (
-          <p className="font-bold text-red-600 flex flex-col">
+          <p className="font-bold text-red-500 flex flex-col">
             {'data' in editProductError ? editProductError.data.message : ''}
           </p>
         )}

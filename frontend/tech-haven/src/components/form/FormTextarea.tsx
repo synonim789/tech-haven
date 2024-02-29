@@ -17,7 +17,9 @@ const FormTextarea = ({ name, error, register }: FormTextareaProps) => {
         placeholder={`Enter ${name}`}
         {...register}
       ></textarea>
-      <p className="font-bold text-red-600 flex flex-col">{error}</p>
+      <p className="font-bold text-red-500 flex flex-col text-[20px]">
+        {error}
+      </p>
     </div>
   )
 }

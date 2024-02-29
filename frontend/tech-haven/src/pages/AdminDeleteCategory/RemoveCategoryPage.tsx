@@ -30,7 +30,7 @@ const RemoveCategoryPage = () => {
               {category.name}
             </p>
             <BiSolidTrash
-              className="text-3xl cursor-pointer hover:opacity-75 text-red-600 hover:scale-110 transition"
+              className="text-3xl cursor-pointer hover:opacity-75 text-red-500 hover:scale-110 transition"
               onClick={() => {
                 deleteCategory(category._id)
               }}
@@ -39,7 +39,7 @@ const RemoveCategoryPage = () => {
         )
       })}
       {deleteCategoryError && (
-        <p className="font-bold text-red-600">
+        <p className="font-bold text-red-500">
           {'data' in deleteCategoryError ? (
             <>{deleteCategoryError.data.message}</>
           ) : (

@@ -54,13 +54,13 @@ const ForgotPassword = () => {
                 },
               })}
             />
-            <p className="font-bold text-red-600 flex flex-col">
+            <p className="font-bold text-red-500 flex flex-col">
               {errors.email?.message}
             </p>
           </label>
           {error &&
             ('data' in error ? (
-              <p className="font-bold text-red-600">{error.data.message}</p>
+              <p className="font-bold text-red-500">{error.data.message}</p>
             ) : (
               ''
             ))}
