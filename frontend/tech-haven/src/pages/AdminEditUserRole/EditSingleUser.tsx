@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { FaUser } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import { useChangeUserRoleMutation } from '../../features/adminUser/adminUserApiSlice'
 import { UserType } from '../../types'
 
@@ -7,7 +9,13 @@ type Props = {
 }
 const EditSingleUser = ({ user }: Props) => {
   const { name, email, role } = user
-  const [changeUserRole, { isLoading }] = useChangeUserRoleMutation()
+  const [changeUserRole, { isLoading, error }] = useChangeUserRoleMutation()
+
+  useEffect(() => {
+    if (error && 'data' in error) {
+      toast.error(error.data.message)
+    }
+  }, [error])
 
   return (
     <div className="flex gap-5 items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl dark:bg-[#121212] dark:border-none">
