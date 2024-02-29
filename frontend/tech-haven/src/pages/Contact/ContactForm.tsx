@@ -84,10 +84,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
               required: 'Message is Required',
             }),
           }}
+          error={errors.message?.message}
         />
-        {errors?.message && (
-          <p className="text-red-600 font-bold ">{errors.message.message}</p>
-        )}
         <FormButton
           text="Send Message"
           loading={loading}

@@ -183,6 +183,10 @@ const AddProductPage = () => {
                 register={{
                   ...register('price', {
                     required: 'Price is required',
+                    min: {
+                      value: 1,
+                      message: 'price must be at least 1',
+                    },
                   }),
                 }}
                 error={errors?.price?.message}
@@ -193,6 +197,10 @@ const AddProductPage = () => {
                 register={{
                   ...register('stock', {
                     required: 'Stock is required',
+                    min: {
+                      value: 1,
+                      message: 'stock must be at least 1',
+                    },
                   }),
                 }}
                 error={errors?.stock?.message}
@@ -203,6 +211,10 @@ const AddProductPage = () => {
                 register={{
                   ...register('rating', {
                     required: 'Rating is required',
+                    min: {
+                      value: 1,
+                      message: 'price must be at least 1',
+                    },
                   }),
                 }}
                 error={errors?.rating?.message}
@@ -213,6 +225,10 @@ const AddProductPage = () => {
                 register={{
                   ...register('revCount', {
                     required: 'Rev Count is required',
+                    min: {
+                      value: 1,
+                      message: 'Rev Count must be more than 1',
+                    },
                   }),
                 }}
                 error={errors?.revCount?.message}
