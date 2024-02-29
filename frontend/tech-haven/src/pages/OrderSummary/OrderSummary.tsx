@@ -8,6 +8,7 @@ import {
   usePostOrderStripeMutation,
 } from '../../features/orders/ordersApiSlice'
 import { RootState } from '../../store'
+import { formatPrice } from '../../utils/formatPrice'
 import OrderSummaryProduct from './OrderSummaryProduct'
 
 type OrderedItems = {
@@ -100,14 +101,17 @@ const OrderSummary = () => {
         </div>
         <div className="bg-white px-4 w-full basis-1/4 shadow-md rounded-lg flex flex-col gap-4 items-center justify-around text-slate-600 dark:bg-[#121212]">
           <p className="flex gap-1 my-4">
-            <span className="font-bold">Subtotal: </span>${order.subtotal}
+            <span className="font-bold">Subtotal: </span>
+            {formatPrice(order.subtotal)}
           </p>
           <p className="flex gap-1 my-4">
-            <span className="font-bold">Shipping: </span>${order.delivery}
+            <span className="font-bold">Shipping: </span>
+            {formatPrice(order.delivery)}
           </p>
           <div className="w-full bg-gray-500 h-1 rounded-full" />
           <p className="flex gap-1 my-4">
-            <b>Total: </b>${order.total}
+            <b>Total: </b>
+            {formatPrice(order.total)}
           </p>
         </div>
       </div>

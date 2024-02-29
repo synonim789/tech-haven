@@ -2,6 +2,7 @@ import { BiSolidTrash } from 'react-icons/bi'
 import { useDispatch } from 'react-redux'
 import AmountButtons from '../../components/ui/AmountButtons'
 import { changeAmount, removeItemFromCart } from '../../features/cart/cart'
+import { formatPrice } from '../../utils/formatPrice'
 
 type CartItemPropsType = {
   item: {
@@ -34,7 +35,9 @@ const CartItem = ({ item }: CartItemPropsType) => {
       <p key={name}>{name}</p>
 
       <AmountButtons amount={amount} increase={increase} decrease={decrease} />
-      <p className="text-slate-400 font-semibold">${price * amount}</p>
+      <p className="text-slate-400 font-semibold">
+        {formatPrice(price * amount)}
+      </p>
 
       <BiSolidTrash
         className="text-4xl text-slate-600 hover:text-red-500 cursor-pointer transition-all hover:scale-105 dark:text-slate-400"

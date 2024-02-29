@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { formatPrice } from '../../utils/formatPrice'
 
 type UserOrdersProps = {
   userOrders: {
@@ -50,7 +51,7 @@ const UserOrdersTable = ({ userOrders }: UserOrdersProps) => {
                 className="block md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
                 data-cell="To Pay"
               >
-                ${order.total}
+                {formatPrice(order.total)}
               </td>
               <td
                 className="flex items-center md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"

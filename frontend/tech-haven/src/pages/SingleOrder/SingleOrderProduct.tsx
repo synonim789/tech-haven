@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { formatPrice } from '../../utils/formatPrice'
 
 type SingleOrderProductProps = {
   image: string
@@ -23,7 +24,7 @@ const SingleOrderProduct = ({
       <img src={image} alt="" className="h-20" />
       <p className="text-lg">{name}</p>
       <p className="text-lg">{quantity}</p>
-      <p className="text-lg font-bold">${price}</p>
+      <p className="text-lg font-bold">{formatPrice(price * quantity)}</p>
     </Link>
   )
 }

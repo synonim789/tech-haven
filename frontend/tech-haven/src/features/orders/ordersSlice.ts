@@ -34,7 +34,7 @@ const orderSlice = createSlice({
       products.forEach((product) => {
         productsPrice += product.price * product.amount
       })
-      const delivery = 15
+      const delivery = 1500
 
       state.order = {
         orderItems: products,

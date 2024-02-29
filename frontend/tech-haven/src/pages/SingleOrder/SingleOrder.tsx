@@ -1,6 +1,7 @@
 import { useParams } from 'react-router'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useGetSingleOrderQuery } from '../../features/orders/ordersApiSlice'
+import { formatPrice } from '../../utils/formatPrice'
 import SingleOrderProduct from './SingleOrderProduct'
 
 const SingleOrder = () => {
@@ -11,6 +12,10 @@ const SingleOrder = () => {
 
   if (isLoading) {
     return <FullscreenLoading />
+  }
+
+  if (!data) {
+    return null
   }
 
   return (
@@ -36,14 +41,16 @@ const SingleOrder = () => {
         <div className="flex justify-end dark:text-slate-400">
           <div className="flex flex-col gap-2 w-fit text-right">
             <p className="text-xl">
-              Subtotal: <span className="font-bold">${data?.subtotal}</span>
+              Subtotal:{' '}
+              <span className="font-bold">{formatPrice(data?.subtotal)}</span>
             </p>
             <p className="text-xl">
-              Delivery: <span className="font-bold">$15</span>
+              Delivery: <span className="font-bold">{formatPrice(1500)}</span>
             </p>
             <div className="bg-gray-600 h-[2px] w" />
             <p className="text-xl">
-              Total: <span className="font-bold">${data?.total}</span>
+              Total:{' '}
+              <span className="font-bold">{formatPrice(data?.total)}</span>
             </p>
           </div>
         </div>

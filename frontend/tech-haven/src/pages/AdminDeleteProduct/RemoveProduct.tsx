@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ProductType } from '../../types'
+import { formatPrice } from '../../utils/formatPrice'
 import RemoveProductModal from './RemoveProductModal'
 
 type RemoveProductProps = {
@@ -14,8 +15,8 @@ const RemoveProduct = ({ product, clear }: RemoveProductProps) => {
   }
 
   return (
-    <section className="mt-20 bg-white dark:bg-[#121212] rounded-xl shadow-xl w-[800px] p-12">
-      <div className="flex items-center justify-between">
+    <section className="mt-20 bg-white dark:bg-[#121212] rounded-xl shadow-xl w-full p-12">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-5">
         <img
           src={product.image}
           alt={product.name}
@@ -24,10 +25,12 @@ const RemoveProduct = ({ product, clear }: RemoveProductProps) => {
         <h3 className="text-3xl font-bold dark:text-slate-600">
           {product.name}
         </h3>
-        <p className="text-3xl font-bold text-[#405684]">{product.price}$</p>
+        <p className="text-3xl font-bold text-[#405684]">
+          {formatPrice(product.price)}
+        </p>
       </div>
       <button
-        className="px-6 py-3 text-2xl font-bold text-white bg-red-600 rounded-xl mt-10 transition-all hover:scale-105 hover:opacity-70"
+        className="px-6 py-3 text-2xl font-bold text-white bg-red-500 rounded-xl mt-10 transition-all hover:scale-105 hover:opacity-70"
         onClick={() => setOpenModal(true)}
       >
         Delete Product

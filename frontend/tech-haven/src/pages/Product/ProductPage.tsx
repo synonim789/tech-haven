@@ -2,6 +2,7 @@ import { AiFillStar } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useGetSingleProductQuery } from '../../features/products/products'
+import { formatPrice } from '../../utils/formatPrice'
 import AddToCart from './AddToCart'
 import ImageGallery from './ImageGallery'
 
@@ -46,7 +47,9 @@ const ProductPage = () => {
             <span className="font-bold">Available: </span>
             {countInStock > 0 ? 'In Stock' : 'Not in Stock'}
           </p>
-          <h3 className="text-[#405684] text-6xl mb-8 font-bold">${price}</h3>
+          <h3 className="text-[#405684] text-6xl mb-8 font-bold">
+            {formatPrice(price)}
+          </h3>
           <AddToCart product={product} />
         </section>
       </div>

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { removeAllItemsFromCart } from '../../features/cart/cart'
 import { RootState } from '../../store'
+import { formatPrice } from '../../utils/formatPrice'
 import CartItem from './CartItem'
 
 const CartPage = () => {
@@ -32,7 +33,8 @@ const CartPage = () => {
         </button>
         <div className="text-right flex flex-col gap-10">
           <h3 className="text-5xl font-semibold dark:text-slate-500">
-            Total: <span className="text-[#405684]">{totalPrice}$</span>
+            Total:{' '}
+            <span className="text-[#405684]">{formatPrice(totalPrice)}</span>
           </h3>
           {user ? (
             <Link

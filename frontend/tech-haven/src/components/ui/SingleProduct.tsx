@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ProductType } from '../../types'
+import { formatPrice } from '../../utils/formatPrice'
 
 const SingleProduct = (product: ProductType) => {
   const { image, name, price, _id: id } = product
@@ -14,7 +15,9 @@ const SingleProduct = (product: ProductType) => {
         <p className="text-[#405684] font-semibold text-3xl mt-5 mb-5 truncate">
           {name}
         </p>
-        <p className="text-orange-500 font-bold text-3xl mb-5">${price}</p>
+        <p className="text-orange-500 font-bold text-3xl mb-5">
+          {formatPrice(price)}
+        </p>
       </div>
     </Link>
   )
