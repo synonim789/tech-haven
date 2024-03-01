@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { IoIosMenu, IoMdClose } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import AdminSidebarMenuLink from './AdminSidebarMenuLink'
-import { AdminSidebarData } from './AdminSidebartData'
+import { AdminSidebarData } from '../data/AdminSidebartData'
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
