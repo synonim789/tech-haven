@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { IoIosMenu, IoMdClose } from 'react-icons/io'
 import { Link } from 'react-router-dom'
-import AdminSidebarMenuLink from './AdminSidebarMenuLink'
 import { AdminSidebarData } from '../data/AdminSidebartData'
+import AdminSidebarMenuLink from './AdminSidebarMenuLink'
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <div className="bg-white text-black w-fit dark:bg-[#121212]">
+    <div className="bg-white text-black w-full lg:w-fit dark:bg-[#121212]">
       <IoIosMenu
-        className="text-6xl ml-6 cursor-pointer lg:hidden"
+        className="text-6xl ml-6 cursor-pointer lg:hidden dark:text-gray-400"
         onClick={() => setIsOpen(true)}
       />
       <nav
@@ -17,10 +18,7 @@ const AdminSidebar = () => {
           isOpen ? ' left-0' : 'top-0 -left-[100%] '
         }`}
       >
-        <div
-          className="text-5xl cursor-pointer w-full flex justify-end lg:hidden"
-          onClick={() => setIsOpen(false)}
-        >
+        <div className="text-5xl cursor-pointer w-full flex justify-end lg:hidden">
           <IoMdClose />
         </div>
         {AdminSidebarData.map((item, index) => {
