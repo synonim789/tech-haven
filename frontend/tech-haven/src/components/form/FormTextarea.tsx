@@ -13,7 +13,7 @@ const FormTextarea = ({ name, error, register }: FormTextareaProps) => {
       <textarea
         name={name}
         id={name}
-        className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-white dark:bg-transparent shadow-lg rounded-xl placeholder:capitalize resize-none h-[200px]"
+        className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 dark:bg-transparent shadow-lg rounded-xl placeholder:capitalize resize-none h-[200px] outline-none"
         placeholder={`Enter ${name}`}
         {...register}
       ></textarea>

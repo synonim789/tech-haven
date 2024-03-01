@@ -99,14 +99,16 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
             }}
             error={errors?.brand?.message}
           />
-          <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-2">
-            <label htmlFor="category">Category</label>
+          <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize">
+            <label htmlFor="category" className="dark:text-gray-500">
+              Category
+            </label>
             <select
               id="category"
               {...register('category', {
                 required: 'Category is required',
               })}
-              className="px-3 py-2 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl placeholder:capitalize"
+              className="px-3 py-2 border-[2px] shadow-lg rounded-md placeholder:capitalize dark:bg-transparent dark:text-gray-500 border-solid border-slate-600 placeholder:text-slate-500"
             >
               <option value="" disabled>
                 Choose Category
@@ -161,7 +163,9 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
           />
         </div>
         <div className="my-8 flex gap-3 text-[20px]">
-          <label htmlFor="featured">Featured:</label>
+          <label htmlFor="featured" className="dark:text-gray-400 font-bold">
+            Featured:
+          </label>
           <input
             type="checkbox"
             id="featured"
