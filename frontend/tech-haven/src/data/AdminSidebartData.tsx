@@ -1,6 +1,7 @@
 import { BiCategoryAlt } from 'react-icons/bi'
 import { FaUsers } from 'react-icons/fa'
 import { IoIosHome } from 'react-icons/io'
+import { LuPackageSearch } from 'react-icons/lu'
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md'
 
 export const AdminSidebarData = [
@@ -61,5 +62,10 @@ export const AdminSidebarData = [
         path: 'removeUser',
       },
     ],
+  },
+  {
+    title: 'Orders',
+    path: 'orders',
+    icon: <LuPackageSearch />,
   },
 ]

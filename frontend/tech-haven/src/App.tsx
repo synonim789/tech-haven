@@ -20,6 +20,7 @@ import RemoveUserPage from './pages/AdminDeleteUser/RemoveUserPage'
 import EditCategoryPage from './pages/AdminEditCategory/EditCategoryPage'
 import EdictProductPage from './pages/AdminEditProduct/EditProductPage'
 import EditUserRole from './pages/AdminEditUserRole/EditUserRolePage'
+import AdminOrderPage from './pages/AdminOrder/AdminOrderPage'
 import AdminPage from './pages/AdminPage/AdminPage'
 import AdminWelcomePage from './pages/AdminWelcome/AdminWelcomePage'
 import CartPage from './pages/Cart/CartPage'
@@ -171,6 +172,7 @@ function App() {
             />
             <Route path="editUserRole" element={<EditUserRole />} />
             <Route path="removeUser" element={<RemoveUserPage />} />
+            <Route path="orders" element={<AdminOrderPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
           <Route
