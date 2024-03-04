@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useGetUserOrderQuery } from '../../features/orders/ordersApiSlice'
 import { RootState } from '../../store'
-import UserOrderPagination from './UserOrderPagination'
+import UserOrderPagination from '../../components/ui/OrderPagination'
 import UserOrdersTable from './UserOrdersTable'
 
 const UserOrderPage = () => {

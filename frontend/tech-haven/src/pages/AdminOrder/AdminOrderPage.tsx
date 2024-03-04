@@ -8,6 +8,7 @@ import AdminOrderTable from './AdminOrderTable'
 const AdminOrderPage = () => {
   const { data, isLoading } = useGetAdminOrdersQuery()
   const [orders, setOrders] = useState<OrderType[] | undefined>(undefined)
+  const [ordersPerPage, setOrdersPerPage] = useState(10)
   const [filteredOrders, setFilteredOrders] = useState<
     OrderType[] | null | undefined
   >(null)
@@ -35,7 +36,17 @@ const AdminOrderPage = () => {
   return (
     <section className="space-y-8">
       <h2 className="text-4xl font-bold text-center text-slate-500">Orders</h2>
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-x-5">
+        <select
+          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize"
+          onChange={(e) => setOrdersPerPage(parseInt(e.target.value))}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option value={pageSize} key={pageSize}>
+              {pageSize}
+            </option>
+          ))}
+        </select>
         <select
           onChange={(e) => handleStatusFilter(e)}
           className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize "
@@ -51,6 +62,7 @@ const AdminOrderPage = () => {
 
       <AdminOrderTable
         orders={filteredOrders !== null ? filteredOrders : orders}
+        ordersPerPage={ordersPerPage}
       />
     </section>
   )

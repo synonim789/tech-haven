@@ -1,14 +1,10 @@
-type UserOrderPaginationProps = {
+type Props = {
   currentPage: number
   numOfPages: number | undefined
   setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const UserOrderPagination = ({
-  currentPage,
-  numOfPages,
-  setPage,
-}: UserOrderPaginationProps) => {
+const OrderPagination = ({ currentPage, numOfPages, setPage }: Props) => {
   const pages = new Array(numOfPages).fill(null).map((v, i) => i)
 
   return (
@@ -31,4 +27,4 @@ const UserOrderPagination = ({
     </div>
   )
 }
-export default UserOrderPagination
+export default OrderPagination
