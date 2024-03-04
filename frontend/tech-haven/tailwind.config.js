@@ -14,6 +14,14 @@ export default {
       aspectRatio: {
         '3/5': '3 / 5',
       },
+      keyframes: {
+        move: {
+          '50%': { transform: 'translateY(-1rem)' },
+        },
+      },
+      animation: {
+        movingY: 'move 2s linear infinite',
+      },
     },
   },
   plugins: [],

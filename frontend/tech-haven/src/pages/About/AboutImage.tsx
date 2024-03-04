@@ -28,7 +28,11 @@ const AboutImage = ({ src }: AboutImagePropType) => {
         />
       )}
       {imageLoaded && (
-        <img src={src} alt="" className="rounded-xl w-[400px] h-auto" />
+        <img
+          src={src}
+          alt=""
+          className="rounded-xl w-[400px] h-[645px] overflow-hidden animate-pulse"
+        />
       )}
     </>
   )
