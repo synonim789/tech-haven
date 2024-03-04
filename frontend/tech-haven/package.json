@@ -12,6 +12,7 @@
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@reduxjs/toolkit": "^2.0.1",
+    "@tanstack/react-table": "^8.13.2",
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
     "blurhash": "^2.0.5",
