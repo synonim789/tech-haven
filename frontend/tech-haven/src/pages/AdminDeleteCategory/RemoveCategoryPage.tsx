@@ -16,7 +16,7 @@ const RemoveCategoryPage = () => {
   }
 
   return (
-    <section className="flex flex-col   gap-6">
+    <section className="flex flex-col gap-6">
       <h4 className="mb-8 text-4xl font-bold text-center text-slate-500">
         Remove Category
       </h4>
