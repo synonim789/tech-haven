@@ -57,3 +57,22 @@ export type UserWithTokenType = {
   token: string
   deleted: boolean
 }
+
+export type OrderType = {
+  _id: string
+  orderItems: {
+    quantity: number
+    price: number
+    name: string
+    productId: string
+    _id: string
+  }[]
+  shippingAddress1: string
+  shippingAddress2: string
+  phone: string
+  status: string
+  user: UserType
+  dateOrdered: string
+  subtotal: number
+  total: number
+}
