@@ -19,7 +19,7 @@ const AdminSidebar = () => {
         }`}
       >
         <div className="text-5xl cursor-pointer w-full flex justify-end lg:hidden">
-          <IoMdClose />
+          <IoMdClose onClick={() => setIsOpen(!isOpen)} />
         </div>
         {AdminSidebarData.map((item, index) => {
           return (
