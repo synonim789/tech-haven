@@ -8,7 +8,6 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        hero: "url('/src/assets/6017768.jpg')",
         contactHero: "url('/src/assets/contactHero.jpg')",
       },
       aspectRatio: {
@@ -16,7 +15,7 @@ export default {
       },
       keyframes: {
         move: {
-          '50%': { transform: 'translateY(-1rem)' },
+          '50%': { transform: 'translateY(-2rem)' },
         },
       },
       animation: {
