@@ -53,7 +53,7 @@ const UserOrderLine = ({ order }: Props) => {
         data-cell="Status"
       >
         <p
-          className={`text-white font-bold px-4 py-2 rounded-full text-center ${background}`}
+          className={`font-bold px-4 py-2 rounded-full text-center ${background}`}
         >
           {label}
         </p>
