@@ -5,12 +5,13 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import OrderPagination from '../../components/ui/OrderPagination'
 import { OrderType } from '../../types'
 import { formatPrice } from '../../utils/formatPrice'
+import AdminOrderOptions from './AdminOrderOptions'
 import OrderStatusCell from './OrderStatusCell'
+import OrderStatusEdit from './OrderStatusEdit'
 
 export type Order = {
   _id: string
@@ -22,50 +23,71 @@ export type Order = {
   total: number
 }
 
-const columHelper = createColumnHelper<Order>()
-const columns = [
-  columHelper.accessor('_id', {
-    header: 'ID',
-    cell: (info) => info.getValue(),
-  }),
-  columHelper.accessor('dateOrdered', {
-    header: 'Created at',
-    cell: (info) => new Date(info.getValue()).toLocaleDateString(),
-  }),
-  columHelper.accessor('user.name', {
-    header: 'Name',
-    cell: (info) => info.getValue(),
-  }),
-  columHelper.accessor('status', {
-    header: 'Status',
-    cell: (info) => <OrderStatusCell value={info} />,
-  }),
-  columHelper.accessor('total', {
-    header: () => 'Total',
-    cell: (info) => formatPrice(info.getValue()),
-  }),
-  columHelper.display({
-    id: 'Actions',
-    cell: (props) => (
-      <BsThreeDotsVertical size={25} className="cursor-pointer" />
-    ),
-  }),
-]
-
 type Props = {
-  orders: OrderType[] | undefined
+  orders: OrderType[] | undefined | null
   ordersPerPage: number
+  setOrders:
+    | Dispatch<SetStateAction<OrderType[] | null>>
+    | Dispatch<SetStateAction<OrderType[] | null | undefined>>
 }
 
-const AdminOrderTable = ({ orders, ordersPerPage }: Props) => {
-  if (!orders || orders.length === 0) {
-    return <h3>No Orders Found</h3>
-  }
-
+const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: ordersPerPage,
   })
+  const [showOptions, setShowOptions] = useState<string | null>(null)
+  const [isEditing, setIsEditing] = useState<string | null>(null)
+  const [editOrderInfo, setEditOrderInfo] = useState<null | {
+    id: string
+    status: string
+  }>(null)
+
+  const columHelper = createColumnHelper<Order>()
+  const columns = [
+    columHelper.accessor('_id', {
+      header: 'ID',
+      cell: (info) => info.getValue(),
+    }),
+    columHelper.accessor('dateOrdered', {
+      header: 'Created at',
+      cell: (info) => new Date(info.getValue()).toLocaleDateString(),
+    }),
+    columHelper.accessor('user.name', {
+      header: 'Name',
+      cell: (info) => info.getValue(),
+    }),
+    columHelper.accessor('status', {
+      header: 'Status',
+      cell: (info) =>
+        isEditing === info.row.original._id ? (
+          <OrderStatusEdit
+            editOrderInfo={handleSetEditOrderInfo}
+            name={info.getValue()}
+            id={info.row.original._id}
+          />
+        ) : (
+          <OrderStatusCell value={info} />
+        ),
+    }),
+    columHelper.accessor('total', {
+      header: () => 'Total',
+      cell: (info) => formatPrice(info.getValue()),
+    }),
+    columHelper.display({
+      id: 'Actions',
+      cell: (props) => (
+        <AdminOrderOptions
+          props={props}
+          show={props.row.original._id === showOptions}
+          setShow={handleShow}
+          isEditing={props.row.original._id === isEditing}
+          setIsEditing={handleEditing}
+          editOrderInfo={editOrderInfo}
+        />
+      ),
+    }),
+  ]
 
   const table = useReactTable({
     data: orders,
@@ -84,6 +106,38 @@ const AdminOrderTable = ({ orders, ordersPerPage }: Props) => {
       pageSize: ordersPerPage,
     })
   }, [ordersPerPage])
+
+  const handleEditing = (id: string | null) => {
+    setIsEditing(id)
+  }
+
+  const handleShow = (id: string | null) => {
+    setShowOptions(id)
+  }
+
+  const handleSetEditOrderInfo = (id: string, status: string) => {
+    setEditOrderInfo({
+      id: id,
+      status: status,
+    })
+
+    setOrders((oldOrders: OrderType[] | null) => {
+      return oldOrders?.map((oldOrder) => {
+        if (oldOrder._id === id) {
+          return {
+            ...oldOrder,
+            status: status,
+          }
+        } else {
+          return oldOrder
+        }
+      })
+    })
+  }
+
+  if (!orders) {
+    return <h3>No Orders Found</h3>
+  }
 
   return (
     <>

@@ -7,7 +7,7 @@ import AdminOrderTable from './AdminOrderTable'
 
 const AdminOrderPage = () => {
   const { data, isLoading } = useGetAdminOrdersQuery()
-  const [orders, setOrders] = useState<OrderType[] | undefined>(undefined)
+  const [orders, setOrders] = useState<OrderType[] | null>(null)
   const [ordersPerPage, setOrdersPerPage] = useState(10)
   const [filteredOrders, setFilteredOrders] = useState<
     OrderType[] | null | undefined
@@ -31,6 +31,10 @@ const AdminOrderPage = () => {
 
   if (isLoading) {
     return <FullscreenLoading />
+  }
+
+  if (!orders) {
+    return <p>Orders not found</p>
   }
 
   return (
@@ -63,6 +67,7 @@ const AdminOrderPage = () => {
       <AdminOrderTable
         orders={filteredOrders !== null ? filteredOrders : orders}
         ordersPerPage={ordersPerPage}
+        setOrders={filteredOrders !== null ? setFilteredOrders : setOrders}
       />
     </section>
   )

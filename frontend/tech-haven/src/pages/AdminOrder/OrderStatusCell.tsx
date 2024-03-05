@@ -15,7 +15,7 @@ const OrderStatusCell = ({ value }: Props) => {
 
   return (
     <div
-      className={`p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none ${color} text-white font-bold px-4 py-2 rounded-full text-center w-full`}
+      className={`p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none ${color} font-bold px-4 py-2 rounded-full text-center w-full`}
     >
       {label}
     </div>
