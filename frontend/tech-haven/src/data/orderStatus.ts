@@ -23,7 +23,7 @@ export const ORDER_STATUS: OrderStatus[] = [
   {
     label: 'In Delivery',
     value: 'inDelivery',
-    background: 'bg-yellow-300 text-yellow-500',
+    background: 'bg-yellow-200 text-yellow-500',
   },
   {
     label: 'Delivered',
