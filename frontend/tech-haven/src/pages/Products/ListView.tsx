@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { RootState } from '../../store'
+import { formatPrice } from '../../utils/formatPrice'
 
 const ListView = () => {
   const pagedProducts = useSelector(
@@ -26,7 +27,7 @@ const ListView = () => {
 
               <div className="mx-5 flex flex-col gap-5">
                 <h5 className="text-2xl text-[#405684] font-bold">
-                  ${product.price}
+                  {formatPrice(product.price)}
                 </h5>
                 <p className="text-slate-600">
                   {product.description.substring(0, 125)}...

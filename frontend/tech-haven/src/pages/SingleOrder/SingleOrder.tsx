@@ -33,7 +33,7 @@ const SingleOrder = () => {
               name={item.productId.name}
               price={item.productId.price}
               quantity={item.quantity}
-              id={item.productId.id}
+              id={item.productId._id}
               key={item.productId._id}
             />
           )
