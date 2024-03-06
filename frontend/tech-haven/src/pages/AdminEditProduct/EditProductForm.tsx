@@ -88,7 +88,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
           error={errors?.description?.message}
         />
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div className="grid grid-cols-1 w-full gap-8 sm:grid-cols-2">
           <FormInput
             name="brand"
             type="text"
