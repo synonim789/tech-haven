@@ -34,9 +34,11 @@ const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
   return createPortal(
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />
-      <div className="fixed top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-14 flex flex-col items-center gap-14 rounded-3xl dark:bg-[#121212] dark:text-slate-400">
-        <h3 className="text-3xl">Do you really want to delete your account?</h3>
-        <div className="flex gap-14">
+      <div className="fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-8 md:p-14 flex flex-col items-center gap-4 md:gap-8 rounded-3xl dark:bg-[#121212] dark:text-slate-400">
+        <h3 className="text-2xl md:text-3xl font-bold text-center">
+          Do you really want to delete your account?
+        </h3>
+        <div className="flex flex-col md:flex-row w-full justify-center items-center gap-4 md:gap-8">
           <button
             className="px-4 py-2 text-[20px] font-bold text-white bg-green-700 rounded-xl hover:scale-105 hover:opacity-75"
             onClick={() => {
