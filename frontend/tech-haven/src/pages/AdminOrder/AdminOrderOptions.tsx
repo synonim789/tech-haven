@@ -3,10 +3,11 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaCheck, FaRegEye } from 'react-icons/fa'
 import { MdOutlineModeEdit } from 'react-icons/md'
 import { useEditOrderMutation } from '../../features/adminOrder/adminOrderApiSlice'
-import { Order } from './AdminOrderTable'
+import { OrderType } from '../../types'
+import AdminOrderInfo from './AdminOrderInfo'
 
 type Props = {
-  props: CellContext<Order, unknown>
+  props: CellContext<OrderType, unknown>
   show: boolean
   setShow: (id: string | null) => void
   isEditing: boolean
@@ -15,6 +16,8 @@ type Props = {
     id: string
     status: string
   } | null
+  setModalOpen: (id: string | null) => void
+  modalOpen: boolean
 }
 
 const AdminOrderOptions = ({
@@ -24,10 +27,17 @@ const AdminOrderOptions = ({
   isEditing,
   setIsEditing,
   editOrderInfo,
+  setModalOpen,
+  modalOpen,
 }: Props) => {
   const handleEdit = () => {
     setShow(null)
     setIsEditing(props.row.original._id)
+  }
+
+  const handleInfo = () => {
+    setShow(null)
+    setModalOpen(props.row.original._id)
   }
 
   const [update, result] = useEditOrderMutation()
@@ -69,7 +79,7 @@ const AdminOrderOptions = ({
             Edit
           </button>
           <button
-            onClick={() => setShow(null)}
+            onClick={handleInfo}
             className="hover:bg-gray-300 w-full text-left p-2 flex items-center gap-2"
           >
             <FaRegEye className="text-green-800" />
@@ -77,6 +87,11 @@ const AdminOrderOptions = ({
           </button>
         </div>
       )}
+      <AdminOrderInfo
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        info={props}
+      />
     </>
   )
 }

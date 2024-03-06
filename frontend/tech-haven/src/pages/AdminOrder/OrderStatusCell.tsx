@@ -1,9 +1,9 @@
 import { CellContext } from '@tanstack/react-table'
 import { ORDER_STATUS } from '../../data/orderStatus'
-import { Order } from './AdminOrderTable'
+import { OrderType } from '../../types'
 
 type Props = {
-  value: CellContext<Order, string>
+  value: CellContext<OrderType, string>
 }
 
 const OrderStatusCell = ({ value }: Props) => {

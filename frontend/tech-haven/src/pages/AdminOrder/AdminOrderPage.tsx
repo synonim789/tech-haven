@@ -9,21 +9,22 @@ const AdminOrderPage = () => {
   const { data, isLoading } = useGetAdminOrdersQuery()
   const [orders, setOrders] = useState<OrderType[] | null>(null)
   const [ordersPerPage, setOrdersPerPage] = useState(10)
-  const [filteredOrders, setFilteredOrders] = useState<
-    OrderType[] | null | undefined
-  >(null)
+  const [filteredOrders, setFilteredOrders] = useState<OrderType[] | null>(null)
 
   useEffect(() => {
     if (data) {
       setOrders(data)
+      console.log(data)
     }
   }, [data])
 
   const handleStatusFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value !== 'all') {
-      setFilteredOrders(
-        orders?.filter((item) => item.status === e.target.value)
-      )
+      if (orders) {
+        setFilteredOrders(
+          orders.filter((item) => item.status === e.target.value)
+        )
+      }
     } else {
       setFilteredOrders(orders)
     }
@@ -34,7 +35,11 @@ const AdminOrderPage = () => {
   }
 
   if (!orders) {
-    return <p>Orders not found</p>
+    return (
+      <h3 className="text-slate-500 font-bold text-center text-3xl">
+        No Orders Found
+      </h3>
+    )
   }
 
   return (

@@ -5,7 +5,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import OrderPagination from '../../components/ui/OrderPagination'
 import { OrderType } from '../../types'
 import { formatPrice } from '../../utils/formatPrice'
@@ -13,22 +13,10 @@ import AdminOrderOptions from './AdminOrderOptions'
 import OrderStatusCell from './OrderStatusCell'
 import OrderStatusEdit from './OrderStatusEdit'
 
-export type Order = {
-  _id: string
-  user: {
-    name: string
-  }
-  dateOrdered: string
-  status: string
-  total: number
-}
-
 type Props = {
-  orders: OrderType[] | undefined | null
+  orders: OrderType[]
   ordersPerPage: number
-  setOrders:
-    | Dispatch<SetStateAction<OrderType[] | null>>
-    | Dispatch<SetStateAction<OrderType[] | null | undefined>>
+  setOrders: React.Dispatch<React.SetStateAction<OrderType[] | null>>
 }
 
 const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
@@ -42,8 +30,9 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
     id: string
     status: string
   }>(null)
+  const [modalOpen, setModalOpen] = useState<string | null>(null)
 
-  const columHelper = createColumnHelper<Order>()
+  const columHelper = createColumnHelper<OrderType>()
   const columns = [
     columHelper.accessor('_id', {
       header: 'ID',
@@ -84,6 +73,8 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
           isEditing={props.row.original._id === isEditing}
           setIsEditing={handleEditing}
           editOrderInfo={editOrderInfo}
+          setModalOpen={handleModalOpen}
+          modalOpen={props.row.original._id === modalOpen}
         />
       ),
     }),
@@ -121,8 +112,12 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
       status: status,
     })
 
-    setOrders((oldOrders: OrderType[] | null) => {
-      return oldOrders?.map((oldOrder) => {
+    setOrders((prevState: OrderType[] | null) => {
+      if (prevState === null) {
+        return prevState
+      }
+
+      return prevState.map((oldOrder) => {
         if (oldOrder._id === id) {
           return {
             ...oldOrder,
@@ -135,14 +130,22 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
     })
   }
 
-  if (!orders) {
-    return <h3>No Orders Found</h3>
+  const handleModalOpen = (id: string | null) => {
+    setModalOpen(id)
+  }
+
+  if (!orders || orders.length === 0) {
+    return (
+      <h3 className="text-slate-500 font-bold text-center text-3xl">
+        No Orders Found
+      </h3>
+    )
   }
 
   return (
     <>
       <div>
-        <table className="w-full border rounded-xl overflow-hidden">
+        <table className="w-full border rounded-xl overflow-hidden hidden md:block">
           <thead className="bg-gray-500 border-b">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
