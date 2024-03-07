@@ -144,41 +144,39 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
 
   return (
     <>
-      <div>
-        <table className="w-full border rounded-xl overflow-hidden hidden md:block">
-          <thead className="bg-gray-500 border-b">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className="p-3 text-sm font-semibold tracking-wide"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="dark:bg-gray-700 dark:text-white">
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className="p-3 text-sm text-slate-700 dark:text-slate-100"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <table className="w-full border rounded-xl overflow-hidden">
+        <thead className="bg-gray-500 border-b">
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  className="p-3 text-sm font-semibold tracking-wide"
+                >
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id} className="dark:bg-gray-700 dark:text-white">
+              {row.getVisibleCells().map((cell) => (
+                <td
+                  key={cell.id}
+                  className="p-3 text-sm text-slate-700 dark:text-slate-100"
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <OrderPagination
         currentPage={pagination.pageIndex}
         numOfPages={table.getPageCount()}
