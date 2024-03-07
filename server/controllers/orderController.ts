@@ -69,8 +69,10 @@ export const deleteOrder = async (
 
 export const getTotalSales = async (req: Request, res: Response) => {
   const totalSales = await Order.aggregate([
-    { $group: { _id: null, totalSales: { $sum: "total" } } },
+    { $group: { _id: null, totalSales: { $sum: "$total" } } },
   ]);
+
+  console.log(totalSales);
   if (!totalSales) {
     return res
       .status(400)
