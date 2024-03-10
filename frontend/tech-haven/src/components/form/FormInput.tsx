@@ -13,7 +13,7 @@ const FormInput = ({ name, type, error, register }: FormInputProps) => {
       </label>
       <input
         type={type}
-        className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize "
+        className="px-3 py-2 border-[2px] border-solid border-gray-300  placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-xl dark:bg-transparent placeholder:capitalize "
         placeholder={`Enter ${name}`}
         {...register}
         step={0.01}
