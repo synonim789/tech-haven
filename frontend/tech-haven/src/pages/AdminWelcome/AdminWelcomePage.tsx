@@ -8,7 +8,7 @@ const AdminWelcomePage = () => {
 
   return (
     <div className="space-y-5 w-full">
-      <div className="text-2xl text-slate-500 text-right bg-[#222427] px-10 py-5 rounded-2xl shadow-xl">
+      <div className="text-2xl text-slate-500 text-right bg-white dark:bg-[#222427] px-10 py-5 rounded-2xl shadow-xl">
         <span className="">Welcome, </span>
         <Link
           to={`/profile`}
