@@ -14,7 +14,7 @@ const AdminSidebar = () => {
         onClick={() => setIsOpen(true)}
       />
       <nav
-        className={`dark:bg-[#121212] bg-white text-gray-700 min-h-screen w-[250px] lg:static lg:inset-0 fixed top-0 transition-all ease-in-out duration-300 z-20 ${
+        className={`dark:bg-[#121212] bg-white text-gray-700 h-full overflow-y-auto min-h-screen w-[250px] lg:static lg:inset-0 fixed top-0 transition-all ease-in-out duration-300 z-20 ${
           isOpen ? ' left-0' : 'top-0 -left-[100%] '
         }`}
       >
