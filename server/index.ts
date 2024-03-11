@@ -7,6 +7,7 @@ import errorHandler from "./helpers/error-handler";
 import categoriesRouter from "./routers/categories";
 import ordersRouter from "./routers/orders";
 import productsRouter from "./routers/products";
+import statisticsRouter from "./routers/statistics";
 import stripeRouter from "./routers/stripe";
 import usersRouter from "./routers/users";
 
@@ -30,6 +31,7 @@ app.use(`${api}/products`, productsRouter);
 app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
+app.use(`${api}/statistics`, statisticsRouter);
 
 if (!process.env.CONNECTION_STRING) {
   throw new Error("No CONNECTION_STRING variable");

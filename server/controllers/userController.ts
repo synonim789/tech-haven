@@ -163,21 +163,7 @@ export const signUpUser = async (
   res.status(200).json({ token: token });
 };
 
-export const getUserCount = async (req: Request, res: Response) => {
-  const userCount = await User.countDocuments({ deleted: false })
-    .then((count) => count)
-    .catch((err) => {
-      return res
-        .status(400)
-        .json({ message: "Something went wrong", err: err });
-    });
-  if (!userCount) {
-    return res.status(500).json({ message: "users not found" });
-  }
-  res.json({
-    count: userCount,
-  });
-};
+
 
 export const deleteUser = async (
   req: Request<IParamsID, unknown, unknown, unknown>,

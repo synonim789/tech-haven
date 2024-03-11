@@ -67,34 +67,6 @@ export const deleteOrder = async (
   return res.status(200).json({ message: "test" });
 };
 
-export const getTotalSales = async (req: Request, res: Response) => {
-  const totalSales = await Order.aggregate([
-    { $group: { _id: null, totalSales: { $sum: "$total" } } },
-  ]);
-
-  console.log(totalSales);
-  if (!totalSales) {
-    return res
-      .status(400)
-      .json({ message: "The order sales cannot be generated" });
-  }
-  res.status(200).json({ totalSales: totalSales.pop().totalSales });
-};
-
-export const getOrderCount = async (req: Request, res: Response) => {
-  const orderCount = await Order.countDocuments()
-    .then((count) => count)
-    .catch((err) => {
-      return res.status(400).json({ success: false, error: err });
-    });
-  if (!orderCount) {
-    return res.status(500).json({ success: false });
-  }
-  res.status(200).json({
-    count: orderCount,
-  });
-};
-
 export const addOrder = async (
   req: Request<unknown, unknown, IAddOrder, unknown>,
   res: Response,

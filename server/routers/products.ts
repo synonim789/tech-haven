@@ -7,7 +7,6 @@ import {
   getAllProducts,
   getFeaturedCount,
   getFeaturedProducts,
-  getProductsCount,
   getSingleProduct,
   updateProduct,
 } from "../controllers/productController";
@@ -39,7 +38,7 @@ router.post(
 );
 router.put("/:id", verifyJWT, verifyRoles("admin"), updateProduct);
 router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteProduct);
-router.get("/get/count", verifyJWT, verifyRoles("admin"), getProductsCount);
+
 router.get(
   "/get/featured/:count",
   verifyJWT,

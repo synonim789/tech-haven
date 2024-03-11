@@ -60,20 +60,6 @@ export const getSingleProduct = async (
   res.status(200).json(product)
 }
 
-export const getProductsCount = async (req: Request, res: Response) => {
-  const productCount = await Product.countDocuments({ deleted: false })
-    .then((count) => count)
-    .catch((err) => {
-      return res.status(400).json({ success: false, error: err })
-    })
-  if (!productCount) {
-    return res.status(500).json({ success: false })
-  }
-  res.status(200).json({
-    count: productCount,
-  })
-}
-
 export const getFeaturedCount = async (
   req: Request<IParamsCount, unknown, unknown, unknown>,
   res: Response
