@@ -18,8 +18,10 @@ const Header = () => {
   useEffect(() => {
     if (token) {
       const decodedToken = decodeToken(token)
-      const { role } = decodedToken
-      setHeaderRole(role)
+      if (decodedToken) {
+        const { role } = decodedToken
+        setHeaderRole(role)
+      }
     } else {
       setHeaderRole('')
     }
@@ -40,7 +42,7 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#405684] w-full py-3 relative ">
+    <header className="bg-[#405684] w-full py-3 relative">
       <div className="max-w-screen-xl px-4 mx-auto">
         {headerRole === 'user' && (
           <div className="flex justify-center sm:justify-end items-center gap-5">
