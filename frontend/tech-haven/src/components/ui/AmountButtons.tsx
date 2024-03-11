@@ -13,20 +13,14 @@ const AmountButtons = ({
 }: AmountButtonsPropsType) => {
   return (
     <div className="flex">
-      <button
-        className="bg-[#405684] text-white text-[20px] font-bold p-3"
-        onClick={decrease}
-      >
-        <MdKeyboardArrowDown />
+      <button className="bg-[#405684] text-white p-3" onClick={decrease}>
+        <MdKeyboardArrowDown size={20} />
       </button>
-      <p className="p-4 bg-white dark:bg-transparent dark:border-y dark:border-[#405684] dark:text-slate-400 border-2 text-[20px] min-w-[60px] text-center">
+      <p className="p-4 text-lg bg-white dark:bg-transparent font-bold  dark:text-slate-400  min-w-[60px] text-center dark:bg-gray-800">
         {amount}
       </p>
-      <button
-        className="bg-[#405684] text-white text-[20px] font-bold p-3"
-        onClick={increase}
-      >
-        <MdKeyboardArrowUp />
+      <button className="bg-[#405684] text-white p-3" onClick={increase}>
+        <MdKeyboardArrowUp size={20} />
       </button>
     </div>
   )

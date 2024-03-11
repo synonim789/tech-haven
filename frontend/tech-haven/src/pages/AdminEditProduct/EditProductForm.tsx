@@ -108,7 +108,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
               {...register('category', {
                 required: 'Category is required',
               })}
-              className="px-3 py-2 border-[2px] shadow-lg placeholder:capitalize dark:bg-transparent dark:text-gray-500 border-solid border-gray-300 rounded-xl placeholder:text-slate-500"
+              className="px-3 py-2 border-[2px] shadow-lg placeholder:capitalize dark:bg-transparent dark:text-gray-500 border-solid border-gray-300 rounded-xl placeholder:text-slate-500 dark:border-gray-700"
             >
               <option value="" disabled>
                 Choose Category

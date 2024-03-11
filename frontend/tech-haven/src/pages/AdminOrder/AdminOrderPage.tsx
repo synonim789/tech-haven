@@ -47,7 +47,7 @@ const AdminOrderPage = () => {
       <h2 className="text-4xl font-bold text-center text-slate-500">Orders</h2>
       <div className="flex justify-end gap-x-5">
         <select
-          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize"
+          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg dark:bg-transparent placeholder:capitalize rounded-xl"
           onChange={(e) => setOrdersPerPage(parseInt(e.target.value))}
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -58,7 +58,7 @@ const AdminOrderPage = () => {
         </select>
         <select
           onChange={(e) => handleStatusFilter(e)}
-          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize "
+          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg dark:bg-transparent placeholder:capitalize rounded-xl"
         >
           <option value="all">All</option>
           {ORDER_STATUS.map((order, index) => (
