@@ -7,7 +7,7 @@ import {
 import { formatPrice } from '../../utils/formatPrice'
 import StatisticCard from './StatisticCard'
 
-const AdminWelcomeStatistics = () => {
+const AdminWelcomeStatisticsCards = () => {
   const { data: totalSalesData, isLoading: totalSalesLoading } =
     useGetTotalSalesQuery()
   const { data: totalOrderCountData, isLoading: totalOrderCountIsLoading } =
@@ -24,7 +24,7 @@ const AdminWelcomeStatistics = () => {
   }
 
   return (
-    <section className="flex flex-col xl:flex-row gap-y-3 xl:gap-x-3 xl:gap-y-0 flex-grow flex-nowrap w-full items-center justify-center">
+    <section className="flex flex-col lg:flex-row gap-y-3 lg:gap-x-3 lg:gap-y-0 flex-grow flex-nowrap w-full items-center justify-center">
       <StatisticCard
         textColor="text-green-500"
         upperValue={formatPrice(totalSalesData.totalSales)}
@@ -40,8 +40,7 @@ const AdminWelcomeStatistics = () => {
         upperValue={userCountData?.count}
         bottomValue="Users"
       />
-      <div></div>
     </section>
   )
 }
-export default AdminWelcomeStatistics
+export default AdminWelcomeStatisticsCards
