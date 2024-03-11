@@ -29,7 +29,7 @@ const UserOrdersTable = ({ userOrders }: UserOrdersProps) => {
       </thead>
       <tbody>
         {userOrders.map((order) => {
-          return <UserOrderLine order={order} />
+          return <UserOrderLine order={order} key={order._id} />
         })}
       </tbody>
     </table>
