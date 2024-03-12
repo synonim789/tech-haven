@@ -1,4 +1,3 @@
-import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import {
   useGetOrderCountQuery,
   useGetTotalSalesQuery,
@@ -16,7 +15,7 @@ const AdminWelcomeStatisticsCards = () => {
     useGetUserCountQuery()
 
   if (totalSalesLoading || totalOrderCountIsLoading || userCountIsLoading) {
-    return <FullscreenLoading />
+    return <p>Loading...</p>
   }
 
   if (!totalSalesData || !totalOrderCountData || !userCountData) {

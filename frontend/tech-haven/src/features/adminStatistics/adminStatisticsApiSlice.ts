@@ -14,6 +14,9 @@ const adminStatisticsApiSlice = api.injectEndpoints({
     getSalesByDate: builder.query<{ _id: string; total: number }[], void>({
       query: () => 'statistics/sales-by-date',
     }),
+    getSalesByCategory: builder.query<{ _id: string; categoryName: string; totalSales: number }[],void>({
+      query: () => 'statistics/sales-by-category',
+    }),
   }),
 })
 
@@ -22,4 +25,5 @@ export const {
   useGetOrderCountQuery,
   useGetUserCountQuery,
   useGetSalesByDateQuery,
+  useGetSalesByCategoryQuery,
 } = adminStatisticsApiSlice
