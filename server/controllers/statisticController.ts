@@ -84,7 +84,7 @@ export const getSalesByDate = async (req: Request, res: Response) => {
       $sort: { _id: -1 },
     },
   ]);
-  res.send(salesByDate);
+  res.status(200).json(salesByDate);
 };
 
 export const getSalesByCategory = async (req: Request, res: Response) => {
@@ -94,7 +94,39 @@ export const getSalesByCategory = async (req: Request, res: Response) => {
         status: { $not: { $eq: "canceled" } },
       },
     },
+    {
+      $unwind: "$orderItems",
+    },
+    {
+      $lookup: {
+        from: "products",
+        localField: "orderItems.productId",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    {
+      $unwind: "$product",
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "product.category",
+        foreignField: "_id",
+        as: "category",
+      },
+    },
+    {
+      $unwind: "$category",
+    },
+    {
+      $group: {
+        _id: "$category._id",
+        categoryName: { $first: "$category.name" },
+        totalSales: { $sum: "$orderItems.price" },
+      },
+    },
   ]);
 
-  res.json(ordersByCategory);
+  res.status(200).json(ordersByCategory);
 };
