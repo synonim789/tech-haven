@@ -87,11 +87,13 @@ const AdminOrderOptions = ({
           </button>
         </div>
       )}
-      <AdminOrderInfo
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        info={props}
-      />
+      {modalOpen && (
+        <AdminOrderInfo
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          info={props}
+        />
+      )}
     </>
   )
 }
