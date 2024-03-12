@@ -96,7 +96,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
       pageIndex: 0,
       pageSize: ordersPerPage,
     })
-  }, [ordersPerPage])
+  }, [])
 
   const handleEditing = (id: string | null) => {
     setIsEditing(id)
@@ -144,8 +144,8 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
 
   return (
     <>
-      <table className="w-full border rounded-xl overflow-hidden">
-        <thead className="bg-gray-500 border-b">
+      <table className="overflow-hidden rounded-md ">
+        <thead className=" dark:text-gray-300 dark:bg-[#1D1F22]">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -164,7 +164,10 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="dark:bg-gray-700 dark:text-white">
+            <tr
+              key={row.id}
+              className="  dark:text-white dark:bg-transparent dark:even:bg-[#303235] dark:odd:bg-[#3E4043]"
+            >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
