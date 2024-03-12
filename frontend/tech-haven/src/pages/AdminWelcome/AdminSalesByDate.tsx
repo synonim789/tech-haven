@@ -37,9 +37,9 @@ const AdminSalesByDate = () => {
   }
 
   return (
-    <div className="h-[370px] dark:bg-[#222427] px-10 py-5 rounded-2xl space-y-5 lg:basis-4/6">
+    <div className="h-[600px] dark:bg-[#222427] px-10 py-5 rounded-2xl space-y-5  basis-2/3">
       <p className="text-2xl text-center  text-lime-600">Sales By Date</p>
-      <ResponsiveContainer height={300}>
+      <ResponsiveContainer height={530}>
         <BarChart data={salesData}>
           <XAxis dataKey="_id" />
           <YAxis dataKey="total" />

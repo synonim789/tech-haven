@@ -17,7 +17,7 @@ const AdminRemoveUser = ({ user }: AdminRemoveUserProps) => {
   }
 
   return (
-    <div className="flex items-center bg-white p-4 border-[2px] border-solid border-slate-300 shadow-lg rounded-xl justify-between gap-2 dark:bg-[#121212] dark:border-none">
+    <div className="flex items-center bg-white p-4 shadow-lg rounded-xl justify-between gap-2 dark:bg-[#222427] ">
       <FaUser size={'30px'} className="dark:text-slate-400" />
       <div className="flex flex-col gap-5">
         <p className="font-semibold text-xl text-slate-400">{name}</p>

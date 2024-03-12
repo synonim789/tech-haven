@@ -15,7 +15,7 @@ const RemoveProduct = ({ product, clear }: RemoveProductProps) => {
   }
 
   return (
-    <section className="mt-20 bg-white dark:bg-[#121212] rounded-xl shadow-xl w-full p-12">
+    <section className="mt-20 bg-white dark:bg-[#222427] rounded-xl shadow-xl w-full p-12">
       <div className="flex flex-col md:flex-row items-center justify-between gap-5">
         <img
           src={product.image}

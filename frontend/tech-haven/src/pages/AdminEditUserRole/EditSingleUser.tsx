@@ -18,7 +18,7 @@ const EditSingleUser = ({ user }: Props) => {
   }, [error])
 
   return (
-    <div className="flex gap-5 items-center bg-white p-4 shadow-lg rounded-xl dark:bg-[#121212]">
+    <div className="flex gap-5 items-center bg-white p-4 shadow-lg rounded-xl dark:bg-[#222427]">
       <FaUser size={'30px'} className="dark:text-slate-400" />
 
       <div>

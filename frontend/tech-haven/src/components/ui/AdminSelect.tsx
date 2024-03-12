@@ -20,7 +20,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
   }
   return (
     <div
-      className="relative bg-white dark:bg-[#121212] text-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
+      className="relative bg-white dark:bg-[#1D1F22] text-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
       onClick={() => setIsOpen((prev) => !prev)}
     >
       <span className="grow flex flex-wrap text-3xl">
@@ -39,7 +39,7 @@ const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
       {isOpen ? <IoMdArrowDropup size={25} /> : <IoMdArrowDropdown size={25} />}
       <ul
         className={
-          'absolute left-0 p-0 w-full top-[calc(100%+5px)] bg-white dark:bg-[#121212] rounded-xl max-h-[400px] overflow-auto ' +
+          'absolute left-0 p-0 w-full top-[calc(100%+5px)] bg-white dark:bg-[#1D1F22] rounded-xl max-h-[400px] overflow-auto ' +
           ` ${isOpen ? 'block' : 'hidden'}`
         }
       >

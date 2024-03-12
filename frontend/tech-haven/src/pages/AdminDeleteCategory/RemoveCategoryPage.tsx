@@ -23,7 +23,7 @@ const RemoveCategoryPage = () => {
       {categories?.map((category: CategoryType) => {
         return (
           <div
-            className="bg-white dark:bg-[#121212] w-full p-4 shadow-lg rounded-lg flex justify-between items-center"
+            className="bg-white dark:bg-[#222427] w-full p-4 shadow-lg rounded-lg flex justify-between items-center"
             key={category._id}
           >
             <p className="text-3xl font-bold dark:text-slate-600">

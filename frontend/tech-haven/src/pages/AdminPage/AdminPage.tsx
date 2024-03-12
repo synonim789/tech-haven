@@ -5,7 +5,7 @@ const AdminPage = () => {
   return (
     <section className="lg:flex lg:flex-row w-full">
       <AdminSidebar />
-      <div className="flex justify-center mt-8 mx-auto px-4 py-6">
+      <div className="flex justify-center mt-8 mx-auto px-4 py-6 w-full">
         <Outlet />
       </div>
     </section>

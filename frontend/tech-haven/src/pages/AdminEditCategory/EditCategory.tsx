@@ -29,7 +29,7 @@ const EditCategory = ({ name, id }: Props) => {
   }
 
   return (
-    <div className="bg-white dark:bg-[#121212] dark:border-none dark:text-slate-500 my-5 px-10 py-5 w-full border-[2px] border-solid border-slate-300 shadow-lg rounded-xl">
+    <div className="bg-white dark:bg-[#222427] dark:border-none dark:text-slate-500 my-5 px-10 py-5 w-full border-[2px] border-solid border-slate-300 shadow-lg rounded-xl">
       <div className="flex justify-between items-center">
         <p className="capitalize font-bold ">{name}</p>
         {openCategory === false && (
