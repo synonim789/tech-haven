@@ -12,7 +12,6 @@ type Props = {
 }
 
 const AdminOrderInfo = ({ modalOpen, setModalOpen, info }: Props) => {
-  console.log('xdd')
   const order = info.row.original
   if (!order) return null
   if (!modalOpen) return null

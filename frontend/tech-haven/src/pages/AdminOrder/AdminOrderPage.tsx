@@ -14,7 +14,6 @@ const AdminOrderPage = () => {
   useEffect(() => {
     if (data) {
       setOrders(data)
-      console.log(data)
     }
   }, [data])
 
