@@ -4,11 +4,11 @@ import AmountButtons from '../../components/ui/AmountButtons'
 import { addToCart } from '../../features/cart/cart'
 import { ProductType } from '../../types'
 
-type AddCoCartPropType = {
+type Props = {
   product: ProductType
 }
 
-const AddToCart = ({ product }: AddCoCartPropType) => {
+const AddToCart = ({ product }: Props) => {
   const { countInStock: count, _id: id } = product
   const dispatch = useDispatch()
 

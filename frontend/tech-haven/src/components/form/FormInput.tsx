@@ -1,14 +1,14 @@
-type FormInputProps = {
+type Props = {
   name: string
   type: string
   error?: string | undefined
   register: any
 }
 
-const FormInput = ({ name, type, error, register }: FormInputProps) => {
+const FormInput = ({ name, type, error, register }: Props) => {
   return (
     <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize">
-      <label htmlFor={name} id={name} className="dark:text-gray-500">
+      <label htmlFor={name} className="dark:text-gray-500">
         {name}
       </label>
       <input
@@ -17,6 +17,9 @@ const FormInput = ({ name, type, error, register }: FormInputProps) => {
         placeholder={`Enter ${name}`}
         {...register}
         step={0.01}
+        id={name}
+        name={name}
+        autoComplete={name}
       />
       <p className="font-bold text-red-500 flex flex-col">{error}</p>
     </div>

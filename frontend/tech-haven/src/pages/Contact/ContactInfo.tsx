@@ -1,11 +1,11 @@
 import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 
-type ContactInfoProps = {
+type Props = {
   className: string
 }
 
-const ContactInfo = ({ className }: ContactInfoProps) => {
+const ContactInfo = ({ className }: Props) => {
   return (
     <section
       className={`flex flex-col items-center justify-center gap-5 text-center ${className} bg-white min-h-[400px] dark:bg-[#121212] `}

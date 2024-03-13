@@ -1,6 +1,6 @@
 import UserOrderLine from './UserOrderLine'
 
-type UserOrdersProps = {
+type Props = {
   userOrders: {
     _id: string
     orderItems: {}
@@ -15,7 +15,7 @@ type UserOrdersProps = {
   }[]
 }
 
-const UserOrdersTable = ({ userOrders }: UserOrdersProps) => {
+const UserOrdersTable = ({ userOrders }: Props) => {
   return (
     <table className="w-full">
       <thead>

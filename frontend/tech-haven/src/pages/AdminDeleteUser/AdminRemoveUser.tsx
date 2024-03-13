@@ -3,11 +3,11 @@ import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useAdminDeleteUserMutation } from '../../features/adminUser/adminUserApiSlice'
 import { UserType } from '../../types'
 
-type AdminRemoveUserProps = {
+type Props = {
   user: UserType
 }
 
-const AdminRemoveUser = ({ user }: AdminRemoveUserProps) => {
+const AdminRemoveUser = ({ user }: Props) => {
   const { name, email, role, _id: id } = user
 
   const [adminDeleteUser, { isLoading }] = useAdminDeleteUserMutation()

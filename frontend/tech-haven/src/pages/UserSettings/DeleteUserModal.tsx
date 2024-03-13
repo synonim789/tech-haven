@@ -6,12 +6,12 @@ import { clearUser } from '../../features/user/userSlice'
 import { RootState } from '../../store'
 import { decodeToken } from '../../utils/decodeToken'
 
-type DeleteUserModalPropsType = {
+type Props = {
   open: boolean
   onClose: () => void
 }
 
-const DeleteUserModal = ({ open, onClose }: DeleteUserModalPropsType) => {
+const DeleteUserModal = ({ open, onClose }: Props) => {
   const [deleteUser, { isLoading }] = useDeleteUserMutation()
   const dispatch = useDispatch()
   const token = useSelector((state: RootState) => state.auth.token)

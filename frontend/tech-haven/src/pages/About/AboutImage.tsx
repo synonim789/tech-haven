@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 
-type AboutImagePropType = {
+type Props = {
   src: string
 }
 
-const AboutImage = ({ src }: AboutImagePropType) => {
+const AboutImage = ({ src }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false)
   useEffect(() => {
     const img = new Image()

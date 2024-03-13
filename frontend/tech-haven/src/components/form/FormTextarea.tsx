@@ -1,10 +1,10 @@
-type FormTextareaProps = {
+type Props = {
   name: string
   error?: string | undefined
   register: any
 }
 
-const FormTextarea = ({ name, error, register }: FormTextareaProps) => {
+const FormTextarea = ({ name, error, register }: Props) => {
   return (
     <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-4">
       <label htmlFor={name} className="text-gray-500">

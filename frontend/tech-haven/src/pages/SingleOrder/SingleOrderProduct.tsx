@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { formatPrice } from '../../utils/formatPrice'
 
-type SingleOrderProductProps = {
+type Props = {
   image: string
   name: string
   price: number
@@ -9,13 +9,7 @@ type SingleOrderProductProps = {
   id: string
 }
 
-const SingleOrderProduct = ({
-  image,
-  name,
-  price,
-  quantity,
-  id,
-}: SingleOrderProductProps) => {
+const SingleOrderProduct = ({ image, name, price, quantity, id }: Props) => {
   return (
     <Link
       to={`/products/${id}`}

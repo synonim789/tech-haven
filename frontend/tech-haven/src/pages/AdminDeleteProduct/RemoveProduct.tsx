@@ -3,12 +3,12 @@ import { ProductType } from '../../types'
 import { formatPrice } from '../../utils/formatPrice'
 import RemoveProductModal from './RemoveProductModal'
 
-type RemoveProductProps = {
+type Props = {
   product: ProductType
   clear: () => void
 }
 
-const RemoveProduct = ({ product, clear }: RemoveProductProps) => {
+const RemoveProduct = ({ product, clear }: Props) => {
   const [openModal, setOpenModal] = useState(false)
   const closeModal = () => {
     setOpenModal(false)

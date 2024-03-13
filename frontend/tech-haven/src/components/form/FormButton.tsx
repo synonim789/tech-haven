@@ -1,10 +1,10 @@
-type FormButtonProps = {
+type Props = {
   loading: boolean
   loadingText?: string
   text: string
 }
 
-const FormButton = ({ loading, loadingText, text }: FormButtonProps) => {
+const FormButton = ({ loading, loadingText, text }: Props) => {
   return (
     <button
       type="submit"

@@ -4,7 +4,7 @@ import AmountButtons from '../../components/ui/AmountButtons'
 import { changeAmount, removeItemFromCart } from '../../features/cart/cart'
 import { formatPrice } from '../../utils/formatPrice'
 
-type CartItemPropsType = {
+type Props = {
   item: {
     amount: number
     id: string
@@ -15,7 +15,7 @@ type CartItemPropsType = {
   }
 }
 
-const CartItem = ({ item }: CartItemPropsType) => {
+const CartItem = ({ item }: Props) => {
   const { name, image, price, amount, id } = item
   const dispatch = useDispatch()
   const increase = () => {

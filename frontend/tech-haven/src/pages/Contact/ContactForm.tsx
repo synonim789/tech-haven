@@ -12,11 +12,11 @@ type ContactFormSubmitData = {
   message: string
 }
 
-type ContactFormProps = {
+type Props = {
   className: string
 }
 
-const ContactForm = ({ className }: ContactFormProps) => {
+const ContactForm = ({ className }: Props) => {
   const form = useForm<ContactFormSubmitData>()
   const { register, handleSubmit, formState, reset } = form
   const { errors } = formState

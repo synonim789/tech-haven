@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { ProductType } from '../../types'
 
-type AdminSelectProps = {
+type Props = {
   options: ProductType[] | undefined
   value: ProductType | null
   onChange: (value: ProductType | null) => void
 }
 
-const AdminSelect = ({ options, value, onChange }: AdminSelectProps) => {
+const AdminSelect = ({ options, value, onChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const clearOptions = () => {

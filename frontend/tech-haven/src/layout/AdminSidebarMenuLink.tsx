@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
-type AdminSidebarMenuLinkPropsType = {
+type Props = {
   item:
     | {
         title: string
@@ -22,10 +22,7 @@ type AdminSidebarMenuLinkPropsType = {
   hideMenu: () => void
 }
 
-const AdminSidebarMenuLink = ({
-  item,
-  hideMenu,
-}: AdminSidebarMenuLinkPropsType) => {
+const AdminSidebarMenuLink = ({ item, hideMenu }: Props) => {
   const [showSubMenu, setShowSubMenu] = useState(false)
 
   const handleClick = () => {

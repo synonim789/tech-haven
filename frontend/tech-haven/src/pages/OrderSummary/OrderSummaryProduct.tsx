@@ -1,11 +1,11 @@
 import { cartItem } from '../../features/cart/cart'
 import { formatPrice } from '../../utils/formatPrice'
 
-type OrderSummaryProductProps = {
+type Props = {
   product: cartItem
 }
 
-const OrderSummaryProduct = ({ product }: OrderSummaryProductProps) => {
+const OrderSummaryProduct = ({ product }: Props) => {
   return (
     <div className="bg-white rounded-xl overflow-hidden flex flex-col md:flex-row justify-between items-center shadow-md text-4xl px-6 py-4 h-full dark:bg-[#121212] text-slate-600 gap-7">
       <img

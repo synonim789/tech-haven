@@ -8,7 +8,7 @@ import { useGetCategoriesQuery } from '../../features/adminCategories/categories
 import { useEditProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
 import { CategoryType, ProductType } from '../../types'
 
-type EditProductFormProps = {
+type Props = {
   product: ProductType
 }
 
@@ -25,7 +25,7 @@ type EditProductType = {
   id: string
 }
 
-const EditProductForm = ({ product }: EditProductFormProps) => {
+const EditProductForm = ({ product }: Props) => {
   const [editForm, setEditForm] = useState<EditProductType | null>(null)
 
   const { data: categories } = useGetCategoriesQuery()

@@ -1,16 +1,12 @@
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 
-type AmountButtonsPropsType = {
+type Props = {
   amount: number
   increase: () => void
   decrease: () => void
 }
 
-const AmountButtons = ({
-  amount,
-  increase,
-  decrease,
-}: AmountButtonsPropsType) => {
+const AmountButtons = ({ amount, increase, decrease }: Props) => {
   return (
     <div className="flex">
       <button className="bg-[#405684] text-white p-3" onClick={decrease}>

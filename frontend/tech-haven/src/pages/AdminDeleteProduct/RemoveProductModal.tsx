@@ -1,12 +1,12 @@
 import { useDeleteProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
 
-type RemoveProductModalProps = {
+type Props = {
   close: () => void
   clear: () => void
   id: string
 }
 
-const RemoveProductModal = ({ close, id, clear }: RemoveProductModalProps) => {
+const RemoveProductModal = ({ close, id, clear }: Props) => {
   const [deleteProduct] = useDeleteProductMutation()
   return (
     <>
