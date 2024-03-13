@@ -1,12 +1,8 @@
-import {
-  useChangeUserRoleMutation,
-  useGetUsersQuery,
-} from '../../features/adminUser/adminUserApiSlice'
+import { useGetUsersQuery } from '../../features/adminUser/adminUserApiSlice'
 import EditSingleUser from './EditSingleUser'
 
 const EditUserRolePage = () => {
   const { data: allUsers } = useGetUsersQuery()
-  const [changeUserRole, { error }] = useChangeUserRoleMutation()
 
   return (
     <section>
@@ -18,11 +14,6 @@ const EditUserRolePage = () => {
           return <EditSingleUser user={user} key={user._id} />
         })}
       </div>
-      {error && (
-        <p className="text-center mt-5 text-2xl font-bold text-red-500">
-          {'data' in error ? error.data.message : ''}
-        </p>
-      )}
     </section>
   )
 }
