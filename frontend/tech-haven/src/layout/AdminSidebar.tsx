@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IoIosMenu, IoMdClose } from 'react-icons/io'
 import { Link } from 'react-router-dom'
-import { AdminSidebarData } from '../data/AdminSidebartData'
+import { AdminSidebarData } from '../data/AdminSidebarData'
 import AdminSidebarMenuLink from './AdminSidebarMenuLink'
 
 const AdminSidebar = () => {
