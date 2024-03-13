@@ -1,5 +1,6 @@
-export const formatPrice = (price: number) => {
-  if (!price) {
+export const formatPrice = (price: number | undefined) => {
+  console.log(price)
+  if (price === undefined) {
     return 'Not Found'
   }
   const newPrice = new Intl.NumberFormat('en-US', {
@@ -8,3 +9,4 @@ export const formatPrice = (price: number) => {
   }).format(price / 100)
   return newPrice
 }
+  
