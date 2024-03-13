@@ -1,11 +1,7 @@
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { BsFillGridFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setGridView,
-  setListView,
-  updateSort,
-} from '../../features/products/filters'
+import { setView, updateSort } from '../../features/products/filters'
 import { RootState } from '../../store'
 
 const Sort = () => {
@@ -34,7 +30,7 @@ const Sort = () => {
             ? 'text-white bg-[#405684]'
             : 'dark:bg-slate-300 dark:border-none border border-solid border-slate-100'
         }`}
-        onClick={() => dispatch(setGridView())}
+        onClick={() => dispatch(setView(true))}
       >
         <BsFillGridFill />
       </button>
@@ -44,7 +40,7 @@ const Sort = () => {
             ? 'text-white bg-[#405684]'
             : 'bg-white dark:bg-slate-300 dark:border-none border border-solid border-slate-100'
         }`}
-        onClick={() => dispatch(setListView())}
+        onClick={() => dispatch(setView(false))}
       >
         <AiOutlineUnorderedList />
       </button>

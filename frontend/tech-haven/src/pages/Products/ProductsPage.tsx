@@ -35,7 +35,7 @@ const ProductsPage = () => {
     dispatch(filterProducts())
     dispatch(sortProducts())
     dispatch(getPagination())
-  }, [currentPage, filters, sort])
+  }, [currentPage, filters, sort, allProducts])
 
   if (isLoading) {
     return <FullscreenLoading />
@@ -43,7 +43,7 @@ const ProductsPage = () => {
 
   return (
     <section className="flex flex-col justify-center">
-      <div className="max-w-5xl mx-auto w-full px-4">
+      <div className="max-w-5xl mx-auto w-full px-8">
         <SearchBar />
         <Sort />
         <div className="flex gap-7 w-fit flex-col lg:flex-row">

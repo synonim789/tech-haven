@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ProductType } from '../../types'
 
 type initialStateType = {
@@ -10,6 +10,7 @@ type initialStateType = {
     minPrice: number
     maxPrice: number
     rating: number
+    [key: string]: string | number
   }
   limit: number
   currentPage: number
@@ -47,26 +48,15 @@ const filterSlice = createSlice({
       state.allProducts = action.payload
       state.filteredProducts = action.payload
     },
-    updateFilter: (state, action) => {
+    updateFilter: (
+      state,
+      action: PayloadAction<{
+        name: string
+        value: string | number
+      }>
+    ) => {
       const { name, value } = action.payload
-      if (name === 'category') {
-        state.filters.category = value
-      }
-      if (name === 'brand') {
-        state.filters.brand = value
-      }
-      if (name === 'minPrice') {
-        state.filters.minPrice = Number(value)
-      }
-      if (name === 'maxPrice') {
-        state.filters.maxPrice = Number(value)
-      }
-      if (name === 'rating') {
-        state.filters.rating = Number(value)
-      }
-      if (name === 'search') {
-        state.filters.search = value
-      }
+      state.filters[name] = value
     },
     filterProducts: (state) => {
       const { allProducts } = state
@@ -99,10 +89,12 @@ const filterSlice = createSlice({
       state.filters.category = 'all'
       state.filters.brand = 'all'
       state.filters.rating = 1
-      state.filters.minPrice = 0
+      state.filters.search = ''
     },
-    setGridView: (state) => {
-      const limit = 9
+
+    setView: (state, action: PayloadAction<boolean>) => {
+      const limit = action.payload ? 9 : 4
+      const currentView = action.payload ? 'gridView' : 'listView'
       const indexOfLastProduct = state.currentPage * limit
       const indexOfFirstProduct = indexOfLastProduct - limit
       const currentProducts = state.filteredProducts.slice(
@@ -110,22 +102,8 @@ const filterSlice = createSlice({
         indexOfLastProduct
       )
       state.pagedProducts = currentProducts
-      state.gridView = true
-      state.listView = false
-      state.currentPage = 1
-      state.limit = limit
-    },
-    setListView: (state) => {
-      const limit = 4
-      const indexOfLastProduct = state.currentPage * limit
-      const indexOfFirstProduct = indexOfLastProduct - limit
-      const currentProducts = state.filteredProducts.slice(
-        indexOfFirstProduct,
-        indexOfLastProduct
-      )
-      state.pagedProducts = currentProducts
-      state.gridView = false
-      state.listView = true
+      state[`${currentView}`] = true
+      state[currentView === 'gridView' ? 'listView' : 'gridView'] = false
       state.currentPage = 1
       state.limit = limit
     },
@@ -179,14 +157,13 @@ const filterSlice = createSlice({
 export const {
   updateFilter,
   clearFilters,
-  setGridView,
-  setListView,
   setAllProducts,
   getPagination,
   updatePagination,
   filterProducts,
   updateSort,
   sortProducts,
+  setView,
 } = filterSlice.actions
 
 export default filterSlice.reducer
