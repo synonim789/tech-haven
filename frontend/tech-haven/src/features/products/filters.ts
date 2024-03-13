@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ProductType } from '../../types'
+import { findMaxPrice } from '../../utils/findMaxPrice'
 
 type initialStateType = {
   allProducts: ProductType[]
@@ -7,10 +8,9 @@ type initialStateType = {
     search: string
     category: string
     brand: string
-    minPrice: number
-    maxPrice: number
     rating: number
     [key: string]: string | number
+    price: number
   }
   limit: number
   currentPage: number
@@ -19,6 +19,7 @@ type initialStateType = {
   filteredProducts: ProductType[]
   pagedProducts: ProductType[]
   sort: string
+  maxPrice: number
 }
 
 const initialState: initialStateType = {
@@ -27,9 +28,8 @@ const initialState: initialStateType = {
     search: '',
     category: 'all',
     brand: 'all',
-    minPrice: 0,
-    maxPrice: 0,
     rating: 1,
+    price: 0,
   },
   limit: 9,
   currentPage: 1,
@@ -38,6 +38,7 @@ const initialState: initialStateType = {
   filteredProducts: [],
   pagedProducts: [],
   sort: 'name-asc',
+  maxPrice: 0,
 }
 
 const filterSlice = createSlice({
@@ -60,29 +61,35 @@ const filterSlice = createSlice({
     },
     filterProducts: (state) => {
       const { allProducts } = state
-      const { search, category, brand, minPrice, maxPrice, rating } =
-        state.filters
+      const { search, category, brand, rating, price } = state.filters
       let filteredProducts = allProducts
       if (search) {
-        filteredProducts = filteredProducts.filter((product: ProductType) =>
+        filteredProducts = filteredProducts.filter((product) =>
           product.name.toLowerCase().startsWith(search)
         )
       }
       if (category !== 'all') {
         filteredProducts = filteredProducts.filter(
-          (product: ProductType) => product.category.name === category
+          (product) => product.category.name === category
         )
       }
       if (brand !== 'all') {
         filteredProducts = filteredProducts.filter(
-          (product: ProductType) => product.brand === brand
+          (product) => product.brand === brand
         )
       }
       if (rating >= 1 && rating <= 5) {
         filteredProducts = filteredProducts.filter(
-          (product: ProductType) => product.rating >= rating
+          (product) => product.rating >= rating
         )
       }
+
+      state.maxPrice = findMaxPrice(filteredProducts)
+
+      filteredProducts = filteredProducts.filter((product) => {
+        return product.price <= price
+      })
+
       state.filteredProducts = filteredProducts
     },
     clearFilters: (state) => {
