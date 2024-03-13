@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
 import OrderPagination from '../../components/ui/OrderPagination'
+import { useSkipper } from '../../hooks/useSkipper'
 import { OrderType } from '../../types'
 import { formatPrice } from '../../utils/formatPrice'
 import AdminOrderOptions from './AdminOrderOptions'
@@ -31,6 +32,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
     status: string
   }>(null)
   const [modalOpen, setModalOpen] = useState<string | null>(null)
+  const [autoResetPageIndex, skipAutoResetPageIndex] = useSkipper()
 
   const columHelper = createColumnHelper<OrderType>()
   const columns = [
@@ -86,6 +88,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    autoResetPageIndex,
     state: {
       pagination,
     },
@@ -96,7 +99,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
       pageIndex: 0,
       pageSize: ordersPerPage,
     })
-  }, [])
+  }, [ordersPerPage])
 
   const handleEditing = (id: string | null) => {
     setIsEditing(id)
@@ -107,6 +110,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
   }
 
   const handleSetEditOrderInfo = (id: string, status: string) => {
+    skipAutoResetPageIndex()
     setEditOrderInfo({
       id: id,
       status: status,
