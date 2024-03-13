@@ -20,11 +20,7 @@ const EditCategory = ({ name, id }: Props) => {
   const [editCategory] = useEditCategoryMutation()
 
   const submit = async (data: DataType) => {
-    console.log(data)
-
     const result = await editCategory({ id: id, name: data.name })
-    console.log(result)
-
     setOpenCategory(false)
   }
 

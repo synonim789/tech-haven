@@ -8,7 +8,6 @@ const SingleOrder = () => {
   const { id } = useParams()
   const { data, isLoading } = useGetSingleOrderQuery(id)
 
-  console.log(data)
 
   if (isLoading) {
     return <FullscreenLoading />

@@ -20,7 +20,7 @@ const HomepageProducts = () => {
   }
 
   return (
-    <section className="pt-10 text-center mb-12 px-4 ">
+    <section className="pt-10 text-center mb-12 px-4">
       <div className="max-w-screen-xl px-4 mx-auto flex flex-col items-center justify-center gap-16 ">
         <h2 className="text-5xl font-semibold text-[#405684] relative after:content-[''] after:absolute after:h-2 after:w-4/5 after:bg-orange-500 after:left-0 after:-bottom-3 after:right-0 after:mx-auto">
           Products

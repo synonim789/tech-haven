@@ -66,21 +66,20 @@ const OrderSummary = () => {
       })
         .unwrap()
         .then((data) => (window.location.href = data.url))
-        .catch((error: any) => console.log(error))
+        .catch((error: any) => toast.error(error.message))
     } else if (order.payment === 'Cash On Delivery') {
-      try {
-        await addOrder({
-          products: orderItems,
-          userId: user,
-          shippingAddress1: order.addressLine1,
-          shippingAddress2: order.addressLine2,
-          phone: order.phone,
-          total: order.total,
-          subtotal: order.subtotal,
-        })
-      } catch (error: any) {
-        toast.error(error.message)
-      }
+      await addOrder({
+        products: orderItems,
+        userId: user,
+        shippingAddress1: order.addressLine1,
+        shippingAddress2: order.addressLine2,
+        phone: order.phone,
+        total: order.total,
+        subtotal: order.subtotal,
+      })
+        .unwrap()
+        .then(() => toast.success('success'))
+        .catch((error: any) => toast.error(error.message))
     }
   }
 

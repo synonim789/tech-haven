@@ -100,7 +100,6 @@ const AddProductPage = () => {
     try {
       await addProduct(formData).unwrap()
       toast.success('Product Added Successfully')
-      console.log(data)
     } catch (err: any) {
       toast.error(err.message)
     }

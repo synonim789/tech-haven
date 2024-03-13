@@ -58,8 +58,6 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
   const submitHandler = async (data: EditProductType) => {
     try {
       const response = await editProduct(data).unwrap()
-      console.log(response)
-
       toast.success('Product updated')
     } catch (error: any) {
       toast.error(error.message)
