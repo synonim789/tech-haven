@@ -12,7 +12,10 @@ const OrderPagination = ({ currentPage, numOfPages, setPage }: Props) => {
       {pages.map((page) => {
         return (
           <button
-            onClick={() => setPage(page)}
+            onClick={() => {
+              window.scroll({ top: 0, left: 0, behavior: 'smooth' })
+              setPage(page)
+            }}
             key={page}
             className={`${
               page === currentPage

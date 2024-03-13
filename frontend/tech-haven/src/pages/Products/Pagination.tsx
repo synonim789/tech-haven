@@ -23,9 +23,10 @@ export const Pagination = () => {
       {pageNumbers.map((number) => {
         return (
           <button
-            onClick={(e) =>
+            onClick={(e) => {
+              window.scroll({ top: 0, left: 0, behavior: 'smooth' })
               dispatch(updatePagination(e.currentTarget.textContent))
-            }
+            }}
             className={
               number == currentPage
                 ? 'w-[50px] h-[50px] bg-[#405684]  rounded-full text-white font-bold text-[20px] shadow-xl scale-125'
