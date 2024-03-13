@@ -5,6 +5,7 @@ const ImageGallery = ({ images = [''] }) => {
   const [imageIndex, setImageIndex] = useState(0)
   const [lastIndex, setLastIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     setLastIndex(images.length - 1)
   }, [images])
