@@ -27,7 +27,7 @@ const OrderStatusEdit = ({ editOrderInfo, name, id }: Props) => {
       value={value}
     >
       {ORDER_STATUS.map((o) => (
-        <option value={o.value} key={o.value} className="bg-black">
+        <option value={o.value} key={o.value}>
           {o.label}
         </option>
       ))}

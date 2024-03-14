@@ -108,7 +108,7 @@ const Filters = ({ allProducts }: Props) => {
           >
             {brands.map((brand, index) => {
               return (
-                <option value={brand} key={index}>
+                <option value={brand} key={index} className="">
                   {brand}
                 </option>
               )

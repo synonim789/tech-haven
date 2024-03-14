@@ -42,6 +42,10 @@
   input[type='range']::-ms-fill-lower {
     @apply bg-blue-900 rounded-xl;
   }
+
+  option {
+    @apply dark:bg-[#454545] dark:text-gray-300 bg-white text-black;
+  }
 }
 
 @layer base {

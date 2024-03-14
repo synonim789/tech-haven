@@ -20,7 +20,7 @@ const FilterRating = ({ filters, handleChange }: Props) => {
   const rating = [5, 4, 3, 2, 1]
 
   return rating.map((rating, index) => (
-    <div key={index} className="mb-2 inline-flex lg:flex items-center gap-x-1">
+    <div key={index} className="mb-2 flex items-center gap-x-1">
       <label
         className="relative flex items-center p-3 rounded-full cursor-pointer "
         htmlFor={`rating${rating}`}

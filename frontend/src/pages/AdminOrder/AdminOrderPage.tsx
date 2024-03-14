@@ -61,7 +61,7 @@ const AdminOrderPage = () => {
         >
           <option value="all">All</option>
           {ORDER_STATUS.map((order, index) => (
-            <option value={order.value} key={index} className="bg-black">
+            <option value={order.value} key={index}>
               {order.label}
             </option>
           ))}
