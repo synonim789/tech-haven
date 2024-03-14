@@ -13,7 +13,7 @@ type LoginFormType = {
 }
 
 const LoginPage = () => {
-  const [login, { isLoading, error, isError }] = useLoginMutation()
+  const [login, { isLoading, error }] = useLoginMutation()
 
   const form = useForm<LoginFormType>()
   const { register, handleSubmit, formState } = form
@@ -33,22 +33,22 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-10 dark:bg-[#121212]">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-5  max-w-sm md:gap-8 lg:gap-10 dark:bg-[#121212] w-full">
         <Link
           to="/"
-          className="flex items-center text-[20px] w-full text-[#405684] font-bold"
+          className="flex items-center text-[20px] text-[#405684] font-bold w-full"
         >
           <AiOutlineArrowLeft />
           Back Home
         </Link>
 
-        <h2 className="text-2xl font-bold text-slate-600">
+        <h2 className="text-xl md:text-2xl font-bold text-slate-600">
           <span className="text-[#405684]">Log In</span> |{' '}
           <Link to="/sign-up">Sign Up</Link>
         </h2>
         <form
-          className="flex flex-col w-full justify-center items-center gap-7"
+          className="flex flex-col w-full  gap-4"
           onSubmit={handleSubmit(submitHandler)}
         >
           <FormInput
@@ -86,11 +86,12 @@ const LoginPage = () => {
             loading={isLoading}
             loadingText="Logging In..."
             text="Log In"
+            className="w-fit"
           />
         </form>
         <Link
           to="/forgot-password"
-          className="text-[#405684] font-bold text-[20px]"
+          className="text-[#405684] font-bold text-[20px] mt-4"
         >
           Forgot Password?
         </Link>
