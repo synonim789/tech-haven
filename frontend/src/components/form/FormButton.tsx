@@ -16,7 +16,9 @@ const FormButton = ({
   return (
     <button
       type="submit"
-      className={`bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition disabled:opacity-50 disabled:cursor-not-allowed ${className} mx-auto`}
+      className={`bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition disabled:opacity-50 disabled:cursor-not-allowed ${
+        className ? className : 'w-full'
+      } mx-auto`}
       disabled={loading || disabled}
     >
       {loading ? loadingText : text}

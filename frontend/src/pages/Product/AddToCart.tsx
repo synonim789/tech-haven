@@ -37,7 +37,7 @@ const AddToCart = ({ product }: Props) => {
     <div className="flex justify-between gap-20">
       <AmountButtons increase={increase} decrease={decrease} amount={amount} />
       <button
-        className="bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+        className="bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[20px] md:text-[24px] hover:scale-105 hover:opacity-80 transition"
         onClick={() => {
           dispatch(addToCart({ id, amount, product }))
         }}

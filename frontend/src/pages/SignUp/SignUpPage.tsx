@@ -97,6 +97,7 @@ const SignUpPage = () => {
             loading={isLoading}
             text="Sign Up"
             loadingText="Signing Up..."
+            className="w-fit"
           />
         </form>
       </div>
