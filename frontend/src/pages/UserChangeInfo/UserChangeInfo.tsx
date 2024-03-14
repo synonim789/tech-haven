@@ -27,6 +27,7 @@ const UserChangeInfo = () => {
   const token = useSelector((state: RootState) => state.auth.token)
   const [updateUser, { isLoading }] = useUpdateUserMutation()
   const dispatch = useDispatch()
+  const [edited, setEdited] = useState(false)
 
   useEffect(() => {
     setFormUser({
@@ -44,14 +45,29 @@ const UserChangeInfo = () => {
   useEffect(() => {
     reset(formUser!)
   }, [formUser])
+  function isUserDataChanged(data: UserForm, user: UserForm) {
+    return Object.keys(data).some(
+      (key) => data[key as keyof UserForm] !== user[key as keyof UserForm]
+    )
+  }
 
   const submitHandler = async (data: UserForm) => {
+    // Check if data has changed
+    if (user) {
+      if (!isUserDataChanged(data, user)) {
+        setEdited(false)
+        toast.info('User data has not changed')
+        return
+      }
+    }
+
     const decodedToken = decodeToken(token)
     if (decodedToken) {
       const { userId } = decodedToken
       await updateUser({ id: userId, data })
         .unwrap()
         .then((result) => {
+          console.log(result)
           dispatch(setUser(result.data))
           toast.success('User info updated successfully')
         })
@@ -60,13 +76,14 @@ const UserChangeInfo = () => {
   }
 
   return (
-    <main>
+    <section className="mb-3">
       <h2 className="text-4xl font-bold mb-7 text-center dark:text-slate-500">
         Update Profile
       </h2>
       <form
-        className="grid grid-cols-2 gap-14"
+        className="grid grid-cols-1 md:grid-cols-2 gap-14"
         onSubmit={handleSubmit(submitHandler)}
+        onChange={() => setEdited(true)}
       >
         <FormInput name="name" type="text" register={{ ...register('name') }} />
         <FormInput
@@ -100,6 +117,7 @@ const UserChangeInfo = () => {
           loading={isLoading}
           loadingText="Loading..."
           text="Update Info"
+          disabled={!edited}
         />
         <button
           type="button"
@@ -109,7 +127,7 @@ const UserChangeInfo = () => {
           Reset Info
         </button>
       </form>
-    </main>
+    </section>
   )
 }
 export default UserChangeInfo
