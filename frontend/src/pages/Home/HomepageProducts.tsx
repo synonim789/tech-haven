@@ -32,7 +32,7 @@ const HomepageProducts = () => {
         </div>
         <Link
           to="/products"
-          className="text-[#405684] dark:bg-[#121212] bg-white px-12 py-6 font-semibold text-4xl rounded-full hover:scale-110 transition duration-300 shadow-xl"
+          className="text-[#405684] dark:bg-[#121212] bg-white px-6 py-3 sm:px-12 sm:py-6 font-semibold text-4xl rounded-full hover:scale-110 transition duration-300 shadow-xl"
         >
           All Products
         </Link>
