@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section className="grid max-w-screen-xl py-8 mt-5 px-4 mx-auto gap-5 lg:gap-8 lg:py-16 lg:grid-cols-12">
       <motion.div
-        className="mr-auto place-self-center text-left lg:col-span-6 w-full mb-5 lg:mb-0"
+        className="mr-auto place-self-center text-center md:lg:text-left lg:col-span-6 w-full mb-5 lg:mb-0"
         initial={{ x: '-100%' }}
         animate={{ x: '0%' }}
       >
