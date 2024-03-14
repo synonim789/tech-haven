@@ -1,5 +1,4 @@
 export const formatPrice = (price: number | undefined) => {
-  console.log(price)
   if (price === undefined) {
     return 'Not Found'
   }
@@ -9,4 +8,3 @@ export const formatPrice = (price: number | undefined) => {
   }).format(price / 100)
   return newPrice
 }
-  
