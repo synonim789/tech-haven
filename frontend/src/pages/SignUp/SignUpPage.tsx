@@ -36,8 +36,8 @@ const SignUpPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-lg gap-10 dark:bg-[#121212]">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-5  max-w-sm md:gap-8 lg:gap-10 dark:bg-[#121212] w-full">
         <div className="w-full text-[#405684] font-bold">
           <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />

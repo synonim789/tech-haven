@@ -43,7 +43,7 @@ const LoginPage = () => {
           Back Home
         </Link>
 
-        <h2 className="text-xl md:text-2xl font-bold text-slate-600">
+        <h2 className="text-2xl font-bold text-slate-600">
           <span className="text-[#405684]">Log In</span> |{' '}
           <Link to="/sign-up">Sign Up</Link>
         </h2>
