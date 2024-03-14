@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
@@ -74,76 +75,77 @@ const Filters = ({ allProducts }: Props) => {
         <span>Filters</span>
         {filtersVisibility ? <FaChevronUp /> : <FaChevronDown />}
       </button>
+      <AnimatePresence>
+        {filtersVisibility && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <p className="font-bold text-2xl mb-5">Category:</p>
+            <div className="p-4">
+              {categories.map((category, index) => {
+                return (
+                  <button
+                    key={index}
+                    className={
+                      category === filters.category
+                        ? 'text-[18px] capitalize mb-2 block underline font-bold'
+                        : 'text-[18px] capitalize mb-2 block'
+                    }
+                    name="category"
+                    onClick={(e) => handleChange(e)}
+                  >
+                    {category}
+                  </button>
+                )
+              })}
+            </div>
 
-      <div
-        className={`${filtersVisibility ? 'block mt-5 lg:mt-0' : ' hidden'} `}
-      >
-        <p className="font-bold text-2xl mb-5">Category:</p>
-        <div className="p-4">
-          {categories.map((category, index) => {
-            return (
-              <button
-                key={index}
-                className={
-                  category === filters.category
-                    ? 'text-[18px] capitalize mb-2 block underline font-bold'
-                    : 'text-[18px] capitalize mb-2 block'
-                }
-                name="category"
-                onClick={(e) => handleChange(e)}
+            <p className="font-bold text-2xl mb-5">Brand:</p>
+            <div className="p-4">
+              <select
+                name="brand"
+                className="p-3 rounded-2xl capitalize cursor-pointer border  dark:bg-transparent  border-gray-100/10"
+                onChange={(e) => handleChange(e)}
+                value={filters.brand}
               >
-                {category}
+                {brands.map((brand, index) => {
+                  return (
+                    <option value={brand} key={index} className="">
+                      {brand}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+
+            <p className="font-bold text-2xl my-5">Price:</p>
+            <div className="p-4">
+              <p>{formatPrice(price)}</p>
+              <input
+                type="range"
+                max={maxPrice}
+                step={100}
+                value={price}
+                onChange={(e) => handleChange(e)}
+                name="price"
+              />
+              <div className="flex justify-between">
+                <p>{formatPrice(0)}</p>
+                <p className="">{formatPrice(maxPrice)}</p>
+              </div>
+            </div>
+
+            <p className="text-2xl font-bold mb-5">Rating:</p>
+            <div>
+              <FilterRating filters={filters} handleChange={handleChange} />
+              <button
+                className="text-2xl font-bold text-[#405684] mt-3 hover:underline"
+                onClick={() => dispatch(clearFilters())}
+              >
+                Clear Filters
               </button>
-            )
-          })}
-        </div>
-
-        <p className="font-bold text-2xl mb-5">Brand:</p>
-        <div className="p-4">
-          <select
-            name="brand"
-            className="p-3 rounded-2xl capitalize cursor-pointer border  dark:bg-transparent  border-gray-100/10"
-            onChange={(e) => handleChange(e)}
-            value={filters.brand}
-          >
-            {brands.map((brand, index) => {
-              return (
-                <option value={brand} key={index} className="">
-                  {brand}
-                </option>
-              )
-            })}
-          </select>
-        </div>
-
-        <p className="font-bold text-2xl my-5">Price:</p>
-        <div className="p-4">
-          <p>{formatPrice(price)}</p>
-          <input
-            type="range"
-            max={maxPrice}
-            step={100}
-            value={price}
-            onChange={(e) => handleChange(e)}
-            name="price"
-          />
-          <div className="flex justify-between">
-            <p>{formatPrice(0)}</p>
-            <p className="">{formatPrice(maxPrice)}</p>
-          </div>
-        </div>
-
-        <p className="text-2xl font-bold mb-5">Rating:</p>
-        <div>
-          <FilterRating filters={filters} handleChange={handleChange} />
-          <button
-            className="text-2xl font-bold text-[#405684] mt-3 hover:underline"
-            onClick={() => dispatch(clearFilters())}
-          >
-            Clear Filters
-          </button>
-        </div>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
