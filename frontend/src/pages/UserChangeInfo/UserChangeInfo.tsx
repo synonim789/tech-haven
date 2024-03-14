@@ -46,13 +46,16 @@ const UserChangeInfo = () => {
   }, [formUser])
 
   const submitHandler = async (data: UserForm) => {
-    try {
-      const { userId } = decodeToken(token)
-
-      const result = await updateUser({ id: userId, data }).unwrap()
-      dispatch(setUser(result.data))
-    } catch (err: any) {
-      toast.error(err.data.message)
+    const decodedToken = decodeToken(token)
+    if (decodedToken) {
+      const { userId } = decodedToken
+      await updateUser({ id: userId, data })
+        .unwrap()
+        .then((result) => {
+          dispatch(setUser(result.data))
+          toast.success('User info updated successfully')
+        })
+        .catch((err) => toast.error(err.data.message))
     }
   }
 
