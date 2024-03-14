@@ -26,10 +26,8 @@ const OrderSummary = () => {
     addOrder,
     { isLoading: addOrderIsLoading, isSuccess: addOrderIsSuccess },
   ] = usePostOrderMutation()
-  const [
-    addStripeOrder,
-    { isLoading: addStripeOrderIsLoading, isSuccess: addStripeOrderIsSuccess },
-  ] = usePostOrderStripeMutation()
+  const [addStripeOrder, { isLoading: addStripeOrderIsLoading }] =
+    usePostOrderStripeMutation()
 
   if (!order) {
     return (
@@ -115,7 +113,7 @@ const OrderSummary = () => {
         </div>
       </div>
       <div className="mt-5">
-        <div className="bg-white rounded-lg shadow-md p-5 flex justify-between items-center text-slate-600 dark:bg-[#121212]">
+        <div className="bg-white rounded-lg shadow-md p-5 flex flex-col md:flex-row justify-between gap-5 items-center text-slate-600 dark:bg-[#121212]">
           <div>
             <p className="capitalize">
               <b>Payment method:</b> {order.payment}

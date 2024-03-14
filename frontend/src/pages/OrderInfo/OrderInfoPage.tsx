@@ -138,28 +138,71 @@ const OrderInfoPage = () => {
           </h4>
           <div className="md:col-span-2 flex justify-between flex-col gap-4 md:flex-row mt-4">
             <div className="flex flex-col gap-4 md:flex-row">
-              <div className="flex items-center text-2xl gap-2">
-                <input
-                  type="radio"
-                  value="stripe"
-                  {...register('payment', {
-                    required: 'Payment form is required',
-                  })}
-                />
+              <div className="flex items-center text-2xl">
+                <label
+                  htmlFor="stripe"
+                  className="relative flex items-center p-3 rounded-full cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    value="stripe"
+                    id="stripe"
+                    {...register('payment', {
+                      required: 'Payment form is required',
+                    })}
+                    className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
+                  />
+                  <span className="absolute text-slate-400 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-full h-full scale-105"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                </label>
+
                 <FaStripeS className="dark:text-slate-500" />
                 <label htmlFor="stripe" className="dark:text-slate-500">
                   Stripe
                 </label>
               </div>
-              <div className="flex items-center gap-2 text-2xl">
-                <input
-                  type="radio"
-                  value="Cash On Delivery"
-                  {...register('payment', {
-                    required: 'Payment form is required',
-                  })}
-                  className="dark:text-slate-500"
-                />
+              <div className="flex items-center text-2xl">
+                <label
+                  className=" relative flex items-center p-3 rounded-full cursor-pointer"
+                  htmlFor="cod"
+                >
+                  <input
+                    type="radio"
+                    value="Cash On Delivery"
+                    id="cod"
+                    {...register('payment', {
+                      required: 'Payment form is required',
+                    })}
+                    className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
+                  />
+                  <span className="absolute text-slate-400 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-full h-full scale-105"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                </label>
+
                 <CiDeliveryTruck className="dark:text-slate-500" />
 
                 <label
