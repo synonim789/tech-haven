@@ -1,10 +1,15 @@
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Phone from '../../assets/rsz_iphone.png'
 
 const Hero = () => {
   return (
     <section className="grid max-w-screen-xl py-8 mt-5 px-4 mx-auto gap-5 lg:gap-8 lg:py-16 lg:grid-cols-12">
-      <div className="mr-auto place-self-center text-center lg:col-span-6 w-full mb-5 lg:mb-0">
+      <motion.div
+        className="mr-auto place-self-center text-left lg:col-span-6 w-full mb-5 lg:mb-0"
+        initial={{ x: '-100%' }}
+        animate={{ x: '0%' }}
+      >
         <h1 className="mb-4 text-4xl font-bold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
           Make your life a Tech Haven
         </h1>
@@ -14,7 +19,7 @@ const Hero = () => {
         >
           Shop Now
         </Link>
-      </div>
+      </motion.div>
       <div className="lg:col-span-6 mx-auto lg:ml-auto lg:block">
         <img
           src={Phone}
