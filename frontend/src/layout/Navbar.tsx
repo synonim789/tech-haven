@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { BsFillCartFill } from 'react-icons/bs'
 
@@ -108,70 +109,83 @@ const Navbar = () => {
             className="text-4xl font-bold cursor-pointer"
             onClick={() => setShowNavigation(!showNavigation)}
           />
-          {showNavigation && (
-            <nav className="flex flex-col items-start justify-start fixed top-0 right-0  w-4/6 h-screen bg-white dark:bg-[#3f3f3f] transition text-4xl">
-              <IoMdClose
-                className="cursor-pointer my-5 ml-4 text-6xl"
-                onClick={() => setShowNavigation(false)}
-              />
+          <AnimatePresence mode="wait">
+            {showNavigation && (
+              <motion.nav
+                initial={{ x: '100%' }}
+                animate={{ x: '0%' }}
+                exit={{ x: '100%' }}
+                transition={{
+                  duration: 0.5,
+                  ease: 'easeInOut',
+                }}
+                className="flex flex-col items-start justify-start fixed top-0 right-0  w-4/6 h-screen bg-white dark:bg-[#3f3f3f] text-4xl"
+              >
+                <nav>
+                  <IoMdClose
+                    className="cursor-pointer my-5 ml-4 text-6xl"
+                    onClick={() => setShowNavigation(false)}
+                  />
 
-              <ul className="ml-4 flex gap-5 flex-col">
-                <li className="mt-5">
-                  <NavLink
-                    to="/products"
-                    onClick={() => setShowNavigation(false)}
-                    className={({ isActive }) =>
-                      isActive ? 'font-semibold' : ''
-                    }
-                  >
-                    Products
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/about"
-                    onClick={() => setShowNavigation(false)}
-                    className={({ isActive }) =>
-                      isActive ? 'font-semibold' : ''
-                    }
-                  >
-                    About Us
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/contact"
-                    onClick={() => setShowNavigation(false)}
-                    className={({ isActive }) =>
-                      isActive ? 'font-semibold' : ''
-                    }
-                  >
-                    Contact
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/cart"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? 'pending relative'
-                        : isActive
-                        ? 'none relative'
-                        : 'relative'
-                    }
-                    onClick={() => setShowNavigation(false)}
-                  >
-                    <BsFillCartFill />
-                    {totalItems > 0 ? (
-                      <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] left-6">
-                        {totalItems}
-                      </p>
-                    ) : null}
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
-          )}
+                  <ul className="ml-4 flex gap-5 flex-col">
+                    <li className="mt-5">
+                      <NavLink
+                        to="/products"
+                        onClick={() => setShowNavigation(false)}
+                        className={({ isActive }) =>
+                          isActive ? 'font-semibold' : ''
+                        }
+                      >
+                        Products
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/about"
+                        onClick={() => setShowNavigation(false)}
+                        className={({ isActive }) =>
+                          isActive ? 'font-semibold' : ''
+                        }
+                      >
+                        About Us
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/contact"
+                        onClick={() => setShowNavigation(false)}
+                        className={({ isActive }) =>
+                          isActive ? 'font-semibold' : ''
+                        }
+                      >
+                        Contact
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/cart"
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? 'pending relative'
+                            : isActive
+                            ? 'none relative'
+                            : 'relative'
+                        }
+                        onClick={() => setShowNavigation(false)}
+                      >
+                        <BsFillCartFill />
+                        {totalItems > 0 ? (
+                          <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] left-6">
+                            {totalItems}
+                          </p>
+                        ) : null}
+                      </NavLink>
+                    </li>
+                  </ul>
+                </nav>
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </nav>
       </div>
     </section>
