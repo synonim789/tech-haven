@@ -6,6 +6,7 @@ import {
   FaYoutube,
 } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Footer = () => {
   const location = useLocation()
@@ -20,6 +21,10 @@ const Footer = () => {
   }
 
   let date = new Date()
+
+  const submit = () => {
+    toast.success('Email added to newsletter')
+  }
 
   return (
     <footer className="bg-white py-8 mt-auto dark:bg-[#121212] dark:text-slate-300">
@@ -58,7 +63,10 @@ const Footer = () => {
             placeholder="Enter Email"
             className="px-5 py-2 rounded-full shadow-smt bg-transparent border-2 border-slate-400 text-2xl placeholder:#5b5050 "
           />
-          <button className="bg-[#405684] text-white text-2xl font-semibold rounded-full py-3 px-6 hover:opacity-80 transition-opacity de">
+          <button
+            className="bg-[#405684] text-white text-2xl font-semibold rounded-full py-3 px-6 hover:opacity-80 transition-opacity"
+            onClick={submit}
+          >
             Subscribe
           </button>
         </div>
