@@ -10,8 +10,8 @@ import {
   getSingleProduct,
   updateProduct,
 } from "../controllers/productController";
-import verifyJWT from "../helpers/jwt";
-import verifyRoles from "../helpers/verifyRoles";
+import verifyJWT from "../utils/jwt";
+import verifyRoles from "../utils/verifyRoles";
 
 const router = Router();
 

@@ -4,13 +4,13 @@ import * as express from "express";
 import * as createHttpError from "http-errors";
 import mongoose from "mongoose";
 import * as morgan from "morgan";
-import errorHandler from "./helpers/error-handler";
 import categoriesRouter from "./routers/categories";
 import ordersRouter from "./routers/orders";
 import productsRouter from "./routers/products";
 import statisticsRouter from "./routers/statistics";
 import stripeRouter from "./routers/stripe";
 import usersRouter from "./routers/users";
+import errorHandler from "./utils/error-handler";
 
 const app = express();
 

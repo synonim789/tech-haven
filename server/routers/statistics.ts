@@ -7,8 +7,8 @@ import {
   getTotalSales,
   getUserCount,
 } from "../controllers/statisticController";
-import verifyJWT from "../helpers/jwt";
-import verifyRoles from "../helpers/verifyRoles";
+import verifyJWT from "../utils/jwt";
+import verifyRoles from "../utils/verifyRoles";
 
 const router = Router();
 

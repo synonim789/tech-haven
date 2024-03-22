@@ -6,8 +6,8 @@ import {
   getSingleOrder,
   updateOrder,
 } from "../controllers/orderController";
-import verifyJWT from "../helpers/jwt";
-import verifyRoles from "../helpers/verifyRoles";
+import verifyJWT from "../utils/jwt";
+import verifyRoles from "../utils/verifyRoles";
 const router = Router();
 
 router.post("/", verifyJWT, verifyRoles("admin", "user"), addOrder);
