@@ -52,7 +52,6 @@ const UserChangeInfo = () => {
   }
 
   const submitHandler = async (data: UserForm) => {
-    // Check if data has changed
     if (user) {
       if (!isUserDataChanged(data, user)) {
         setEdited(false)
@@ -90,6 +89,7 @@ const UserChangeInfo = () => {
           name="email"
           type="email"
           register={{ ...register('email') }}
+          disabled
         />
         <FormInput
           name="phone"
