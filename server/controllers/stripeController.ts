@@ -1,4 +1,5 @@
-import { Request, Response } from "express";
+import { RequestHandler } from "express";
+import * as createHttpError from "http-errors";
 import Stripe from "stripe";
 import Order from "../models/order";
 import env from "../utils/validateEnv";
@@ -20,36 +21,38 @@ type CheckoutSessionRequest = {
   }[];
 };
 
-export const stripeWebhookHandler = async (req: Request, res: Response) => {
-  let event;
+export const stripeWebhookHandler: RequestHandler = async (req, res, next) => {
   try {
     const sig = req.headers["stripe-signature"];
     const body = req.body;
     if (!sig) {
-      throw new Error("no signature");
+      throw createHttpError(404, "Sig not found");
     }
-    console.log(sig);
-    event = STRIPE.webhooks.constructEvent(body, sig, STRIPE_ENDPOINT_SECRET);
-  } catch (error: any) {
-    console.log(error);
-    return res.status(500).send(`Webhook error: ${error.message}`);
-  }
-
-  if (event.type === "checkout.session.completed") {
-    const order = await Order.findById(event.data.object.metadata?.orderId);
-    console.log(order);
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
+    let event;
+    try {
+      event = STRIPE.webhooks.constructEvent(body, sig, STRIPE_ENDPOINT_SECRET);
+    } catch (error) {
+      console.error("Error constructing Stripe event:", error);
+      throw createHttpError(400, "Invalid Stripe webhook event");
     }
-    order.subtotal = event.data.object.amount_subtotal;
-    order.total = event.data.object.amount_total;
-    order.status = "paid";
-    await order.save();
+    if (event.type === "checkout.session.completed") {
+      const order = await Order.findById(event.data.object.metadata?.orderId);
+      console.log(order);
+      if (!order) {
+        throw createHttpError(404, "Order not found");
+      }
+      order.subtotal = event.data.object.amount_subtotal;
+      order.total = event.data.object.amount_total;
+      order.status = "paid";
+      await order.save();
+    }
+    return res.status(200).end();
+  } catch (error) {
+    next(error);
   }
-  return res.status(200).end();
 };
 
-export const createCheckoutSession = async (req: Request, res: Response) => {
+export const createCheckoutSession: RequestHandler = async (req, res, next) => {
   try {
     const checkoutSessionRequest: CheckoutSessionRequest = req.body.order;
     const newOrder = new Order({
@@ -66,15 +69,14 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
     const session = await createSession(lineItems, newOrder._id.toString());
 
     if (!session.url) {
-      return res.status(500).json({ message: "Error creating stripe session" });
+      throw createHttpError(500, "Error creating stripe session");
     }
 
     await newOrder.save();
 
     return res.status(200).json({ url: session.url });
-  } catch (error: any) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
+  } catch (error) {
+    next(error);
   }
 };
 
