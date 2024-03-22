@@ -1,52 +1,75 @@
 import * as bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
+import * as createHttpError from "http-errors";
 import * as jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Order from "../models/order";
 import User from "../models/user";
 
-export const getAllUser: RequestHandler = async (req, res) => {
-  const userList = await User.find({ deleted: false }).select("-passwordHash");
-  if (!userList) {
-    res.status(500).json({ message: "Users not found" });
+export const getAllUser: RequestHandler = async (req, res, next) => {
+  try {
+    const userList = await User.find({ deleted: false }).select(
+      "-passwordHash",
+    );
+    if (!userList) {
+      throw createHttpError(404, "Users not found");
+    }
+    res.status(200).json(userList);
+  } catch (error) {
+    next(error);
   }
-  res.status(200).json(userList);
 };
 
 interface AddUserBody {
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  role: string;
-  street: string;
-  apartment: string;
-  city: string;
-  zip: string;
-  country: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+  role?: string;
+  street?: string;
+  apartment?: string;
+  city?: string;
+  zip?: string;
+  country?: string;
 }
 
 export const addUser: RequestHandler<unknown, unknown, AddUserBody> = async (
   req,
   res,
+  next,
 ) => {
-  let user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    passwordHash: bcrypt.hashSync(req.body.password, 10),
-    phone: req.body.phone,
-    role: req.body.role,
-    street: req.body.street,
-    apartment: req.body.apartment,
-    city: req.body.city,
-    zip: req.body.zip,
-    country: req.body.country,
-  });
-  user = await user.save();
-  if (!user) {
-    return res.status(404).json({ message: "The user cannot be created" });
+  try {
+    if (!req.body.name || !req.body.email || !req.body.password) {
+      throw createHttpError(400, "Parameters missing");
+    }
+
+    const existingEmail = await User.findOne({ email: req.body.email }).exec();
+
+    if (existingEmail) {
+      throw createHttpError(
+        409,
+        "A user with this email address already exists.",
+      );
+    }
+
+    let user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      passwordHash: bcrypt.hashSync(req.body.password, 10),
+      phone: req.body.phone,
+      role: req.body.role,
+      street: req.body.street,
+      apartment: req.body.apartment,
+      city: req.body.city,
+      zip: req.body.zip,
+      country: req.body.country,
+    });
+    user = await user.save();
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
   }
-  res.status(200).json(user);
 };
 
 interface GetUserParams {
@@ -58,17 +81,26 @@ export const getUser: RequestHandler<
   unknown,
   unknown,
   unknown
-> = async (req, res) => {
-  if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).json({ message: "Invalid User Id" });
+> = async (req, res, next) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      throw createHttpError(400, "Invalid User Id");
+    }
+    const user = await User.findById(req.params.id).select(
+      "-passwordHash -role",
+    );
+    if (!user) {
+      throw createHttpError(404, "User not found");
+    }
+
+    if (req.userId !== user._id.toString() && req.role !== "admin") {
+      throw createHttpError(401, "You cannot access this user");
+    }
+
+    return res.status(200).json(user);
+  } catch (error) {
+    next(error);
   }
-  const user = await User.findById(req.params.id).select("-passwordHash -role");
-  if (!user) {
-    return res
-      .status(500)
-      .json({ message: "The user with given ID was not found" });
-  }
-  return res.status(200).json(user);
 };
 
 interface LoginUserBody {
@@ -81,24 +113,32 @@ export const loginUser: RequestHandler<
   unknown,
   LoginUserBody,
   unknown
-> = async (req, res) => {
-  if (!req.body.email || !req.body.password) {
-    return res.status(400).json({ message: "All fields must be filled" });
-  }
-  const user = await User.findOne({ email: req.body.email });
-  if (user?.deleted === true) {
-    return res.status(400).json({
-      message:
+> = async (req, res, next) => {
+  const email = req.body.email;
+  const passwordRaw = req.body.password;
+  try {
+    if (!email || !passwordRaw) {
+      throw createHttpError(400, "Email or password missing");
+    }
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw createHttpError(400, "Incorrect email or password");
+    }
+    if (user?.deleted === true) {
+      throw createHttpError(
+        400,
         "User was deleted, contact administration if you want to get it restored",
-    });
-  }
-  const secret = process.env.secret as string;
+      );
+    }
+    const secret = process.env.secret as string;
 
-  if (!user) {
-    return res.status(400).json({ message: "Incorrect email or password" });
-  }
+    const passwordMatch = await bcrypt.compare(passwordRaw, user.passwordHash);
 
-  if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+    if (!passwordMatch) {
+      throw createHttpError(401, "Incorrect email or password");
+    }
+
     const token = jwt.sign(
       {
         userId: user.id,
@@ -108,8 +148,8 @@ export const loginUser: RequestHandler<
       { expiresIn: "7d" },
     );
     res.status(200).json({ token: token });
-  } else {
-    res.status(400).json({ message: "Incorrect password" });
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -124,35 +164,43 @@ export const signUpUser: RequestHandler<
   unknown,
   SignUpUserBody,
   unknown
-> = async (req, res) => {
-  if (!req.body.email || !req.body.password || !req.body.name) {
-    return res.status(400).json({ message: "All fields must be filled" });
-  }
-  const exist = await User.findOne({ email: req.body.email });
-  if (exist?.deleted === true) {
-    return res.status(500).json({
-      message:
+> = async (req, res, next) => {
+  const email = req.body.email;
+  const passwordRaw = req.body.password;
+  const name = req.body.name;
+  try {
+    if (!email || !passwordRaw || !name) {
+      throw createHttpError(400, "Missing parameters");
+    }
+    const exist = await User.findOne({ email: email });
+    if (exist?.deleted === true) {
+      throw createHttpError(
+        409,
         "user has been deleted. Contact administration to have it restored",
-    });
-  }
-  if (exist) {
-    return res.status(400).json({ message: "Email already in use" });
-  }
-  let user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    passwordHash: bcrypt.hashSync(req.body.password, 10),
-  });
-  user = await user.save();
-  const secret = process.env.secret as string;
+      );
+    }
+    if (exist) {
+      throw createHttpError(409, "User with this email already exists.");
+    }
 
-  const token = jwt.sign({ userId: user.id, role: user.role }, secret, {
-    expiresIn: "1d",
-  });
-  if (!user) {
-    return res.status(404).json({ message: "the user cannot be created!" });
+    const passwordHash = await bcrypt.hash(passwordRaw, 10);
+
+    let user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      passwordHash: passwordHash,
+    });
+    user = await user.save();
+    const secret = process.env.secret as string;
+
+    const token = jwt.sign({ userId: user.id, role: user.role }, secret, {
+      expiresIn: "1d",
+    });
+
+    res.status(200).json({ token: token });
+  } catch (error) {
+    next(error);
   }
-  res.status(200).json({ token: token });
 };
 
 interface DeleteUserParams {
@@ -164,12 +212,24 @@ export const deleteUser: RequestHandler<
   unknown,
   unknown,
   unknown
-> = async (req, res) => {
+> = async (req, res, next) => {
+  const userId = req.params.id;
   try {
-    await User.findOneAndUpdate({ _id: req.params.id }, { deleted: true });
-    return res.status(200).json({ message: "User deleted Successfully" });
+    if (!mongoose.isValidObjectId(userId)) {
+      throw createHttpError(400, "Invalid User Id");
+    }
+
+    const user = await User.findById(userId).exec();
+    if (!user) {
+      throw createHttpError(404, "User not found");
+    }
+    if (req.userId !== user._id.toString() && req.role !== "admin") {
+      throw createHttpError(401, "You cannot access this user");
+    }
+    await user.updateOne({ deleted: true });
+    res.sendStatus(204);
   } catch (error) {
-    return res.status(500).json({ message: "cannot delete user" });
+    next(error);
   }
 };
 
@@ -182,19 +242,25 @@ export const userForgotPassword: RequestHandler<
   unknown,
   UserForgotPasswordBody,
   unknown
-> = async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
-  if (user?.deleted === true) {
-    return res.status(500).json({
-      message:
-        "User with this email was deleted. contact with administration to have it restored.",
-    });
-  }
-  if (!user) {
-    return res.status(404).json({ message: "No User with that email find" });
-  }
+> = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
 
-  return res.status(200).json({ success: true });
+    if (!user) {
+      return createHttpError(404, "No User with that email find");
+    }
+
+    if (user.deleted === true) {
+      return createHttpError(
+        404,
+        "User with this email was deleted. contact with administration to have it restored.",
+      );
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    next(error);
+  }
 };
 
 interface UpdateUserParams {
@@ -216,19 +282,28 @@ export const updateUser: RequestHandler<
   unknown,
   UpdateUserBody,
   unknown
-> = async (req, res) => {
-  if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).json({ message: "Invalid User ID" });
-  }
-  const user = await User.findById(req.params.id);
-  if (user?.deleted === true) {
-    return res.status(500).json({
-      message:
-        "User is deleted. Contact with administration if you want it changed",
-    });
-  }
+> = async (req, res, next) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({ message: "Invalid User ID" });
+    }
+    const user = await User.findById(req.params.id).exec();
 
-  if (user) {
+    if (!user) {
+      throw createHttpError(404, "User not found");
+    }
+
+    if (user.deleted === true) {
+      throw createHttpError(
+        404,
+        "User is deleted. Contact with administration if you want it changed",
+      );
+    }
+
+    if (req.userId !== user._id.toString() && req.role !== "admin") {
+      throw createHttpError(401, "You cannot access this user");
+    }
+
     user.name = req.body.name || user.name;
     user.phone = req.body.phone || user.phone;
     user.street = req.body.street || user.street;
@@ -249,8 +324,8 @@ export const updateUser: RequestHandler<
       zip: updatedUser.zip,
       country: updatedUser.country,
     });
-  } else {
-    res.status(404).json({ message: "User not found" });
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -263,32 +338,37 @@ export const changeUserRole: RequestHandler<
   unknown,
   unknown,
   unknown
-> = async (req, res) => {
-  if (!mongoose.isValidObjectId(req.params.id)) {
-    return res.status(400).json({ message: "Invalid User ID" });
-  }
-  const user = await User.findById(req.params.id);
-  if (user?.deleted === true) {
-    return res.status(500).json({
-      message:
+> = async (req, res, next) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      throw createHttpError(400, "Invalid User Id");
+    }
+
+    const user = await User.findById(req.params.id).exec();
+
+    if (!user) {
+      throw createHttpError(404, "User not found");
+    }
+
+    if (user.deleted === true) {
+      createHttpError(
+        404,
         "User is deleted. Contact with administration if you want it changed",
-    });
-  }
-  if (user) {
+      );
+    }
+
     if (user.role === "admin" && user.name !== "admin") {
       user.role = "user";
     } else if (user.role === "user") {
       user.role = "admin";
     } else {
-      return res
-        .status(401)
-        .json({ message: "Basic Admin Role cannot be changed" });
+      throw createHttpError(403, "Basic Admin Role cannot be changed");
     }
 
     await user.save();
     return res.status(200).json({ message: "User changed" });
-  } else {
-    res.status(404).json({ message: "User Not Found" });
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -305,16 +385,28 @@ export const getUserOrder: RequestHandler<
   unknown,
   unknown,
   GetUserOrderQuery
-> = async (req, res) => {
-  const user = await User.findById(req.params.id);
-  const page = parseInt(req.query.page || "0");
-  if (!user) {
-    return res.status(400).json({ message: "User not found" });
+> = async (req, res, next) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      throw createHttpError(400, "Invalid user id");
+    }
+
+    const user = await User.findById(req.params.id).exec();
+
+    if (!user) {
+      throw createHttpError(404, "User not found");
+    }
+    const page = parseInt(req.query.page || "0");
+
+    const userOrders = await Order.find({ user: req.params.id })
+      .limit(5)
+      .skip(5 * page)
+      .sort({ dateOrdered: -1 });
+    const orderCount = await Order.countDocuments({ user: req.params.id });
+    return res
+      .status(200)
+      .json({ total: Math.ceil(orderCount / 5), userOrders });
+  } catch (error) {
+    next(error);
   }
-  const userOrders = await Order.find({ user: req.params.id })
-    .limit(5)
-    .skip(5 * page)
-    .sort({ dateOrdered: -1 });
-  const orderCount = await Order.countDocuments({ user: req.params.id });
-  return res.status(200).json({ total: Math.ceil(orderCount / 5), userOrders });
 };
