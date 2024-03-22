@@ -27,9 +27,7 @@ const LoginPage = () => {
         const token = response.data.token
         dispatch(setData(token))
       }
-    } catch (err: any) {
-      console.log(err.message)
-    }
+    } catch (err: any) {}
   }
 
   return (

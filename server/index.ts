@@ -14,11 +14,10 @@ import usersRouter from "./routers/users";
 const app = express();
 
 app.use(cors());
-app.options("*", cors());
 
 // Middleware
 
-app.use(morgan("tiny"));
+app.use(morgan("dev"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
 const api = process.env.API_URL as string;

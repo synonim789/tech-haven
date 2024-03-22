@@ -1,11 +1,19 @@
 import * as bcrypt from "bcryptjs";
-import { Request, Response } from "express";
+import { RequestHandler } from "express";
 import * as jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Order from "../models/order";
 import User from "../models/user";
 
-interface IAddUserBody {
+export const getAllUser: RequestHandler = async (req, res) => {
+  const userList = await User.find({ deleted: false }).select("-passwordHash");
+  if (!userList) {
+    res.status(500).json({ message: "Users not found" });
+  }
+  res.status(200).json(userList);
+};
+
+interface AddUserBody {
   name: string;
   email: string;
   password: string;
@@ -18,46 +26,9 @@ interface IAddUserBody {
   country: string;
 }
 
-interface IParamsID {
-  id?: number;
-}
-
-interface ILoginUserBody {
-  email?: string | null;
-  password?: string | null;
-}
-
-interface ISignUpUser {
-  email?: string | null;
-  password?: string | null;
-  name?: string | null;
-}
-
-interface IUpdateUser {
-  name: string;
-  phone: string;
-  street: string;
-  apartment: string;
-  city: string;
-  zip: string;
-  country: string;
-}
-
-interface IGetUserOrderQuery {
-  page?: string;
-}
-
-export const getAllUser = async (req: Request, res: Response) => {
-  const userList = await User.find({ deleted: false }).select("-passwordHash");
-  if (!userList) {
-    res.status(500).json({ message: "Users not found" });
-  }
-  res.status(200).json(userList);
-};
-
-export const addUser = async (
-  req: Request<unknown, unknown, IAddUserBody, unknown>,
-  res: Response,
+export const addUser: RequestHandler<unknown, unknown, AddUserBody> = async (
+  req,
+  res,
 ) => {
   let user = new User({
     name: req.body.name,
@@ -78,10 +49,16 @@ export const addUser = async (
   res.status(200).json(user);
 };
 
-export const getUser = async (
-  req: Request<IParamsID, unknown, unknown, unknown>,
-  res: Response,
-) => {
+interface GetUserParams {
+  id?: string;
+}
+
+export const getUser: RequestHandler<
+  GetUserParams,
+  unknown,
+  unknown,
+  unknown
+> = async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ message: "Invalid User Id" });
   }
@@ -94,10 +71,17 @@ export const getUser = async (
   return res.status(200).json(user);
 };
 
-export const loginUser = async (
-  req: Request<unknown, unknown, ILoginUserBody, unknown>,
-  res: Response,
-) => {
+interface LoginUserBody {
+  email?: string | null;
+  password?: string | null;
+}
+
+export const loginUser: RequestHandler<
+  unknown,
+  unknown,
+  LoginUserBody,
+  unknown
+> = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).json({ message: "All fields must be filled" });
   }
@@ -129,10 +113,18 @@ export const loginUser = async (
   }
 };
 
-export const signUpUser = async (
-  req: Request<unknown, unknown, ISignUpUser>,
-  res: Response,
-) => {
+interface SignUpUserBody {
+  email?: string | null;
+  password?: string | null;
+  name?: string | null;
+}
+
+export const signUpUser: RequestHandler<
+  unknown,
+  unknown,
+  SignUpUserBody,
+  unknown
+> = async (req, res) => {
   if (!req.body.email || !req.body.password || !req.body.name) {
     return res.status(400).json({ message: "All fields must be filled" });
   }
@@ -163,12 +155,16 @@ export const signUpUser = async (
   res.status(200).json({ token: token });
 };
 
+interface DeleteUserParams {
+  id?: string;
+}
 
-
-export const deleteUser = async (
-  req: Request<IParamsID, unknown, unknown, unknown>,
-  res: Response,
-) => {
+export const deleteUser: RequestHandler<
+  DeleteUserParams,
+  unknown,
+  unknown,
+  unknown
+> = async (req, res) => {
   try {
     await User.findOneAndUpdate({ _id: req.params.id }, { deleted: true });
     return res.status(200).json({ message: "User deleted Successfully" });
@@ -177,10 +173,16 @@ export const deleteUser = async (
   }
 };
 
-export const userForgotPassword = async (
-  req: Request<unknown, unknown, { email: string }, unknown>,
-  res: Response,
-) => {
+interface UserForgotPasswordBody {
+  email?: string;
+}
+
+export const userForgotPassword: RequestHandler<
+  unknown,
+  unknown,
+  UserForgotPasswordBody,
+  unknown
+> = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (user?.deleted === true) {
     return res.status(500).json({
@@ -195,10 +197,26 @@ export const userForgotPassword = async (
   return res.status(200).json({ success: true });
 };
 
-export const updateUser = async (
-  req: Request<IParamsID, unknown, IUpdateUser, unknown>,
-  res: Response,
-) => {
+interface UpdateUserParams {
+  id?: string;
+}
+
+interface UpdateUserBody {
+  name: string;
+  phone: string;
+  street: string;
+  apartment: string;
+  city: string;
+  zip: string;
+  country: string;
+}
+
+export const updateUser: RequestHandler<
+  UpdateUserParams,
+  unknown,
+  UpdateUserBody,
+  unknown
+> = async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ message: "Invalid User ID" });
   }
@@ -236,10 +254,16 @@ export const updateUser = async (
   }
 };
 
-export const changeUserRole = async (
-  req: Request<IParamsID, unknown, unknown, unknown>,
-  res: Response,
-) => {
+interface ChangeUserRoleParams {
+  id?: string;
+}
+
+export const changeUserRole: RequestHandler<
+  ChangeUserRoleParams,
+  unknown,
+  unknown,
+  unknown
+> = async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ message: "Invalid User ID" });
   }
@@ -268,10 +292,20 @@ export const changeUserRole = async (
   }
 };
 
-export const getUserOrder = async (
-  req: Request<IParamsID, unknown, unknown, IGetUserOrderQuery>,
-  res: Response,
-) => {
+interface GetUserOrderParams {
+  id?: string;
+}
+
+interface GetUserOrderQuery {
+  page?: string;
+}
+
+export const getUserOrder: RequestHandler<
+  GetUserOrderParams,
+  unknown,
+  unknown,
+  GetUserOrderQuery
+> = async (req, res) => {
   const user = await User.findById(req.params.id);
   const page = parseInt(req.query.page || "0");
   if (!user) {
