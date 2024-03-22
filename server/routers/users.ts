@@ -28,7 +28,7 @@ router.post("/login", loginUser);
 router.post("/sign-up", signUpUser);
 router.delete("/:id", verifyJWT, verifyRoles("user", "admin"), deleteUser);
 router.post("/forgot-password", userForgotPassword);
-router.put("/:id", verifyJWT, verifyRoles("user"), updateUser);
+router.put("/:id", verifyJWT, verifyRoles("user", "admin"), updateUser);
 router.put("/change-role/:id", verifyJWT, verifyRoles("admin"), changeUserRole);
 
 export default router;
