@@ -87,7 +87,7 @@ export const deleteProduct: RequestHandler<
       throw createHttpError(404, "Product not found");
     }
 
-    await product.deleteOne();
+    await product.updateOne({ deleted: true });
     res.sendStatus(204);
   } catch (error) {
     next(error);
