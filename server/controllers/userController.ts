@@ -5,6 +5,7 @@ import * as jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Order from "../models/order";
 import User from "../models/user";
+import env from "../utils/validateEnv";
 
 export const getAllUser: RequestHandler = async (req, res, next) => {
   try {
@@ -131,7 +132,7 @@ export const loginUser: RequestHandler<
         "User was deleted, contact administration if you want to get it restored",
       );
     }
-    const secret = process.env.secret as string;
+    const secret = env.SECRET;
 
     const passwordMatch = await bcrypt.compare(passwordRaw, user.passwordHash);
 
@@ -191,7 +192,7 @@ export const signUpUser: RequestHandler<
       passwordHash: passwordHash,
     });
     user = await user.save();
-    const secret = process.env.secret as string;
+    const secret = env.SECRET;
 
     const token = jwt.sign({ userId: user.id, role: user.role }, secret, {
       expiresIn: "1d",

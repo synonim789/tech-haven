@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import Order from "../models/order";
+import env from "../utils/validateEnv";
 
-const STRIPE = new Stripe(process.env.STRIPE_KEY as string);
-const STRIPE_ENDPOINT_SECRET = process.env.ENDPOINT_SECRET as string;
-const CLIENT_URL = process.env.CLIENT_URL as string;
+const STRIPE = new Stripe(env.STRIPE_KEY);
+const STRIPE_ENDPOINT_SECRET = env.STRIPE_ENDPOINT_SECRET;
+const CLIENT_URL = env.CLIENT_URL;
 
 type CheckoutSessionRequest = {
   shippingAddress1: string;
@@ -58,7 +59,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
       user: checkoutSessionRequest.userId,
       orderItems: checkoutSessionRequest.products,
       status: "pending",
-      dateOrdered: new Date()
+      dateOrdered: new Date(),
     });
 
     const lineItems = createLineItems(checkoutSessionRequest);

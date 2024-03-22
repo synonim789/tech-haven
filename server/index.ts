@@ -11,6 +11,7 @@ import statisticsRouter from "./routers/statistics";
 import stripeRouter from "./routers/stripe";
 import usersRouter from "./routers/users";
 import errorHandler from "./utils/error-handler";
+import env from "./utils/validateEnv";
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 
-const api = process.env.API_URL as string;
+const api = env.API_URL;
 
 app.use(`${api}/stripe/webhook`, express.raw({ type: "*/*" }));
 app.use(express.json());
@@ -38,7 +39,7 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 mongoose
-  .connect(process.env.CONNECTION_STRING as string)
+  .connect(env.MONGODB_CONNECTION_STRING)
   .then(() => {
     console.log("Database Connection is ready...");
   })
