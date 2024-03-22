@@ -1,18 +1,20 @@
 import { NextFunction, Request, Response } from "express";
+import { isHttpError } from "http-errors";
 
 const errorHandler = (
-  err: Error,
+  error: unknown,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  if (err.name === "UnauthorizedError") {
-    return res.status(401).json({ message: "The user is not authorized" });
+  console.log(error);
+  let errorMessage = "An unknown error occurred";
+  let statusCode = 500;
+  if (isHttpError(error)) {
+    statusCode = error.status;
+    errorMessage = error.message;
   }
-  if (err.name === "ValidationError") {
-    return res.status(401).json({ message: err });
-  }
-  return res.status(500).json({ message: err });
+  res.status(statusCode).json({ message: errorMessage });
 };
 
 export default errorHandler;

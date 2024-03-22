@@ -1,6 +1,7 @@
 import * as cors from "cors";
 import "dotenv/config";
 import * as express from "express";
+import * as createHttpError from "http-errors";
 import mongoose from "mongoose";
 import * as morgan from "morgan";
 import errorHandler from "./helpers/error-handler";
@@ -15,11 +16,9 @@ const app = express();
 
 app.use(cors());
 
-// Middleware
-
 app.use(morgan("dev"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
-app.use(errorHandler);
+
 const api = process.env.API_URL as string;
 
 app.use(`${api}/stripe/webhook`, express.raw({ type: "*/*" }));
@@ -32,11 +31,14 @@ app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
 app.use(`${api}/statistics`, statisticsRouter);
 
-if (!process.env.CONNECTION_STRING) {
-  throw new Error("No CONNECTION_STRING variable");
-}
+app.use((req, res, next) => {
+  next(createHttpError(404, "Endpoint not found"));
+});
+
+app.use(errorHandler);
+
 mongoose
-  .connect(process.env.CONNECTION_STRING)
+  .connect(process.env.CONNECTION_STRING as string)
   .then(() => {
     console.log("Database Connection is ready...");
   })
