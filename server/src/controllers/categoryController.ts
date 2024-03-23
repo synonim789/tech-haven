@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import * as createHttpError from "http-errors";
+import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import Category from "../models/category";
 import Product from "../models/product";

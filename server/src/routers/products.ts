@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as multer from "multer";
+import multer from "multer";
 import storage from "../config/multerStorage";
 import {
   addProduct,

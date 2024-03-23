@@ -1,7 +1,7 @@
-import * as bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
-import * as createHttpError from "http-errors";
-import * as jwt from "jsonwebtoken";
+import createHttpError from "http-errors";
+import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Order from "../models/order";
 import User from "../models/user";

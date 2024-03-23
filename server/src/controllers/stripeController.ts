@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import * as createHttpError from "http-errors";
+import createHttpError from "http-errors";
 import Stripe from "stripe";
 import Order from "../models/order";
 import env from "../utils/validateEnv";

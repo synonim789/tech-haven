@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import * as createHttpError from "http-errors";
+import createHttpError from "http-errors";
 import Order from "../models/order";
 import Product from "../models/product";
 import User from "../models/user";
