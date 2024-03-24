@@ -40,6 +40,7 @@ export const updateOrder: RequestHandler<
   unknown,
   UpdateOrderBody
 > = async (req, res, next) => {
+  const status = req.body.status;
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
       throw createHttpError(400, "Order Id is not valid");
@@ -51,7 +52,7 @@ export const updateOrder: RequestHandler<
       throw createHttpError(404, "Order not found");
     }
 
-    order.status = req.body.status;
+    order.status = status;
     const updatedOrder = await order.save();
     res.status(200).json(updatedOrder);
   } catch (error) {
@@ -115,7 +116,7 @@ export const addOrder: RequestHandler<
     });
 
     const savedOrder = await newOrder.save();
-    return res.status(200).json(newOrder);
+    return res.status(200).json(savedOrder);
   } catch (error) {
     next(error);
   }

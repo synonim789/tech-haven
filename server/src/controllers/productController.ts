@@ -28,11 +28,12 @@ export const getSingleProduct: RequestHandler<
   unknown,
   unknown
 > = async (req, res, next) => {
+  const productId = req.params.id;
   try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
+    if (!mongoose.isValidObjectId(productId)) {
       throw createHttpError(400, "Invalid product id");
     }
-    const product = await Product.findById(req.params.id).populate("category");
+    const product = await Product.findById(productId).populate("category");
     if (!product) {
       throw createHttpError(404, "Product not found");
     }
@@ -112,33 +113,44 @@ export const addProduct: RequestHandler<
   AddProductBody,
   unknown
 > = async (req, res, next) => {
+  const {
+    name,
+    description,
+    price,
+    brand,
+    category,
+    countInStock,
+    rating,
+    numReviews,
+    isFeatured,
+  } = req.body;
   try {
     if (
-      !req.body.name ||
-      !req.body.description ||
-      !req.body.price ||
-      !req.body.brand ||
-      !req.body.category ||
-      !req.body.countInStock ||
-      !req.body.rating ||
-      !req.body.numReviews ||
-      !req.body.isFeatured
+      !name ||
+      !description ||
+      !price ||
+      !brand ||
+      !category ||
+      !countInStock ||
+      !rating ||
+      !numReviews ||
+      !isFeatured
     ) {
       throw createHttpError(400, "All fields must be filled");
     }
 
-    const exist = await Product.findOne({ name: req.body.name }).exec();
+    const exist = await Product.findOne({ name: name }).exec();
 
     if (exist) {
       throw createHttpError(409, "Product already exist");
     }
 
-    if (!mongoose.isValidObjectId(req.body.category)) {
+    if (!mongoose.isValidObjectId(category)) {
       throw createHttpError(401, "Invalid Category Id");
     }
-    const category = await Category.findById(req.body.category);
+    const categoryExist = await Category.findById(category);
 
-    if (!category) {
+    if (!categoryExist) {
       throw createHttpError(404, "Category not found");
     }
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
@@ -157,17 +169,17 @@ export const addProduct: RequestHandler<
     });
 
     let product = new Product({
-      name: req.body.name,
-      description: req.body.description,
+      name: name,
+      description: description,
       image: `${basePath}${singleImage[0].filename}`,
       images: imagesPath,
-      price: req.body.price,
-      brand: req.body.brand,
-      category: req.body.category,
-      countInStock: req.body.countInStock,
-      rating: req.body.rating,
-      numReviews: req.body.numReviews,
-      isFeatured: req.body.isFeatured,
+      price: price,
+      brand: brand,
+      category: category,
+      countInStock: countInStock,
+      rating: rating,
+      numReviews: numReviews,
+      isFeatured: isFeatured,
     });
 
     product = await product.save();
@@ -199,42 +211,47 @@ export const updateProduct: RequestHandler<
   UpdateProductBody,
   unknown
 > = async (req, res, next) => {
+  const productId = req.params.id;
+  const {
+    name,
+    description,
+    brand,
+    category,
+    countInStock,
+    rating,
+    numReviews,
+    isFeatured,
+  } = req.body;
   try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
+    if (!mongoose.isValidObjectId(productId)) {
       throw createHttpError(400, "Invalid Product Id");
     }
 
-    if (!mongoose.isValidObjectId(req.body.category)) {
+    if (!mongoose.isValidObjectId(category)) {
       throw createHttpError(400, "Invalid category Id");
     }
 
+    if (!category) {
+      throw createHttpError(404, "Category not found.");
+    }
+
     if (
-      !req.body.name ||
-      !req.body.description ||
-      !req.body.brand ||
-      !req.body.category ||
-      !req.body.countInStock ||
-      !req.body.rating ||
-      !req.body.numReviews ||
-      !req.body.isFeatured
+      !name ||
+      !description ||
+      !brand ||
+      !category ||
+      !countInStock ||
+      !rating ||
+      !numReviews ||
+      !isFeatured
     ) {
       throw createHttpError(400, "All fields must be filled");
     }
+    const product = await Product.findById(productId);
+    if (!product) {
+      throw createHttpError(404, "Product not found");
+    }
 
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      {
-        name: req.body.name,
-        description: req.body.description,
-        brand: req.body.brand,
-        category: req.body.category,
-        countInStock: req.body.countInStock,
-        rating: req.body.rating,
-        numReviews: req.body.numReviews,
-        isFeatured: req.body.isFeatured,
-      },
-      { new: true },
-    );
     res.status(200).json(product);
   } catch (error) {
     next(error);

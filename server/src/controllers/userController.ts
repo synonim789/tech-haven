@@ -39,12 +39,15 @@ export const addUser: RequestHandler<unknown, unknown, AddUserBody> = async (
   res,
   next,
 ) => {
+  const { name, email, phone, role, street, apartment, city, zip, country } =
+    req.body;
+  const passwordRaw = req.body.password;
   try {
-    if (!req.body.name || !req.body.email || !req.body.password) {
+    if (!name || !email || !passwordRaw) {
       throw createHttpError(400, "Parameters missing");
     }
 
-    const existingEmail = await User.findOne({ email: req.body.email }).exec();
+    const existingEmail = await User.findOne({ email: email }).exec();
 
     if (existingEmail) {
       throw createHttpError(
@@ -54,16 +57,16 @@ export const addUser: RequestHandler<unknown, unknown, AddUserBody> = async (
     }
 
     let user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      passwordHash: bcrypt.hashSync(req.body.password, 10),
-      phone: req.body.phone,
-      role: req.body.role,
-      street: req.body.street,
-      apartment: req.body.apartment,
-      city: req.body.city,
-      zip: req.body.zip,
-      country: req.body.country,
+      name: name,
+      email: email,
+      passwordHash: bcrypt.hashSync(passwordRaw, 10),
+      phone: phone,
+      role: role,
+      street: street,
+      apartment: apartment,
+      city: city,
+      zip: zip,
+      country: country,
     });
     user = await user.save();
 
@@ -83,13 +86,12 @@ export const getUser: RequestHandler<
   unknown,
   unknown
 > = async (req, res, next) => {
+  const userId = req.params.id;
   try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
+    if (!mongoose.isValidObjectId(userId)) {
       throw createHttpError(400, "Invalid User Id");
     }
-    const user = await User.findById(req.params.id).select(
-      "-passwordHash -role",
-    );
+    const user = await User.findById(userId).select("-passwordHash -role");
     if (!user) {
       throw createHttpError(404, "User not found");
     }
@@ -187,8 +189,8 @@ export const signUpUser: RequestHandler<
     const passwordHash = await bcrypt.hash(passwordRaw, 10);
 
     let user = new User({
-      name: req.body.name,
-      email: req.body.email,
+      name: name,
+      email: email,
       passwordHash: passwordHash,
     });
     user = await user.save();
@@ -244,8 +246,9 @@ export const userForgotPassword: RequestHandler<
   UserForgotPasswordBody,
   unknown
 > = async (req, res, next) => {
+  const email = req.body.email;
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       return createHttpError(404, "No User with that email find");
@@ -284,11 +287,13 @@ export const updateUser: RequestHandler<
   UpdateUserBody,
   unknown
 > = async (req, res, next) => {
+  const userId = req.params.id;
+  const { name, phone, street, apartment, city, zip, country } = req.body;
   try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
-      return res.status(400).json({ message: "Invalid User ID" });
+    if (!mongoose.isValidObjectId(userId)) {
+      throw createHttpError(400, "User Id not valid");
     }
-    const user = await User.findById(req.params.id).exec();
+    const user = await User.findById(userId).exec();
 
     if (!user) {
       throw createHttpError(404, "User not found");
@@ -305,13 +310,13 @@ export const updateUser: RequestHandler<
       throw createHttpError(401, "You cannot access this user");
     }
 
-    user.name = req.body.name || user.name;
-    user.phone = req.body.phone || user.phone;
-    user.street = req.body.street || user.street;
-    user.apartment = req.body.apartment || user.apartment;
-    user.city = req.body.city || user.city;
-    user.zip = req.body.zip || user.zip;
-    user.country = req.body.country || user.country;
+    user.name = name || user.name;
+    user.phone = phone || user.phone;
+    user.street = street || user.street;
+    user.apartment = apartment || user.apartment;
+    user.city = city || user.city;
+    user.zip = zip || user.zip;
+    user.country = country || user.country;
 
     const updatedUser = await user.save();
     res.status(200).json({
@@ -340,12 +345,13 @@ export const changeUserRole: RequestHandler<
   unknown,
   unknown
 > = async (req, res, next) => {
+  const userId = req.params.id;
   try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
+    if (!mongoose.isValidObjectId(userId)) {
       throw createHttpError(400, "Invalid User Id");
     }
 
-    const user = await User.findById(req.params.id).exec();
+    const user = await User.findById(userId).exec();
 
     if (!user) {
       throw createHttpError(404, "User not found");
@@ -387,23 +393,25 @@ export const getUserOrder: RequestHandler<
   unknown,
   GetUserOrderQuery
 > = async (req, res, next) => {
+  const userId = req.params.id;
+  const pageQuery = req.query.page;
   try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
+    if (!mongoose.isValidObjectId(userId)) {
       throw createHttpError(400, "Invalid user id");
     }
 
-    const user = await User.findById(req.params.id).exec();
+    const user = await User.findById(userId).exec();
 
     if (!user) {
       throw createHttpError(404, "User not found");
     }
-    const page = parseInt(req.query.page || "0");
+    const page = parseInt(pageQuery || "0");
 
-    const userOrders = await Order.find({ user: req.params.id })
+    const userOrders = await Order.find({ user: userId })
       .limit(5)
       .skip(5 * page)
       .sort({ dateOrdered: -1 });
-    const orderCount = await Order.countDocuments({ user: req.params.id });
+    const orderCount = await Order.countDocuments({ user: userId });
     return res
       .status(200)
       .json({ total: Math.ceil(orderCount / 5), userOrders });
