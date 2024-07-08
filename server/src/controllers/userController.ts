@@ -5,6 +5,13 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Order from "../models/order";
 import User from "../models/user";
+import {
+  AddUserSchema,
+  ForgotPasswordSchema,
+  LoginSchema,
+  SignUpSchema,
+  UpdateUserSchema,
+} from "../schemas/userSchema";
 import env from "../utils/validateEnv";
 
 export const getAllUser: RequestHandler = async (req, res, next) => {
@@ -34,18 +41,20 @@ interface AddUserBody {
   country?: string;
 }
 
-export const addUser: RequestHandler<unknown, unknown, AddUserBody> = async (
-  req,
-  res,
-  next,
-) => {
-  const { name, email, phone, role, street, apartment, city, zip, country } =
-    req.body;
-  const passwordRaw = req.body.password;
+export const addUser: RequestHandler = async (req, res, next) => {
   try {
-    if (!name || !email || !passwordRaw) {
-      throw createHttpError(400, "Parameters missing");
-    }
+    const {
+      name,
+      email,
+      phone,
+      role,
+      street,
+      apartment,
+      city,
+      zip,
+      country,
+      password: passwordRaw,
+    } = AddUserSchema.parse(req.body);
 
     const existingEmail = await User.findOne({ email: email }).exec();
 
@@ -76,16 +85,7 @@ export const addUser: RequestHandler<unknown, unknown, AddUserBody> = async (
   }
 };
 
-interface GetUserParams {
-  id?: string;
-}
-
-export const getUser: RequestHandler<
-  GetUserParams,
-  unknown,
-  unknown,
-  unknown
-> = async (req, res, next) => {
+export const getUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
   try {
     if (!mongoose.isValidObjectId(userId)) {
@@ -111,18 +111,9 @@ interface LoginUserBody {
   password?: string | null;
 }
 
-export const loginUser: RequestHandler<
-  unknown,
-  unknown,
-  LoginUserBody,
-  unknown
-> = async (req, res, next) => {
-  const email = req.body.email;
-  const passwordRaw = req.body.password;
+export const loginUser: RequestHandler = async (req, res, next) => {
   try {
-    if (!email || !passwordRaw) {
-      throw createHttpError(400, "Email or password missing");
-    }
+    const { email, password: passwordRaw } = LoginSchema.parse(req.body);
 
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -156,25 +147,9 @@ export const loginUser: RequestHandler<
   }
 };
 
-interface SignUpUserBody {
-  email?: string | null;
-  password?: string | null;
-  name?: string | null;
-}
-
-export const signUpUser: RequestHandler<
-  unknown,
-  unknown,
-  SignUpUserBody,
-  unknown
-> = async (req, res, next) => {
-  const email = req.body.email;
-  const passwordRaw = req.body.password;
-  const name = req.body.name;
+export const signUpUser: RequestHandler = async (req, res, next) => {
   try {
-    if (!email || !passwordRaw || !name) {
-      throw createHttpError(400, "Missing parameters");
-    }
+    const { email, password: passwordRaw, name } = SignUpSchema.parse(req.body);
     const exist = await User.findOne({ email: email });
     if (exist?.deleted === true) {
       throw createHttpError(
@@ -206,16 +181,7 @@ export const signUpUser: RequestHandler<
   }
 };
 
-interface DeleteUserParams {
-  id?: string;
-}
-
-export const deleteUser: RequestHandler<
-  DeleteUserParams,
-  unknown,
-  unknown,
-  unknown
-> = async (req, res, next) => {
+export const deleteUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
   try {
     if (!mongoose.isValidObjectId(userId)) {
@@ -236,18 +202,9 @@ export const deleteUser: RequestHandler<
   }
 };
 
-interface UserForgotPasswordBody {
-  email?: string;
-}
-
-export const userForgotPassword: RequestHandler<
-  unknown,
-  unknown,
-  UserForgotPasswordBody,
-  unknown
-> = async (req, res, next) => {
-  const email = req.body.email;
+export const userForgotPassword: RequestHandler = async (req, res, next) => {
   try {
+    const email = ForgotPasswordSchema.parse(req.body);
     const user = await User.findOne({ email: email });
 
     if (!user) {
@@ -267,29 +224,12 @@ export const userForgotPassword: RequestHandler<
   }
 };
 
-interface UpdateUserParams {
-  id?: string;
-}
-
-interface UpdateUserBody {
-  name: string;
-  phone: string;
-  street: string;
-  apartment: string;
-  city: string;
-  zip: string;
-  country: string;
-}
-
-export const updateUser: RequestHandler<
-  UpdateUserParams,
-  unknown,
-  UpdateUserBody,
-  unknown
-> = async (req, res, next) => {
+export const updateUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
-  const { name, phone, street, apartment, city, zip, country } = req.body;
+
   try {
+    const { name, phone, street, apartment, city, zip, country } =
+      UpdateUserSchema.parse(req.body);
     if (!mongoose.isValidObjectId(userId)) {
       throw createHttpError(400, "User Id not valid");
     }
@@ -335,16 +275,7 @@ export const updateUser: RequestHandler<
   }
 };
 
-interface ChangeUserRoleParams {
-  id?: string;
-}
-
-export const changeUserRole: RequestHandler<
-  ChangeUserRoleParams,
-  unknown,
-  unknown,
-  unknown
-> = async (req, res, next) => {
+export const changeUserRole: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
   try {
     if (!mongoose.isValidObjectId(userId)) {
@@ -379,22 +310,9 @@ export const changeUserRole: RequestHandler<
   }
 };
 
-interface GetUserOrderParams {
-  id?: string;
-}
-
-interface GetUserOrderQuery {
-  page?: string;
-}
-
-export const getUserOrder: RequestHandler<
-  GetUserOrderParams,
-  unknown,
-  unknown,
-  GetUserOrderQuery
-> = async (req, res, next) => {
+export const getUserOrder: RequestHandler = async (req, res, next) => {
   const userId = req.params.id;
-  const pageQuery = req.query.page;
+  const pageQuery = req.query.page as string;
   try {
     if (!mongoose.isValidObjectId(userId)) {
       throw createHttpError(400, "Invalid user id");
