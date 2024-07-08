@@ -5,7 +5,7 @@ type Props = {
 }
 
 const OrderPagination = ({ currentPage, numOfPages, setPage }: Props) => {
-  const pages = new Array(numOfPages).fill(null).map((v, i) => i)
+  const pages = new Array(numOfPages).fill(null).map((_, i) => i)
 
   return (
     <div className="min-w-full flex justify-end gap-x-2 mt-5">
