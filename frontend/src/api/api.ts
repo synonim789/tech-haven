@@ -12,8 +12,10 @@ interface CustomError {
   }
 }
 
+const serverUrl = import.meta.env.VITE_SERVER_URL as string
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:3000/api/v1/',
+  baseUrl: serverUrl,
   prepareHeaders(headers, { getState }) {
     const token = (getState() as RootState).auth.token
     if (token) {
