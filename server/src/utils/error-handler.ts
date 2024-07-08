@@ -3,9 +3,9 @@ import { isHttpError } from "http-errors";
 
 const errorHandler = (
   error: unknown,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   console.log(error);
   let errorMessage = "An unknown error occurred";

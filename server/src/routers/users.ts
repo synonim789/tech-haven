@@ -11,24 +11,45 @@ import {
   updateUser,
   userForgotPassword,
 } from "../controllers/userController";
+import { asyncWrapper } from "../utils/asyncWrapper";
 import verifyJWT from "../utils/jwt";
 import verifyRoles from "../utils/verifyRoles";
 const router = Router();
 
-router.get("/", verifyJWT, verifyRoles("admin"), getAllUser);
+router.get("/", verifyJWT, verifyRoles("admin"), asyncWrapper(getAllUser));
 router.get(
   "/orders/:id",
   verifyJWT,
   verifyRoles("user", "admin"),
-  getUserOrder,
+  asyncWrapper(getUserOrder),
 );
-router.post("/", addUser);
-router.get("/:id", verifyJWT, verifyRoles("admin", "user"), getUser);
-router.post("/login", loginUser);
-router.post("/sign-up", signUpUser);
-router.delete("/:id", verifyJWT, verifyRoles("user", "admin"), deleteUser);
-router.post("/forgot-password", userForgotPassword);
-router.put("/:id", verifyJWT, verifyRoles("user", "admin"), updateUser);
-router.put("/change-role/:id", verifyJWT, verifyRoles("admin"), changeUserRole);
+router.post("/", asyncWrapper(addUser));
+router.get(
+  "/:id",
+  verifyJWT,
+  verifyRoles("admin", "user"),
+  asyncWrapper(getUser),
+);
+router.post("/login", asyncWrapper(loginUser));
+router.post("/sign-up", asyncWrapper(signUpUser));
+router.delete(
+  "/:id",
+  verifyJWT,
+  verifyRoles("user", "admin"),
+  asyncWrapper(deleteUser),
+);
+router.post("/forgot-password", asyncWrapper(userForgotPassword));
+router.put(
+  "/:id",
+  verifyJWT,
+  verifyRoles("user", "admin"),
+  asyncWrapper(updateUser),
+);
+router.put(
+  "/change-role/:id",
+  verifyJWT,
+  verifyRoles("admin"),
+  asyncWrapper(changeUserRole),
+);
 
 export default router;

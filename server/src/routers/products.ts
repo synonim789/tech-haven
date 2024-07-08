@@ -10,6 +10,7 @@ import {
   getSingleProduct,
   updateProduct,
 } from "../controllers/productController";
+import { asyncWrapper } from "../utils/asyncWrapper";
 import verifyJWT from "../utils/jwt";
 import verifyRoles from "../utils/verifyRoles";
 
@@ -22,8 +23,8 @@ const uploadOptions = multer({
   },
 });
 
-router.get(`/`, getAllProducts);
-router.get("/:id", getSingleProduct);
+router.get(`/`, asyncWrapper(getAllProducts));
+router.get("/:id", asyncWrapper(getSingleProduct));
 router.post(
   `/`,
   verifyJWT,
@@ -39,17 +40,27 @@ router.post(
     },
   ]),
   verifyRoles("admin"),
-  addProduct,
+  asyncWrapper(addProduct),
 );
-router.put("/:id", verifyJWT, verifyRoles("admin"), updateProduct);
-router.delete("/:id", verifyJWT, verifyRoles("admin"), deleteProduct);
+router.put(
+  "/:id",
+  verifyJWT,
+  verifyRoles("admin"),
+  asyncWrapper(updateProduct),
+);
+router.delete(
+  "/:id",
+  verifyJWT,
+  verifyRoles("admin"),
+  asyncWrapper(deleteProduct),
+);
 
 router.get(
   "/get/featured/:count",
   verifyJWT,
   verifyRoles("admin"),
-  getFeaturedCount,
+  asyncWrapper(getFeaturedCount),
 );
-router.get("/get/featured-products", getFeaturedProducts);
+router.get("/get/featured-products", asyncWrapper(getFeaturedProducts));
 
 export default router;

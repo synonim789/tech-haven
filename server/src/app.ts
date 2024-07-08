@@ -1,7 +1,6 @@
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
-import path from "path";
 import categoriesRouter from "./routers/categories";
 import ordersRouter from "./routers/orders";
 import productsRouter from "./routers/products";
@@ -27,10 +26,6 @@ app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
 app.use(`${api}/statistics`, statisticsRouter);
-
-// app.use((req, res, next) => {
-//   next(createHttpError(404, "Endpoint not found"));
-// });
 
 app.use(errorHandler);
 
