@@ -5,12 +5,12 @@ export const AddProductSchema = z
     name: z.string(),
     category: z.string(),
     description: z.string(),
-    price: z.number(),
+    price: z.string(),
     brand: z.string(),
-    countInStock: z.number(),
-    rating: z.number(),
-    numReviews: z.number(),
-    isFeatured: z.boolean(),
+    countInStock: z.string(),
+    rating: z.string(),
+    numReviews: z.string(),
+    isFeatured: z.string(),
   })
   .refine(
     (data) => {

@@ -15,7 +15,12 @@ import verifyRoles from "../utils/verifyRoles";
 
 const router = Router();
 
-const uploadOptions = multer({ storage: storage });
+const uploadOptions = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+});
 
 router.get(`/`, getAllProducts);
 router.get("/:id", getSingleProduct);

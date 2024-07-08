@@ -17,10 +17,6 @@ const app = express();
 app.use(cors());
 
 app.use(morgan("dev"));
-app.use(
-  "/public/uploads",
-  express.static(path.join(__dirname, "..", "public", "uploads")),
-);
 
 app.use(`${api}/stripe/webhook`, express.raw({ type: "*/*" }));
 app.use(express.json());

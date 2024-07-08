@@ -7,6 +7,7 @@ import {
   AddProductSchema,
   updateProductSchema,
 } from "../schemas/productSchema";
+import { uploadImage } from "../utils/uploadImage";
 
 export const getAllProducts: RequestHandler = async (req, res, next) => {
   try {
@@ -104,21 +105,23 @@ export const addProduct: RequestHandler = async (req, res, next) => {
     const allImages = files.images;
     const singleImage = files.image;
 
-    if (!allImages || allImages.length === 0) {
+    if (
+      !allImages ||
+      allImages.length === 0 ||
+      !singleImage ||
+      singleImage.length === 0
+    ) {
       throw createHttpError(400, "Images must me added");
     }
-
-    let imagesPath: string[] = [];
-    const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
-
-    allImages.map((file) => {
-      imagesPath.push(`${basePath}${file.filename}`);
-    });
+    const imagesPath = await Promise.all(
+      allImages.map((image) => uploadImage(image)),
+    );
+    const singleImagePath = await uploadImage(singleImage[0]);
 
     let product = new Product({
       name: name,
       description: description,
-      image: `${basePath}${singleImage[0].filename}`,
+      image: singleImagePath,
       images: imagesPath,
       price: price,
       brand: brand,
@@ -167,6 +170,17 @@ export const updateProduct: RequestHandler = async (req, res, next) => {
     if (!product) {
       throw createHttpError(404, "Product not found");
     }
+
+    await product.updateOne({
+      name: name,
+      description: description,
+      brand: brand,
+      category: category,
+      countInStock: countInStock,
+      rating: rating,
+      numReviews: numReviews,
+      isFeatured: isFeatured,
+    });
 
     res.status(200).json(product);
   } catch (error) {
