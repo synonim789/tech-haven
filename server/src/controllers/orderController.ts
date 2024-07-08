@@ -2,10 +2,7 @@ import { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import Order from "../models/order";
-
-interface IParamsID {
-  id?: string;
-}
+import { AddOrderSchema, updateOrderSchema } from "../schemas/orderSchema";
 
 export const getAllOrders: RequestHandler = async (req, res, next) => {
   try {
@@ -21,26 +18,8 @@ export const getAllOrders: RequestHandler = async (req, res, next) => {
   }
 };
 
-interface UpdateOrderParams {
-  id?: string;
-}
-
-interface UpdateOrderBody {
-  status:
-    | "pending"
-    | "paid"
-    | "inProgress"
-    | "inDelivery"
-    | "delivered"
-    | "canceled";
-}
-
-export const updateOrder: RequestHandler<
-  UpdateOrderParams,
-  unknown,
-  UpdateOrderBody
-> = async (req, res, next) => {
-  const status = req.body.status;
+export const updateOrder: RequestHandler = async (req, res, next) => {
+  const { status } = updateOrderSchema.parse(req.body);
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
       throw createHttpError(400, "Order Id is not valid");
@@ -77,40 +56,24 @@ interface AddOrderBody {
   };
 }
 
-export const addOrder: RequestHandler<
-  unknown,
-  unknown,
-  AddOrderBody,
-  unknown
-> = async (req, res, next) => {
-  const order = req.body.order;
+export const addOrder: RequestHandler = async (req, res, next) => {
+  const { order } = AddOrderSchema.parse(req.body);
 
   try {
     if (!order) {
       throw createHttpError(400, "Order data is missing");
     }
 
-    const { products, shippingAddress1, phone, userId, subtotal, total } =
-      order;
-    if (
-      !products ||
-      !shippingAddress1 ||
-      !phone ||
-      !userId ||
-      !subtotal ||
-      !total
-    ) {
-      throw createHttpError(400, "Incomplete order data");
-    }
+
 
     const newOrder = new Order({
-      orderItems: products,
-      shippingAddress1: shippingAddress1,
-      shippingAddress2: shippingAddress1,
-      phone: phone,
-      user: userId,
-      subtotal: subtotal,
-      total: total,
+      orderItems: order.products,
+      shippingAddress1: order.shippingAddress1,
+      shippingAddress2: order.shippingAddress1,
+      phone: order.phone,
+      user: order.userId,
+      subtotal: order.subtotal,
+      total: order.total,
       status: "inProgress",
       createdAt: new Date(),
     });
@@ -122,16 +85,7 @@ export const addOrder: RequestHandler<
   }
 };
 
-interface GetSingleOrderParams {
-  id?: string;
-}
-
-export const getSingleOrder: RequestHandler<
-  GetSingleOrderParams,
-  unknown,
-  unknown,
-  unknown
-> = async (req, res, next) => {
+export const getSingleOrder: RequestHandler = async (req, res, next) => {
   const orderId = req.params.id;
   try {
     if (!mongoose.isValidObjectId(orderId)) {
