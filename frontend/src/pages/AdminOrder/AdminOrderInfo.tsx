@@ -15,6 +15,7 @@ const AdminOrderInfo = ({ modalOpen, setModalOpen, info }: Props) => {
   const order = info.row.original
   if (!order) return null
   if (!modalOpen) return null
+  
   return createPortal(
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />

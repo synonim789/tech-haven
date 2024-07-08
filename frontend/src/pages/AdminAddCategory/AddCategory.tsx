@@ -20,6 +20,7 @@ const AddCategory = () => {
       toast.success('Category added successfully')
     }
   }, [isSuccess])
+
   const { errors } = formState
 
   if (isLoading) {

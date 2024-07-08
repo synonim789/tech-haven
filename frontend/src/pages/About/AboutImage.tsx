@@ -7,6 +7,7 @@ type Props = {
 
 const AboutImage = ({ src }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false)
+
   useEffect(() => {
     const img = new Image()
     img.onload = () => {
@@ -14,6 +15,7 @@ const AboutImage = ({ src }: Props) => {
     }
     img.src = src
   }, [src])
+
   return (
     <>
       {!imageLoaded && (

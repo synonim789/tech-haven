@@ -9,10 +9,12 @@ import { removeAllItemsFromCart } from '../../features/cart/cart'
 const OrderSuccess = () => {
   const { width, height } = useWindowSize()
   const dispatch = useDispatch()
+
   useEffect(() => {
     localStorage.removeItem('cart')
     dispatch(removeAllItemsFromCart())
   }, [])
+
   return (
     <>
       <div className="z-[200]">

@@ -8,6 +8,7 @@ type Props = {
 
 const RemoveProductModal = ({ close, id, clear }: Props) => {
   const [deleteProduct] = useDeleteProductMutation()
+  
   return (
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />
