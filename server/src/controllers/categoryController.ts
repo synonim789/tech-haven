@@ -3,12 +3,16 @@ import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import Category from "../models/category";
 import Product from "../models/product";
+import {
+  addCategorySchema,
+  updateCategorySchema,
+} from "../schemas/categorySchema";
 
 export const getAllCategories: RequestHandler = async (req, res, next) => {
   try {
     const categoryList = await Category.find({ deleted: false });
     if (!categoryList) {
-      throw createHttpError(404, "No categories found ");
+      throw createHttpError(404, "No categories found");
     }
     return res.status(200).json(categoryList);
   } catch (error) {
@@ -16,16 +20,7 @@ export const getAllCategories: RequestHandler = async (req, res, next) => {
   }
 };
 
-interface GetSingleCategoryParams {
-  id?: string;
-}
-
-export const getSingleCategory: RequestHandler<
-  GetSingleCategoryParams,
-  unknown,
-  unknown,
-  unknown
-> = async (req, res, next) => {
+export const getSingleCategory: RequestHandler = async (req, res, next) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
       return res.status(400).json({ message: "Invalid Category ID." });
@@ -41,21 +36,9 @@ export const getSingleCategory: RequestHandler<
   }
 };
 
-interface AddCategoryBody {
-  name?: string;
-}
-
-export const addCategory: RequestHandler<
-  unknown,
-  unknown,
-  AddCategoryBody,
-  unknown
-> = async (req, res, next) => {
-  const name = req.body.name;
+export const addCategory: RequestHandler = async (req, res, next) => {
   try {
-    if (!name) {
-      throw createHttpError(400, "Category Name is required");
-    }
+    const { name } = addCategorySchema.parse(req.body);
 
     let existCategory = await Category.findOne({ name: name }).exec();
 
@@ -73,29 +56,13 @@ export const addCategory: RequestHandler<
   }
 };
 
-interface UpdateCategoryParams {
-  id?: string;
-}
-
-interface UpdateCategoryBody {
-  name?: string;
-}
-
-export const updateCategory: RequestHandler<
-  UpdateCategoryParams,
-  unknown,
-  UpdateCategoryBody,
-  unknown
-> = async (req, res, next) => {
+export const updateCategory: RequestHandler = async (req, res, next) => {
   const categoryId = req.params.id;
-  const name = req.body.name;
+
   try {
+    const { name } = updateCategorySchema.parse(req.body);
     if (!mongoose.isValidObjectId(categoryId)) {
       throw createHttpError(400, "Invalid Category ID");
-    }
-
-    if (!name) {
-      throw createHttpError(400, "Category must have a title");
     }
 
     const category = await Category.findById(categoryId).exec();
@@ -117,16 +84,7 @@ export const updateCategory: RequestHandler<
   }
 };
 
-interface DeleteCategoryParams {
-  id?: string;
-}
-
-export const deleteCategory: RequestHandler<
-  DeleteCategoryParams,
-  unknown,
-  unknown,
-  unknown
-> = async (req, res, next) => {
+export const deleteCategory: RequestHandler = async (req, res, next) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
       throw createHttpError(400, "Invalid category Id");
