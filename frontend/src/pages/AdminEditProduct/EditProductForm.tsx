@@ -57,7 +57,7 @@ const EditProductForm = ({ product }: Props) => {
 
   const submitHandler = async (data: EditProductType) => {
     try {
-      const response = await editProduct(data).unwrap()
+      await editProduct(data).unwrap()
       toast.success('Product updated')
     } catch (error: any) {
       toast.error(error.message)
