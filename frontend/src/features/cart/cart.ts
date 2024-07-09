@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
+import { ProductType } from '../../types'
 
 export type cartItem = {
   id: string
@@ -32,11 +33,18 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (
+      state,
+      action: PayloadAction<{
+        id: string
+        amount: number
+        product: ProductType
+      }>
+    ) => {
       const { id, amount, product } = action.payload
       if (state.cart) {
-        const item = state.cart.find((item: cartItem) => item.id === id)
-        if (item) {
+        const existingItem = state.cart.find((item: cartItem) => item.id === id)
+        if (existingItem) {
           const tempCart = state.cart.map((cartItem) => {
             if (cartItem.id === id) {
               let newAmount = cartItem.amount + amount
@@ -64,7 +72,7 @@ const cartSlice = createSlice({
         toast.info('Product Added to Cart')
       }
     },
-    removeItemFromCart: (state, action) => {
+    removeItemFromCart: (state, action: PayloadAction<string>) => {
       const newCart = state.cart.filter(
         (cartItem) => cartItem.id !== action.payload
       )
@@ -92,7 +100,10 @@ const cartSlice = createSlice({
 
       localStorage.setItem('cart', JSON.stringify(state.cart))
     },
-    changeAmount: (state, action) => {
+    changeAmount: (
+      state,
+      action: PayloadAction<{ id: string; value: 'increase' | 'decrease' }>
+    ) => {
       const { id, value } = action.payload
       const newCart = state.cart.map((cartItem) => {
         if (cartItem.id === id) {
