@@ -25,7 +25,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
     pageIndex: 0,
     pageSize: ordersPerPage,
   })
-  const [showOptions, setShowOptions] = useState<string | null>(null)
+  const [showOptions, setShowOptions] = useState<string | null | boolean>(null)
   const [isEditing, setIsEditing] = useState<string | null>(null)
   const [editOrderInfo, setEditOrderInfo] = useState<null | {
     id: string
@@ -62,11 +62,12 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
         ),
     }),
     columHelper.accessor('total', {
-      header: () => 'Total',
+      header: 'Total',
       cell: (info) => formatPrice(info.getValue()),
     }),
     columHelper.display({
       id: 'Actions',
+      header: 'Actions',
       cell: (props) => (
         <AdminOrderOptions
           props={props}
@@ -84,10 +85,11 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
 
   const table = useReactTable({
     data: orders,
-    columns,
+    columns: columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    enableColumnResizing: true,
     autoResetPageIndex,
     state: {
       pagination,
@@ -105,7 +107,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
     setIsEditing(id)
   }
 
-  const handleShow = (id: string | null) => {
+  const handleShow = (id: string | boolean) => {
     setShowOptions(id)
   }
 
@@ -147,11 +149,11 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
   }
 
   return (
-    <>
-      <table className="overflow-hidden rounded-md ">
+    <div>
+      <table className="min-w-full overflow-hidden rounded-md">
         <thead className=" dark:text-gray-300 dark:bg-[#1D1F22]">
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr key={headerGroup.id} className="hidden md:table-row">
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
@@ -170,12 +172,13 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className="  dark:text-white dark:bg-transparent dark:even:bg-[#303235] dark:odd:bg-[#3E4043]"
+              className="dark:text-white dark:bg-transparent dark:even:bg-[#303235] dark:odd:bg-[#3E4043]"
             >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="p-3 text-sm text-slate-700 dark:text-slate-100"
+                  className="block md:table-cell p-3 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
+                  data-cell={String(cell.column.columnDef?.header)}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
@@ -189,7 +192,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
         numOfPages={table.getPageCount()}
         setPage={table.setPageIndex}
       />
-    </>
+    </div>
   )
 }
 export default AdminOrderTable

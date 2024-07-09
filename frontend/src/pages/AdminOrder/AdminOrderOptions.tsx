@@ -9,7 +9,7 @@ import AdminOrderInfo from './AdminOrderInfo'
 type Props = {
   props: CellContext<OrderType, unknown>
   show: boolean
-  setShow: (id: string | null) => void
+  setShow: (id: string | boolean) => void
   isEditing: boolean
   setIsEditing: (id: string | null) => void
   editOrderInfo: {
@@ -31,16 +31,16 @@ const AdminOrderOptions = ({
   modalOpen,
 }: Props) => {
   const handleEdit = () => {
-    setShow(null)
+    setShow(false)
     setIsEditing(props.row.original._id)
   }
 
   const handleInfo = () => {
-    setShow(null)
+    setShow(false)
     setModalOpen(props.row.original._id)
   }
 
-  const [update, result] = useEditOrderMutation()
+  const [update, _result] = useEditOrderMutation()
 
   const handleSubmit = () => {
     if (!editOrderInfo?.id || !editOrderInfo?.status) {
@@ -48,7 +48,14 @@ const AdminOrderOptions = ({
     }
     update({ id: editOrderInfo?.id, status: editOrderInfo?.status })
     setIsEditing(null)
-    console.log(result.data)
+  }
+
+  const handleEditButton = () => {
+    if (show === false) {
+      setShow(props.row.original._id)
+    } else {
+      setShow(false)
+    }
   }
 
   return (
@@ -61,7 +68,7 @@ const AdminOrderOptions = ({
           <FaCheck className="text-green-600" size={20} />
         </button>
       ) : (
-        <button onClick={() => setShow(props.row.original._id)}>
+        <button onClick={handleEditButton} className="">
           <BsThreeDotsVertical
             size={25}
             className="cursor-pointer relative z-10"
