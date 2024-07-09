@@ -22,7 +22,7 @@ type DataType = {
   isFeatured: boolean
   price: number
   rating: number
-  revCount: number
+  numReviews: number
   stock: number
   brand: string
 }
@@ -44,7 +44,7 @@ const AddProductPage = () => {
       price: 0,
       stock: 0,
       rating: 0,
-      revCount: 0,
+      numReviews: 0,
       isFeatured: false,
       image: null,
       images: null,
@@ -95,7 +95,7 @@ const AddProductPage = () => {
     formData.append('price', data.price)
     formData.append('countInStock', data.stock)
     formData.append('rating', data.rating)
-    formData.append('numReviews', data.revCount)
+    formData.append('numReviews', data.numReviews)
     formData.append('isFeatured', data.isFeatured)
     try {
       await addProduct(formData).unwrap()
@@ -219,10 +219,10 @@ const AddProductPage = () => {
                 error={errors?.rating?.message}
               />
               <FormInput
-                name="reviews"
+                name="numReviews"
                 type="number"
                 register={{
-                  ...register('revCount', {
+                  ...register('numReviews', {
                     required: 'Rev Count is required',
                     min: {
                       value: 1,
@@ -230,11 +230,13 @@ const AddProductPage = () => {
                     },
                   }),
                 }}
-                error={errors?.revCount?.message}
+                error={errors?.numReviews?.message}
               />
             </div>
-            <div className="mt-8 flex justify-end gap-3 text-[20px]">
-              <label htmlFor="featured">Featured:</label>
+            <div className="mt-8 flex justify-end gap-3 text-[20px] ">
+              <label htmlFor="featured" className="text-slate-400 font-bold">
+                Featured:
+              </label>
               <input
                 type="checkbox"
                 id="featured"
