@@ -45,7 +45,7 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setAllProducts: (state, action) => {
+    setAllProducts: (state, action: PayloadAction<ProductType[]>) => {
       state.allProducts = action.payload
       state.filteredProducts = action.payload
     },
@@ -93,10 +93,13 @@ const filterSlice = createSlice({
       state.filteredProducts = filteredProducts
     },
     clearFilters: (state) => {
-      state.filters.category = 'all'
-      state.filters.brand = 'all'
-      state.filters.rating = 1
-      state.filters.search = ''
+      state.filters = {
+        search: '',
+        category: 'all',
+        brand: 'all',
+        rating: 1,
+        price: 0,
+      }
     },
 
     setView: (state, action: PayloadAction<boolean>) => {
@@ -126,8 +129,13 @@ const filterSlice = createSlice({
       )
       state.pagedProducts = currentProducts
     },
-    updatePagination: (state, action) => {
-      state.currentPage = Number(action.payload)
+    updatePagination: (state, action: PayloadAction<string | null>) => {
+      if (action.payload) {
+        state.currentPage = Number(action.payload)
+      }
+    },
+    resetPaginaiton: (state) => {
+      state.currentPage = 1
     },
     updateSort: (state, action) => {
       state.sort = action.payload
@@ -171,6 +179,7 @@ export const {
   updateSort,
   sortProducts,
   setView,
+  resetPaginaiton,
 } = filterSlice.actions
 
 export default filterSlice.reducer

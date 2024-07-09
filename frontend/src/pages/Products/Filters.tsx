@@ -3,7 +3,11 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useWindowSize } from 'react-use'
-import { clearFilters, updateFilter } from '../../features/products/filters'
+import {
+  clearFilters,
+  resetPaginaiton,
+  updateFilter,
+} from '../../features/products/filters'
 import { RootState } from '../../store'
 import { ProductType } from '../../types'
 import { formatPrice } from '../../utils/formatPrice'
@@ -50,7 +54,7 @@ const Filters = ({ allProducts }: Props) => {
       | React.MouseEvent<HTMLButtonElement>
   ) => {
     const { name, value } = event.target as HTMLInputElement | HTMLSelectElement
-
+    dispatch(resetPaginaiton())
     if (name === 'category') {
       const categoryValue = (event.target as HTMLButtonElement)?.textContent
       if (categoryValue) {

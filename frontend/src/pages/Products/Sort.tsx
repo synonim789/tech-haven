@@ -1,7 +1,12 @@
+import React from 'react'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { BsFillGridFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
-import { setView, updateSort } from '../../features/products/filters'
+import {
+  resetPaginaiton,
+  setView,
+  updateSort,
+} from '../../features/products/filters'
 import { RootState } from '../../store'
 
 const Sort = () => {
@@ -12,12 +17,17 @@ const Sort = () => {
   const listView = useSelector((state: RootState) => state.filters.listView)
   const gridView = useSelector((state: RootState) => state.filters.gridView)
 
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(updateSort(e.currentTarget.value))
+    dispatch(resetPaginaiton())
+  }
+
   return (
     <div className="mb-5 flex md:justify-end md:gap-5 flex-col md:flex-row md:items-center">
       <select
         name="sort"
         className="p-3 rounded-2xl shadow-lg mb-3 md:mb-0 dark:bg-[#575757] dark:text-white"
-        onChange={(e) => dispatch(updateSort(e.currentTarget.value))}
+        onChange={handleSort}
       >
         <option value="name-asc">Name A-Z</option>
         <option value="name-desc">Name Z-A</option>

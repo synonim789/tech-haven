@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFilter } from '../../features/products/filters'
+import { resetPaginaiton, updateFilter } from '../../features/products/filters'
 import { RootState } from '../../store'
 
 const SearchBar = () => {
@@ -11,6 +11,7 @@ const SearchBar = () => {
       const name = event.target.name
       const value = event.target.value
       dispatch(updateFilter({ name, value }))
+      dispatch(resetPaginaiton())
     }
   }
   return (
