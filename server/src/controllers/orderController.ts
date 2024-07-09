@@ -42,7 +42,7 @@ export const addOrder: RequestHandler = async (req, res) => {
   const newOrder = new Order({
     orderItems: order.products,
     shippingAddress1: order.shippingAddress1,
-    shippingAddress2: order.shippingAddress1,
+    shippingAddress2: order.shippingAddress2,
     phone: order.phone,
     user: order.userId,
     subtotal: order.subtotal,
