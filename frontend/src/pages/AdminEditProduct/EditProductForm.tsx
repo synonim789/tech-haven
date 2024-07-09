@@ -150,7 +150,7 @@ const EditProductForm = ({ product }: Props) => {
             }}
           />
           <FormInput
-            name="reviews"
+            name="numReviews"
             type="number"
             register={{
               ...register('numReviews', {
