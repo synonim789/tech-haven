@@ -66,7 +66,6 @@ const UserChangeInfo = () => {
       await updateUser({ id: userId, data })
         .unwrap()
         .then((result) => {
-          console.log(result)
           dispatch(setUser(result.data))
           toast.success('User info updated successfully')
         })

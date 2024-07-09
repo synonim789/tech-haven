@@ -4,19 +4,10 @@ import SingleProduct from '../../components/ui/SingleProduct'
 import { useGetFeaturedProductsQuery } from '../../features/featuredProducts/featuredProducts'
 
 const HomepageProducts = () => {
-  const {
-    data: featuredProducts,
-    isLoading,
-    isError,
-    error,
-  } = useGetFeaturedProductsQuery()
+  const { data: featuredProducts, isLoading } = useGetFeaturedProductsQuery()
 
   if (isLoading) {
     return <FullscreenLoading />
-  }
-
-  if (isError) {
-    console.log(error)
   }
 
   return (

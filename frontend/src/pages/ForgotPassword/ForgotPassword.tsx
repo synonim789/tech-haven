@@ -19,8 +19,8 @@ const ForgotPassword = () => {
       const { email } = data
       await forgotPassword({ email }).unwrap()
       toast.success('Link to reset password was sent to your email')
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      toast.error(err.message)
     }
   }
 
