@@ -103,7 +103,7 @@ const UserChangeInfo = () => {
         <FormInput
           name="apartment"
           type="text"
-          register={{ ...register('street') }}
+          register={{ ...register('apartment') }}
         />
         <FormInput name="city" type="text" register={{ ...register('city') }} />
         <FormInput name="zip" type="text" register={{ ...register('zip') }} />
