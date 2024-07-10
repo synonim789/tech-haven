@@ -30,9 +30,9 @@ export const stripeWebhookHandler: RequestHandler = async (req, res) => {
   let event;
   try {
     event = STRIPE.webhooks.constructEvent(body, sig, STRIPE_ENDPOINT_SECRET);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error constructing Stripe event:", error);
-    throw createHttpError(400, "Invalid Stripe webhook event");
+    throw createHttpError(400, error.message);
   }
   if (event.type === "checkout.session.completed") {
     const order = await Order.findById(event.data.object.metadata?.orderId);
