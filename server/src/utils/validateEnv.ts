@@ -7,8 +7,5 @@ export default cleanEnv(process.env, {
   STRIPE_KEY: str(),
   CLIENT_URL: url(),
   STRIPE_ENDPOINT_SECRET: str(),
-  GOOGLE_PROJECT_ID: str(),
   GOOGLE_BUCKET_NAME: str(),
-  GOOGLE_CLIENT_EMAIL: str(),
-  GOOGLE_PRIVATE_KEY: str(),
 });
