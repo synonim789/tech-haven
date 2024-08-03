@@ -1,3 +1,4 @@
+import { createElement } from 'react'
 import { BiCategoryAlt } from 'react-icons/bi'
 import { FaUsers } from 'react-icons/fa'
 import { IoIosHome } from 'react-icons/io'
@@ -8,12 +9,12 @@ export const AdminSidebarData = [
   {
     title: 'Home',
     path: '',
-    icon: <IoIosHome />,
+    icon: createElement(IoIosHome),
   },
   {
     title: 'Products',
     path: 'products',
-    icon: <MdOutlineProductionQuantityLimits />,
+    icon: createElement(MdOutlineProductionQuantityLimits),
     subMenu: [
       {
         title: 'Add Product',
@@ -32,7 +33,7 @@ export const AdminSidebarData = [
   {
     title: 'Categories',
     path: 'categories',
-    icon: <BiCategoryAlt />,
+    icon: createElement(BiCategoryAlt),
     subMenu: [
       {
         title: 'Add Category',
@@ -51,7 +52,7 @@ export const AdminSidebarData = [
   {
     title: 'Users',
     path: 'users',
-    icon: <FaUsers />,
+    icon: createElement(FaUsers),
     subMenu: [
       {
         title: 'Edit User Role',
@@ -66,6 +67,6 @@ export const AdminSidebarData = [
   {
     title: 'Orders',
     path: 'orders',
-    icon: <LuPackageSearch />,
+    icon: createElement(LuPackageSearch),
   },
 ]
