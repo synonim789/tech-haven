@@ -27,7 +27,6 @@ const ProductPage = () => {
     <main className="max-w-screen-xl mx-auto w-full flex flex-col justify-between gap-16 mt-10 mb-20 px-5">
       <div className="flex flex-col lg:flex-row gap-7 lg:gap-0">
         <ImageGallery images={images} />
-
         <section className="flex flex-col gap-4 justify-between">
           <p className="text-2xl flex items-center text-slate-400">
             <AiFillStar className="text-yellow-500" />
@@ -36,9 +35,6 @@ const ProductPage = () => {
           <h2 className="text-6xl font-bold text-slate-500 max-w-sm ">
             {name}
           </h2>
-          {/* <p className="text-[25px] text-slate-600 font-semibold">
-          {description}
-        </p> */}
           <p className="text-[25px] text-slate-500">
             <span className="font-bold ">Brand: </span>
             {brand}
