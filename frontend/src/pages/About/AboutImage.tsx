@@ -21,8 +21,8 @@ const AboutImage = ({ src }: Props) => {
       {!imageLoaded && (
         <Blurhash
           hash=",TMQ^#jvRkaxM{~pj?M{ofRj02Rjj]RjoeIUt8WAtRtR%LRP%MWBRjogt8RPRjayITaxWEt7t7%gRjt7ayRP"
-          width="400px"
-          height="645px"
+          width="350px"
+          height="553px"
           resolutionX={32}
           resolutionY={32}
           punch={1}
@@ -32,8 +32,8 @@ const AboutImage = ({ src }: Props) => {
       {imageLoaded && (
         <img
           src={src}
-          alt=""
-          className="rounded-xl w-[400px] h-[645px] overflow-hidden animate-pulse"
+          alt="laptop on the accessories on the desk"
+          className="rounded-xl w-[350px] overflow-hidden animate-pulse"
         />
       )}
     </>
