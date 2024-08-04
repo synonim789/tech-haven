@@ -34,9 +34,9 @@ const DeleteUserModal = ({ open, onClose }: Props) => {
   if (!open) return null
   return createPortal(
     <>
-      <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />
+      <div className="fixed inset-0 z-40 bg-neutral-400 opacity-40" />
       <FocusTrap>
-        <dialog className="fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-8 md:p-14 flex flex-col items-center gap-4 md:gap-8 rounded-3xl dark:bg-[#121212] dark:text-slate-400">
+        <dialog className="fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-8 md:p-14 flex flex-col items-center gap-4 md:gap-8 rounded-3xl dark:bg-[#121212] dark:text-slate-400 w-full md:w-fit">
           <h3 className="text-2xl md:text-3xl font-bold text-center">
             Do you really want to delete your account?
           </h3>
