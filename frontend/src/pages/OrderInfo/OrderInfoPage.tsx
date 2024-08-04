@@ -51,11 +51,11 @@ const OrderInfoPage = () => {
   }
 
   return (
-    <section className="my-10 max-w-6xl mx-auto px-5">
+    <section className="my-10 max-w-6xl mx-auto">
       <div className="bg-white shadow-xl w-full p-5 rounded-xl dark:bg-[#121212]">
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="md:grid md:grid-cols-2 md:gap-x-6"
+          className="md:grid md:grid-cols-2 md:gap-x-6 flex flex-col"
         >
           <h4 className="text-3xl mb-4 font-bold text-slate-500">
             Delivery Info:
