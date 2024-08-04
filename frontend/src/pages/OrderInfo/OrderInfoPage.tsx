@@ -51,7 +51,7 @@ const OrderInfoPage = () => {
   }
 
   return (
-    <section className="my-10 max-w-6xl mx-auto">
+    <section className="my-10 max-w-6xl md:mx-auto">
       <div className="bg-white shadow-xl w-full p-5 rounded-xl dark:bg-[#121212]">
         <form
           onSubmit={handleSubmit(submitHandler)}
