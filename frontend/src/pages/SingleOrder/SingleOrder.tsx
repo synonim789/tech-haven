@@ -8,7 +8,6 @@ const SingleOrder = () => {
   const { id } = useParams()
   const { data, isLoading } = useGetSingleOrderQuery(id)
 
-
   if (isLoading) {
     return <FullscreenLoading />
   }
@@ -18,9 +17,9 @@ const SingleOrder = () => {
   }
 
   return (
-    <section>
+    <section className="w-full">
       <div className="flex flex-col gap-5">
-        <div className="grid grid-cols-4 font-semibold text-slate-400">
+        <div className="hidden md:grid md:grid-cols-4 font-semibold text-slate-400">
           <p className="col-span-2 text-right">Product</p>
           <p className="col-span-1 text-right">Quantity</p>
           <p className="col-span-1 text-right">Price</p>
