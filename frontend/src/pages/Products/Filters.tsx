@@ -82,7 +82,7 @@ const Filters = ({ allProducts }: Props) => {
       <AnimatePresence>
         {filtersVisibility && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <p className="font-bold text-2xl mb-5">Category:</p>
+            <p className="font-bold text-2xl mb-5 mt-6 lg:mt-0">Category:</p>
             <div className="p-4">
               {categories.map((category, index) => {
                 return (
