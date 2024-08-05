@@ -68,7 +68,7 @@ const EditProductForm = ({ product }: Props) => {
     <>
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col justify-center items-center max-w-[250px] sm:max-w-full"
       >
         <FormInput
           type="text"
