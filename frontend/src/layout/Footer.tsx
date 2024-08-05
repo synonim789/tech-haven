@@ -61,7 +61,7 @@ const Footer = () => {
           <input
             type="text"
             placeholder="Enter Email"
-            className="shadow-smt placeholder:#5b5050 rounded-full border-2 border-slate-400 bg-transparent px-5 py-2 text-2xl "
+            className="rounded-full border-2 border-slate-400 bg-transparent px-5 py-2 text-2xl shadow-sm placeholder:text-[#5b5050] "
           />
           <button
             className="rounded-full bg-[#405684] px-6 py-3 text-2xl font-semibold text-white transition-opacity hover:opacity-80"
