@@ -110,7 +110,7 @@ const AddProductPage = () => {
   }
 
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-6 max-w-[250px] md:max-w-full">
       <h2 className="mb-8 text-4xl font-bold text-center text-slate-500">
         Add Product
       </h2>
