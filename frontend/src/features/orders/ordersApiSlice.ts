@@ -18,7 +18,7 @@ type OrderType = {
   dateOrdered: string
 }
 
-type OrderItems = {
+export type OrderItems = {
   name: string
   price: number
   quantity: number

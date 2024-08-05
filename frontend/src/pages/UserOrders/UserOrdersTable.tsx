@@ -1,9 +1,10 @@
+import { OrderItems } from '../../features/orders/ordersApiSlice'
 import UserOrderLine from './UserOrderLine'
 
 type Props = {
   userOrders: {
     _id: string
-    orderItems: {}
+    orderItems: OrderItems[]
     shippingAddress1: string
     shippingAddress2: string
     phone: string
@@ -16,6 +17,7 @@ type Props = {
 }
 
 const UserOrdersTable = ({ userOrders }: Props) => {
+  console.log(userOrders)
   return (
     <table className="w-full">
       <thead>

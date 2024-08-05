@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ORDER_STATUS } from '../../data/orderStatus'
+import { OrderItems } from '../../features/orders/ordersApiSlice'
 import { formatPrice } from '../../utils/formatPrice'
 
 type Props = {
   order: {
     _id: string
-    orderItems: {}
+    orderItems: OrderItems[]
     shippingAddress1: string
     shippingAddress2: string
     phone: string
