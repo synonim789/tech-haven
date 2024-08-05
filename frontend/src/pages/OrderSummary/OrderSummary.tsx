@@ -64,7 +64,7 @@ const OrderSummary = () => {
       })
         .unwrap()
         .then((data) => (window.location.href = data.url))
-        .catch((error: any) => toast.error(error.message))
+        .catch((error) => toast.error(error.message))
     } else if (order.payment === 'Cash On Delivery') {
       await addOrder({
         products: orderItems,
@@ -77,7 +77,7 @@ const OrderSummary = () => {
       })
         .unwrap()
         .then(() => toast.success('success'))
-        .catch((error: any) => toast.error(error.message))
+        .catch((error) => toast.error(error.message))
     }
   }
 
