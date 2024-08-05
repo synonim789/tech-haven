@@ -31,7 +31,7 @@ const OrderSummary = () => {
 
   if (!order) {
     return (
-      <h4 className="text-center text-5xl font-bold max-w-6xl mx-auto px-5 my-auto py-5 text-slate-500">
+      <h4 className="m-auto max-w-6xl p-5 text-center text-5xl font-bold text-slate-500">
         You need to place an order to get to summary.
       </h4>
     )
@@ -86,34 +86,34 @@ const OrderSummary = () => {
   }
 
   return (
-    <section className="text-3xl py-5 max-w-6xl mx-auto w-full px-5">
-      <h2 className="text-5xl font-bold mb-5 text-center text-slate-500">
+    <section className="mx-auto w-full max-w-6xl p-5 text-3xl">
+      <h2 className="mb-5 text-center text-5xl font-bold text-slate-500">
         Order Summary
       </h2>
-      <div className="flex flex-col md:flex-row justify-between gap-5">
-        <div className="flex flex-col gap-y-5 basis-3/4">
+      <div className="flex flex-col justify-between gap-5 md:flex-row">
+        <div className="flex basis-3/4 flex-col gap-y-5">
           {order?.orderItems.map((item) => {
             return <OrderSummaryProduct product={item} key={item.id} />
           })}
         </div>
-        <div className="bg-white px-4 w-full basis-1/4 shadow-md rounded-lg flex flex-col gap-4 items-center justify-around text-slate-600 dark:bg-[#121212]">
-          <p className="flex gap-1 my-4">
+        <div className="flex w-full basis-1/4 flex-col items-center justify-around gap-4 rounded-lg bg-white px-4 text-slate-600 shadow-md dark:bg-[#121212]">
+          <p className="my-4 flex gap-1">
             <span className="font-bold">Subtotal: </span>
             {formatPrice(order.subtotal)}
           </p>
-          <p className="flex gap-1 my-4">
+          <p className="my-4 flex gap-1">
             <span className="font-bold">Shipping: </span>
             {formatPrice(order.delivery)}
           </p>
-          <div className="w-full bg-gray-500 h-1 rounded-full" />
-          <p className="flex gap-1 my-4">
+          <div className="h-1 w-full rounded-full bg-gray-500" />
+          <p className="my-4 flex gap-1">
             <b>Total: </b>
             {formatPrice(order.total)}
           </p>
         </div>
       </div>
       <div className="mt-5">
-        <div className="bg-white rounded-lg shadow-md p-5 flex flex-col md:flex-row justify-between gap-5 items-center text-slate-600 dark:bg-[#121212]">
+        <div className="flex flex-col items-center justify-between gap-5 rounded-lg bg-white p-5 text-slate-600 shadow-md md:flex-row dark:bg-[#121212]">
           <div>
             <p className="capitalize">
               <b>Payment method:</b> {order.payment}
@@ -126,7 +126,7 @@ const OrderSummary = () => {
           </div>
           <button
             onClick={() => handleCheckout()}
-            className="bg-[#405684] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5 hover:scale-105 hover:opacity-75 transition"
+            className="mt-5 rounded-lg bg-[#405684] px-4 py-2 text-2xl font-bold text-white shadow-lg transition hover:scale-105 hover:opacity-75"
           >
             Continue
           </button>

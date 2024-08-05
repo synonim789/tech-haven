@@ -9,12 +9,12 @@ const AdminWelcomePage = () => {
   const user = useSelector((state: RootState) => state.user.user)
 
   return (
-    <section className="space-y-5 w-full">
-      <div className="text-2xl text-slate-500 text-right bg-white dark:bg-[#222427] px-10 py-5 rounded-2xl shadow-xl">
+    <section className="w-full space-y-5">
+      <div className="rounded-2xl bg-white px-10 py-5 text-right text-2xl text-slate-500 shadow-xl dark:bg-[#222427]">
         <span className="">Welcome, </span>
         <Link
           to={`/profile`}
-          className="font-bold underline-offset-3 underline"
+          className="underline-offset-3 font-bold underline"
         >
           {user?.name}
         </Link>

@@ -18,17 +18,17 @@ const EditSingleUser = ({ user }: Props) => {
   }, [error])
 
   return (
-    <div className="flex gap-5 items-center bg-white p-4 shadow-lg rounded-xl dark:bg-[#222427]">
+    <div className="flex items-center gap-5 rounded-xl bg-white p-4 shadow-lg dark:bg-[#222427]">
       <FaUser size={'30px'} className="dark:text-slate-400" />
 
       <div>
-        <p className="font-semibold text-xl text-slate-400">{name}</p>
+        <p className="text-xl font-semibold text-slate-400">{name}</p>
         <p className="text-slate-600">{email}</p>
         {role === 'admin' && (
-          <div className="flex gap-5 items-center mt-3">
+          <div className="mt-3 flex items-center gap-5">
             <p className="font-bold text-slate-400">admin</p>
             <button
-              className="px-2 py-3 bg-[#405684] text-white font-bold rounded-xl hover:scale-105 transition hover:opacity-70"
+              className="rounded-xl bg-[#405684] px-2 py-3 font-bold text-white transition hover:scale-105 hover:opacity-70"
               onClick={() => changeUserRole(user._id)}
             >
               {isLoading ? 'Changing...' : 'Change to User'}
@@ -36,10 +36,10 @@ const EditSingleUser = ({ user }: Props) => {
           </div>
         )}
         {role === 'user' && (
-          <div className="flex gap-5 items-center mt-3">
+          <div className="mt-3 flex items-center gap-5">
             <p className="font-bold text-slate-400">user</p>
             <button
-              className="px-2 py-3 bg-blue-500 text-white font-bold rounded-xl hover:scale-105 transition hover:opacity-70"
+              className="rounded-xl bg-blue-500 px-2 py-3 font-bold text-white transition hover:scale-105 hover:opacity-70"
               onClick={() => changeUserRole(user._id)}
             >
               {isLoading ? 'Changing...' : ' Change to Admin'}

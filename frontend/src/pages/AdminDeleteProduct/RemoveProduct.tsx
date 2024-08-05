@@ -15,8 +15,8 @@ const RemoveProduct = ({ product, clear }: Props) => {
   }
 
   return (
-    <section className="mt-20 bg-white dark:bg-[#222427] rounded-xl shadow-xl w-full p-12">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+    <section className="mt-20 w-full rounded-xl bg-white p-12 shadow-xl dark:bg-[#222427]">
+      <div className="flex flex-col items-center justify-between gap-5 md:flex-row">
         <img
           src={product.image}
           alt={product.name}
@@ -30,7 +30,7 @@ const RemoveProduct = ({ product, clear }: Props) => {
         </p>
       </div>
       <button
-        className="px-6 py-3 text-2xl font-bold text-white bg-red-500 rounded-xl mt-10 transition-all hover:scale-105 hover:opacity-70"
+        className="mt-10 rounded-xl bg-red-500 px-6 py-3 text-2xl font-bold text-white transition-all hover:scale-105 hover:opacity-70"
         onClick={() => setOpenModal(true)}
       >
         Delete Product

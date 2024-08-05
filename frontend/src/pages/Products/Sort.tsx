@@ -23,10 +23,10 @@ const Sort = () => {
   }
 
   return (
-    <div className="mb-5 flex md:justify-end md:gap-5 flex-col md:flex-row md:items-center">
+    <div className="mb-5 flex flex-col md:flex-row md:items-center md:justify-end md:gap-5">
       <select
         name="sort"
-        className="p-3 rounded-2xl shadow-lg mb-3 md:mb-0 dark:bg-[#575757] dark:text-white"
+        className="mb-3 rounded-2xl p-3 shadow-lg md:mb-0 dark:bg-[#575757] dark:text-white"
         onChange={handleSort}
       >
         <option value="name-asc">Name A-Z</option>
@@ -35,20 +35,20 @@ const Sort = () => {
         <option value="price-desc">Price Descending</option>
       </select>
       <button
-        className={`hidden md:block text-3xl p-1 rounded-md ${
+        className={`hidden rounded-md p-1 text-3xl md:block ${
           gridView
-            ? 'text-white bg-[#405684]'
-            : 'dark:bg-slate-300 dark:border-none border border-solid border-slate-100'
+            ? 'bg-[#405684] text-white'
+            : 'border border-solid border-slate-100 dark:border-none dark:bg-slate-300'
         }`}
         onClick={() => dispatch(setView(true))}
       >
         <BsFillGridFill />
       </button>
       <button
-        className={`hidden md:block text-3xl p-1  rounded-md ${
+        className={`hidden rounded-md p-1 text-3xl  md:block ${
           listView
-            ? 'text-white bg-[#405684]'
-            : 'bg-white dark:bg-slate-300 dark:border-none border border-solid border-slate-100'
+            ? 'bg-[#405684] text-white'
+            : 'border border-solid border-slate-100 bg-white dark:border-none dark:bg-slate-300'
         }`}
         onClick={() => dispatch(setView(false))}
       >

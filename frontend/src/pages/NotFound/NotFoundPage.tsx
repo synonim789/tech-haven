@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom'
 
 const NotFoundPage = () => {
   return (
-    <main className="flex items-center justify-center flex-col min-h-[80vh]">
-      <h2 className="text-red-500 text-9xl">404</h2>
+    <main className="flex min-h-[80vh] flex-col items-center justify-center">
+      <h2 className="text-9xl text-red-500">404</h2>
       <h2 className="text-4xl">Page Not Found</h2>
       <Link
         to="/"
-        className="bg-[#405684] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5"
+        className="mt-5 rounded-lg bg-[#405684] px-4 py-2 text-2xl font-bold text-white shadow-lg"
       >
         Back To Home
       </Link>

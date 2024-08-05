@@ -15,7 +15,7 @@ const EdictProductPage = () => {
 
   return (
     <section className="text-center">
-      <h4 className="mb-8 text-4xl font-bold text-center text-slate-500">
+      <h4 className="mb-8 text-center text-4xl font-bold text-slate-500">
         Edit Product
       </h4>
       <AdminSelect

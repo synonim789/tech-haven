@@ -25,9 +25,9 @@ const ForgotPassword = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-5  max-w-sm md:gap-8 lg:gap-10 dark:bg-[#121212] w-full">
-        <div className="w-full text-[#405684] font-bold">
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="flex w-full max-w-sm flex-col items-center justify-center gap-5 rounded-xl bg-white  p-10 shadow-2xl md:gap-8 lg:gap-10 dark:bg-[#121212]">
+        <div className="w-full font-bold text-[#405684]">
           <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />
             Back Home
@@ -35,15 +35,15 @@ const ForgotPassword = () => {
         </div>
         <h2 className="text-2xl font-bold text-[#405684]">Forgot Password</h2>
         <form
-          className="flex flex-col w-full justify-center items-center gap-7"
+          className="flex w-full flex-col items-center justify-center gap-7"
           onSubmit={handleSubmit(submitHandler)}
         >
-          <label className="flex flex-col w-full text-[20px] font-bold cursor-pointer text-gray-400">
+          <label className="flex w-full cursor-pointer flex-col text-[20px] font-bold text-gray-400">
             <span>Email</span>
             <input
               type="email"
               id="email"
-              className="px-3 py-2 border-[2px] border-solid border-slate-600 shadow-lg rounded-xl dark:bg-transparent dark:text-white"
+              className="rounded-xl border-2 border-solid border-slate-600 px-3 py-2 shadow-lg dark:bg-transparent dark:text-white"
               placeholder="Enter Email"
               {...register('email', {
                 required: 'Email is required',
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
                 },
               })}
             />
-            <p className="font-bold text-red-500 flex flex-col">
+            <p className="flex flex-col font-bold text-red-500">
               {errors.email?.message}
             </p>
           </label>
@@ -66,14 +66,14 @@ const ForgotPassword = () => {
             ))}
           <button
             type="submit"
-            className="bg-[#405684] text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+            className="rounded-lg bg-[#405684] px-4 py-2 text-[24px] font-bold text-white transition hover:scale-105 hover:opacity-80"
           >
             {isLoading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
         <Link
           to="/login"
-          className="font-bold text-[#405684] text-right w-full text-[20px]"
+          className="w-full text-right text-[20px] font-bold text-[#405684]"
         >
           Login
         </Link>

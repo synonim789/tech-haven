@@ -21,16 +21,16 @@ const OrderSuccess = () => {
         <Confetti width={width} height={height} />
       </div>
 
-      <main className="m-auto max-w-6xl p-5 flex flex-col items-center gap-7">
-        <div className="md:w-40 md:h-40 bg-green-400 rounded-full flex items-center justify-center">
-          <BsCheck size={100} className="text-green-700 p-0 m-0" />
+      <main className="m-auto flex max-w-6xl flex-col items-center gap-7 p-5">
+        <div className="flex items-center justify-center rounded-full bg-green-400 md:size-40">
+          <BsCheck size={100} className="m-0 p-0 text-green-700" />
         </div>
-        <h2 className="text-3xl font-bold text-center text-green-700">
+        <h2 className="text-center text-3xl font-bold text-green-700">
           Your Order Is Confirmed
         </h2>
         <Link
           to="/"
-          className="bg-[#405684] text-white px-4 py-2 rounded-lg shadow-lg text-2xl font-bold mt-5"
+          className="mt-5 rounded-lg bg-[#405684] px-4 py-2 text-2xl font-bold text-white shadow-lg"
         >
           Back To Home
         </Link>

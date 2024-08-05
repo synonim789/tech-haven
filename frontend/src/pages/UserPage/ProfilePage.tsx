@@ -3,7 +3,7 @@ import ProfileSidebar from '../../components/ui/ProfileNavbar'
 
 const ProfilePage = () => {
   return (
-    <div className="py-4 flex items-center flex-col mx-auto">
+    <div className="mx-auto flex flex-col items-center py-4">
       <ProfileSidebar />
       <Outlet />
     </div>

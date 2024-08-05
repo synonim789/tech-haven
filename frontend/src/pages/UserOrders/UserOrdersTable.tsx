@@ -19,7 +19,7 @@ const UserOrdersTable = ({ userOrders }: Props) => {
   return (
     <table className="w-full">
       <thead>
-        <tr className="border-b-2 border-b-gray-500 border-spacing-0 hidden md:table-row dark:text-slate-400">
+        <tr className="hidden border-spacing-0 border-b-2 border-b-gray-500 md:table-row dark:text-slate-400">
           <th>ID</th>
           <th>Date</th>
           <th>To Pay</th>

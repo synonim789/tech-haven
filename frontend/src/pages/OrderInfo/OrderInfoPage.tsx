@@ -52,12 +52,12 @@ const OrderInfoPage = () => {
 
   return (
     <section className="my-10 max-w-6xl md:mx-auto">
-      <div className="bg-white shadow-xl w-full p-5 rounded-xl dark:bg-[#121212]">
+      <div className="w-full rounded-xl bg-white p-5 shadow-xl dark:bg-[#121212]">
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="md:grid md:grid-cols-2 md:gap-x-6 flex flex-col"
+          className="flex flex-col md:grid md:grid-cols-2 md:gap-x-6"
         >
-          <h4 className="text-3xl mb-4 font-bold text-slate-500">
+          <h4 className="mb-4 text-3xl font-bold text-slate-500">
             Delivery Info:
           </h4>
           <div className="md:col-span-2">
@@ -133,15 +133,15 @@ const OrderInfoPage = () => {
             }}
             error={errors?.apartment?.message}
           />
-          <h4 className="text-3xl mt-4 font-bold col-span-2 text-slate-500">
+          <h4 className="col-span-2 mt-4 text-3xl font-bold text-slate-500">
             Payment method:
           </h4>
-          <div className="md:col-span-2 flex justify-between flex-col gap-4 md:flex-row mt-4">
+          <div className="mt-4 flex flex-col justify-between gap-4 md:col-span-2 md:flex-row">
             <div className="flex flex-col gap-4 md:flex-row">
               <div className="flex items-center text-2xl">
                 <label
                   htmlFor="stripe"
-                  className="relative flex items-center p-3 rounded-full cursor-pointer"
+                  className="relative flex cursor-pointer items-center rounded-full p-3"
                 >
                   <input
                     type="radio"
@@ -150,14 +150,14 @@ const OrderInfoPage = () => {
                     {...register('payment', {
                       required: 'Payment form is required',
                     })}
-                    className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
+                    className="before:content[''] peer relative size-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:size-10 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
                   />
-                  <span className="absolute text-slate-400 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                  <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-slate-400 opacity-0 transition-opacity peer-checked:opacity-100">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-full h-full scale-105"
+                      className="size-full scale-105"
                     >
                       <path
                         fillRule="evenodd"
@@ -175,7 +175,7 @@ const OrderInfoPage = () => {
               </div>
               <div className="flex items-center text-2xl">
                 <label
-                  className=" relative flex items-center p-3 rounded-full cursor-pointer"
+                  className=" relative flex cursor-pointer items-center rounded-full p-3"
                   htmlFor="cod"
                 >
                   <input
@@ -185,14 +185,14 @@ const OrderInfoPage = () => {
                     {...register('payment', {
                       required: 'Payment form is required',
                     })}
-                    className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
+                    className="before:content[''] peer relative size-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:size-10 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
                   />
-                  <span className="absolute text-slate-400 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                  <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-slate-400 opacity-0 transition-opacity peer-checked:opacity-100">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-full h-full scale-105"
+                      className="size-full scale-105"
                     >
                       <path
                         fillRule="evenodd"
@@ -216,7 +216,7 @@ const OrderInfoPage = () => {
 
             <button
               type="submit"
-              className="text-2xl font-bold bg-[#405684] text-white px-3 py-1.5 rounded-lg hover:scale-105 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:bg-gray-500"
+              className="rounded-lg bg-[#405684] px-3 py-1.5 text-2xl font-bold text-white transition-all hover:scale-105 hover:opacity-90 disabled:cursor-not-allowed disabled:bg-gray-500"
               disabled={!isValid}
             >
               Continue

@@ -17,24 +17,24 @@ const AdminRemoveUser = ({ user }: Props) => {
   }
 
   return (
-    <div className="flex items-center bg-white p-4 shadow-lg rounded-xl justify-between gap-2 dark:bg-[#222427] ">
+    <div className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 shadow-lg dark:bg-[#222427] ">
       <FaUser size={'30px'} className="dark:text-slate-400" />
       <div className="flex flex-col gap-5">
-        <p className="font-semibold text-xl text-slate-400">{name}</p>
+        <p className="text-xl font-semibold text-slate-400">{name}</p>
         <p className="text-slate-600">{email}</p>
         {role === 'admin' && (
-          <p className="font-bold bg-blue-800 w-fit text-white px-4 py-2 rounded-xl">
+          <p className="w-fit rounded-xl bg-blue-800 px-4 py-2 font-bold text-white">
             admin
           </p>
         )}
         {role === 'user' && (
-          <p className="font-bold bg-green-700 w-fit text-white px-4 py-2 rounded-xl">
+          <p className="w-fit rounded-xl bg-green-700 px-4 py-2 font-bold text-white">
             user
           </p>
         )}
       </div>
       <button onClick={() => adminDeleteUser(id)}>
-        <FaTrash className="text-red-800 text-3xl hover:opacity-70 transition-opacity duration-300" />
+        <FaTrash className="text-3xl text-red-800 transition-opacity duration-300 hover:opacity-70" />
       </button>
     </div>
   )

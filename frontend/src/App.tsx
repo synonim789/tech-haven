@@ -65,11 +65,11 @@ function App() {
       }
       dispatch(setUser(data))
     }
-  }, [data, token])
+  }, [data, token, dispatch])
 
   useEffect(() => {
     dispatch(countCartTotal())
-  }, [cart])
+  }, [cart, dispatch])
 
   if (isLoading) {
     return <FullscreenLoading />
@@ -141,7 +141,7 @@ function App() {
               path="products"
               element={
                 <div>
-                  <h2 className="text-6xl font-bold text-slate-600 text-center">
+                  <h2 className="text-center text-6xl font-bold text-slate-600">
                     Products
                   </h2>
                 </div>
@@ -153,7 +153,7 @@ function App() {
               path="categories"
               element={
                 <div>
-                  <h2 className="text-6xl font-bold text-slate-600 text-center">
+                  <h2 className="text-center text-6xl font-bold text-slate-600">
                     Categories
                   </h2>
                 </div>
@@ -166,7 +166,7 @@ function App() {
               path="users"
               element={
                 <div>
-                  <h2 className="text-6xl font-bold text-slate-600 text-center">
+                  <h2 className="text-center text-6xl font-bold text-slate-600">
                     Users
                   </h2>
                 </div>

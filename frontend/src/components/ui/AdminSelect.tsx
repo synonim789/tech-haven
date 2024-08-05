@@ -20,10 +20,10 @@ const AdminSelect = ({ options, value, onChange }: Props) => {
   }
   return (
     <div
-      className="relative bg-white dark:bg-[#1D1F22] dark:text-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
+      className="relative z-0 flex w-full items-center gap-2 rounded-xl bg-white p-5 shadow-xl dark:bg-[#1D1F22] dark:text-white"
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <span className="grow flex flex-wrap text-2xl">
+      <span className="flex grow flex-wrap text-2xl">
         {value ? value.name : 'Choose Product'}
       </span>
       <button
@@ -35,7 +35,7 @@ const AdminSelect = ({ options, value, onChange }: Props) => {
       >
         &times;
       </button>
-      <div className="self-stretch w-[1px] bg-slate-600"></div>
+      <div className="w-px self-stretch bg-slate-600"></div>
       {isOpen ? <IoMdArrowDropup size={25} /> : <IoMdArrowDropdown size={25} />}
       <ul
         className={
@@ -48,7 +48,7 @@ const AdminSelect = ({ options, value, onChange }: Props) => {
             return (
               <li
                 key={option._id}
-                className="text-2xl p-3 cursor-pointer flex items-center gap-5 font-bold text-left hover:bg-[#405684] hover:text-white"
+                className="flex cursor-pointer items-center gap-5 p-3 text-left text-2xl font-bold hover:bg-[#405684] hover:text-white"
                 onClick={(e) => {
                   e.stopPropagation()
                   selectOption(option)

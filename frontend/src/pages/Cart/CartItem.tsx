@@ -29,7 +29,7 @@ const CartItem = ({ item }: Props) => {
   return (
     <div
       key={name}
-      className="grid gap-6 xl:grid-cols-5 place-items-center bg-white mb-10 rounded-md border border-gray-200 overflow-hidden text-center shadow-md text-4xl p-5 dark:bg-[#222427] dark:border-none dark:text-slate-600"
+      className="mb-10 grid place-items-center gap-6 overflow-hidden rounded-md border border-gray-200 bg-white p-5 text-center text-4xl shadow-md xl:grid-cols-5 dark:border-none dark:bg-[#222427] dark:text-slate-600"
     >
       <img src={image} alt={name} className="w-4/5" />
       <p key={name}>{name}</p>
@@ -38,7 +38,7 @@ const CartItem = ({ item }: Props) => {
       <p className="  font-semibold">{formatPrice(price * amount)}</p>
 
       <BiSolidTrash
-        className="text-4xl text-slate-600 hover:text-red-500 cursor-pointer transition-all hover:scale-105 dark:text-slate-400"
+        className="cursor-pointer text-4xl text-slate-600 transition-all hover:scale-105 hover:text-red-500 dark:text-slate-400"
         onClick={() => {
           dispatch(removeItemFromCart(id))
         }}

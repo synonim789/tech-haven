@@ -8,7 +8,7 @@ const OrderPagination = ({ currentPage, numOfPages, setPage }: Props) => {
   const pages = new Array(numOfPages).fill(null).map((_, i) => i)
 
   return (
-    <div className="min-w-full flex justify-end gap-x-2 mt-5">
+    <div className="mt-5 flex min-w-full justify-end gap-x-2">
       {pages.map((page) => {
         return (
           <button
@@ -20,8 +20,8 @@ const OrderPagination = ({ currentPage, numOfPages, setPage }: Props) => {
             className={`${
               page === currentPage
                 ? 'bg-[#405684] text-white'
-                : 'bg-white dark:bg-transparent dark:border dark:border-slate-100 dark:text-slate-100'
-            } py-2 px-4 rounded-sm font-semibold hover:scale-105 transition hover:opacity-90`}
+                : 'bg-white dark:border dark:border-slate-100 dark:bg-transparent dark:text-slate-100'
+            } rounded-sm px-4 py-2 font-semibold transition hover:scale-105 hover:opacity-90`}
           >
             {page + 1}
           </button>

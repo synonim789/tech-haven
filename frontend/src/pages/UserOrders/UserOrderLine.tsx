@@ -31,35 +31,35 @@ const UserOrderLine = ({ order }: Props) => {
       key={order._id}
     >
       <td
-        className="block md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
+        className="block p-2 before:mr-1 before:font-bold before:content-[attr(data-cell)] md:table-cell md:before:content-none"
         data-cell="Id"
       >
         {order._id}
       </td>
       <td
-        className="block md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
+        className="block p-2 before:mr-1 before:font-bold before:content-[attr(data-cell)] md:table-cell md:before:content-none"
         data-cell="Date"
       >
         {new Date(order.dateOrdered).toLocaleDateString()}
       </td>
       <td
-        className="block md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
+        className="block p-2 before:mr-1 before:font-bold before:content-[attr(data-cell)] md:table-cell md:before:content-none"
         data-cell="To Pay"
       >
         {formatPrice(order.total)}
       </td>
       <td
-        className="flex items-center md:table-cell p-2 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
+        className="flex items-center p-2 before:mr-1 before:font-bold before:content-[attr(data-cell)] md:table-cell md:before:content-none"
         data-cell="Status"
       >
         <p
-          className={`font-bold px-4 py-2 rounded-full text-center ${background}`}
+          className={`rounded-full px-4 py-2 text-center font-bold ${background}`}
         >
           {label}
         </p>
       </td>
-      <td className="block md:table-cell p-2">
-        <Link to={`${order._id}`} className="text-blue-500 font-semibold">
+      <td className="block p-2 md:table-cell">
+        <Link to={`${order._id}`} className="font-semibold text-blue-500">
           Details
         </Link>
       </td>

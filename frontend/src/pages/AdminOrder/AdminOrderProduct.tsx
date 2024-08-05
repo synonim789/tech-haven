@@ -22,7 +22,7 @@ const AdminOrderProduct = ({ id, quantity }: Props) => {
   return (
     <Link
       to={`/products/${id}`}
-      className="grid md:gap-6 xl:grid-cols-4 place-items-center bg-white rounded-md border border-gray-200 overflow-hidden text-center shadow-md p-3 dark:bg-[#575757] dark:border-none dark:text-slate-400"
+      className="grid place-items-center overflow-hidden rounded-md border border-gray-200 bg-white p-3 text-center shadow-md md:gap-6 xl:grid-cols-4 dark:border-none dark:bg-[#575757] dark:text-slate-400"
     >
       <img
         src={product.image}
@@ -31,10 +31,10 @@ const AdminOrderProduct = ({ id, quantity }: Props) => {
       />
       <span>{product.name}</span>
 
-      <span className="text-slate-400 font-semibold">
+      <span className="font-semibold text-slate-400">
         {formatPrice(product.price * quantity)}
       </span>
-      <span className="text-slate-400 font-semibold">{quantity}</span>
+      <span className="font-semibold text-slate-400">{quantity}</span>
     </Link>
   )
 }

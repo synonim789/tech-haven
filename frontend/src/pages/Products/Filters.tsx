@@ -71,9 +71,9 @@ const Filters = ({ allProducts }: Props) => {
   }, [dispatch, maxPrice])
 
   return (
-    <div className="bg-white h-full top-20 shadow-xl rounded-xl p-8 block dark:text-slate-300  dark:bg-[#121212] transition-all">
+    <div className="top-20 block h-full rounded-xl bg-white p-8 shadow-xl transition-all  dark:bg-[#121212] dark:text-slate-300">
       <button
-        className="font-bold text-2xl lg:hidden w-full flex items-center justify-between"
+        className="flex w-full items-center justify-between text-2xl font-bold lg:hidden"
         onClick={() => setFiltersVisibility(!filtersVisibility)}
       >
         <span>Filters</span>
@@ -82,7 +82,7 @@ const Filters = ({ allProducts }: Props) => {
       <AnimatePresence>
         {filtersVisibility && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <p className="font-bold text-2xl mb-5 mt-6 lg:mt-0">Category:</p>
+            <p className="mb-5 mt-6 text-2xl font-bold lg:mt-0">Category:</p>
             <div className="p-4">
               {categories.map((category, index) => {
                 return (
@@ -90,8 +90,8 @@ const Filters = ({ allProducts }: Props) => {
                     key={index}
                     className={
                       category === filters.category
-                        ? 'text-[18px] capitalize mb-2 block underline font-bold'
-                        : 'text-[18px] capitalize mb-2 block'
+                        ? 'mb-2 block text-[18px] font-bold capitalize underline'
+                        : 'mb-2 block text-[18px] capitalize'
                     }
                     name="category"
                     onClick={(e) => handleChange(e)}
@@ -102,11 +102,11 @@ const Filters = ({ allProducts }: Props) => {
               })}
             </div>
 
-            <p className="font-bold text-2xl mb-5">Brand:</p>
+            <p className="mb-5 text-2xl font-bold">Brand:</p>
             <div className="p-4">
               <select
                 name="brand"
-                className="p-3 rounded-2xl capitalize cursor-pointer border  dark:bg-transparent  border-gray-100/10"
+                className="cursor-pointer rounded-2xl border border-gray-100/10 p-3  capitalize  dark:bg-transparent"
                 onChange={(e) => handleChange(e)}
                 value={filters.brand}
               >
@@ -120,7 +120,7 @@ const Filters = ({ allProducts }: Props) => {
               </select>
             </div>
 
-            <p className="font-bold text-2xl my-5">Price:</p>
+            <p className="my-5 text-2xl font-bold">Price:</p>
             <div className="p-4">
               <p>{formatPrice(price)}</p>
               <input
@@ -137,11 +137,11 @@ const Filters = ({ allProducts }: Props) => {
               </div>
             </div>
 
-            <p className="text-2xl font-bold mb-5">Rating:</p>
+            <p className="mb-5 text-2xl font-bold">Rating:</p>
             <div>
               <FilterRating filters={filters} handleChange={handleChange} />
               <button
-                className="text-2xl font-bold text-[#405684] mt-3 hover:underline"
+                className="mt-3 text-2xl font-bold text-[#405684] hover:underline"
                 onClick={() => dispatch(clearFilters())}
               >
                 Clear Filters

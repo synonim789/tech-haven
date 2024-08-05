@@ -22,7 +22,7 @@ const OrderStatusEdit = ({ editOrderInfo, name, id }: Props) => {
 
   return (
     <select
-      className="px-3 py-2 border-[2px] border-solid border-slate-900 placeholder:text-slate-900 dark:text-gray-400 outline-none shadow-lg rounded-md dark:bg-transparent placeholder:capitalize"
+      className="rounded-md border-2 border-solid border-slate-900 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-900 dark:bg-transparent dark:text-gray-400"
       onChange={onSelectChange}
       value={value}
     >

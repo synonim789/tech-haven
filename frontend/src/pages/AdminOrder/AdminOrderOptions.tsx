@@ -62,7 +62,7 @@ const AdminOrderOptions = ({
     <>
       {isEditing ? (
         <button
-          className="p-1 bg-green-300 rounded-md hover:scale-110 transition-all hover:opacity-90"
+          className="rounded-md bg-green-300 p-1 transition-all hover:scale-110 hover:opacity-90"
           onClick={handleSubmit}
         >
           <FaCheck className="text-green-600" size={20} />
@@ -71,15 +71,15 @@ const AdminOrderOptions = ({
         <button onClick={handleEditButton} className="">
           <BsThreeDotsVertical
             size={25}
-            className="cursor-pointer relative z-10"
+            className="relative z-10 cursor-pointer"
           />
         </button>
       )}
 
       {show && (
-        <div className="absolute bg-white text-gray-600 flex flex-col items-start z-50 rounded-md font-bold text-lg overflow-hidden">
+        <div className="absolute z-50 flex flex-col items-start overflow-hidden rounded-md bg-white text-lg font-bold text-gray-600">
           <button
-            className="hover:bg-gray-300 w-full text-left p-2 flex items-center gap-2 "
+            className="flex w-full items-center gap-2 p-2 text-left hover:bg-gray-300 "
             onClick={handleEdit}
           >
             <MdOutlineModeEdit className="text-blue-700" />
@@ -87,7 +87,7 @@ const AdminOrderOptions = ({
           </button>
           <button
             onClick={handleInfo}
-            className="hover:bg-gray-300 w-full text-left p-2 flex items-center gap-2"
+            className="flex w-full items-center gap-2 p-2 text-left hover:bg-gray-300"
           >
             <FaRegEye className="text-green-800" />
             See More

@@ -8,13 +8,13 @@ type Props = {
 
 const FormInput = ({ name, type, error, register, ...props }: Props) => {
   return (
-    <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize mb-4">
+    <div className="mb-4 flex w-full cursor-pointer flex-col text-[20px] font-semibold capitalize">
       <label htmlFor={name} className="dark:text-gray-500">
         {name}
       </label>
       <input
         type={type}
-        className="px-3 py-2 border-2 border-solid border-gray-300 dark:border-gray-700 disabled:opacity-80 disabled:cursor-not-allowed placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg rounded-xl dark:bg-transparent placeholder:capitalize "
+        className="rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-80 dark:border-gray-700 dark:bg-transparent dark:text-gray-400"
         placeholder={`Enter ${name}`}
         {...register}
         step={0.01}
@@ -23,7 +23,7 @@ const FormInput = ({ name, type, error, register, ...props }: Props) => {
         autoComplete={name}
         {...props}
       />
-      <p className="font-bold text-red-500 flex flex-col">{error}</p>
+      <p className="flex flex-col font-bold text-red-500">{error}</p>
     </div>
   )
 }

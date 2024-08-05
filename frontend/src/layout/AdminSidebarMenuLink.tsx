@@ -38,7 +38,7 @@ const AdminSidebarMenuLink = ({ item, hideMenu }: Props) => {
     <>
       <Link
         to={item.path}
-        className="text-gray-700 dark:text-slate-500 text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] h hover:border-l-[5px] hover:border-solid hover:border-l-[#405684]"
+        className="h flex h-[80px] w-full items-center justify-between p-3 text-2xl font-semibold text-gray-700 hover:border-l-[5px] hover:border-solid hover:border-l-[#405684] dark:text-slate-500"
         onClick={() => handleClick()}
       >
         <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ const AdminSidebarMenuLink = ({ item, hideMenu }: Props) => {
             <Link
               to={menu.path}
               key={menu.path}
-              className="text-gray-500 h-[60px] font-bold pl-10 flex items-center hover:bg-[#192b90] hover:text-white"
+              className="flex h-[60px] items-center pl-10 font-bold text-gray-500 hover:bg-[#192b90] hover:text-white"
               onClick={hideMenu}
             >
               {menu.title}

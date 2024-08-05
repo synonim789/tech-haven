@@ -13,20 +13,20 @@ const ListView = () => {
       {pagedProducts.map((product, index) => {
         return (
           <div
-            className="bg-white rounded-xl shadow-md hover:scale-105 transition dark:bg-[#121212]"
+            className="rounded-xl bg-white shadow-md transition hover:scale-105 dark:bg-[#121212]"
             key={index}
           >
-            <h2 className="mt-5 text-3xl ml-5 text-[#405684] font-bold">
+            <h2 className="ml-5 mt-5 text-3xl font-bold text-[#405684]">
               {product.name}
             </h2>
-            <div className="flex items-center justify-between text-right pb-5 pl-3">
+            <div className="flex items-center justify-between pb-5 pl-3 text-right">
               <img
                 src={product.image}
-                className=" overflow-hidden rounded-lg object-cover w-[200px] h-100%"
+                className=" h-100% w-[200px] overflow-hidden rounded-lg object-cover"
               />
 
               <div className="mx-5 flex flex-col gap-5">
-                <h5 className="text-2xl text-[#405684] font-bold">
+                <h5 className="text-2xl font-bold text-[#405684]">
                   {formatPrice(product.price)}
                 </h5>
                 <p className="text-slate-600">
@@ -34,7 +34,7 @@ const ListView = () => {
                 </p>
                 <Link
                   to={`/products/${product._id}`}
-                  className="bg-[#405684] text-white w-fit font-bold text-2xl py-2 px-4 rounded-xl block"
+                  className="block w-fit rounded-xl bg-[#405684] px-4 py-2 text-2xl font-bold text-white"
                 >
                   Go To Product
                 </Link>

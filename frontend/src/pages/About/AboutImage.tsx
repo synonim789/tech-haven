@@ -26,14 +26,14 @@ const AboutImage = ({ src }: Props) => {
           resolutionX={32}
           resolutionY={32}
           punch={1}
-          className="rounded-xl overflow-hidden"
+          className="overflow-hidden rounded-xl"
         />
       )}
       {imageLoaded && (
         <img
           src={src}
           alt="laptop on the accessories on the desk"
-          className="rounded-xl w-[350px] overflow-hidden animate-pulse"
+          className="w-[350px] animate-pulse overflow-hidden rounded-xl"
         />
       )}
     </>

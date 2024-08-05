@@ -29,7 +29,7 @@ const AdminSalesByCategory = () => {
   }
 
   return (
-    <div className=" h-[600px] dark:bg-[#222427] px-10 py-5 rounded-2xl space-y-5  basis-1/3 flex flex-col items-center">
+    <div className=" flex h-[600px] basis-1/3 flex-col items-center space-y-5  rounded-2xl px-10 py-5 dark:bg-[#222427]">
       <p className="text-center text-2xl text-purple-600">Sales By Category</p>
       <ResponsiveContainer height={530}>
         <PieChart width={700}>

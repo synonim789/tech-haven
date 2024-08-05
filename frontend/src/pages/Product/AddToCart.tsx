@@ -34,10 +34,10 @@ const AddToCart = ({ product }: Props) => {
   }
 
   return (
-    <div className="flex justify-between items-center gap-10 md:gap-20">
+    <div className="flex items-center justify-between gap-10 md:gap-20">
       <AmountButtons increase={increase} decrease={decrease} amount={amount} />
       <button
-        className="bg-[#405684] text-white font-bold px-2 py-4 rounded-lg text-[20px] md:text-[24px] hover:scale-105 hover:opacity-80 transition"
+        className="rounded-lg bg-[#405684] px-2 py-4 text-[20px] font-bold text-white transition hover:scale-105 hover:opacity-80 md:text-[24px]"
         onClick={() => {
           dispatch(addToCart({ id, amount, product }))
         }}

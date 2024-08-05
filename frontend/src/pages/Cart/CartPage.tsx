@@ -13,25 +13,25 @@ const CartPage = () => {
 
   if (cart.length < 1) {
     return (
-      <div className="flex justify-center items-center mt-20">
+      <div className="mt-20 flex items-center justify-center">
         <h2 className="text-4xl font-bold text-slate-500">No Products Found</h2>
       </div>
     )
   }
   return (
-    <section className="my-10 max-w-5xl mx-auto px-5">
+    <section className="mx-auto my-10 max-w-5xl px-5">
       {cart.map((item) => {
         return <CartItem item={item} key={item.name} />
       })}
 
-      <div className="flex justify-between md:items-end flex-col md:flex-row items-center gap-5">
+      <div className="flex flex-col items-center justify-between gap-5 md:flex-row md:items-end">
         <button
-          className="bg-red-500 text-white font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+          className="rounded-lg bg-red-500 px-4 py-2 text-[24px] font-bold text-white transition hover:scale-105 hover:opacity-80"
           onClick={() => dispatch(removeAllItemsFromCart())}
         >
           Remove All items
         </button>
-        <div className="text-right flex flex-col gap-10">
+        <div className="flex flex-col gap-10 text-right">
           <h3 className="text-5xl font-semibold dark:text-slate-500">
             Total:{' '}
             <span className="text-[#405684]">{formatPrice(totalPrice)}</span>
@@ -39,14 +39,14 @@ const CartPage = () => {
           {user ? (
             <Link
               to="/order/info"
-              className="bg-[#405684] text-white text-center font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+              className="rounded-lg bg-[#405684] px-4 py-2 text-center text-[24px] font-bold text-white transition hover:scale-105 hover:opacity-80"
             >
               Continue {'>'}
             </Link>
           ) : (
             <Link
               to="/login"
-              className="bg-[#405684] text-white text-center font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition"
+              className="rounded-lg bg-[#405684] px-4 py-2 text-center text-[24px] font-bold text-white transition hover:scale-105 hover:opacity-80"
             >
               Log in
             </Link>

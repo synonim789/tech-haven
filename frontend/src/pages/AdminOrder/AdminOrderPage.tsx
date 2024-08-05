@@ -35,7 +35,7 @@ const AdminOrderPage = () => {
 
   if (!orders) {
     return (
-      <h3 className="text-slate-500 font-bold text-center text-3xl">
+      <h3 className="text-center text-3xl font-bold text-slate-500">
         No Orders Found
       </h3>
     )
@@ -43,10 +43,10 @@ const AdminOrderPage = () => {
 
   return (
     <section className="space-y-8">
-      <h2 className="text-4xl font-bold text-center text-slate-500">Orders</h2>
+      <h2 className="text-center text-4xl font-bold text-slate-500">Orders</h2>
       <div className="flex justify-end gap-x-5">
         <select
-          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg dark:bg-transparent placeholder:capitalize rounded-xl"
+          className="rounded-xl border-2 border-solid border-slate-600 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:bg-transparent dark:text-gray-400"
           onChange={(e) => setOrdersPerPage(parseInt(e.target.value))}
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -57,7 +57,7 @@ const AdminOrderPage = () => {
         </select>
         <select
           onChange={(e) => handleStatusFilter(e)}
-          className="px-3 py-2 border-[2px] border-solid border-slate-600 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg dark:bg-transparent placeholder:capitalize rounded-xl"
+          className="rounded-xl border-2 border-solid border-slate-600 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:bg-transparent dark:text-gray-400"
         >
           <option value="all">All</option>
           {ORDER_STATUS.map((order, index) => (

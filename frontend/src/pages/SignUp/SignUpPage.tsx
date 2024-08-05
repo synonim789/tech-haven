@@ -36,21 +36,21 @@ const SignUpPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-5  max-w-sm md:gap-8 lg:gap-10 dark:bg-[#121212] w-full">
-        <div className="w-full text-[#405684] font-bold">
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="flex w-full max-w-sm flex-col items-center justify-center gap-5 rounded-xl bg-white  p-10 shadow-2xl md:gap-8 lg:gap-10 dark:bg-[#121212]">
+        <div className="w-full font-bold text-[#405684]">
           <Link to="/" className="flex items-center text-[20px]">
             <AiOutlineArrowLeft />
             Back Home
           </Link>
         </div>
-        <h2 className="text-slate-600 text-2xl font-bold">
+        <h2 className="text-2xl font-bold text-slate-600">
           <Link to="/login">Log In</Link> |{' '}
           <span className="text-[#405684]">Sign Up</span>
         </h2>
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="flex flex-col w-full justify-center items-center gap-7"
+          className="flex w-full flex-col items-center justify-center gap-7"
         >
           <FormInput
             name="email"

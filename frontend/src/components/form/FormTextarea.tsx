@@ -6,18 +6,18 @@ type Props = {
 
 const FormTextarea = ({ name, error, register }: Props) => {
   return (
-    <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize my-4">
+    <div className="my-4 flex w-full cursor-pointer flex-col text-[20px] font-semibold capitalize">
       <label htmlFor={name} className="text-gray-500">
         {name}
       </label>
       <textarea
         name={name}
         id={name}
-        className="px-3 py-2 border-[2px] border-solid border-gray-300 placeholder:text-slate-500 dark:text-gray-400 dark:bg-transparent shadow-lg rounded-xl placeholder:capitalize resize-none h-[200px] outline-none dark:border-gray-700"
+        className="h-[200px] resize-none rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-400"
         placeholder={`Enter ${name}`}
         {...register}
       ></textarea>
-      <p className="font-bold text-red-500 flex flex-col text-[20px]">
+      <p className="flex flex-col text-[20px] font-bold text-red-500">
         {error}
       </p>
     </div>

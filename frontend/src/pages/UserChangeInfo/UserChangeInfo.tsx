@@ -75,11 +75,11 @@ const UserChangeInfo = () => {
 
   return (
     <section className="mb-3">
-      <h2 className="text-4xl font-bold mb-7 text-center dark:text-slate-500">
+      <h2 className="mb-7 text-center text-4xl font-bold dark:text-slate-500">
         Update Profile
       </h2>
       <form
-        className="grid grid-cols-1 md:grid-cols-2 gap-14"
+        className="grid grid-cols-1 gap-14 md:grid-cols-2"
         onSubmit={handleSubmit(submitHandler)}
         onChange={() => setEdited(true)}
       >
@@ -121,7 +121,7 @@ const UserChangeInfo = () => {
         <button
           type="button"
           onClick={() => reset()}
-          className="font-bold px-4 py-2 rounded-lg text-[24px] hover:scale-105 hover:opacity-80 transition bg-red-500 text-white"
+          className="rounded-lg bg-red-500 px-4 py-2 text-[24px] font-bold text-white transition hover:scale-105 hover:opacity-80"
         >
           Reset Info
         </button>

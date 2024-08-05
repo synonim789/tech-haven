@@ -142,7 +142,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
 
   if (!orders || orders.length === 0) {
     return (
-      <h3 className="text-slate-500 font-bold text-center text-3xl">
+      <h3 className="text-center text-3xl font-bold text-slate-500">
         No Orders Found
       </h3>
     )
@@ -151,7 +151,7 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
   return (
     <div>
       <table className="min-w-full overflow-hidden rounded-md">
-        <thead className=" dark:text-gray-300 dark:bg-[#1D1F22]">
+        <thead className=" dark:bg-[#1D1F22] dark:text-gray-300">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="hidden md:table-row">
               {headerGroup.headers.map((header) => (
@@ -172,12 +172,12 @@ const AdminOrderTable = ({ orders, ordersPerPage, setOrders }: Props) => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className="dark:text-white dark:bg-transparent dark:even:bg-[#303235] dark:odd:bg-[#3E4043]"
+              className="dark:bg-transparent dark:text-white dark:odd:bg-[#3E4043] dark:even:bg-[#303235]"
             >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="block md:table-cell p-3 before:content-[attr(data-cell)] before:mr-1 before:font-bold md:before:content-none"
+                  className="block p-3 before:mr-1 before:font-bold before:content-[attr(data-cell)] md:table-cell md:before:content-none"
                   data-cell={String(cell.column.columnDef?.header)}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

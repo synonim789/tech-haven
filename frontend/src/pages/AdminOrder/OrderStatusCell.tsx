@@ -15,7 +15,7 @@ const OrderStatusCell = ({ value }: Props) => {
 
   return (
     <div
-      className={`p-3  ${color} font-bold px-4 py-2 rounded-full text-center w-full`}
+      className={`p-3  ${color} w-full rounded-full px-4 py-2 text-center font-bold`}
     >
       {label}
     </div>

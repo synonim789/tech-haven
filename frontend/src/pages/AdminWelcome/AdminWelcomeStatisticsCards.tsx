@@ -23,7 +23,7 @@ const AdminWelcomeStatisticsCards = () => {
   }
 
   return (
-    <section className="flex flex-col lg:flex-row gap-y-3 lg:gap-x-3 lg:gap-y-0 items-center justify-center">
+    <section className="flex flex-col items-center justify-center gap-y-3 lg:flex-row lg:gap-x-3 lg:gap-y-0">
       <StatisticCard
         textColor="text-green-500"
         upperValue={formatPrice(totalSalesData.totalSales)}

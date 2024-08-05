@@ -4,26 +4,26 @@ import Phone from '../../assets/rsz_iphone.png'
 
 const Hero = () => {
   return (
-    <section className="grid max-w-screen-xl py-8 mt-5 px-4 mx-auto gap-5 lg:gap-8 lg:py-16 lg:grid-cols-12">
+    <section className="mx-auto mt-5 grid max-w-screen-xl gap-5 px-4 py-8 lg:grid-cols-12 lg:gap-8 lg:py-16">
       <motion.div
-        className="mr-auto place-self-center text-center md:lg:text-left lg:col-span-6 w-full mb-5 lg:mb-0"
+        className="mb-5 mr-auto w-full place-self-center text-center md:lg:text-left lg:col-span-6 lg:mb-0"
         initial={{ x: '-100%' }}
         animate={{ x: '0%' }}
       >
-        <h1 className="mb-4 text-4xl font-bold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+        <h1 className="mb-4 text-4xl font-bold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
           Make your life a Tech Haven
         </h1>
         <Link
           to="/products"
-          className="inline-flex items-center justify-center px-5 py-3 font-bold text-center text-2xl text-white rounded-full bg-[#405684] hover:scale-105 transition"
+          className="inline-flex items-center justify-center rounded-full bg-[#405684] px-5 py-3 text-center text-2xl font-bold text-white transition hover:scale-105"
         >
           Shop Now
         </Link>
       </motion.div>
-      <div className="lg:col-span-6 mx-auto lg:ml-auto lg:block">
+      <div className="mx-auto lg:col-span-6 lg:ml-auto lg:block">
         <img
           src={Phone}
-          className="w-3/4 mx-auto lg:w-full lg:mx-0 animate-movingY"
+          className="mx-auto w-3/4 animate-movingY lg:mx-0 lg:w-full"
         />
       </div>
     </section>

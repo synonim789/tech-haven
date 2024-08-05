@@ -19,7 +19,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search..."
-        className="p-4 w-full overflow-hidden my-10 rounded-full text-2xl shadow-lg lg:w-3/4 dark:bg-[#575757] dark:text-white placeholder:text-white"
+        className="my-10 w-full overflow-hidden rounded-full p-4 text-2xl shadow-lg placeholder:text-white lg:w-3/4 dark:bg-[#575757] dark:text-white"
         name="search"
         value={filters.search}
         onChange={(e) => handleSearchChange(e)}

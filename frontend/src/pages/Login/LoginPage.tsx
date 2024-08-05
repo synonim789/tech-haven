@@ -34,11 +34,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-10 flex flex-col justify-center items-center rounded-xl shadow-2xl gap-5  max-w-sm md:gap-8 lg:gap-10 dark:bg-[#121212] w-full">
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="flex w-full max-w-sm flex-col items-center justify-center gap-5 rounded-xl bg-white  p-10 shadow-2xl md:gap-8 lg:gap-10 dark:bg-[#121212]">
         <Link
           to="/"
-          className="flex items-center text-[20px] text-[#405684] font-bold w-full"
+          className="flex w-full items-center text-[20px] font-bold text-[#405684]"
         >
           <AiOutlineArrowLeft />
           Back Home
@@ -49,7 +49,7 @@ const LoginPage = () => {
           <Link to="/sign-up">Sign Up</Link>
         </h2>
         <form
-          className="flex flex-col w-full  gap-4"
+          className="flex w-full flex-col  gap-4"
           onSubmit={handleSubmit(submitHandler)}
         >
           <FormInput
@@ -92,7 +92,7 @@ const LoginPage = () => {
         </form>
         <Link
           to="/forgot-password"
-          className="text-[#405684] font-bold text-[20px] mt-4"
+          className="mt-4 text-[20px] font-bold text-[#405684]"
         >
           Forgot Password?
         </Link>

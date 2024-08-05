@@ -12,14 +12,14 @@ export const Pagination = () => {
   const dispatch = useDispatch()
   const limit = useSelector((state: RootState) => state.filters.limit)
 
-  let pageNumbers = []
+  const pageNumbers = []
 
   for (let i = 1; i <= Math.ceil(filteredProducts.length / limit); i++) {
     pageNumbers.push(i)
   }
 
   return (
-    <div className="flex justify-center items-center my-8 gap-5">
+    <div className="my-8 flex items-center justify-center gap-5">
       {pageNumbers.map((number) => {
         return (
           <button
@@ -29,8 +29,8 @@ export const Pagination = () => {
             }}
             className={
               number == currentPage
-                ? 'w-[50px] h-[50px] bg-[#405684]  rounded-full text-white font-bold text-[20px] shadow-xl scale-125'
-                : 'w-[50px] h-[50px] bg-white dark:bg-slate-400 rounded-full text-[#405684] font-bold text-[20px] shadow-xl'
+                ? 'size-[50px] scale-125 rounded-full  bg-[#405684] text-[20px] font-bold text-white shadow-xl'
+                : 'size-[50px] rounded-full bg-white text-[20px] font-bold text-[#405684] shadow-xl dark:bg-slate-400'
             }
             key={number}
           >

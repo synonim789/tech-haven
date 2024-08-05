@@ -3,9 +3,9 @@ import AdminSidebar from '../../layout/AdminSidebar'
 
 const AdminPage = () => {
   return (
-    <section className="lg:flex lg:flex-row w-full">
+    <section className="w-full lg:flex lg:flex-row">
       <AdminSidebar />
-      <div className="flex justify-center mt-8 md:mx-auto md:px-4 py-6 w-full">
+      <div className="mt-8 flex w-full justify-center py-6 md:mx-auto md:px-4">
         <Outlet />
       </div>
     </section>

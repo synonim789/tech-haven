@@ -23,9 +23,9 @@ const Navbar = () => {
   }
 
   return (
-    <section className="py-5 bg-white dark:bg-[#121212] dark:text-slate-400 w-full sticky top-0 z-20">
-      <div className="flex justify-between items-center max-w-screen-xl px-4 mx-auto">
-        <p className="font-bold text-3xl text-[#405684] relative">
+    <section className="sticky top-0 z-20 w-full bg-white py-5 dark:bg-[#121212] dark:text-slate-400">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-4">
+        <p className="relative text-3xl font-bold text-[#405684]">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -40,8 +40,8 @@ const Navbar = () => {
           </NavLink>
         </p>
         <nav>
-          <ul className=" gap-4 items-center hidden sm:flex">
-            <li className="text-2xl font-semibold relative">
+          <ul className=" hidden items-center gap-4 sm:flex">
+            <li className="relative text-2xl font-semibold">
               <NavLink
                 to="/products"
                 className={({ isActive, isPending }) =>
@@ -55,7 +55,7 @@ const Navbar = () => {
                 Products
               </NavLink>
             </li>
-            <li className="text-2xl font-semibold relative">
+            <li className="relative text-2xl font-semibold">
               <NavLink
                 to="/about"
                 className={({ isActive, isPending }) =>
@@ -69,7 +69,7 @@ const Navbar = () => {
                 About Us
               </NavLink>
             </li>
-            <li className="text-2xl font-semibold relative">
+            <li className="relative text-2xl font-semibold">
               <NavLink
                 to="/contact"
                 className={({ isActive, isPending }) =>
@@ -96,7 +96,7 @@ const Navbar = () => {
               >
                 <BsFillCartFill />
                 {totalItems > 0 ? (
-                  <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] right-[-14px]">
+                  <p className="absolute right-[-14px] top-[-14px] flex size-6 items-start justify-center rounded-full bg-orange-500 text-xl text-white">
                     {totalItems}
                   </p>
                 ) : null}
@@ -106,7 +106,7 @@ const Navbar = () => {
         </nav>
         <nav className="flex sm:hidden">
           <RxHamburgerMenu
-            className="text-4xl font-bold cursor-pointer"
+            className="cursor-pointer text-4xl font-bold"
             onClick={() => setShowNavigation(!showNavigation)}
           />
           <AnimatePresence mode="wait">
@@ -119,15 +119,15 @@ const Navbar = () => {
                   duration: 0.5,
                   ease: 'easeInOut',
                 }}
-                className="flex flex-col items-start justify-start fixed top-0 right-0  w-4/6 h-screen bg-white dark:bg-[#3f3f3f] text-4xl"
+                className="fixed right-0 top-0 flex h-screen w-4/6 flex-col  items-start justify-start bg-white text-4xl dark:bg-[#3f3f3f]"
               >
                 <nav>
                   <IoMdClose
-                    className="cursor-pointer my-5 ml-4 text-6xl"
+                    className="my-5 ml-4 cursor-pointer text-6xl"
                     onClick={() => setShowNavigation(false)}
                   />
 
-                  <ul className="ml-4 flex gap-5 flex-col">
+                  <ul className="ml-4 flex flex-col gap-5">
                     <li className="mt-5">
                       <NavLink
                         to="/products"
@@ -175,7 +175,7 @@ const Navbar = () => {
                       >
                         <BsFillCartFill />
                         {totalItems > 0 ? (
-                          <p className="w-6 h-6 rounded-full bg-orange-500 text-white text-xl flex justify-center items-start absolute top-[-14px] left-6">
+                          <p className="absolute left-6 top-[-14px] flex size-6 items-start justify-center rounded-full bg-orange-500 text-xl text-white">
                             {totalItems}
                           </p>
                         ) : null}

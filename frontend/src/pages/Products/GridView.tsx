@@ -7,7 +7,7 @@ type Props = {
 
 const GridView = ({ pagedProducts }: Props) => {
   return (
-    <div className="grid grid-cols-1 gap-9 text-center h-full sm:grid-cols-2 md:grid-cols-3">
+    <div className="grid h-full grid-cols-1 gap-9 text-center sm:grid-cols-2 md:grid-cols-3">
       {pagedProducts.map((product: ProductType) => {
         return <SingleProduct key={product._id} {...product} />
       })}

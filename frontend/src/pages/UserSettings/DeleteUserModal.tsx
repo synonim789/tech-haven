@@ -26,7 +26,7 @@ const DeleteUserModal = ({ open, onClose }: Props) => {
 
   if (isLoading) {
     return (
-      <div className="fixed top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-14 flex flex-col items-center gap-14 rounded-3xl">
+      <div className="fixed left-[50%] top-[50%] z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-14 rounded-3xl bg-white p-14">
         Loading...
       </div>
     )
@@ -36,13 +36,13 @@ const DeleteUserModal = ({ open, onClose }: Props) => {
     <>
       <div className="fixed inset-0 z-40 bg-neutral-400 opacity-40" />
       <FocusTrap>
-        <dialog className="fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white z-50 p-8 md:p-14 flex flex-col items-center gap-4 md:gap-8 rounded-3xl dark:bg-[#121212] dark:text-slate-400 w-full md:w-fit">
-          <h3 className="text-2xl md:text-3xl font-bold text-center">
+        <dialog className="fixed left-1/2 top-1/2 z-50 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-4 rounded-3xl bg-white p-8 md:w-fit md:gap-8 md:p-14 dark:bg-[#121212] dark:text-slate-400">
+          <h3 className="text-center text-2xl font-bold md:text-3xl">
             Do you really want to delete your account?
           </h3>
-          <div className="flex flex-col md:flex-row w-full justify-center items-center gap-4 md:gap-8">
+          <div className="flex w-full flex-col items-center justify-center gap-4 md:flex-row md:gap-8">
             <button
-              className="px-4 py-2 text-[20px] font-bold text-white bg-green-700 rounded-xl hover:scale-105 hover:opacity-75"
+              className="rounded-xl bg-green-700 px-4 py-2 text-[20px] font-bold text-white hover:scale-105 hover:opacity-75"
               onClick={() => {
                 deleteHandler()
               }}
@@ -50,7 +50,7 @@ const DeleteUserModal = ({ open, onClose }: Props) => {
               Yes, I do
             </button>
             <button
-              className="px-4 py-2 text-[20px] font-bold text-white bg-red-500 rounded-xl hover:scale-105 hover:opacity-75"
+              className="rounded-xl bg-red-500 px-4 py-2 text-[20px] font-bold text-white hover:scale-105 hover:opacity-75"
               onClick={onClose}
             >
               No, I don&apos;t

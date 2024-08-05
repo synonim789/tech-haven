@@ -22,7 +22,7 @@ const FilterRating = ({ filters, handleChange }: Props) => {
   return rating.map((rating, index) => (
     <div key={index} className="mb-2 flex items-center gap-x-1">
       <label
-        className="relative flex items-center p-3 rounded-full cursor-pointer "
+        className="relative flex cursor-pointer items-center rounded-full p-3 "
         htmlFor={`rating${rating}`}
       >
         <input
@@ -32,14 +32,14 @@ const FilterRating = ({ filters, handleChange }: Props) => {
           checked={filters.rating === rating}
           value={rating}
           onChange={(e) => handleChange(e)}
-          className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
+          className="before:content[''] peer relative size-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:size-10 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
         />
-        <span className="absolute text-slate-400 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+        <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-slate-400 opacity-0 transition-opacity peer-checked:opacity-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-full h-full scale-105"
+            className="size-full scale-105"
           >
             <path
               fillRule="evenodd"
@@ -52,7 +52,7 @@ const FilterRating = ({ filters, handleChange }: Props) => {
 
       <label
         htmlFor={`rating${rating}`}
-        className="mt-px font-light text-gray-00 cursor-pointer select-none flex gap-1 text-nowrap"
+        className="text-gray-00 mt-px flex cursor-pointer select-none gap-1 text-nowrap font-light"
       >
         {`From ${rating}`}
         {Array.from({ length: 5 }, (_, i) => {

@@ -43,10 +43,10 @@ const ProductsPage = () => {
 
   return (
     <section className="flex flex-col justify-center">
-      <div className="max-w-5xl mx-auto w-full px-8">
+      <div className="mx-auto w-full max-w-5xl px-8">
         <SearchBar />
         <Sort />
-        <div className="flex gap-7 w-fit flex-col lg:flex-row">
+        <div className="flex w-fit flex-col gap-7 lg:flex-row">
           <Filters allProducts={allProducts} />
           <ProductsList />
         </div>

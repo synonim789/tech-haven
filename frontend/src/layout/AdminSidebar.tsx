@@ -8,17 +8,17 @@ const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="bg-white text-black w-full lg:w-fit dark:bg-[#121212]">
+    <div className="w-full bg-white text-black lg:w-fit dark:bg-[#121212]">
       <IoIosMenu
-        className="text-6xl ml-6 cursor-pointer lg:hidden dark:text-gray-700"
+        className="ml-6 cursor-pointer text-6xl lg:hidden dark:text-gray-700"
         onClick={() => setIsOpen(true)}
       />
       <nav
-        className={`dark:bg-[#121212] bg-white text-gray-700 h-full overflow-y-auto min-h-screen w-[250px] lg:static lg:inset-0 fixed top-0 transition-all ease-in-out duration-300 z-20 ${
-          isOpen ? ' left-0' : 'top-0 -left-[100%] '
+        className={`fixed top-0 z-20 h-full min-h-screen w-[250px] overflow-y-auto bg-white text-gray-700 transition-all duration-300 ease-in-out lg:static lg:inset-0 dark:bg-[#121212] ${
+          isOpen ? ' left-0' : '-left-full top-0 '
         }`}
       >
-        <div className="text-5xl cursor-pointer w-full flex justify-end lg:hidden">
+        <div className="flex w-full cursor-pointer justify-end text-5xl lg:hidden">
           <IoMdClose onClick={() => setIsOpen(!isOpen)} />
         </div>
         {AdminSidebarData.map((item, index) => {
@@ -32,7 +32,7 @@ const AdminSidebar = () => {
         })}
         <Link
           to="/"
-          className="text-gray-400 dark:text-gray-700 text-2xl font-semibold flex items-center justify-between p-3 w-full h-[80px] hover:border-l-[5px] hover:border-solid hover:border-l-[#405684] "
+          className="flex h-[80px] w-full items-center justify-between p-3 text-2xl font-semibold text-gray-400 hover:border-l-[5px] hover:border-solid hover:border-l-[#405684] dark:text-gray-700 "
         >
           Return To Main Page
         </Link>

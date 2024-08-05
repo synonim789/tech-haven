@@ -110,8 +110,8 @@ const AddProductPage = () => {
   }
 
   return (
-    <section className="flex flex-col gap-6 max-w-[250px] md:max-w-full">
-      <h2 className="mb-8 text-4xl font-bold text-center text-slate-500">
+    <section className="flex max-w-[250px] flex-col gap-6 md:max-w-full">
+      <h2 className="mb-8 text-center text-4xl font-bold text-slate-500">
         Add Product
       </h2>
       <form onSubmit={handleSubmit(submitHandler)}>
@@ -148,7 +148,7 @@ const AddProductPage = () => {
                   }),
                 }}
               />
-              <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize">
+              <div className="flex w-full cursor-pointer flex-col text-[20px] font-semibold capitalize">
                 <label htmlFor="category" className="dark:text-gray-500">
                   Category
                 </label>
@@ -157,7 +157,7 @@ const AddProductPage = () => {
                   {...register('category', {
                     required: 'Category is required',
                   })}
-                  className="px-3 py-2 border-[2px] border-solid border-gray-300 placeholder:text-slate-500 dark:text-gray-400 outline-none shadow-lg dark:bg-transparent placeholder:capitalize rounded-xl dark:border-gray-700"
+                  className="rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-400"
                 >
                   <option value="" disabled>
                     Choose Category
@@ -171,7 +171,7 @@ const AddProductPage = () => {
                   })}
                 </select>
                 {errors.category?.message && (
-                  <p className="text-red-500 font-bold">
+                  <p className="font-bold text-red-500">
                     {errors.category?.message}
                   </p>
                 )}
@@ -234,7 +234,7 @@ const AddProductPage = () => {
               />
             </div>
             <div className="mt-8 flex justify-end gap-3 text-[20px] ">
-              <label htmlFor="featured" className="text-slate-400 font-bold">
+              <label htmlFor="featured" className="font-bold text-slate-400">
                 Featured:
               </label>
               <input
@@ -245,8 +245,8 @@ const AddProductPage = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col justify-between gap-5 mt-4 md:mt-0">
-            <div className="rounded-xl bg-white dark:bg-[#222427] shadow-xl h-full w-full gap-5 flex flex-col items-center justify-center p-[10px]">
+          <div className="mt-4 flex flex-col justify-between gap-5 md:mt-0">
+            <div className="flex size-full flex-col items-center justify-center gap-5 rounded-xl bg-white p-[10px] shadow-xl dark:bg-[#222427]">
               {image && (
                 <img
                   src={URL.createObjectURL(image)}
@@ -255,7 +255,7 @@ const AddProductPage = () => {
               )}
               <label
                 htmlFor="mainImage"
-                className="text-2xl text-white bg-[#405684] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
+                className="cursor-pointer rounded-xl bg-[#405684] px-6 py-3 text-2xl font-bold text-white transition hover:scale-105 hover:opacity-75"
               >
                 Choose Main Image...
               </label>
@@ -263,28 +263,28 @@ const AddProductPage = () => {
               <input
                 type="file"
                 id="mainImage"
-                className="w-0 h-0 opacity-0 overflow-hidden absolute -z-10"
+                className="absolute -z-10 size-0 overflow-hidden opacity-0"
                 {...register('image', {
                   required: 'Main Image is required',
                 })}
                 onChange={handleImageChange}
               />
               {errors.image?.message && (
-                <p className="text-red-500 font-bold">
+                <p className="font-bold text-red-500">
                   {errors.image?.message}
                 </p>
               )}
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-[#222427] shadow-xl h-full w-full gap-5 flex flex-col items-center justify-center p-[10px]">
+            <div className="flex size-full flex-col items-center justify-center gap-5 rounded-xl bg-white p-[10px] shadow-xl dark:bg-[#222427]">
               {images && (
-                <div className="grid gap-2 grid-cols-4">
+                <div className="grid grid-cols-4 gap-2">
                   {images &&
                     images.map((item, index) => {
                       return (
                         <img
                           src={URL.createObjectURL(item)}
-                          className="w-[60px] rounded-md block"
+                          className="block w-[60px] rounded-md"
                           key={index}
                         />
                       )
@@ -293,7 +293,7 @@ const AddProductPage = () => {
               )}
               <label
                 htmlFor="allImages"
-                className="text-2xl text-white bg-[#405684] cursor-pointer rounded-xl px-6 py-3 font-bold hover:opacity-75 hover:scale-105 transition"
+                className="cursor-pointer rounded-xl bg-[#405684] px-6 py-3 text-2xl font-bold text-white transition hover:scale-105 hover:opacity-75"
               >
                 Choose All Images...
               </label>
@@ -301,14 +301,14 @@ const AddProductPage = () => {
                 type="file"
                 id="allImages"
                 multiple
-                className="w-0 h-0 opacity-0 overflow-hidden absolute -z-10"
+                className="absolute -z-10 size-0 overflow-hidden opacity-0"
                 {...register('images', {
                   required: 'All Image is required',
                 })}
                 onChange={handleImagesChange}
               />
               {errors.images?.message && (
-                <p className="text-red-500 font-bold">
+                <p className="font-bold text-red-500">
                   {errors.images?.message}
                 </p>
               )}
@@ -316,7 +316,7 @@ const AddProductPage = () => {
           </div>
         </div>
         {addProductError && (
-          <p className="text-center text-red-500 text-2xl font-bold">
+          <p className="text-center text-2xl font-bold text-red-500">
             {'data' in addProductError ? (
               <>{addProductError.data.message}</>
             ) : undefined}
@@ -324,7 +324,7 @@ const AddProductPage = () => {
         )}
         <button
           type="submit"
-          className="bg-[#405684] text-white px-4 py-2 font-bold text-[20px] mt-8 rounded-xl hover:opacity-80 hover:scale-105 transition"
+          className="mt-8 rounded-xl bg-[#405684] px-4 py-2 text-[20px] font-bold text-white transition hover:scale-105 hover:opacity-80"
         >
           Add Product
         </button>

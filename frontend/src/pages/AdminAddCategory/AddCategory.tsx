@@ -28,8 +28,8 @@ const AddCategory = () => {
   }
 
   return (
-    <section className="flex flex-col gap-4 items-center">
-      <h4 className="mb-8 text-4xl font-bold text-center text-slate-500">
+    <section className="flex flex-col items-center gap-4">
+      <h4 className="mb-8 text-center text-4xl font-bold text-slate-500">
         Add Category
       </h4>
       <form

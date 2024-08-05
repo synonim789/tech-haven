@@ -68,7 +68,7 @@ const EditProductForm = ({ product }: Props) => {
     <>
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="flex flex-col justify-center items-center max-w-[250px] sm:max-w-full"
+        className="flex max-w-[250px] flex-col items-center justify-center sm:max-w-full"
       >
         <FormInput
           type="text"
@@ -86,7 +86,7 @@ const EditProductForm = ({ product }: Props) => {
           error={errors?.description?.message}
         />
 
-        <div className="grid grid-cols-1 w-full gap-8 sm:grid-cols-2">
+        <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2">
           <FormInput
             name="brand"
             type="text"
@@ -97,7 +97,7 @@ const EditProductForm = ({ product }: Props) => {
             }}
             error={errors?.brand?.message}
           />
-          <div className="flex flex-col w-full text-[20px] font-semibold cursor-pointer capitalize">
+          <div className="flex w-full cursor-pointer flex-col text-[20px] font-semibold capitalize">
             <label htmlFor="category" className="dark:text-gray-500">
               Category
             </label>
@@ -106,7 +106,7 @@ const EditProductForm = ({ product }: Props) => {
               {...register('category', {
                 required: 'Category is required',
               })}
-              className="px-3 py-2 border-[2px] shadow-lg placeholder:capitalize dark:bg-transparent dark:text-gray-500 border-solid border-gray-300 rounded-xl placeholder:text-slate-500 dark:border-gray-700"
+              className="rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-500"
             >
               <option value="" disabled>
                 Choose Category
@@ -161,7 +161,7 @@ const EditProductForm = ({ product }: Props) => {
           />
         </div>
         <div className="my-8 flex gap-3 text-[20px]">
-          <label htmlFor="featured" className="dark:text-gray-400 font-bold">
+          <label htmlFor="featured" className="font-bold dark:text-gray-400">
             Featured:
           </label>
           <input
@@ -172,7 +172,7 @@ const EditProductForm = ({ product }: Props) => {
           />
         </div>
         {editProductError && (
-          <p className="font-bold text-red-500 flex flex-col">
+          <p className="flex flex-col font-bold text-red-500">
             {'data' in editProductError ? editProductError.data.message : ''}
           </p>
         )}

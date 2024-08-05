@@ -43,16 +43,16 @@ const ImageGallery = ({ images = [''] }) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-6 lg:w-2/4">
+    <div className="flex flex-col items-center justify-center gap-6 lg:w-2/4">
       <div className="relative">
         <img
           src={images[imageIndex]}
-          className="w-auto h-[400px] aspect-square object-cover rounded-xl overflow-hidden"
+          className="aspect-square h-[400px] w-auto overflow-hidden rounded-xl object-cover"
         />
         {!(lastIndex === imageIndex) && (
           <button
             onClick={() => nextImage()}
-            className="bg-white dark:bg-[#121212] absolute right-2 rounded-full top-1/2 -translate-y-1/2 p-1"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white p-1 dark:bg-[#121212]"
           >
             <BiChevronRight size={30} className="dark:text-slate-400" />
           </button>
@@ -61,21 +61,21 @@ const ImageGallery = ({ images = [''] }) => {
         {imageIndex > 0 && (
           <button
             onClick={() => prevImage()}
-            className="bg-white dark:bg-[#121212] absolute left-2 top-1/2 -translate-y-1/2 p-1 rounded-full"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white p-1 dark:bg-[#121212]"
           >
             <BiChevronLeft size={30} className="dark:text-slate-400" />
           </button>
         )}
       </div>
       <div
-        className="overflow-hidden flex max-w-[400px] gap-5 transition-all duration-500"
+        className="flex max-w-[400px] gap-5 overflow-hidden transition-all duration-500"
         ref={containerRef}
       >
         {images.map((image, index) => {
           return (
             <img
               src={image}
-              className="aspect-square object-cover w-auto h-[100px] rounded-lg cursor-pointer"
+              className="aspect-square h-[100px] w-auto cursor-pointer rounded-lg object-cover"
               key={index}
               onClick={() => setImage(image)}
             />

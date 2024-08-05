@@ -42,54 +42,54 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#405684] w-full py-3 relative">
-      <div className="max-w-screen-xl px-4 mx-auto">
+    <header className="relative w-full bg-[#405684] py-3">
+      <div className="mx-auto max-w-screen-xl px-4">
         {headerRole === 'user' && (
-          <div className="flex justify-center sm:justify-end items-center gap-5">
+          <div className="flex items-center justify-center gap-5 sm:justify-end">
             <button
-              className="border-[2px] border-solid border-white text-white dark:text-slate-300 text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
+              className="rounded-lg border-2 border-solid border-white px-2 py-1 text-xl font-bold text-white hover:opacity-90 dark:text-slate-300"
               onClick={() => handleLogout()}
             >
               Log out
             </button>
             <Link
-              className="text-white font-bold underline flex items-center text-xl gap-2"
+              className="flex items-center gap-2 text-xl font-bold text-white underline"
               to={`/profile/`}
             >
               {user && user.name.split(' ')[0]}
-              <CgProfile className="h-8 w-8" />
+              <CgProfile className="size-8" />
             </Link>
           </div>
         )}
         {headerRole === 'admin' && (
-          <div className="flex justify-center sm:justify-end items-center gap-5">
+          <div className="flex items-center justify-center gap-5 sm:justify-end">
             <button
-              className="border-[2px] border-solid border-white text-white dark:text-slate-300 text-xl font-bold px-2 py-1 rounded-lg hover:opacity-90"
+              className="rounded-lg border-2 border-solid border-white px-2 py-1 text-xl font-bold text-white hover:opacity-90 dark:text-slate-300"
               onClick={() => handleLogout()}
             >
               Log out
             </button>
             <Link
               to="/admin"
-              className="text-white dark:text-slate-300 font-bold text-xl flex items-center gap-2 hover:opacity-90"
+              className="flex items-center gap-2 text-xl font-bold text-white hover:opacity-90 dark:text-slate-300"
             >
-              <RiAdminLine className="h-8 w-8" />
+              <RiAdminLine className="size-8" />
               <span>Admin Panel</span>
             </Link>
           </div>
         )}
 
         {!user && (
-          <div className="flex justify-center sm:justify-end gap-3">
+          <div className="flex justify-center gap-3 sm:justify-end">
             <Link
               to="/login"
-              className="text-white dark:text-slate-300 text-2xl font-bold transition-opacity hover:opacity-60"
+              className="text-2xl font-bold text-white transition-opacity hover:opacity-60 dark:text-slate-300"
             >
               Login
             </Link>
             <Link
               to="/sign-up"
-              className="text-white dark:text-slate-300 text-2xl font-bold transition-opacity hover:opacity-60"
+              className="text-2xl font-bold text-white transition-opacity hover:opacity-60 dark:text-slate-300"
             >
               Sign Up
             </Link>
