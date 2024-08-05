@@ -12,7 +12,7 @@ const AmountButtons = ({ amount, increase, decrease }: Props) => {
       <button className="bg-[#405684] p-3 text-white" onClick={decrease}>
         <MdKeyboardArrowDown size={24} />
       </button>
-      <p className="min-w-[60px] place-self-center bg-white p-4 text-center  text-lg font-bold  dark:bg-gray-800 dark:bg-transparent dark:text-slate-400">
+      <p className="min-w-[60px] place-self-center bg-transparent p-4 text-center text-lg font-bold dark:text-slate-400">
         {amount}
       </p>
       <button className="bg-[#405684] p-3 text-white" onClick={increase}>
