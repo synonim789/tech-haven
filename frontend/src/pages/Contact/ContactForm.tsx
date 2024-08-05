@@ -69,8 +69,7 @@ const ContactForm = ({ className }: Props) => {
             ...register('name', {
               required: 'Name is Required',
               pattern: {
-                value:
-                  /[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/,
+                value: /[^0-9.,\"?!;:#$%&()*+\-/<>=@[\]\\^_{|}~]+/,
                 message: 'Invalid name',
               },
             }),
