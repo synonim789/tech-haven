@@ -59,8 +59,10 @@ const EditProductForm = ({ product }: Props) => {
     try {
       await editProduct(data).unwrap()
       toast.success('Product updated')
-    } catch (error: any) {
-      toast.error(error.message)
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message)
+      }
     }
   }
 
