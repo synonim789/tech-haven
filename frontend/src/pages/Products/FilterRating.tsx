@@ -22,7 +22,7 @@ const FilterRating = ({ filters, handleChange }: Props) => {
   return rating.map((rating, index) => (
     <div key={index} className="mb-2 flex items-center gap-x-1">
       <label
-        className="relative flex cursor-pointer items-center rounded-full p-3 "
+        className="relative flex cursor-pointer items-center rounded-full p-3"
         htmlFor={`rating${rating}`}
       >
         <input
@@ -32,7 +32,7 @@ const FilterRating = ({ filters, handleChange }: Props) => {
           checked={filters.rating === rating}
           value={rating}
           onChange={(e) => handleChange(e)}
-          className="before:content[''] peer relative size-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:size-10 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
+          className="peer relative size-5 cursor-pointer appearance-none rounded-full border border-gray-100/10 bg-gray-300/5 p-0 text-gray-900 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:size-10 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:bg-gray-300 before:opacity-0 before:transition-opacity before:content-[''] checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-0"
         />
         <span className="pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-slate-400 opacity-0 transition-opacity peer-checked:opacity-100">
           <svg
@@ -52,7 +52,7 @@ const FilterRating = ({ filters, handleChange }: Props) => {
 
       <label
         htmlFor={`rating${rating}`}
-        className="text-gray-00 mt-px flex cursor-pointer select-none gap-1 text-nowrap font-light"
+        className="mt-px flex cursor-pointer select-none gap-1 text-nowrap font-light text-gray-400"
       >
         {`From ${rating}`}
         {Array.from({ length: 5 }, (_, i) => {
