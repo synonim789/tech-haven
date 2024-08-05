@@ -14,6 +14,12 @@ type SignUpFormType = {
   password: string
 }
 
+type ErrorWithData = {
+  data?: {
+    message: string
+  }
+}
+
 const SignUpPage = () => {
   const form = useForm<SignUpFormType>()
   const { register, handleSubmit, formState } = form
@@ -30,8 +36,13 @@ const SignUpPage = () => {
         const token = response.data.token
         dispatch(setData(token))
       }
-    } catch (err: any) {
-      toast.error(err.data.message)
+    } catch (err) {
+      if (err instanceof Error && 'data' in err) {
+        const errorWithData = err as ErrorWithData
+        toast.error(errorWithData.data?.message)
+      } else {
+        console.error(err)
+      }
     }
   }
 
