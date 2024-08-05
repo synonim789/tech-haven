@@ -28,8 +28,10 @@ const LoginPage = () => {
         const token = response.data.token
         dispatch(setData(token))
       }
-    } catch (err: any) {
-      toast.error(err.message)
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message)
+      }
     }
   }
 
