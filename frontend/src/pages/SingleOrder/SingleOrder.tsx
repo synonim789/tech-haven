@@ -45,7 +45,7 @@ const SingleOrder = () => {
             <p className="text-xl">
               Delivery: <span className="font-bold">{formatPrice(1500)}</span>
             </p>
-            <div className="w h-[2px] bg-gray-600" />
+            <div className="h-[2px] bg-gray-600" />
             <p className="text-xl">
               Total:{' '}
               <span className="font-bold">{formatPrice(data?.total)}</span>
