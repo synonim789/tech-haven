@@ -22,7 +22,7 @@ const ListView = () => {
             <div className="flex items-center justify-between pb-5 pl-3 text-right">
               <img
                 src={product.image}
-                className=" h-100% w-[200px] overflow-hidden rounded-lg object-cover"
+                className=" h-full w-[200px] overflow-hidden rounded-lg object-cover"
               />
 
               <div className="mx-5 flex flex-col gap-5">
