@@ -4,7 +4,7 @@ import AboutImage from './AboutImage'
 const AboutPage = () => {
   return (
     <section className="mx-auto my-10 max-w-6xl px-4">
-      <h2 className="fit relative mb-8 w-full text-center text-5xl font-bold text-[#405684] after:absolute after:inset-x-0 after:-bottom-1 after:mx-auto after:h-1 after:w-[175px] after:bg-orange-500 after:content-['']">
+      <h2 className="relative mb-8 w-full text-center text-5xl font-bold text-[#405684] after:absolute after:inset-x-0 after:-bottom-1 after:mx-auto after:h-1 after:w-[175px] after:bg-orange-500 after:content-['']">
         About us
       </h2>
       <div className="flex w-full flex-col-reverse items-center justify-between gap-5 md:flex-row">
