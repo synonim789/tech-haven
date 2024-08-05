@@ -38,7 +38,7 @@ const AdminSidebarMenuLink = ({ item, hideMenu }: Props) => {
     <>
       <Link
         to={item.path}
-        className="h flex h-[80px] w-full items-center justify-between p-3 text-2xl font-semibold text-gray-700 hover:border-l-[5px] hover:border-solid hover:border-l-[#405684] dark:text-slate-500"
+        className="flex h-[80px] w-full items-center justify-between p-3 text-2xl font-semibold text-gray-700 hover:border-l-[5px] hover:border-solid hover:border-l-[#405684] dark:text-slate-500"
         onClick={() => handleClick()}
       >
         <div className="flex items-center gap-3">
