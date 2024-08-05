@@ -22,7 +22,7 @@ const baseQuery = fetchBaseQuery({
       headers.set('Authorization', `Bearer ${token}`)
     }
   },
-}) as BaseQueryFn<string | FetchArgs, unknown, CustomError, {}>
+}) as BaseQueryFn<string | FetchArgs, unknown, CustomError, object>
 
 export const api = createApi({
   reducerPath: 'api',
