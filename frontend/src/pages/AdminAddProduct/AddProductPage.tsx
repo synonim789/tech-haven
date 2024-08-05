@@ -77,31 +77,33 @@ const AddProductPage = () => {
   }, [isSuccess])
 
   const submitHandler = async (data: DataType) => {
-    const formData: any = new FormData()
-    if (data.images) {
-      for (let i = 0; i < data.images.length; i++) {
-        formData.append('images', data.images[i])
-      }
+    const formData = new FormData()
+    if (images) {
+      images.forEach((imageFile) => {
+        formData.append('images', imageFile)
+      })
     }
 
-    if (data.image) {
-      formData.append('image', data.image[0])
+    if (image) {
+      formData.append('image', image)
     }
 
     formData.append('name', data.name)
     formData.append('description', data.description)
     formData.append('brand', data.brand)
     formData.append('category', data.category)
-    formData.append('price', data.price)
-    formData.append('countInStock', data.stock)
-    formData.append('rating', data.rating)
-    formData.append('numReviews', data.numReviews)
-    formData.append('isFeatured', data.isFeatured)
+    formData.append('price', data.price.toString())
+    formData.append('countInStock', data.stock.toString())
+    formData.append('rating', data.rating.toString())
+    formData.append('numReviews', data.numReviews.toString())
+    formData.append('isFeatured', String(data.isFeatured))
     try {
       await addProduct(formData).unwrap()
       toast.success('Product Added Successfully')
-    } catch (err: any) {
-      toast.error(err.message)
+    } catch (err) {
+      if (err instanceof Error && 'message' in err) {
+        toast.error(err.message)
+      }
     }
   }
 
