@@ -14,7 +14,7 @@ const AdminWelcomePage = () => {
         <span className="">Welcome, </span>
         <Link
           to={`/profile`}
-          className="underline-offset-3 font-bold underline"
+          className="font-bold underline underline-offset-4"
         >
           {user?.name}
         </Link>
