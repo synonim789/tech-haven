@@ -8,11 +8,11 @@ type Props = {
 
 const RemoveProductModal = ({ close, id, clear }: Props) => {
   const [deleteProduct] = useDeleteProductMutation()
-  
+
   return (
     <>
       <div className="fixed inset-0  z-40 bg-neutral-400 opacity-40" />
-      <div className="fixed left-[50%] top-[50%] z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-14 rounded-3xl bg-white p-14 text-slate-500 dark:bg-[#222427]">
+      <div className="fixed left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-14 rounded-3xl bg-white p-14 text-slate-500 dark:bg-[#222427]">
         <h3 className="text-3xl font-bold">
           Do you really want to delete this product?
         </h3>
