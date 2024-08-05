@@ -20,10 +20,10 @@ const AdminSelect = ({ options, value, onChange }: Props) => {
   }
   return (
     <div
-      className="relative bg-white dark:bg-[#1D1F22] text-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
+      className="relative bg-white dark:bg-[#1D1F22] dark:text-white rounded-xl shadow-xl flex items-center p-5 gap-2 w-full z-0"
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <span className="grow flex flex-wrap text-3xl">
+      <span className="grow flex flex-wrap text-2xl">
         {value ? value.name : 'Choose Product'}
       </span>
       <button
