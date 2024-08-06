@@ -9,8 +9,8 @@ export default [
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  ...tailwind.configs['flat/recommended'],
   pluginReact.configs.flat.recommended,
+  ...tailwind.configs['flat/recommended'],
   {
     rules: {
       'react/react-in-jsx-scope': 'off',
