@@ -28,12 +28,12 @@ const AddCategory = () => {
   }
 
   return (
-    <section className="flex flex-col items-center gap-4 max-w-[250px] sm:max-w-full">
+    <section className="flex max-w-[250px] flex-col items-center gap-4 sm:max-w-full">
       <h4 className="mb-8 text-center text-4xl font-bold text-slate-500">
         Add Category
       </h4>
       <form
-        className="flex flex-col items-center gap-4 w-full"
+        className="flex w-full flex-col items-center gap-4"
         onSubmit={handleSubmit(addCategory)}
       >
         <FormInput
