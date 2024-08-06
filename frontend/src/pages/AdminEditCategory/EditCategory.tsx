@@ -25,9 +25,9 @@ const EditCategory = ({ name, id }: Props) => {
   }
 
   return (
-    <div className="my-5 w-full rounded-xl border-2 border-solid border-slate-300 bg-white px-10 py-5 shadow-lg dark:border-none dark:bg-[#222427] dark:text-slate-500">
+    <div className="my-5 max-w-[250px] rounded-xl border-2 border-solid border-slate-300 bg-white px-10 py-5 shadow-lg sm:max-w-full dark:border-none dark:bg-[#222427] dark:text-slate-500">
       <div className="flex items-center justify-between">
-        <p className="font-bold capitalize ">{name}</p>
+        <p className="font-bold capitalize">{name}</p>
         {openCategory === false && (
           <IoMdArrowDropdown
             size={'25px'}
@@ -47,7 +47,7 @@ const EditCategory = ({ name, id }: Props) => {
       {openCategory && (
         <form
           onSubmit={handleSubmit(submit)}
-          className="mt-5 flex flex-col items-center justify-between  gap-5 md:flex-row md:items-end"
+          className="mt-5 flex flex-col items-center justify-between gap-5 md:flex-row md:items-center"
         >
           <FormInput
             register={{ ...register('name') }}
