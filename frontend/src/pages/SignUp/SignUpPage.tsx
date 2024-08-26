@@ -1,18 +1,16 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/Input'
+import Input from '../../components/form/Input'
+import Label from '../../components/form/Label'
 import { useRegisterUserMutation } from '../../features/auth/authApiSlice'
 import { setData } from '../../features/auth/authSlice'
-
-type SignUpFormType = {
-  email: string
-  name: string
-  password: string
-}
+import { signUpSchema, SignUpValues } from '../../validation/auth'
 
 type ErrorWithData = {
   data?: {
@@ -21,14 +19,19 @@ type ErrorWithData = {
 }
 
 const SignUpPage = () => {
-  const form = useForm<SignUpFormType>()
+  const form = useForm<SignUpValues>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      email: '',
+    },
+  })
   const { register, handleSubmit, formState } = form
   const { errors } = formState
   const dispatch = useDispatch()
 
   const [registerUser, { isLoading, error }] = useRegisterUserMutation()
 
-  const submitHandler = async (data: SignUpFormType) => {
+  const submitHandler = async (data: SignUpValues) => {
     try {
       const { email, name, password } = data
       const response = await registerUser({ email, name, password })
@@ -61,44 +64,60 @@ const SignUpPage = () => {
         </h2>
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="flex w-full flex-col items-center justify-center gap-7"
+          className="flex w-full flex-col items-center justify-center gap-4"
         >
-          <FormInput
-            name="email"
-            type="email"
-            error={errors.email?.message}
-            register={{
-              ...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value:
-                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
-                  message: 'Invalid email',
-                },
-              }),
-            }}
-          />
-          <FormInput
-            name="name"
-            type="text"
-            error={errors.name?.message}
-            register={{
-              ...register('name', {
-                required: 'Name is Required',
-              }),
-            }}
-          />
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Email"
+              error={errors.email?.message}
+              {...register('email')}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Name"
+              error={errors.name?.message}
+              {...register('name')}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="*******"
+              error={errors.password?.message}
+              {...register('password')}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
 
-          <FormInput
-            name="password"
-            type="password"
-            error={errors.password?.message}
-            register={{
-              ...register('password', {
-                required: 'Password is required',
-              }),
-            }}
-          />
           {error && (
             <p className="font-bold text-red-500">
               {'data' in error ? error.data.message : ''}
