@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
-import FormTextarea from '../../components/form/FormTextarea'
 import FormInput from '../../components/form/Input'
+import FormTextarea from '../../components/form/Textarea'
 
 type ContactFormSubmitData = {
   email: string
