@@ -1,5 +1,9 @@
 import { api } from '../../api/api'
-import { LoginValues, SignUpValues } from '../../validation/auth'
+import {
+  ForgotPasswordValues,
+  LoginValues,
+  SignUpValues,
+} from '../../validation/auth'
 
 type TokenType = {
   token: string
@@ -21,11 +25,14 @@ export const authApiSlice = api.injectEndpoints({
         body: { email, name, password },
       }),
     }),
-    forgotPassword: builder.mutation({
+    forgotPassword: builder.mutation<
+      { success: boolean },
+      ForgotPasswordValues
+    >({
       query: ({ email }) => ({
         url: '/users/forgot-password',
         method: 'POST',
-        body: { email },
+        body: { email: email },
       }),
     }),
   }),

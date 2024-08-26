@@ -1,20 +1,32 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import Input from '../../components/form/Input'
+import Label from '../../components/form/Label'
 import { useForgotPasswordMutation } from '../../features/auth/authApiSlice'
-
-type ForgotPasswordFormType = {
-  email: string
-}
+import {
+  forgotPasswordSchema,
+  ForgotPasswordValues,
+} from '../../validation/auth'
 
 const ForgotPassword = () => {
-  const form = useForm<ForgotPasswordFormType>()
-  const { register, handleSubmit, formState } = form
-  const [forgotPassword, { isLoading, error }] = useForgotPasswordMutation()
-  const { errors } = formState
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<ForgotPasswordValues>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: '',
+    },
+  })
 
-  const submitHandler = async (data: ForgotPasswordFormType) => {
+  const [forgotPassword, { isLoading, error }] = useForgotPasswordMutation()
+
+  const submitHandler = async (data: ForgotPasswordValues) => {
     try {
       const { email } = data
       await forgotPassword({ email }).unwrap()
@@ -37,29 +49,26 @@ const ForgotPassword = () => {
         </div>
         <h2 className="text-2xl font-bold text-[#405684]">Forgot Password</h2>
         <form
-          className="flex w-full flex-col items-center justify-center gap-7"
+          className="flex w-full flex-col items-center justify-center gap-4"
           onSubmit={handleSubmit(submitHandler)}
         >
-          <label className="flex w-full cursor-pointer flex-col text-[20px] font-bold text-gray-400">
-            <span>Email</span>
-            <input
-              type="email"
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
               id="email"
-              className="rounded-xl border-2 border-solid border-slate-600 px-3 py-2 shadow-lg dark:bg-transparent dark:text-white"
-              placeholder="Enter Email"
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value:
-                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
-                  message: 'Invalid email',
-                },
-              })}
+              type="email"
+              placeholder="Email"
+              {...register('email')}
             />
-            <p className="flex flex-col font-bold text-red-500">
-              {errors.email?.message}
-            </p>
-          </label>
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
+
           {error &&
             ('data' in error ? (
               <p className="font-bold text-red-500">{error.data.message}</p>
