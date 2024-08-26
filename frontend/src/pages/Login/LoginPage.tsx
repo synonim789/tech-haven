@@ -1,27 +1,32 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/FormInput'
+import Input from '../../components/form/Input'
+import Label from '../../components/form/Label'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
 import { setData } from '../../features/auth/authSlice'
-
-type LoginFormType = {
-  email: string
-  password: string
-}
+import { loginSchema, LoginValues } from '../../validation/auth'
 
 const LoginPage = () => {
   const [login, { isLoading, error }] = useLoginMutation()
 
-  const form = useForm<LoginFormType>()
+  const form = useForm<LoginValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
   const { register, handleSubmit, formState } = form
   const { errors } = formState
   const dispatch = useDispatch()
 
-  const submitHandler = async (data: LoginFormType) => {
+  const submitHandler = async (data: LoginValues) => {
     try {
       const response = await login(data)
       if ('data' in response && response.data) {
@@ -54,31 +59,39 @@ const LoginPage = () => {
           className="flex w-full flex-col  gap-4"
           onSubmit={handleSubmit(submitHandler)}
         >
-          <FormInput
-            name="email"
-            type="email"
-            error={errors.email?.message}
-            register={{
-              ...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value:
-                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
-                  message: 'Invalid email',
-                },
-              }),
-            }}
-          />
-          <FormInput
-            name="password"
-            type="password"
-            error={errors.password?.message}
-            register={{
-              ...register('password', {
-                required: 'Password is required',
-              }),
-            }}
-          />
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="email"
+              error={errors.email?.message}
+              placeholder="Email"
+              {...register('email')}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="*******"
+              error={errors.password?.message}
+              {...register('password')}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
 
           {error && (
             <p className="font-bold text-red-500">

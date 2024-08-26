@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/FormInput'
+import FormInput from '../../components/form/Input'
 import { useRegisterUserMutation } from '../../features/auth/authApiSlice'
 import { setData } from '../../features/auth/authSlice'
 

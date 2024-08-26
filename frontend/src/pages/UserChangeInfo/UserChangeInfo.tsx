@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/FormInput'
+import FormInput from '../../components/form/Input'
 import { useUpdateUserMutation } from '../../features/user/userApiSlice'
 import { setUser } from '../../features/user/userSlice'
 import { RootState } from '../../store'
@@ -47,7 +47,7 @@ const UserChangeInfo = () => {
   }, [formUser])
   function isUserDataChanged(data: UserForm, user: UserForm) {
     return Object.keys(data).some(
-      (key) => data[key as keyof UserForm] !== user[key as keyof UserForm]
+      (key) => data[key as keyof UserForm] !== user[key as keyof UserForm],
     )
   }
 

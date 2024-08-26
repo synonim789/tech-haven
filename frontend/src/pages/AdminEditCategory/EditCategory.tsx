@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/FormInput'
+import FormInput from '../../components/form/Input'
 import { useEditCategoryMutation } from '../../features/adminCategories/categoriesApiSlice'
 
 type Props = {

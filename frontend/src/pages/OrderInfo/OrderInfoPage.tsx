@@ -4,7 +4,7 @@ import { CiDeliveryTruck } from 'react-icons/ci'
 import { FaStripeS } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import FormInput from '../../components/form/FormInput'
+import FormInput from '../../components/form/Input'
 import { placeOrder } from '../../features/orders/ordersSlice'
 import { RootState } from '../../store'
 

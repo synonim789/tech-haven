@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/FormInput'
 import FormTextarea from '../../components/form/FormTextarea'
+import FormInput from '../../components/form/Input'
 
 type ContactFormSubmitData = {
   email: string
@@ -33,7 +33,7 @@ const ContactForm = ({ className }: Props) => {
         },
         () => {
           toast.error('Something went wrong')
-        }
+        },
       )
     reset()
   }
