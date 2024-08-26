@@ -1,5 +1,6 @@
 import { api } from '../../api/api'
 import { CategoryType } from '../../types'
+import { AddCategoryValues } from '../../validation/category'
 
 const categoriesApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,7 +10,7 @@ const categoriesApiSlice = api.injectEndpoints({
       }),
       providesTags: ['Categories'],
     }),
-    addCategory: builder.mutation({
+    addCategory: builder.mutation<CategoryType, AddCategoryValues>({
       query: ({ category }) => ({
         url: '/categories',
         method: 'POST',
