@@ -161,7 +161,7 @@ export const deleteUser: RequestHandler = async (req, res) => {
 };
 
 export const userForgotPassword: RequestHandler = async (req, res) => {
-  const email = ForgotPasswordSchema.parse(req.body);
+  const { email } = ForgotPasswordSchema.parse(req.body);
   const user = await User.findOne({ email: email });
 
   if (!user) {
