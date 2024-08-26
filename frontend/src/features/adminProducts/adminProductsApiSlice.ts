@@ -1,8 +1,9 @@
 import { api } from '../../api/api'
+import { ProductType } from '../../types'
 
 const adminProductsApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    addProduct: builder.mutation({
+    addProduct: builder.mutation<ProductType, FormData>({
       query: (body) => ({
         url: '/products',
         method: 'POST',
@@ -10,7 +11,7 @@ const adminProductsApiSlice = api.injectEndpoints({
       }),
       invalidatesTags: ['Products'],
     }),
-    deleteProduct: builder.mutation({
+    deleteProduct: builder.mutation<{ deleted: boolean }, string>({
       query: (id) => ({
         url: `/products/${id}`,
         method: 'DELETE',

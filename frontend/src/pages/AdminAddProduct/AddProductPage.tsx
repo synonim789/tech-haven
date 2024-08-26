@@ -1,57 +1,48 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import FormTextarea from '../../components/form/FormTextarea'
-import FormInput from '../../components/form/Input'
+import Input from '../../components/form/Input'
+import Label from '../../components/form/Label'
+import Textarea from '../../components/form/Textarea'
 import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useGetCategoriesQuery } from '../../features/adminCategories/categoriesApiSlice'
 import { useAddProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
-
-type CategoryType = {
-  _id: string
-  name: string
-}
-
-type DataType = {
-  name: string
-  category: string
-  description: string
-  image: FileList[] | null
-  images: FileList[] | null
-  isFeatured: boolean
-  price: number
-  rating: number
-  numReviews: number
-  stock: number
-  brand: string
-}
+import { cn } from '../../utils/cn'
+import { addProductSchema, AddProductValues } from '../../validation/product'
 
 const AddProductPage = () => {
   const [image, setImage] = useState<File | null>(null)
   const [images, setImages] = useState<File[] | null>(null)
 
   const { data: categories } = useGetCategoriesQuery()
-  const [addProduct, { error: addProductError, isSuccess, isLoading }] =
+  const [addProduct, { error: addProductError, isLoading }] =
     useAddProductMutation()
 
-  const { register, handleSubmit, formState, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AddProductValues>({
+    resolver: zodResolver(addProductSchema),
     defaultValues: {
       name: '',
       description: '',
       brand: '',
       category: '',
       price: 0,
-      stock: 0,
+      countInStock: 0,
       rating: 0,
       numReviews: 0,
       isFeatured: false,
-      image: null,
-      images: null,
+      image: undefined,
+      images: undefined,
     },
+    mode: 'onChange',
   })
-
-  const { errors } = formState
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -68,38 +59,31 @@ const AddProductPage = () => {
     }
   }
 
-  useEffect(() => {
-    if (isSuccess) {
-      reset()
-      setImage(null)
-      setImages(null)
-    }
-  }, [isSuccess])
-
-  const submitHandler = async (data: DataType) => {
+  const submitHandler = async (data: AddProductValues) => {
     const formData = new FormData()
-    if (images) {
-      images.forEach((imageFile) => {
-        formData.append('images', imageFile)
-      })
+    console.log(data.isFeatured)
+    if (data.image.length) {
+      formData.append('image', data.image[0])
+    }
+    if (data.images.length) {
+      Array.from(data.images).forEach((file) => formData.append('images', file))
     }
 
-    if (image) {
-      formData.append('image', image)
-    }
+    formData.append('isFeatured', data.isFeatured ? 'true' : 'false')
 
-    formData.append('name', data.name)
-    formData.append('description', data.description)
-    formData.append('brand', data.brand)
-    formData.append('category', data.category)
-    formData.append('price', data.price.toString())
-    formData.append('countInStock', data.stock.toString())
-    formData.append('rating', data.rating.toString())
-    formData.append('numReviews', data.numReviews.toString())
-    formData.append('isFeatured', String(data.isFeatured))
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'image' && key !== 'images' && key !== 'isFeatured') {
+        formData.append(key, value.toString())
+      }
+    })
+
     try {
       await addProduct(formData).unwrap()
       toast.success('Product Added Successfully')
+
+      reset()
+      setImage(null)
+      setImages(null)
     } catch (err) {
       if (err instanceof Error && 'message' in err) {
         toast.error(err.message)
@@ -118,53 +102,73 @@ const AddProductPage = () => {
       </h2>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div className="flex flex-col md:flex-row md:gap-x-5">
-          <div>
-            <FormInput
-              name="name"
-              type="text"
-              register={{
-                ...register('name', {
-                  required: 'Product Name is required',
-                }),
-              }}
-              error={errors.name?.message}
-            />
-            <FormTextarea
-              name="description"
-              error={errors?.description?.message}
-              register={{
-                ...register('description', {
-                  required: 'Description is required',
-                }),
-              }}
-            />
+          <div className="md:space-y-5">
+            <div>
+              <Label htmlFor="name">Product Name</Label>
+              <Input
+                type="text"
+                placeholder="Name"
+                {...register('name')}
+                error={errors.name?.message}
+              />
+              <ErrorMessage
+                errors={errors}
+                name="name"
+                render={({ message }) => (
+                  <p className="text-red-500 font-semibold">{message}</p>
+                )}
+              />
+            </div>
+            <div>
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                placeholder="Description"
+                error={errors?.description?.message}
+                {...register('description')}
+              />
+              <ErrorMessage
+                errors={errors}
+                name="description"
+                render={({ message }) => (
+                  <p className="text-red-500 font-semibold">{message}</p>
+                )}
+              />
+            </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              <FormInput
-                name="brand"
-                type="text"
-                error={errors.brand?.message}
-                register={{
-                  ...register('brand', {
-                    required: 'Brand is required',
-                  }),
-                }}
-              />
-              <div className="flex w-full cursor-pointer flex-col text-[20px] font-semibold capitalize">
-                <label htmlFor="category" className="dark:text-gray-500">
-                  Category
-                </label>
+              <div>
+                <Label htmlFor="brand">Brand</Label>
+                <Input
+                  type="text"
+                  error={errors.brand?.message}
+                  {...register('brand')}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="brand"
+                  render={({ message }) => (
+                    <p className="text-red-500 font-semibold">{message}</p>
+                  )}
+                />
+              </div>
+
+              <div className="flex w-full cursor-pointer flex-col  font-semibold capitalize">
+                <Label htmlFor="category">Category</Label>
                 <select
                   id="category"
-                  {...register('category', {
-                    required: 'Category is required',
-                  })}
-                  className="rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-400"
+                  {...register('category')}
+                  className={cn(
+                    'rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-400',
+                    {
+                      '!border-red-400': errors.category?.message,
+                    },
+                  )}
                 >
-                  <option value="" disabled>
+                  <option value="" hidden>
                     Choose Category
                   </option>
-                  {categories?.map((category: CategoryType) => {
+                  {categories?.map((category) => {
                     return (
                       <option value={category._id} key={category._id}>
                         {category.name}
@@ -172,71 +176,82 @@ const AddProductPage = () => {
                     )
                   })}
                 </select>
-                {errors.category?.message && (
-                  <p className="font-bold text-red-500">
-                    {errors.category?.message}
-                  </p>
-                )}
+                <ErrorMessage
+                  errors={errors}
+                  name="category"
+                  render={({ message }) => (
+                    <p className="text-red-500 font-semibold">{message}</p>
+                  )}
+                />
               </div>
-              <FormInput
-                name="price"
-                type="number"
-                register={{
-                  ...register('price', {
-                    required: 'Price is required',
-                    min: {
-                      value: 1,
-                      message: 'price must be at least 1',
-                    },
-                  }),
-                }}
-                error={errors?.price?.message}
-              />
-              <FormInput
-                name="stock"
-                type="number"
-                register={{
-                  ...register('stock', {
-                    required: 'Stock is required',
-                    min: {
-                      value: 1,
-                      message: 'stock must be at least 1',
-                    },
-                  }),
-                }}
-                error={errors?.stock?.message}
-              />
-              <FormInput
-                name="rating"
-                type="number"
-                register={{
-                  ...register('rating', {
-                    required: 'Rating is required',
-                    min: {
-                      value: 1,
-                      message: 'price must be at least 1',
-                    },
-                  }),
-                }}
-                error={errors?.rating?.message}
-              />
-              <FormInput
-                name="numReviews"
-                type="number"
-                register={{
-                  ...register('numReviews', {
-                    required: 'Rev Count is required',
-                    min: {
-                      value: 1,
-                      message: 'Rev Count must be more than 1',
-                    },
-                  }),
-                }}
-                error={errors?.numReviews?.message}
-              />
+              <div>
+                <Label htmlFor="price">Price</Label>
+                <Input
+                  id="price"
+                  type="number"
+                  {...register('price')}
+                  error={errors?.price?.message}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="price"
+                  render={({ message }) => (
+                    <p className="text-red-500 font-semibold">{message}</p>
+                  )}
+                />
+              </div>
+              <div>
+                <Label htmlFor="countInStock">Stock</Label>
+                <Input
+                  id="countInStock"
+                  type="number"
+                  {...register('countInStock')}
+                  error={errors?.countInStock?.message}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="countInStock"
+                  render={({ message }) => (
+                    <p className="text-red-500 font-semibold">{message}</p>
+                  )}
+                />
+              </div>
+              <div>
+                <Label htmlFor="rating">Rating</Label>
+                <Input
+                  id="rating"
+                  type="number"
+                  step={0.01}
+                  {...register('rating')}
+                  error={errors?.rating?.message}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="rating"
+                  render={({ message }) => (
+                    <p className="text-red-500 font-semibold">{message}</p>
+                  )}
+                />
+              </div>
+              <div>
+                <Label htmlFor="numReviews">Review Count</Label>
+                <Input
+                  id="numReviews"
+                  type="number"
+                  {...register('numReviews')}
+                  error={errors?.numReviews?.message}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="numReviews"
+                  render={({ message }) => (
+                    <p className="text-red-500 font-semibold">{message}</p>
+                  )}
+                />
+              </div>
             </div>
-            <div className="mt-8 flex justify-end gap-3 text-[20px] ">
-              <label htmlFor="featured" className="font-bold text-slate-400">
+            <div className="mt-8 flex justify-end gap-3">
+              <label htmlFor="featured" className="font-semibold text-gray-500">
                 Featured:
               </label>
               <input
@@ -245,6 +260,7 @@ const AddProductPage = () => {
                 {...register('isFeatured')}
                 className="w-5 accent-[#405684]"
               />
+              <ErrorMessage errors={errors} name="isFeatured" />
             </div>
           </div>
           <div className="mt-4 flex flex-col justify-between gap-5 md:mt-0">
@@ -255,27 +271,27 @@ const AddProductPage = () => {
                   className="block w-[120px]"
                 />
               )}
-              <label
+              <Label
                 htmlFor="mainImage"
-                className="cursor-pointer rounded-xl bg-[#405684] px-6 py-3 text-2xl font-bold text-white transition hover:scale-105 hover:opacity-75"
+                className="cursor-pointer rounded-xl bg-[#405684] px-6 py-3 text-2xl font-bold !text-white transition hover:scale-105 hover:opacity-75"
               >
                 Choose Main Image...
-              </label>
+              </Label>
 
-              <input
+              <Input
                 type="file"
                 id="mainImage"
                 className="absolute -z-10 size-0 overflow-hidden opacity-0"
-                {...register('image', {
-                  required: 'Main Image is required',
-                })}
+                {...register('image')}
                 onChange={handleImageChange}
               />
-              {errors.image?.message && (
-                <p className="font-bold text-red-500">
-                  {errors.image?.message}
-                </p>
-              )}
+              <ErrorMessage
+                errors={errors}
+                name="image"
+                render={({ message }) => (
+                  <p className="text-red-500 font-semibold">{message}</p>
+                )}
+              />
             </div>
 
             <div className="flex size-full flex-col items-center justify-center gap-5 rounded-xl bg-white p-[10px] shadow-xl dark:bg-[#222427]">
@@ -293,27 +309,27 @@ const AddProductPage = () => {
                     })}
                 </div>
               )}
-              <label
+              <Label
                 htmlFor="allImages"
-                className="cursor-pointer rounded-xl bg-[#405684] px-6 py-3 text-2xl font-bold text-white transition hover:scale-105 hover:opacity-75"
+                className="cursor-pointer rounded-xl bg-[#405684] px-6 py-3 text-2xl font-bold !text-white transition hover:scale-105 hover:opacity-75"
               >
                 Choose All Images...
-              </label>
-              <input
+              </Label>
+              <Input
                 type="file"
                 id="allImages"
                 multiple
                 className="absolute -z-10 size-0 overflow-hidden opacity-0"
-                {...register('images', {
-                  required: 'All Image is required',
-                })}
+                {...register('images')}
                 onChange={handleImagesChange}
               />
-              {errors.images?.message && (
-                <p className="font-bold text-red-500">
-                  {errors.images?.message}
-                </p>
-              )}
+              <ErrorMessage
+                errors={errors}
+                name="images"
+                render={({ message }) => (
+                  <p className="text-red-500 font-semibold">{message}</p>
+                )}
+              />
             </div>
           </div>
         </div>
