@@ -1,25 +1,37 @@
+import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import FormButton from '../../components/form/FormButton'
-import FormInput from '../../components/form/Input'
+import Input from '../../components/form/Input'
+import Label from '../../components/form/Label'
 import { useEditCategoryMutation } from '../../features/adminCategories/categoriesApiSlice'
+import {
+  editCategorySchema,
+  EditCategoryValues,
+} from '../../validation/category'
 
 type Props = {
   name: string
   id: string
 }
 
-type DataType = {
-  name?: string
-}
-
 const EditCategory = ({ name, id }: Props) => {
   const [openCategory, setOpenCategory] = useState(false)
-  const { register, handleSubmit } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EditCategoryValues>({
+    resolver: zodResolver(editCategorySchema),
+    defaultValues: {
+      name: name,
+    },
+  })
   const [editCategory] = useEditCategoryMutation()
 
-  const submit = async (data: DataType) => {
+  const submit = async (data: EditCategoryValues) => {
     await editCategory({ id: id, name: data.name })
     setOpenCategory(false)
   }
@@ -47,14 +59,25 @@ const EditCategory = ({ name, id }: Props) => {
       {openCategory && (
         <form
           onSubmit={handleSubmit(submit)}
-          className="mt-5 flex flex-col items-center justify-between gap-5 md:flex-row md:items-center"
+          className="mt-5 flex flex-col gap-5 md:flex-row md:items-end "
         >
-          <FormInput
-            register={{ ...register('name') }}
-            name="category"
-            type="text"
-          />
-          <FormButton loading={false} text="edit" />
+          <div>
+            <Label>Name</Label>
+            <Input
+              placeholder="Category Name"
+              type="text"
+              {...register('name')}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ message }) => (
+                <p className="text-red-500 font-semibold">{message}</p>
+              )}
+            />
+          </div>
+
+          <FormButton loading={false} text="edit" className="w-fit" />
         </form>
       )}
     </div>

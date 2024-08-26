@@ -15,7 +15,7 @@ const AddCategory = () => {
     useForm<AddCategoryValues>({
       resolver: zodResolver(addCategorySchema),
       defaultValues: {
-        category: '',
+        name: '',
       },
     })
   const [addCategory, { isLoading, isSuccess }] = useAddCategoryMutation()
@@ -43,17 +43,17 @@ const AddCategory = () => {
         onSubmit={handleSubmit(addCategory)}
       >
         <div>
-          <Label htmlFor="category">Category</Label>
+          <Label htmlFor="name">Category</Label>
           <Input
             id="category"
             type="text"
             placeholder="Category Name"
-            {...register('category')}
-            error={errors.category?.message}
+            {...register('name')}
+            error={errors.name?.message}
           />
           <ErrorMessage
             errors={errors}
-            name="category"
+            name="name"
             render={({ message }) => (
               <p className="text-red-400 font-semibold">{message}</p>
             )}

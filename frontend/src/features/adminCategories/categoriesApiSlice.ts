@@ -11,10 +11,10 @@ const categoriesApiSlice = api.injectEndpoints({
       providesTags: ['Categories'],
     }),
     addCategory: builder.mutation<CategoryType, AddCategoryValues>({
-      query: ({ category }) => ({
+      query: ({ name }) => ({
         url: '/categories',
         method: 'POST',
-        body: { name: category },
+        body: { name },
       }),
       invalidatesTags: ['Categories'],
     }),
@@ -25,11 +25,11 @@ const categoriesApiSlice = api.injectEndpoints({
       }),
       invalidatesTags: ['Categories'],
     }),
-    editCategory: builder.mutation({
-      query: (body) => ({
-        url: `/categories/${body.id}`,
+    editCategory: builder.mutation<CategoryType, { id: string; name: string }>({
+      query: ({ id, name }) => ({
+        url: `/categories/${id}`,
         method: 'PUT',
-        body: { name: body.name },
+        body: { name },
       }),
       invalidatesTags: ['Categories'],
     }),
