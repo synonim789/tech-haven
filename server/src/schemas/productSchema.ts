@@ -56,8 +56,7 @@ export const updateProductSchema = z
         !data.category ||
         !data.countInStock ||
         !data.rating ||
-        !data.numReviews ||
-        !data.isFeatured
+        !data.numReviews
       ) {
         return false;
       }
