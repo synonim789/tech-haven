@@ -153,13 +153,13 @@ const AddProductPage = () => {
                 />
               </div>
 
-              <div className="flex w-full cursor-pointer flex-col  font-semibold capitalize">
+              <div>
                 <Label htmlFor="category">Category</Label>
                 <select
                   id="category"
                   {...register('category')}
                   className={cn(
-                    'rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-400',
+                    'rounded-xl border-2 border-solid border-gray-300 px-3 py-2 shadow-lg outline-none placeholder:capitalize placeholder:text-slate-500 dark:border-gray-700 dark:bg-transparent dark:text-gray-400 w-full font-semibold capitalize',
                     {
                       '!border-red-400': errors.category?.message,
                     },
