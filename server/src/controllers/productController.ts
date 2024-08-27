@@ -151,23 +151,26 @@ export const updateProduct: RequestHandler = async (req, res) => {
     throw createHttpError(404, "Category not found.");
   }
 
-  const product = await Product.findById(productId);
-  if (!product) {
+  const updatedProduct = await Product.findByIdAndUpdate(
+    productId,
+    {
+      name,
+      description,
+      brand,
+      category,
+      countInStock,
+      rating,
+      numReviews,
+      isFeatured,
+    },
+    { new: true }, // This option returns the updated product
+  );
+
+  if (!updateProduct) {
     throw createHttpError(404, "Product not found");
   }
 
-  await product.updateOne({
-    name: name,
-    description: description,
-    brand: brand,
-    category: category,
-    countInStock: countInStock,
-    rating: rating,
-    numReviews: numReviews,
-    isFeatured: isFeatured,
-  });
-
-  res.status(200).json(product);
+  res.status(200).json(updatedProduct);
 };
 
 export const getFeaturedProducts: RequestHandler = async (_req, res) => {
