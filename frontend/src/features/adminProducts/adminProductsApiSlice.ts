@@ -1,5 +1,6 @@
 import { api } from '../../api/api'
 import { ProductType } from '../../types'
+import { EditProductValues } from '../../validation/product'
 
 const adminProductsApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +19,10 @@ const adminProductsApiSlice = api.injectEndpoints({
       }),
       invalidatesTags: ['Products'],
     }),
-    editProduct: builder.mutation({
+    editProduct: builder.mutation<
+      ProductType,
+      EditProductValues & { id: string }
+    >({
       query: (body) => ({
         url: `/products/${body.id}`,
         method: 'PUT',
