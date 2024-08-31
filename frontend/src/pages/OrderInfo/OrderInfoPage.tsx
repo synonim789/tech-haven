@@ -1,51 +1,40 @@
-import { useEffect, useState } from 'react'
+import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { CiDeliveryTruck } from 'react-icons/ci'
 import { FaStripeS } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import FormInput from '../../components/form/Input'
+import Input from '../../components/form/Input'
+import Label from '../../components/form/Label'
 import { placeOrder } from '../../features/orders/ordersSlice'
 import { RootState } from '../../store'
-
-type OrderInfo = {
-  name?: string
-  zip?: string
-  city?: string
-  country?: string
-  phone?: string
-  street?: string
-  apartment?: string
-  payment?: string
-}
+import { orderInfoSchema, OrderInfoValues } from '../../validation/order'
 
 const OrderInfoPage = () => {
   const user = useSelector((state: RootState) => state.user.user)
-  const [orderInfoForm, setOrderInfoForm] = useState<OrderInfo | null>(null)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    setOrderInfoForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<OrderInfoValues>({
+    resolver: zodResolver(orderInfoSchema),
+    defaultValues: {
       name: user?.name,
+      apartment: user?.apartment,
       city: user?.city,
       country: user?.country,
+      payment: 'stripe',
       phone: user?.phone,
       street: user?.street,
-      zip: user?.zip,
-      apartment: user?.apartment,
-      payment: 'paypal',
-    })
-  }, [user])
+    },
+  })
 
-  const { register, handleSubmit, reset, formState } = useForm<OrderInfo>()
-  const { errors, isValid } = formState
-
-  useEffect(() => {
-    reset(orderInfoForm!)
-  }, [orderInfoForm])
-
-  const submitHandler = (data: OrderInfo) => {
+  const submitHandler = (data: OrderInfoValues) => {
     navigate('/order/summary')
     dispatch(placeOrder(data))
   }
@@ -55,84 +44,131 @@ const OrderInfoPage = () => {
       <div className="w-full rounded-xl bg-white p-5 shadow-xl dark:bg-[#121212]">
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="flex flex-col md:grid md:grid-cols-2 md:gap-x-6"
+          className="flex flex-col md:grid md:grid-cols-2 md:gap-x-6 space-y-6"
         >
           <h4 className="mb-4 text-3xl font-bold text-slate-500">
             Delivery Info:
           </h4>
           <div className="md:col-span-2">
-            <FormInput
-              name="name"
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
               type="text"
-              register={{
-                ...register('name', {
-                  required: 'Name is required',
-                }),
-              }}
+              placeholder="Your Name"
+              {...register('name')}
               error={errors?.name?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="name"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="zip">Zip</Label>
+            <Input
+              id="zip"
+              type="text"
+              placeholder="Zip-Code"
+              {...register('zip')}
+              error={errors?.zip?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="zip"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="city">City</Label>
+            <Input
+              id="city"
+              type="text"
+              placeholder="City"
+              {...register('city')}
+              error={errors?.city?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="city"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="country">Country</Label>
+            <Input
+              id="country"
+              type="text"
+              placeholder="Country"
+              {...register('country')}
+              error={errors?.country?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="country"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input
+              id="phone"
+              placeholder="Phone Number"
+              type="text"
+              {...register('phone')}
+              error={errors?.phone?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="phone"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="street">Street</Label>
+            <Input
+              type="text"
+              id="street"
+              placeholder="Street"
+              {...register('street')}
+              error={errors?.street?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="street"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
+            />
+          </div>
+          <div>
+            <Label htmlFor="apartment">Apartment</Label>
+            <Input
+              type="text"
+              id="apartment"
+              placeholder="Apartment"
+              {...register('apartment')}
+              error={errors?.apartment?.message}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="apartment"
+              render={({ message }) => (
+                <p className="text-red-400">{message}</p>
+              )}
             />
           </div>
 
-          <FormInput
-            name="zip"
-            type="text"
-            register={{
-              ...register('zip', {
-                required: 'Zip is required',
-              }),
-            }}
-            error={errors?.zip?.message}
-          />
-          <FormInput
-            name="city"
-            type="text"
-            register={{
-              ...register('city', {
-                required: 'City is required',
-              }),
-            }}
-            error={errors?.city?.message}
-          />
-          <FormInput
-            name="country"
-            type="text"
-            register={{
-              ...register('country', {
-                required: 'Country is required',
-              }),
-            }}
-            error={errors?.country?.message}
-          />
-          <FormInput
-            name="phone"
-            type="text"
-            register={{
-              ...register('phone', {
-                required: 'Phone is required',
-              }),
-            }}
-            error={errors?.phone?.message}
-          />
-          <FormInput
-            name="street"
-            type="text"
-            register={{
-              ...register('street', {
-                required: 'Street is required',
-              }),
-            }}
-            error={errors?.street?.message}
-          />
-          <FormInput
-            name="apartment"
-            type="text"
-            register={{
-              ...register('apartment', {
-                required: 'Apartment is required',
-              }),
-            }}
-            error={errors?.apartment?.message}
-          />
           <h4 className="col-span-2 mt-4 text-3xl font-bold text-slate-500">
             Payment method:
           </h4>
@@ -169,9 +205,7 @@ const OrderInfoPage = () => {
                 </label>
 
                 <FaStripeS className="dark:text-slate-500" />
-                <label htmlFor="stripe" className="dark:text-slate-500">
-                  Stripe
-                </label>
+                <Label htmlFor="stripe">Stripe</Label>
               </div>
               <div className="flex items-center text-2xl">
                 <label
@@ -205,12 +239,7 @@ const OrderInfoPage = () => {
 
                 <CiDeliveryTruck className="dark:text-slate-500" />
 
-                <label
-                  htmlFor="Cash On Delivery"
-                  className="dark:text-slate-500"
-                >
-                  Cash On Delivery
-                </label>
+                <Label htmlFor="cod">Cash On Delivery</Label>
               </div>
             </div>
 
