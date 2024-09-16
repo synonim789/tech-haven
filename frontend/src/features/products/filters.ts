@@ -54,7 +54,7 @@ const filterSlice = createSlice({
       action: PayloadAction<{
         name: string
         value: string | number
-      }>
+      }>,
     ) => {
       const { name, value } = action.payload
       state.filters[name] = value
@@ -65,22 +65,22 @@ const filterSlice = createSlice({
       let filteredProducts = allProducts
       if (search) {
         filteredProducts = filteredProducts.filter((product) =>
-          product.name.toLowerCase().startsWith(search)
+          product.name.toLowerCase().startsWith(search),
         )
       }
       if (category !== 'all') {
         filteredProducts = filteredProducts.filter(
-          (product) => product.category.name === category
+          (product) => product.category.name === category,
         )
       }
       if (brand !== 'all') {
         filteredProducts = filteredProducts.filter(
-          (product) => product.brand === brand
+          (product) => product.brand === brand,
         )
       }
       if (rating >= 1 && rating <= 5) {
         filteredProducts = filteredProducts.filter(
-          (product) => product.rating >= rating
+          (product) => product.rating >= rating,
         )
       }
 
@@ -98,7 +98,7 @@ const filterSlice = createSlice({
         category: 'all',
         brand: 'all',
         rating: 1,
-        price: 0,
+        price: state.maxPrice,
       }
     },
 
@@ -109,7 +109,7 @@ const filterSlice = createSlice({
       const indexOfFirstProduct = indexOfLastProduct - limit
       const currentProducts = state.filteredProducts.slice(
         indexOfFirstProduct,
-        indexOfLastProduct
+        indexOfLastProduct,
       )
       state.pagedProducts = currentProducts
       state[`${currentView}`] = true
@@ -125,7 +125,7 @@ const filterSlice = createSlice({
       const indexOfFirstProduct = indexOfLastProduct - state.limit
       const currentProducts = filteredProducts.slice(
         indexOfFirstProduct,
-        indexOfLastProduct
+        indexOfLastProduct,
       )
       state.pagedProducts = currentProducts
     },
