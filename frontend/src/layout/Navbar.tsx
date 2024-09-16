@@ -32,8 +32,8 @@ const Navbar = () => {
               isPending
                 ? ''
                 : isActive
-                ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
-                : ''
+                  ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
+                  : ''
             }
           >
             TechHaven
@@ -48,8 +48,8 @@ const Navbar = () => {
                   isPending
                     ? 'pending'
                     : isActive
-                    ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
-                    : ''
+                      ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
+                      : ''
                 }
               >
                 Products
@@ -62,8 +62,8 @@ const Navbar = () => {
                   isPending
                     ? 'pending'
                     : isActive
-                    ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
-                    : ''
+                      ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
+                      : ''
                 }
               >
                 About Us
@@ -76,8 +76,8 @@ const Navbar = () => {
                   isPending
                     ? 'pending'
                     : isActive
-                    ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
-                    : ''
+                      ? "after:content-[''] after:bg-orange-500 after:h-1 after:w-4/5 after:left-0 after:right-0 after:mx-auto after:absolute after:-bottom-2"
+                      : ''
                 }
               >
                 Contact
@@ -90,15 +90,15 @@ const Navbar = () => {
                   isPending
                     ? 'pending relative'
                     : isActive
-                    ? 'none relative'
-                    : 'relative'
+                      ? 'none relative'
+                      : 'relative'
                 }
               >
                 <BsFillCartFill />
                 {totalItems > 0 ? (
-                  <p className="absolute right-[-14px] top-[-14px] flex size-6 items-start justify-center rounded-full bg-orange-500 text-xl text-white">
+                  <span className="absolute -right-2 -top-3 rounded-full bg-orange-400 px-2 text-sm font-medium tabular-nums text-white">
                     {totalItems}
-                  </p>
+                  </span>
                 ) : null}
               </NavLink>
             </li>
@@ -168,14 +168,14 @@ const Navbar = () => {
                           isPending
                             ? 'pending relative'
                             : isActive
-                            ? 'none relative'
-                            : 'relative'
+                              ? 'none relative'
+                              : 'relative'
                         }
                         onClick={() => setShowNavigation(false)}
                       >
                         <BsFillCartFill />
                         {totalItems > 0 ? (
-                          <p className="absolute left-6 top-[-14px] flex size-6 items-start justify-center rounded-full bg-orange-500 text-xl text-white">
+                          <p className="absolute left-6 top-[-14px] flex size-7 items-center justify-center rounded-full bg-orange-500 text-xl text-white">
                             {totalItems}
                           </p>
                         ) : null}

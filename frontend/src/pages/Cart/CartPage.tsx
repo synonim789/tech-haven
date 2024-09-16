@@ -32,9 +32,11 @@ const CartPage = () => {
           Remove All items
         </button>
         <div className="flex flex-col gap-10 text-right">
-          <h3 className="text-5xl font-semibold dark:text-slate-500">
+          <h3 className="text-5xl font-semibold dark:text-slate-500 tabular-nums">
             Total:{' '}
-            <span className="text-[#405684]">{formatPrice(totalPrice)}</span>
+            <span className="text-[#405684] tabular-nums">
+              {formatPrice(totalPrice)}
+            </span>
           </h3>
           {user ? (
             <Link
