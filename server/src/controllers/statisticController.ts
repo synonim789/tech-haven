@@ -1,8 +1,8 @@
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import createHttpError from "http-errors";
-import Order from "../models/order";
-import Product from "../models/product";
-import User from "../models/user";
+import Order from "../models/order.js";
+import Product from "../models/product.js";
+import User from "../models/user.js";
 
 export const getOrderCount: RequestHandler = async (_req, res) => {
   const orderCount = await Order.countDocuments()

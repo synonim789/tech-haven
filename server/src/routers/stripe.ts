@@ -2,8 +2,8 @@ import express from "express";
 import {
   createCheckoutSession,
   stripeWebhookHandler,
-} from "../controllers/stripeController";
-import { asyncWrapper } from "../utils/asyncWrapper";
+} from "../controllers/stripeController.js";
+import { asyncWrapper } from "../utils/asyncWrapper.js";
 
 const router = express.Router();
 

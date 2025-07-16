@@ -1,18 +1,18 @@
 import bcrypt from "bcryptjs";
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import Order from "../models/order";
-import User from "../models/user";
+import Order from "../models/order.js";
+import User from "../models/user.js";
 import {
   AddUserSchema,
   ForgotPasswordSchema,
   LoginSchema,
   SignUpSchema,
   UpdateUserSchema,
-} from "../schemas/userSchema";
-import env from "../utils/validateEnv";
+} from "../schemas/userSchema.js";
+import env from "../utils/validateEnv.js";
 
 export const getAllUser: RequestHandler = async (_req, res) => {
   const userList = await User.find({ deleted: false }).select("-passwordHash");

@@ -10,10 +10,10 @@ import {
   signUpUser,
   updateUser,
   userForgotPassword,
-} from "../controllers/userController";
-import { asyncWrapper } from "../utils/asyncWrapper";
-import verifyJWT from "../utils/jwt";
-import verifyRoles from "../utils/verifyRoles";
+} from "../controllers/userController.js";
+import { asyncWrapper } from "../utils/asyncWrapper.js";
+import verifyJWT from "../utils/jwt.js";
+import verifyRoles from "../utils/verifyRoles.js";
 const router = Router();
 
 router.get("/", verifyJWT, verifyRoles("admin"), asyncWrapper(getAllUser));

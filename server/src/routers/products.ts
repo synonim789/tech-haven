@@ -7,10 +7,10 @@ import {
   getFeaturedProducts,
   getSingleProduct,
   updateProduct,
-} from "../controllers/productController";
-import { asyncWrapper } from "../utils/asyncWrapper";
-import verifyJWT from "../utils/jwt";
-import verifyRoles from "../utils/verifyRoles";
+} from "../controllers/productController.js";
+import { asyncWrapper } from "../utils/asyncWrapper.js";
+import verifyJWT from "../utils/jwt.js";
+import verifyRoles from "../utils/verifyRoles.js";
 
 const router = Router();
 

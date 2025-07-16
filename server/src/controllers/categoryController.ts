@@ -1,12 +1,12 @@
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
-import Category from "../models/category";
-import Product from "../models/product";
+import Category from "../models/category.js";
+import Product from "../models/product.js";
 import {
   addCategorySchema,
   updateCategorySchema,
-} from "../schemas/categorySchema";
+} from "../schemas/categorySchema.js";
 
 export const getAllCategories: RequestHandler = async (_req, res) => {
   const categoryList = await Category.find({ deleted: false });

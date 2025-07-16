@@ -1,12 +1,12 @@
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
-import Category from "../models/category";
-import Product from "../models/product";
+import Category from "../models/category.js";
+import Product from "../models/product.js";
 import {
   AddProductSchema,
   updateProductSchema,
-} from "../schemas/productSchema";
+} from "../schemas/productSchema.js";
 
 export const getAllProducts: RequestHandler = async (_req, res) => {
   const products = await Product.find({ deleted: false }).populate("category");

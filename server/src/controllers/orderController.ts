@@ -1,8 +1,8 @@
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
-import Order from "../models/order";
-import { AddOrderSchema, updateOrderSchema } from "../schemas/orderSchema";
+import Order from "../models/order.js";
+import { AddOrderSchema, updateOrderSchema } from "../schemas/orderSchema.js";
 
 export const getAllOrders: RequestHandler = async (_req, res) => {
   const orderList = await Order.find()

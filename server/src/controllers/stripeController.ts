@@ -1,8 +1,8 @@
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import createHttpError from "http-errors";
 import Stripe from "stripe";
-import Order from "../models/order";
-import env from "../utils/validateEnv";
+import Order from "../models/order.js";
+import env from "../utils/validateEnv.js";
 
 const STRIPE = new Stripe(env.STRIPE_KEY);
 const STRIPE_ENDPOINT_SECRET = env.STRIPE_ENDPOINT_SECRET;

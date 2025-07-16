@@ -5,10 +5,10 @@ import {
   getAllCategories,
   getSingleCategory,
   updateCategory,
-} from "../controllers/categoryController";
-import { asyncWrapper } from "../utils/asyncWrapper";
-import verifyJWT from "../utils/jwt";
-import verifyRoles from "../utils/verifyRoles";
+} from "../controllers/categoryController.js";
+import { asyncWrapper } from "../utils/asyncWrapper.js";
+import verifyJWT from "../utils/jwt.js";
+import verifyRoles from "../utils/verifyRoles.js";
 
 const router = Router();
 

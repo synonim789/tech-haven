@@ -1,4 +1,4 @@
-import { createUploadthing, FileRouter } from "uploadthing/express";
+import { createUploadthing, type FileRouter } from "uploadthing/express";
 
 const f = createUploadthing();
 
