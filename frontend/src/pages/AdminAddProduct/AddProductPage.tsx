@@ -11,6 +11,7 @@ import FullscreenLoading from '../../components/ui/FullscreenLoading'
 import { useGetCategoriesQuery } from '../../features/adminCategories/categoriesApiSlice'
 import { useAddProductMutation } from '../../features/adminProducts/adminProductsApiSlice'
 import { cn } from '../../utils/cn'
+import { uploadProductImages } from '../../utils/uploadthing'
 import { addProductSchema, AddProductValues } from '../../validation/product'
 
 const AddProductPage = () => {
@@ -60,25 +61,25 @@ const AddProductPage = () => {
   }
 
   const submitHandler = async (data: AddProductValues) => {
-    const formData = new FormData()
-    console.log(data.isFeatured)
-    if (data.image.length) {
-      formData.append('image', data.image[0])
-    }
-    if (data.images.length) {
-      Array.from(data.images).forEach((file) => formData.append('images', file))
-    }
 
-    formData.append('isFeatured', data.isFeatured ? 'true' : 'false')
-
-    Object.entries(data).forEach(([key, value]) => {
-      if (key !== 'image' && key !== 'images' && key !== 'isFeatured') {
-        formData.append(key, value.toString())
-      }
-    })
+    if (!image || !images) {
+      toast.error('Please select all images')
+      return
+    }
 
     try {
-      await addProduct(formData).unwrap()
+      const { mainImageUrl, galleryUrls } = await uploadProductImages(
+        image,
+        images,
+      )
+
+      const productData = {
+        ...data,
+        image: mainImageUrl,
+        images: galleryUrls,
+      }
+
+      await addProduct(productData).unwrap()
       toast.success('Product Added Successfully')
 
       reset()

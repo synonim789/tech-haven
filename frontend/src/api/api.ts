@@ -12,7 +12,7 @@ interface CustomError {
   }
 }
 
-const serverUrl = import.meta.env.VITE_SERVER_URL as string
+export const serverUrl = import.meta.env.VITE_SERVER_URL as string
 
 const baseQuery = fetchBaseQuery({
   baseUrl: serverUrl,

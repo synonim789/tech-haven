@@ -2,9 +2,23 @@ import { api } from '../../api/api'
 import { ProductType } from '../../types'
 import { EditProductValues } from '../../validation/product'
 
+type AddProductType = {
+  image: string
+  images: string[]
+  name: string
+  description: string
+  brand: string
+  category: string
+  price: number
+  countInStock: number
+  rating: number
+  numReviews: number
+  isFeatured?: boolean | undefined
+}
+
 const adminProductsApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    addProduct: builder.mutation<ProductType, FormData>({
+    addProduct: builder.mutation<ProductType, AddProductType>({
       query: (body) => ({
         url: '/products',
         method: 'POST',
