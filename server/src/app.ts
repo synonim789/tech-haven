@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
+import { createRouteHandler } from "uploadthing/express";
 import categoriesRouter from "./routers/categories";
 import ordersRouter from "./routers/orders";
 import productsRouter from "./routers/products";
@@ -8,6 +9,7 @@ import statisticsRouter from "./routers/statistics";
 import stripeRouter from "./routers/stripe";
 import usersRouter from "./routers/users";
 import errorHandler from "./utils/error-handler";
+import { uploadRouter } from "./utils/uploadthing";
 import env from "./utils/validateEnv";
 
 const api = env.API_URL;
@@ -26,6 +28,7 @@ app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/orders`, ordersRouter);
 app.use(`${api}/statistics`, statisticsRouter);
+app.use(`${api}/uploadthing`, createRouteHandler({ router: uploadRouter }));
 
 app.use(errorHandler);
 

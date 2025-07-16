@@ -1,6 +1,4 @@
 import { Router } from "express";
-import multer from "multer";
-import storage from "../config/multerStorage";
 import {
   addProduct,
   deleteProduct,
@@ -16,32 +14,9 @@ import verifyRoles from "../utils/verifyRoles";
 
 const router = Router();
 
-const uploadOptions = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-  },
-});
-
 router.get(`/`, asyncWrapper(getAllProducts));
 router.get("/:id", asyncWrapper(getSingleProduct));
-router.post(
-  `/`,
-  verifyJWT,
-
-  uploadOptions.fields([
-    {
-      name: "image",
-      maxCount: 1,
-    },
-    {
-      name: "images",
-      maxCount: 10,
-    },
-  ]),
-  verifyRoles("admin"),
-  asyncWrapper(addProduct),
-);
+router.post(`/`, verifyJWT, verifyRoles("admin"), asyncWrapper(addProduct));
 router.put(
   "/:id",
   verifyJWT,

@@ -7,7 +7,6 @@ import {
   AddProductSchema,
   updateProductSchema,
 } from "../schemas/productSchema";
-import { uploadImage } from "../utils/uploadImage";
 
 export const getAllProducts: RequestHandler = async (_req, res) => {
   const products = await Product.find({ deleted: false }).populate("category");
@@ -74,6 +73,8 @@ export const addProduct: RequestHandler = async (req, res) => {
     numReviews,
     price,
     rating,
+    image,
+    images,
   } = AddProductSchema.parse(req.body);
 
   const exist = await Product.findOne({ name: name }).exec();
@@ -90,28 +91,12 @@ export const addProduct: RequestHandler = async (req, res) => {
   if (!categoryExist) {
     throw createHttpError(404, "Category not found");
   }
-  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-  const allImages = files.images;
-  const singleImage = files.image;
-
-  if (
-    !allImages ||
-    allImages.length === 0 ||
-    !singleImage ||
-    singleImage.length === 0
-  ) {
-    throw createHttpError(400, "Images must me added");
-  }
-  const imagesPath = await Promise.all(
-    allImages.map((image) => uploadImage(image)),
-  );
-  const singleImagePath = await uploadImage(singleImage[0]);
 
   let product = new Product({
     name: name,
     description: description,
-    image: singleImagePath,
-    images: imagesPath,
+    image: image,
+    images: images,
     price: price,
     brand: brand,
     category: category,

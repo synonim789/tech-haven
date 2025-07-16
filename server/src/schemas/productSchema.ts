@@ -11,6 +11,8 @@ export const AddProductSchema = z
     rating: z.string(),
     numReviews: z.string(),
     isFeatured: z.string(),
+    image: z.string(),
+    images: z.array(z.string()),
   })
   .refine(
     (data) => {
