@@ -7,5 +7,4 @@ export default cleanEnv(process.env, {
   STRIPE_KEY: str(),
   CLIENT_URL: url(),
   STRIPE_ENDPOINT_SECRET: str(),
-  GOOGLE_BUCKET_NAME: str(),
 });

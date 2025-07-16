@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import env from "../utils/validateEnv";
 
 export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {

@@ -5,12 +5,12 @@ export const AddProductSchema = z
     name: z.string(),
     category: z.string(),
     description: z.string(),
-    price: z.string(),
+    price: z.number(),
     brand: z.string(),
-    countInStock: z.string(),
-    rating: z.string(),
-    numReviews: z.string(),
-    isFeatured: z.string(),
+    countInStock: z.number(),
+    rating: z.number(),
+    numReviews: z.number(),
+    isFeatured: z.boolean(),
     image: z.string(),
     images: z.array(z.string()),
   })
@@ -24,8 +24,7 @@ export const AddProductSchema = z
         !data.category ||
         !data.countInStock ||
         !data.rating ||
-        !data.numReviews ||
-        !data.isFeatured
+        !data.numReviews
       ) {
         return false;
       }

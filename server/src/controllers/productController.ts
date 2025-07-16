@@ -63,6 +63,8 @@ export const deleteProduct: RequestHandler = async (req, res) => {
 };
 
 export const addProduct: RequestHandler = async (req, res) => {
+  console.log(req.body);
+
   const {
     brand,
     category,
